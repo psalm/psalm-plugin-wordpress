@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<psalm totallyTyped="true" >
+  <projectFiles>
+    <directory name="."/>
+    <ignoreFiles> <directory name="../../vendor"/> </ignoreFiles>
+  </projectFiles>
+  <plugins>
+    <pluginClass class="PsalmWordPress\Plugin"/>
+  </plugins>
+</psalm>
