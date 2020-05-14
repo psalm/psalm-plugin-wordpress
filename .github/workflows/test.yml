@@ -14,9 +14,8 @@ jobs:
     strategy:
       matrix:
         php: [7.4]
-        illuminate_version: [5.8.*, 6.*, 7.*]
 
-    name: PHP ${{ matrix.php }} | Illuminate ${{ matrix.illuminate_version }}
+    name: PHP ${{ matrix.php }}
 
     steps:
     - uses: actions/checkout@v2
@@ -24,6 +23,6 @@ jobs:
     - name: Install dependencies
       run: |
         export COMPOSER_ROOT_VERSION=dev-master
-        composer require "illuminate/container:${{ matrix.illuminate_version }}" "illuminate/contracts:${{ matrix.illuminate_version }}" "illuminate/database:${{ matrix.illuminate_version }}" "illuminate/http:${{ matrix.illuminate_version }}" "illuminate/support:${{ matrix.illuminate_version }}" --no-interaction --no-progress  --no-suggest
+        composer install --no-interaction --no-progress  --no-suggest
     - name: Run Tests
       run: vendor/bin/codecept run
