@@ -1,16 +1,16 @@
 {
-    "name": "weirdan/psalm-plugin-skeleton",
-    "description": "Template to create psalm-plugin projects from",
+    "name": "humanmade/psalm-plugin-wordpress",
+    "description": "WordPress stubs and plugin for Psalm.",
     "type": "psalm-plugin",
     "license": "MIT",
     "authors": [
         {
-            "name": "Bruce Weirdan",
-            "email": "weirdan@gmail.com"
+            "name": "Joe Hoyle",
+            "email": "joehoyle@gmail.com"
         }
     ],
     "require": {
-        "vimeo/psalm": "dev-master"
+        "vimeo/psalm": "^3.11"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.2",
