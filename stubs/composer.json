@@ -1,0 +1,12 @@
+{
+    "require": {
+        "johnpbloch/wordpress": "^5.4",
+        "wp-cli/wp-cli": "^2.4"
+    },
+    "autoload": {
+        "files": [
+            "vendor/wp-cli/wp-cli/php/class-wp-cli.php",
+            "vendor/wp-cli/wp-cli/php/class-wp-cli-command.php"
+        ]
+    }
+}

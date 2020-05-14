@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<psalm requireVoidReturnType="false">
+    <projectFiles>
+        <directory name="./wordpress" />
+        <ignoreFiles>
+            <directory name="./wordpress/wp-content/themes" />
+            <directory name="./wordpress/wp-content/plugins" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>
