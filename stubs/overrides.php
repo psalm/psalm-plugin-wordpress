@@ -1,13 +1,13 @@
 <?php
 
-namespace WP_CLI {
+class WP_CLI {
 	/**
 	 *
 	 * @param string $command
 	 * @param callable|class-string $class
 	 * @return void
 	 */
-	function add_command( string $command, $class ) {
+	static function add_command( string $command, $class ) {
 
 	}
 }
