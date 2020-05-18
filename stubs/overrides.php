@@ -1,5 +1,18 @@
 <?php
 
+namespace WP_CLI {
+	/**
+	 *
+	 * @param string $command
+	 * @param callable|class-string $class
+	 * @return void
+	 */
+	function add_command( string $command, $class ) {
+
+	}
+}
+
+
 /**
  * @return array{path: string, basedir: string, baseurl: string, url: string}
  */
