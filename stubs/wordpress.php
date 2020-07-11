@@ -2,258 +2,11 @@
 
 namespace {
     const ABSPATH = 'Psalm could not infer this type';
-    class AMFReader
-    {
-        /**
-         * @var AMFStream
-         */
-        public $stream;
-        /**
-         * @param AMFStream $stream
-         */
-        public function __construct(\AMFStream $stream)
-        {
-        }
-        /**
-         * @return mixed
-         */
-        public function readData()
-        {
-        }
-        /**
-         * @return false|float
-         */
-        public function readDouble()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function readBoolean()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readString()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function readObject()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function readMixedArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function readArray()
-        {
-        }
-        /**
-         * @return false|float
-         */
-        public function readDate()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readLongString()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readXML()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function readTypedObject()
-        {
-        }
-    }
-    class AMFStream
-    {
-        /**
-         * @var string
-         */
-        public $bytes;
-        /**
-         * @var int
-         */
-        public $pos;
-        /**
-         * @param string $bytes
-         */
-        public function __construct($bytes)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function readByte()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function readInt()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function readLong()
-        {
-        }
-        /**
-         * @return false|float
-         */
-        public function readDouble()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readUTF()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readLongUTF()
-        {
-        }
-        /**
-         * @param int $length
-         *
-         * @return string
-         */
-        public function read($length)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function peekByte()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function peekInt()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function peekLong()
-        {
-        }
-        /**
-         * @return false|float
-         */
-        public function peekDouble()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function peekUTF()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function peekLongUTF()
-        {
-        }
-    }
     const ARRAY_A = 'ARRAY_A';
     const ARRAY_N = 'ARRAY_N';
     const ATOM = 'Atom';
     const AUTH_KEY = 'put your unique phrase here';
     const AUTH_SALT = 'put your unique phrase here';
-    class AVCSequenceParameterSetReader
-    {
-        /**
-         * @var string
-         */
-        public $sps;
-        public $start = 0;
-        public $currentBytes = 0;
-        public $currentBits = 0;
-        /**
-         * @var int
-         */
-        public $width;
-        /**
-         * @var int
-         */
-        public $height;
-        /**
-         * @param string $sps
-         */
-        public function __construct($sps)
-        {
-        }
-        public function readData()
-        {
-        }
-        /**
-         * @param int $bits
-         */
-        public function skipBits($bits)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getBit()
-        {
-        }
-        /**
-         * @param int $bits
-         *
-         * @return int
-         */
-        public function getBits($bits)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function expGolombUe()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function expGolombSe()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getWidth()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getHeight()
-        {
-        }
-    }
     class AtomEntry
     {
         /**
@@ -501,53 +254,6 @@ namespace {
     const CRLF = '
 ';
     const CUSTOM_TAGS = false;
-    class Closure
-    {
-        /**
-         * @param Closure $old
-         * @param null|object $to
-         * @param object|string $scope
-         *
-         * @return Closure|false
-         */
-        public static function bind($old, $to, $scope)
-        {
-        }
-        /**
-         * @param null|object $new
-         * @param object|string $newscope
-         *
-         * @return Closure|false
-         */
-        public function bindTo($new, $newscope)
-        {
-        }
-        /**
-         * @param object $to
-         * @param mixed $parameters
-         *
-         * @return mixed
-         */
-        public function call($to, $parameters)
-        {
-        }
-        /**
-         * @param callable $callable
-         *
-         * @return Closure
-         */
-        public static function fromCallable($callable)
-        {
-        }
-        /**
-         * @param mixed $args
-         *
-         * @return mixed
-         */
-        public function __invoke($args)
-        {
-        }
-    }
     class Core_Upgrader extends \WP_Upgrader
     {
         public function upgrade_strings()
@@ -576,13 +282,6 @@ namespace {
         public function check_files()
         {
         }
-    }
-    interface Countable
-    {
-        /**
-         * @return int
-         */
-        public abstract function count();
     }
     class Custom_Background
     {
@@ -823,1089 +522,6 @@ namespace {
     const DB_USER = 'username_here';
     const DOING_AJAX = true;
     const DOING_CRON = true;
-    class DOMAttr
-    {
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @var DOMElement
-         */
-        public $ownerElement;
-        /**
-         * @var bool
-         */
-        public $schemaTypeInfo;
-        /**
-         * @var bool
-         */
-        public $specified;
-        /**
-         * @var string
-         */
-        public $value;
-        /**
-         * @return bool
-         */
-        public function isId()
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $value
-         *
-         * @return void
-         */
-        public function __construct($name, $value)
-        {
-        }
-    }
-    class DOMCdataSection
-    {
-        /**
-         * @param string $value
-         *
-         * @return void
-         */
-        public function __construct($value)
-        {
-        }
-    }
-    class DOMCharacterData
-    {
-        /**
-         * @var string
-         */
-        public $data;
-        /**
-         * @var int
-         */
-        public $length;
-        /**
-         * @param int $offset
-         * @param int $count
-         *
-         * @return string
-         */
-        public function substringData($offset, $count)
-        {
-        }
-        /**
-         * @param string $data
-         *
-         * @return void
-         */
-        public function appendData($data)
-        {
-        }
-        /**
-         * @param int $offset
-         * @param string $data
-         *
-         * @return void
-         */
-        public function insertData($offset, $data)
-        {
-        }
-        /**
-         * @param int $offset
-         * @param int $count
-         *
-         * @return void
-         */
-        public function deleteData($offset, $count)
-        {
-        }
-        /**
-         * @param int $offset
-         * @param int $count
-         * @param string $data
-         *
-         * @return void
-         */
-        public function replaceData($offset, $count, $data)
-        {
-        }
-    }
-    class DOMComment
-    {
-        /**
-         * @param string $value
-         *
-         * @return void
-         */
-        public function __construct($value)
-        {
-        }
-    }
-    class DOMDocumentFragment
-    {
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @return void
-         */
-        public function __construct()
-        {
-        }
-        /**
-         * @param string $data
-         *
-         * @return bool
-         */
-        public function appendXML($data)
-        {
-        }
-    }
-    class DOMDocumentType
-    {
-        /**
-         * @var string
-         */
-        public $publicId;
-        /**
-         * @var string
-         */
-        public $systemId;
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @var DOMNamedNodeMap
-         */
-        public $entities;
-        /**
-         * @var DOMNamedNodeMap
-         */
-        public $notations;
-        /**
-         * @var string
-         */
-        public $internalSubset;
-    }
-    class DOMEntityReference
-    {
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @param string $name
-         *
-         * @return void
-         */
-        public function __construct($name)
-        {
-        }
-    }
-    class DOMImplementation
-    {
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @param mixed $feature
-         * @param mixed $version
-         */
-        public function getFeature($feature, $version)
-        {
-        }
-        /**
-         * @param string $feature
-         * @param string $version
-         *
-         * @return bool
-         */
-        public function hasFeature($feature, $version)
-        {
-        }
-        /**
-         * @param string $qualifiedname
-         * @param string $publicid
-         * @param string $systemid
-         *
-         * @return DOMDocumentType
-         */
-        public function createDocumentType($qualifiedname, $publicid, $systemid)
-        {
-        }
-        /**
-         * @param string $namespaceuri
-         * @param string $qualifiedname
-         * @param DOMDocumentType $doctype
-         *
-         * @return DOMDocument
-         */
-        public function createDocument($namespaceuri, $qualifiedname, $doctype)
-        {
-        }
-    }
-    class DOMNode
-    {
-        /**
-         * @var string
-         */
-        public $nodeName;
-        /**
-         * @var string
-         */
-        public $nodeValue;
-        /**
-         * @var int
-         */
-        public $nodeType;
-        /**
-         * @var DOMNode|null
-         */
-        public $parentNode;
-        /**
-         * @var DOMNodeList
-         */
-        public $childNodes;
-        /**
-         * @var DOMNode|null
-         */
-        public $firstChild;
-        /**
-         * @var DOMNode|null
-         */
-        public $lastChild;
-        /**
-         * @var DOMNode|null
-         */
-        public $previousSibling;
-        /**
-         * @var DOMNode|null
-         */
-        public $nextSibling;
-        /**
-         * @var null
-         */
-        public $attributes;
-        /**
-         * @var DOMDocument|null
-         */
-        public $ownerDocument;
-        /**
-         * @var null|string
-         */
-        public $namespaceURI;
-        /**
-         * @var string
-         */
-        public $prefix;
-        /**
-         * @var string
-         */
-        public $localName;
-        /**
-         * @var null|string
-         */
-        public $baseURI;
-        /**
-         * @var string
-         */
-        public $textContent;
-        /**
-         * @param DOMNode $newnode
-         * @param DOMNode|null $refnode
-         *
-         * @return DOMNode
-         */
-        public function insertBefore($newnode, $refnode)
-        {
-        }
-        /**
-         * @param DOMNode $newnode
-         * @param DOMNode $oldnode
-         *
-         * @return DOMNode|false
-         */
-        public function replaceChild($newnode, $oldnode)
-        {
-        }
-        /**
-         * @param DOMNode $oldnode
-         *
-         * @return DOMNode
-         */
-        public function removeChild($oldnode)
-        {
-        }
-        /**
-         * @param DOMNode $newnode
-         *
-         * @return DOMNode
-         */
-        public function appendChild($newnode)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasChildNodes()
-        {
-        }
-        /**
-         * @param bool $deep
-         *
-         * @return DOMNode
-         */
-        public function cloneNode($deep)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function normalize()
-        {
-        }
-        /**
-         * @param string $feature
-         * @param string $version
-         *
-         * @return bool
-         */
-        public function isSupported($feature, $version)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasAttributes()
-        {
-        }
-        /**
-         * @param DOMNode $other
-         */
-        public function compareDocumentPosition($other)
-        {
-        }
-        /**
-         * @param DOMNode $node
-         *
-         * @return bool
-         */
-        public function isSameNode($node)
-        {
-        }
-        /**
-         * @param string $namespaceuri
-         *
-         * @return string
-         */
-        public function lookupPrefix($namespaceuri)
-        {
-        }
-        /**
-         * @param string $namespaceuri
-         *
-         * @return bool
-         */
-        public function isDefaultNamespace($namespaceuri)
-        {
-        }
-        /**
-         * @param string $prefix
-         *
-         * @return string
-         */
-        public function lookupNamespaceUri($prefix)
-        {
-        }
-        /**
-         * @param DOMNode $arg
-         */
-        public function isEqualNode($arg)
-        {
-        }
-        /**
-         * @param mixed $feature
-         * @param mixed $version
-         */
-        public function getFeature($feature, $version)
-        {
-        }
-        /**
-         * @param mixed $key
-         * @param mixed $data
-         * @param mixed $handler
-         */
-        public function setUserData($key, $data, $handler)
-        {
-        }
-        /**
-         * @param mixed $key
-         */
-        public function getUserData($key)
-        {
-        }
-        /**
-         * @return null|string
-         */
-        public function getNodePath()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getLineNo()
-        {
-        }
-        /**
-         * @param bool $exclusive
-         * @param bool $with_comments
-         * @param array<array-key, mixed> $xpath
-         * @param array<array-key, mixed> $ns_prefixes
-         *
-         * @return string
-         */
-        public function C14N($exclusive, $with_comments, $xpath, $ns_prefixes)
-        {
-        }
-        /**
-         * @param string $uri
-         * @param bool $exclusive
-         * @param bool $with_comments
-         * @param array<array-key, mixed> $xpath
-         * @param array<array-key, mixed> $ns_prefixes
-         *
-         * @return false|int
-         */
-        public function C14NFile($uri, $exclusive, $with_comments, $xpath, $ns_prefixes)
-        {
-        }
-    }
-    class DOMProcessingInstruction
-    {
-        /**
-         * @var string
-         */
-        public $target;
-        /**
-         * @var string
-         */
-        public $data;
-        /**
-         * @param string $name
-         * @param string $value
-         *
-         * @return void
-         */
-        public function __construct($name, $value)
-        {
-        }
-    }
-    class DOMText
-    {
-        /**
-         * @var string
-         */
-        public $wholeText;
-        /**
-         * @param int $offset
-         *
-         * @return DOMText
-         */
-        public function splitText($offset)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isWhitespaceInElementContent()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isElementContentWhitespace()
-        {
-        }
-        /**
-         * @param mixed $content
-         */
-        public function replaceWholeText($content)
-        {
-        }
-        /**
-         * @param string $value
-         *
-         * @return void
-         */
-        public function __construct($value)
-        {
-        }
-    }
-    class DOMXPath
-    {
-        /**
-         * @var DOMDocument
-         */
-        public $document;
-        /**
-         * @param DOMDocument $doc
-         *
-         * @return void
-         */
-        public function __construct($doc)
-        {
-        }
-        /**
-         * @param string $prefix
-         * @param string $namespaceuri
-         *
-         * @return bool
-         */
-        public function registerNamespace($prefix, $namespaceuri)
-        {
-        }
-        /**
-         * @param string $expression
-         * @param DOMNode|null $contextnode
-         * @param bool $registernodens
-         *
-         * @return DOMNodeList|false
-         */
-        public function query($expression, $contextnode, $registernodens)
-        {
-        }
-        /**
-         * @param string $expression
-         * @param DOMNode|null $contextnode
-         * @param bool $registernodens
-         *
-         * @return mixed
-         */
-        public function evaluate($expression, $contextnode, $registernodens)
-        {
-        }
-        /**
-         * @param mixed $restrict
-         *
-         * @return void
-         */
-        public function registerPhpFunctions($restrict)
-        {
-        }
-    }
-    class DateInterval
-    {
-        /**
-         * @var int
-         */
-        public $y;
-        /**
-         * @var int
-         */
-        public $m;
-        /**
-         * @var int
-         */
-        public $d;
-        /**
-         * @var int
-         */
-        public $h;
-        /**
-         * @var int
-         */
-        public $i;
-        /**
-         * @var int
-         */
-        public $s;
-        /**
-         * @var float
-         */
-        public $f;
-        /**
-         * @var int
-         */
-        public $invert;
-        /**
-         * @var mixed
-         */
-        public $days;
-        /**
-         * @param string $spec
-         *
-         * @return void
-         */
-        public function __construct($spec)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function __wakeup()
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array
-         *
-         * @return DateInterval
-         */
-        public static function __set_state($array)
-        {
-        }
-        /**
-         * @param string $format
-         *
-         * @return string
-         */
-        public function format($format)
-        {
-        }
-        /**
-         * @param string $time
-         *
-         * @return DateInterval
-         */
-        public static function createFromDateString($time)
-        {
-        }
-    }
-    class DateTime
-    {
-        public const ATOM = 'Y-m-d\\TH:i:sP';
-        public const COOKIE = 'l, d-M-Y H:i:s T';
-        public const ISO8601 = 'Y-m-d\\TH:i:sO';
-        public const RFC822 = 'D, d M y H:i:s O';
-        public const RFC850 = 'l, d-M-y H:i:s T';
-        public const RFC1036 = 'D, d M y H:i:s O';
-        public const RFC1123 = 'D, d M Y H:i:s O';
-        public const RFC7231 = 'D, d M Y H:i:s \\G\\M\\T';
-        public const RFC2822 = 'D, d M Y H:i:s O';
-        public const RFC3339 = 'Y-m-d\\TH:i:sP';
-        public const RFC3339_EXTENDED = 'Y-m-d\\TH:i:s.vP';
-        public const RSS = 'D, d M Y H:i:s O';
-        public const W3C = 'Y-m-d\\TH:i:sP';
-        /**
-         * @param string $time
-         *
-         * @return void
-         */
-        public function __construct($time)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function __wakeup()
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array
-         *
-         * @return static
-         */
-        public static function __set_state($array)
-        {
-        }
-        /**
-         * @param DateTimeImmutable $datetTimeImmutable
-         *
-         * @return static
-         */
-        public static function createFromImmutable($datetTimeImmutable)
-        {
-        }
-        /**
-         * @param string $format
-         * @param string $time
-         * @param DateTimeZone|null $timezone
-         *
-         * @return false|static
-         */
-        public static function createFromFormat($format, $time, $timezone)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function getLastErrors()
-        {
-        }
-        /**
-         * @param string $format
-         *
-         * @return false|string
-         */
-        public function format($format)
-        {
-        }
-        /**
-         * @param string $modify
-         *
-         * @return false|static
-         */
-        public function modify($modify)
-        {
-        }
-        /**
-         * @param DateInterval $interval
-         *
-         * @return static
-         */
-        public function add($interval)
-        {
-        }
-        /**
-         * @param DateInterval $interval
-         *
-         * @return static
-         */
-        public function sub($interval)
-        {
-        }
-        /**
-         * @return DateTimeZone
-         */
-        public function getTimezone()
-        {
-        }
-        /**
-         * @param DateTimeZone $timezone
-         *
-         * @return static
-         */
-        public function setTimezone($timezone)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getOffset()
-        {
-        }
-        /**
-         * @param int $hour
-         * @param int $minute
-         * @param int $second
-         * @param int $microseconds
-         *
-         * @return false|static
-         */
-        public function setTime($hour, $minute, $second, $microseconds)
-        {
-        }
-        /**
-         * @param int $year
-         * @param int $month
-         * @param int $day
-         *
-         * @return static
-         */
-        public function setDate($year, $month, $day)
-        {
-        }
-        /**
-         * @param int $year
-         * @param int $week
-         * @param int $day
-         *
-         * @return static
-         */
-        public function setISODate($year, $week, $day)
-        {
-        }
-        /**
-         * @param int $unixtimestamp
-         *
-         * @return static
-         */
-        public function setTimestamp($unixtimestamp)
-        {
-        }
-        /**
-         * @return false|int
-         */
-        public function getTimestamp()
-        {
-        }
-        /**
-         * @param DateTimeInterface $datetime2
-         * @param bool $absolute
-         *
-         * @return DateInterval|false
-         */
-        public function diff($datetime2, $absolute)
-        {
-        }
-    }
-    interface DateTimeInterface
-    {
-        public const ATOM = 'Y-m-d\\TH:i:sP';
-        public const COOKIE = 'l, d-M-Y H:i:s T';
-        public const ISO8601 = 'Y-m-d\\TH:i:sO';
-        public const RFC822 = 'D, d M y H:i:s O';
-        public const RFC850 = 'l, d-M-y H:i:s T';
-        public const RFC1036 = 'D, d M y H:i:s O';
-        public const RFC1123 = 'D, d M Y H:i:s O';
-        public const RFC7231 = 'D, d M Y H:i:s \\G\\M\\T';
-        public const RFC2822 = 'D, d M Y H:i:s O';
-        public const RFC3339 = 'Y-m-d\\TH:i:sP';
-        public const RFC3339_EXTENDED = 'Y-m-d\\TH:i:s.vP';
-        public const RSS = 'D, d M Y H:i:s O';
-        public const W3C = 'Y-m-d\\TH:i:sP';
-        /**
-         * @param string $format
-         *
-         * @return string
-         */
-        public abstract function format($format);
-        /**
-         * @return DateTimeZone
-         */
-        public abstract function getTimezone();
-        /**
-         * @return int
-         */
-        public abstract function getOffset();
-        /**
-         * @return false|int
-         */
-        public abstract function getTimestamp();
-        /**
-         * @param DateTimeInterface $datetime2
-         * @param bool $absolute
-         *
-         * @return DateInterval
-         */
-        public abstract function diff($datetime2, $absolute);
-        public abstract function __wakeup();
-    }
-    class Directory
-    {
-        /**
-         * @var string
-         */
-        public $path;
-        /**
-         * @var resource
-         */
-        public $handle;
-        /**
-         * @param resource $dir_handle
-         *
-         * @return void
-         */
-        public function close($dir_handle)
-        {
-        }
-        /**
-         * @param resource $dir_handle
-         *
-         * @return void
-         */
-        public function rewind($dir_handle)
-        {
-        }
-        /**
-         * @param resource $dir_handle
-         *
-         * @return false|string
-         */
-        public function read($dir_handle)
-        {
-        }
-    }
-    const EBML_ID_ASPECTRATIOTYPE = 5299;
-    const EBML_ID_ATTACHEDFILE = 8615;
-    const EBML_ID_ATTACHMENTLINK = 13382;
-    const EBML_ID_ATTACHMENTS = 155296873;
-    const EBML_ID_AUDIO = 97;
-    const EBML_ID_BITDEPTH = 8804;
-    const EBML_ID_CHANNELPOSITIONS = 13435;
-    const EBML_ID_CHANNELS = 31;
-    const EBML_ID_CHAPCOUNTRY = 894;
-    const EBML_ID_CHAPLANGUAGE = 892;
-    const EBML_ID_CHAPPROCESS = 10564;
-    const EBML_ID_CHAPPROCESSCODECID = 10581;
-    const EBML_ID_CHAPPROCESSCOMMAND = 10513;
-    const EBML_ID_CHAPPROCESSDATA = 10547;
-    const EBML_ID_CHAPPROCESSPRIVATE = 1293;
-    const EBML_ID_CHAPPROCESSTIME = 10530;
-    const EBML_ID_CHAPSTRING = 5;
-    const EBML_ID_CHAPTERATOM = 54;
-    const EBML_ID_CHAPTERDISPLAY = 0;
-    const EBML_ID_CHAPTERFLAGENABLED = 1432;
-    const EBML_ID_CHAPTERFLAGHIDDEN = 24;
-    const EBML_ID_CHAPTERPHYSICALEQUIV = 9155;
-    const EBML_ID_CHAPTERS = 4433776;
-    const EBML_ID_CHAPTERSEGMENTEDITIONUID = 11964;
-    const EBML_ID_CHAPTERSEGMENTUID = 11879;
-    const EBML_ID_CHAPTERTIMEEND = 18;
-    const EBML_ID_CHAPTERTIMESTART = 17;
-    const EBML_ID_CHAPTERTRACK = 15;
-    const EBML_ID_CHAPTERTRACKNUMBER = 9;
-    const EBML_ID_CHAPTERTRANSLATE = 10532;
-    const EBML_ID_CHAPTERTRANSLATECODEC = 10687;
-    const EBML_ID_CHAPTERTRANSLATEEDITIONUID = 10748;
-    const EBML_ID_CHAPTERTRANSLATEID = 10661;
-    const EBML_ID_CHAPTERUID = 13252;
-    const EBML_ID_CLUSTER = 256095861;
-    const EBML_ID_CLUSTERBLOCK = 33;
-    const EBML_ID_CLUSTERBLOCKADDID = 110;
-    const EBML_ID_CLUSTERBLOCKADDITIONAL = 37;
-    const EBML_ID_CLUSTERBLOCKADDITIONID = 75;
-    const EBML_ID_CLUSTERBLOCKADDITIONS = 13729;
-    const EBML_ID_CLUSTERBLOCKDURATION = 27;
-    const EBML_ID_CLUSTERBLOCKGROUP = 32;
-    const EBML_ID_CLUSTERBLOCKMORE = 38;
-    const EBML_ID_CLUSTERBLOCKVIRTUAL = 34;
-    const EBML_ID_CLUSTERCODECSTATE = 36;
-    const EBML_ID_CLUSTERDELAY = 78;
-    const EBML_ID_CLUSTERDURATION = 79;
-    const EBML_ID_CLUSTERENCRYPTEDBLOCK = 47;
-    const EBML_ID_CLUSTERFRAMENUMBER = 77;
-    const EBML_ID_CLUSTERLACENUMBER = 76;
-    const EBML_ID_CLUSTERPOSITION = 39;
-    const EBML_ID_CLUSTERPREVSIZE = 43;
-    const EBML_ID_CLUSTERREFERENCEBLOCK = 123;
-    const EBML_ID_CLUSTERREFERENCEPRIORITY = 122;
-    const EBML_ID_CLUSTERREFERENCEVIRTUAL = 125;
-    const EBML_ID_CLUSTERSILENTTRACKNUMBER = 6359;
-    const EBML_ID_CLUSTERSILENTTRACKS = 6228;
-    const EBML_ID_CLUSTERSIMPLEBLOCK = 35;
-    const EBML_ID_CLUSTERSLICES = 14;
-    const EBML_ID_CLUSTERTIMECODE = 103;
-    const EBML_ID_CLUSTERTIMESLICE = 104;
-    const EBML_ID_CODECDECODEALL = 42;
-    const EBML_ID_CODECDOWNLOADURL = 438848;
-    const EBML_ID_CODECID = 6;
-    const EBML_ID_CODECINFOURL = 1785920;
-    const EBML_ID_CODECNAME = 362120;
-    const EBML_ID_CODECPRIVATE = 9122;
-    const EBML_ID_CODECSETTINGS = 1742487;
-    const EBML_ID_COLOURSPACE = 963876;
-    const EBML_ID_CONTENTCOMPALGO = 596;
-    const EBML_ID_CONTENTCOMPRESSION = 4148;
-    const EBML_ID_CONTENTCOMPSETTINGS = 597;
-    const EBML_ID_CONTENTENCALGO = 2017;
-    const EBML_ID_CONTENTENCKEYID = 2018;
-    const EBML_ID_CONTENTENCODING = 8768;
-    const EBML_ID_CONTENTENCODINGORDER = 4145;
-    const EBML_ID_CONTENTENCODINGS = 11648;
-    const EBML_ID_CONTENTENCODINGSCOPE = 4146;
-    const EBML_ID_CONTENTENCODINGTYPE = 4147;
-    const EBML_ID_CONTENTENCRYPTION = 4149;
-    const EBML_ID_CONTENTSIGALGO = 2021;
-    const EBML_ID_CONTENTSIGHASHALGO = 2022;
-    const EBML_ID_CONTENTSIGKEYID = 2020;
-    const EBML_ID_CONTENTSIGNATURE = 2019;
-    const EBML_ID_CRC32 = 63;
-    const EBML_ID_CUEBLOCKNUMBER = 4984;
-    const EBML_ID_CUECLUSTERPOSITION = 113;
-    const EBML_ID_CUECODECSTATE = 106;
-    const EBML_ID_CUEPOINT = 59;
-    const EBML_ID_CUEREFCLUSTER = 23;
-    const EBML_ID_CUEREFCODECSTATE = 107;
-    const EBML_ID_CUEREFERENCE = 91;
-    const EBML_ID_CUEREFNUMBER = 4959;
-    const EBML_ID_CUEREFTIME = 22;
-    const EBML_ID_CUES = 206814059;
-    const EBML_ID_CUETIME = 51;
-    const EBML_ID_CUETRACK = 119;
-    const EBML_ID_CUETRACKPOSITIONS = 55;
-    const EBML_ID_DATEUTC = 1121;
-    const EBML_ID_DEFAULTDURATION = 254851;
-    const EBML_ID_DISPLAYHEIGHT = 5306;
-    const EBML_ID_DISPLAYUNIT = 5298;
-    const EBML_ID_DISPLAYWIDTH = 5296;
-    const EBML_ID_DOCTYPE = 642;
-    const EBML_ID_DOCTYPEREADVERSION = 645;
-    const EBML_ID_DOCTYPEVERSION = 647;
-    const EBML_ID_DURATION = 1161;
-    const EBML_ID_EBML = 172351395;
-    const EBML_ID_EBMLMAXIDLENGTH = 754;
-    const EBML_ID_EBMLMAXSIZELENGTH = 755;
-    const EBML_ID_EBMLREADVERSION = 759;
-    const EBML_ID_EBMLVERSION = 646;
-    const EBML_ID_EDITIONENTRY = 1465;
-    const EBML_ID_EDITIONFLAGDEFAULT = 1499;
-    const EBML_ID_EDITIONFLAGHIDDEN = 1469;
-    const EBML_ID_EDITIONFLAGORDERED = 1501;
-    const EBML_ID_EDITIONUID = 1468;
-    const EBML_ID_FILEDATA = 1628;
-    const EBML_ID_FILEDESCRIPTION = 1662;
-    const EBML_ID_FILEMIMETYPE = 1632;
-    const EBML_ID_FILENAME = 1646;
-    const EBML_ID_FILEREFERRAL = 1653;
-    const EBML_ID_FILEUID = 1710;
-    const EBML_ID_FLAGDEFAULT = 8;
-    const EBML_ID_FLAGENABLED = 57;
-    const EBML_ID_FLAGFORCED = 5546;
-    const EBML_ID_FLAGINTERLACED = 26;
-    const EBML_ID_FLAGLACING = 28;
-    const EBML_ID_GAMMAVALUE = 1029411;
-    const EBML_ID_INFO = 88713574;
-    const EBML_ID_LANGUAGE = 177564;
-    const EBML_ID_MAXBLOCKADDITIONID = 5614;
-    const EBML_ID_MAXCACHE = 11768;
-    const EBML_ID_MINCACHE = 11751;
-    const EBML_ID_MUXINGAPP = 3456;
-    const EBML_ID_NAME = 4974;
-    const EBML_ID_NEXTFILENAME = 1999803;
-    const EBML_ID_NEXTUID = 2013475;
-    const EBML_ID_OLDSTEREOMODE = 5049;
-    const EBML_ID_OUTPUTSAMPLINGFREQUENCY = 14517;
-    const EBML_ID_PIXELCROPBOTTOM = 5290;
-    const EBML_ID_PIXELCROPLEFT = 5324;
-    const EBML_ID_PIXELCROPRIGHT = 5341;
-    const EBML_ID_PIXELCROPTOP = 5307;
-    const EBML_ID_PIXELHEIGHT = 58;
-    const EBML_ID_PIXELWIDTH = 48;
-    const EBML_ID_PREVFILENAME = 1868715;
-    const EBML_ID_PREVUID = 1882403;
-    const EBML_ID_SAMPLINGFREQUENCY = 53;
-    const EBML_ID_SEEK = 3515;
-    const EBML_ID_SEEKHEAD = 21863284;
-    const EBML_ID_SEEKID = 5035;
-    const EBML_ID_SEEKPOSITION = 5036;
-    const EBML_ID_SEGMENT = 139690087;
-    const EBML_ID_SEGMENTFAMILY = 1092;
-    const EBML_ID_SEGMENTFILENAME = 13188;
-    const EBML_ID_SEGMENTUID = 13220;
-    const EBML_ID_SIMPLETAG = 10184;
-    const EBML_ID_STEREOMODE = 5048;
-    const EBML_ID_TAG = 13171;
-    const EBML_ID_TAGATTACHMENTUID = 9158;
-    const EBML_ID_TAGBINARY = 1157;
-    const EBML_ID_TAGCHAPTERUID = 9156;
-    const EBML_ID_TAGDEFAULT = 1156;
-    const EBML_ID_TAGEDITIONUID = 9161;
-    const EBML_ID_TAGLANGUAGE = 1146;
-    const EBML_ID_TAGNAME = 1443;
-    const EBML_ID_TAGS = 39109479;
-    const EBML_ID_TAGSTRING = 1159;
-    const EBML_ID_TAGTRACKUID = 9157;
-    const EBML_ID_TARGETS = 9152;
-    const EBML_ID_TARGETTYPE = 9162;
-    const EBML_ID_TARGETTYPEVALUE = 10442;
-    const EBML_ID_TIMECODESCALE = 710577;
-    const EBML_ID_TITLE = 15273;
-    const EBML_ID_TRACKENTRY = 46;
-    const EBML_ID_TRACKNUMBER = 87;
-    const EBML_ID_TRACKOFFSET = 4991;
-    const EBML_ID_TRACKOVERLAY = 12203;
-    const EBML_ID_TRACKS = 106212971;
-    const EBML_ID_TRACKTIMECODESCALE = 209231;
-    const EBML_ID_TRACKTRANSLATE = 9764;
-    const EBML_ID_TRACKTRANSLATECODEC = 9919;
-    const EBML_ID_TRACKTRANSLATEEDITIONUID = 9980;
-    const EBML_ID_TRACKTRANSLATETRACKID = 9893;
-    const EBML_ID_TRACKTYPE = 3;
-    const EBML_ID_TRACKUID = 13253;
-    const EBML_ID_VIDEO = 96;
-    const EBML_ID_VOID = 108;
-    const EBML_ID_WRITINGAPP = 5953;
     const EP_ATTACHMENT = 2;
     const EP_AUTHORS = 2048;
     const EP_CATEGORIES = 512;
@@ -1956,18 +572,9 @@ namespace {
         {
         }
     }
-    const GETID3_FLV_TAG_AUDIO = 8;
-    const GETID3_FLV_TAG_META = 18;
-    const GETID3_FLV_TAG_VIDEO = 9;
-    const GETID3_FLV_VIDEO_H263 = 2;
-    const GETID3_FLV_VIDEO_H264 = 7;
-    const GETID3_FLV_VIDEO_SCREEN = 3;
-    const GETID3_FLV_VIDEO_SCREENV2 = 6;
-    const GETID3_FLV_VIDEO_VP6FLV = 4;
-    const GETID3_FLV_VIDEO_VP6FLV_ALPHA = 5;
-    const GETID3_INCLUDEPATH = 'Psalm could not infer this type';
-    const GETID3_MP3_VALID_CHECK_FRAMES = 35;
-    const GETID3_OS_ISWINDOWS = 'Psalm could not infer this type';
+    const GRAPHEME_EXTR_COUNT = 0;
+    const GRAPHEME_EXTR_MAXBYTES = 1;
+    const GRAPHEME_EXTR_MAXCHARS = 2;
     class Gettext_Translations extends \Translations
     {
         /**
@@ -2015,20 +622,8 @@ namespace {
         {
         }
     }
-    const H264_AVC_SEQUENCE_HEADER = 0;
-    const H264_PROFILE_BASELINE = 66;
-    const H264_PROFILE_EXTENDED = 88;
-    const H264_PROFILE_HIGH = 100;
-    const H264_PROFILE_HIGH10 = 110;
-    const H264_PROFILE_HIGH422 = 122;
-    const H264_PROFILE_HIGH444 = 144;
-    const H264_PROFILE_HIGH444_PREDICTIVE = 244;
-    const H264_PROFILE_MAIN = 77;
-    class HashContext
-    {
-    }
     const IFRAME_REQUEST = true;
-    const IS_PROFILE_PAGE = true;
+    const IS_PROFILE_PAGE = 'Psalm could not infer this type';
     class IXR_Base64
     {
         public $data;
@@ -2281,32 +876,6 @@ namespace {
         {
         }
     }
-    class InvalidArgumentException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
-    interface JsonSerializable
-    {
-        /**
-         * @return mixed
-         */
-        public abstract function jsonSerialize();
-    }
     const LOGGED_IN_KEY = 'put your unique phrase here';
     const LOGGED_IN_SALT = 'put your unique phrase here';
     class Language_Pack_Upgrader extends \WP_Upgrader
@@ -2398,26 +967,10 @@ namespace {
         {
         }
     }
-    class LogicException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
     const MAGPIE_USER_AGENT = 'Psalm could not infer this type';
+    const MB_CASE_LOWER = 1;
+    const MB_CASE_TITLE = 2;
+    const MB_CASE_UPPER = 0;
     class MO extends \Gettext_Translations
     {
         public $_nplurals = 2;
@@ -2730,426 +1283,6 @@ namespace {
     const PCLZIP_SEPARATOR = ',';
     const PCLZIP_TEMPORARY_DIR = '';
     const PCLZIP_TEMPORARY_FILE_RATIO = 0.47;
-    class PDO
-    {
-        public const PARAM_BOOL = 5;
-        public const PARAM_NULL = 0;
-        public const PARAM_INT = 1;
-        public const PARAM_STR = 2;
-        public const PARAM_LOB = 3;
-        public const PARAM_STMT = 4;
-        public const PARAM_INPUT_OUTPUT = 2147483648;
-        public const PARAM_STR_NATL = 1073741824;
-        public const PARAM_STR_CHAR = 536870912;
-        public const PARAM_EVT_ALLOC = 0;
-        public const PARAM_EVT_FREE = 1;
-        public const PARAM_EVT_EXEC_PRE = 2;
-        public const PARAM_EVT_EXEC_POST = 3;
-        public const PARAM_EVT_FETCH_PRE = 4;
-        public const PARAM_EVT_FETCH_POST = 5;
-        public const PARAM_EVT_NORMALIZE = 6;
-        public const FETCH_LAZY = 1;
-        public const FETCH_ASSOC = 2;
-        public const FETCH_NUM = 3;
-        public const FETCH_BOTH = 4;
-        public const FETCH_OBJ = 5;
-        public const FETCH_BOUND = 6;
-        public const FETCH_COLUMN = 7;
-        public const FETCH_CLASS = 8;
-        public const FETCH_INTO = 9;
-        public const FETCH_FUNC = 10;
-        public const FETCH_GROUP = 65536;
-        public const FETCH_UNIQUE = 196608;
-        public const FETCH_KEY_PAIR = 12;
-        public const FETCH_CLASSTYPE = 262144;
-        public const FETCH_SERIALIZE = 524288;
-        public const FETCH_PROPS_LATE = 1048576;
-        public const FETCH_NAMED = 11;
-        public const ATTR_AUTOCOMMIT = 0;
-        public const ATTR_PREFETCH = 1;
-        public const ATTR_TIMEOUT = 2;
-        public const ATTR_ERRMODE = 3;
-        public const ATTR_SERVER_VERSION = 4;
-        public const ATTR_CLIENT_VERSION = 5;
-        public const ATTR_SERVER_INFO = 6;
-        public const ATTR_CONNECTION_STATUS = 7;
-        public const ATTR_CASE = 8;
-        public const ATTR_CURSOR_NAME = 9;
-        public const ATTR_CURSOR = 10;
-        public const ATTR_ORACLE_NULLS = 11;
-        public const ATTR_PERSISTENT = 12;
-        public const ATTR_STATEMENT_CLASS = 13;
-        public const ATTR_FETCH_TABLE_NAMES = 14;
-        public const ATTR_FETCH_CATALOG_NAMES = 15;
-        public const ATTR_DRIVER_NAME = 16;
-        public const ATTR_STRINGIFY_FETCHES = 17;
-        public const ATTR_MAX_COLUMN_LEN = 18;
-        public const ATTR_EMULATE_PREPARES = 20;
-        public const ATTR_DEFAULT_FETCH_MODE = 19;
-        public const ATTR_DEFAULT_STR_PARAM = 21;
-        public const ERRMODE_SILENT = 0;
-        public const ERRMODE_WARNING = 1;
-        public const ERRMODE_EXCEPTION = 2;
-        public const CASE_NATURAL = 0;
-        public const CASE_LOWER = 2;
-        public const CASE_UPPER = 1;
-        public const NULL_NATURAL = 0;
-        public const NULL_EMPTY_STRING = 1;
-        public const NULL_TO_STRING = 2;
-        public const ERR_NONE = '00000';
-        public const FETCH_ORI_NEXT = 0;
-        public const FETCH_ORI_PRIOR = 1;
-        public const FETCH_ORI_FIRST = 2;
-        public const FETCH_ORI_LAST = 3;
-        public const FETCH_ORI_ABS = 4;
-        public const FETCH_ORI_REL = 5;
-        public const CURSOR_FWDONLY = 0;
-        public const CURSOR_SCROLL = 1;
-        public const DBLIB_ATTR_CONNECTION_TIMEOUT = 1000;
-        public const DBLIB_ATTR_QUERY_TIMEOUT = 1001;
-        public const DBLIB_ATTR_STRINGIFY_UNIQUEIDENTIFIER = 1002;
-        public const DBLIB_ATTR_VERSION = 1003;
-        public const DBLIB_ATTR_TDS_VERSION = 1004;
-        public const DBLIB_ATTR_SKIP_EMPTY_ROWSETS = 1005;
-        public const DBLIB_ATTR_DATETIME_CONVERT = 1006;
-        public const MYSQL_ATTR_USE_BUFFERED_QUERY = 1000;
-        public const MYSQL_ATTR_LOCAL_INFILE = 1001;
-        public const MYSQL_ATTR_INIT_COMMAND = 1002;
-        public const MYSQL_ATTR_COMPRESS = 1003;
-        public const MYSQL_ATTR_DIRECT_QUERY = 1004;
-        public const MYSQL_ATTR_FOUND_ROWS = 1005;
-        public const MYSQL_ATTR_IGNORE_SPACE = 1006;
-        public const MYSQL_ATTR_SSL_KEY = 1007;
-        public const MYSQL_ATTR_SSL_CERT = 1008;
-        public const MYSQL_ATTR_SSL_CA = 1009;
-        public const MYSQL_ATTR_SSL_CAPATH = 1010;
-        public const MYSQL_ATTR_SSL_CIPHER = 1011;
-        public const MYSQL_ATTR_SERVER_PUBLIC_KEY = 1012;
-        public const MYSQL_ATTR_MULTI_STATEMENTS = 1013;
-        public const MYSQL_ATTR_SSL_VERIFY_SERVER_CERT = 1014;
-        public const ODBC_ATTR_USE_CURSOR_LIBRARY = 1000;
-        public const ODBC_ATTR_ASSUME_UTF8 = 1001;
-        public const ODBC_SQL_USE_IF_NEEDED = 0;
-        public const ODBC_SQL_USE_DRIVER = 2;
-        public const ODBC_SQL_USE_ODBC = 1;
-        public const PGSQL_ATTR_DISABLE_PREPARES = 1000;
-        public const PGSQL_TRANSACTION_IDLE = 0;
-        public const PGSQL_TRANSACTION_ACTIVE = 1;
-        public const PGSQL_TRANSACTION_INTRANS = 2;
-        public const PGSQL_TRANSACTION_INERROR = 3;
-        public const PGSQL_TRANSACTION_UNKNOWN = 4;
-        public const SQLITE_DETERMINISTIC = 2048;
-        public const SQLITE_ATTR_OPEN_FLAGS = 1000;
-        public const SQLITE_OPEN_READONLY = 1;
-        public const SQLITE_OPEN_READWRITE = 2;
-        public const SQLITE_OPEN_CREATE = 4;
-        public const SQLITE_ATTR_READONLY_STATEMENT = 1001;
-        public const SQLITE_ATTR_EXTENDED_RESULT_CODES = 1002;
-        /**
-         * @param string $dsn
-         * @param null|string $username
-         * @param null|string $passwd
-         * @param array<array-key, mixed>|null $options
-         *
-         * @return void
-         */
-        public function __construct($dsn, $username, $passwd, $options)
-        {
-        }
-        /**
-         * @param string $statement
-         * @param array<array-key, mixed> $options
-         *
-         * @return PDOStatement|false
-         */
-        public function prepare($statement, $options)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function beginTransaction()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function commit()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function rollBack()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function inTransaction()
-        {
-        }
-        /**
-         * @param int $attribute
-         * @param mixed $value
-         *
-         * @return bool
-         */
-        public function setAttribute($attribute, $value)
-        {
-        }
-        /**
-         * @param string $query
-         *
-         * @return false|int
-         */
-        public function exec($query)
-        {
-        }
-        /**
-         * @param string $sql
-         *
-         * @return PDOStatement|false
-         */
-        public function query($sql)
-        {
-        }
-        /**
-         * @param null|string $name
-         *
-         * @return string
-         */
-        public function lastInsertId($name)
-        {
-        }
-        /**
-         * @return null|string
-         */
-        public function errorCode()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function errorInfo()
-        {
-        }
-        /**
-         * @param int $attribute
-         *
-         * @return mixed
-         */
-        public function getAttribute($attribute)
-        {
-        }
-        /**
-         * @param string $string
-         * @param int $paramtype
-         *
-         * @return false|string
-         */
-        public function quote($string, $paramtype)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function getAvailableDrivers()
-        {
-        }
-    }
-    class PDOException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var string
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-        /**
-         * @var mixed
-         */
-        public $errorInfo;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $errorinfo;
-    }
-    class PDOStatement
-    {
-        /**
-         * @var mixed
-         */
-        public $queryString;
-        /**
-         * @var string
-         */
-        public $querystring;
-        /**
-         * @param array<array-key, mixed>|null $bound_input_params
-         *
-         * @return bool
-         */
-        public function execute($bound_input_params)
-        {
-        }
-        /**
-         * @param int $how
-         * @param int $orientation
-         * @param int $offset
-         *
-         * @return mixed
-         */
-        public function fetch($how, $orientation, $offset)
-        {
-        }
-        /**
-         * @param mixed $paramno
-         * @param mixed $rw_param
-         * @param int $type
-         * @param int $maxlen
-         * @param mixed $driverdata
-         *
-         * @return bool
-         */
-        public function bindParam($paramno, $rw_param, $type, $maxlen, $driverdata)
-        {
-        }
-        /**
-         * @param mixed $column
-         * @param mixed $rw_param
-         * @param int $type
-         * @param int $maxlen
-         * @param mixed $driverdata
-         *
-         * @return bool
-         */
-        public function bindColumn($column, $rw_param, $type, $maxlen, $driverdata)
-        {
-        }
-        /**
-         * @param mixed $paramno
-         * @param mixed $param
-         * @param int $type
-         *
-         * @return bool
-         */
-        public function bindValue($paramno, $param, $type)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function rowCount()
-        {
-        }
-        /**
-         * @param int $column_number
-         *
-         * @return null|scalar
-         */
-        public function fetchColumn($column_number)
-        {
-        }
-        /**
-         * @param int $how
-         * @param callable|int|string $fetch_argument
-         * @param array<array-key, mixed>|null $ctor_args
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function fetchAll($how, $fetch_argument, $ctor_args)
-        {
-        }
-        /**
-         * @param string $class_name
-         * @param array<array-key, mixed>|null $ctor_args
-         *
-         * @return false|mixed
-         */
-        public function fetchObject($class_name, $ctor_args)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function errorCode()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function errorInfo()
-        {
-        }
-        /**
-         * @param int $attribute
-         * @param mixed $value
-         *
-         * @return bool
-         */
-        public function setAttribute($attribute, $value)
-        {
-        }
-        /**
-         * @param int $attribute
-         *
-         * @return mixed
-         */
-        public function getAttribute($attribute)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function columnCount()
-        {
-        }
-        /**
-         * @param int $column
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function getColumnMeta($column)
-        {
-        }
-        /**
-         * @param int $mode
-         *
-         * @return bool
-         */
-        public function setFetchMode($mode)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function nextRowset()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function closeCursor()
-        {
-        }
-        /**
-         * @return void
-         */
-        public function debugDumpParams()
-        {
-        }
-    }
     class PHPMailer
     {
         public const STOP_MESSAGE = 0;
@@ -12135,895 +10268,6 @@ namespace {
     function RandomCompat_substr($binary_string, $start, $length = null)
     {
     }
-    class RangeException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
-    interface RecursiveIterator
-    {
-        /**
-         * @return bool
-         */
-        public abstract function hasChildren();
-        /**
-         * @return RecursiveIterator
-         */
-        public abstract function getChildren();
-    }
-    class ReflectionClassConstant
-    {
-        /**
-         * @var mixed
-         */
-        public $name;
-        /**
-         * @var mixed
-         */
-        public $class;
-        /**
-         * @param mixed $class
-         * @param string $name
-         * @param bool $return
-         *
-         * @return string
-         */
-        public static function export($class, $name, $return)
-        {
-        }
-        /**
-         * @param mixed $class
-         * @param string $name
-         *
-         * @return void
-         */
-        public function __construct($class, $name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @return array<array-key, scalar>|null|scalar
-         */
-        public function getValue()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPublic()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPrivate()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isProtected()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getModifiers()
-        {
-        }
-        /**
-         * @return ReflectionClass
-         */
-        public function getDeclaringClass()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getDocComment()
-        {
-        }
-    }
-    class ReflectionException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
-    class ReflectionExtension
-    {
-        /**
-         * @var mixed
-         */
-        public $name;
-        /**
-         * @param string $name
-         * @param bool $return
-         *
-         * @return null|string
-         */
-        public static function export($name, $return)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return void
-         */
-        public function __construct($name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getVersion()
-        {
-        }
-        /**
-         * @return array<string, ReflectionFunction>
-         */
-        public function getFunctions()
-        {
-        }
-        /**
-         * @return array<string, mixed>
-         */
-        public function getConstants()
-        {
-        }
-        /**
-         * @return array<string, mixed>
-         */
-        public function getINIEntries()
-        {
-        }
-        /**
-         * @return array<class-string, ReflectionClass>
-         */
-        public function getClasses()
-        {
-        }
-        /**
-         * @return list<class-string>
-         */
-        public function getClassNames()
-        {
-        }
-        /**
-         * @return array<string, string>
-         */
-        public function getDependencies()
-        {
-        }
-        /**
-         * @return void
-         */
-        public function info()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPersistent()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isTemporary()
-        {
-        }
-    }
-    class ReflectionFunction
-    {
-        public const IS_DEPRECATED = 2048;
-        /**
-         * @var mixed
-         */
-        public $name;
-        /**
-         * @param Closure|callable-string $name
-         *
-         * @return void
-         */
-        public function __construct($name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @param string $name
-         * @param bool $return
-         *
-         * @return null|string
-         */
-        public static function export($name, $return)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDisabled()
-        {
-        }
-        /**
-         * @param mixed $args
-         *
-         * @return mixed
-         */
-        public function invoke($args)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $args
-         *
-         * @return mixed
-         */
-        public function invokeArgs($args)
-        {
-        }
-        /**
-         * @return Closure|null
-         */
-        public function getClosure()
-        {
-        }
-    }
-    class ReflectionFunctionAbstract
-    {
-        /**
-         * @var mixed
-         */
-        public $name;
-        /**
-         * @return bool
-         */
-        public function inNamespace()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isClosure()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDeprecated()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isInternal()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isUserDefined()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isGenerator()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isVariadic()
-        {
-        }
-        /**
-         * @return null|object
-         */
-        public function getClosureThis()
-        {
-        }
-        /**
-         * @return ReflectionClass|null
-         */
-        public function getClosureScopeClass()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getDocComment()
-        {
-        }
-        /**
-         * @return false|int
-         */
-        public function getEndLine()
-        {
-        }
-        /**
-         * @return ReflectionExtension
-         */
-        public function getExtension()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getExtensionName()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getFileName()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getNamespaceName()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getNumberOfParameters()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getNumberOfRequiredParameters()
-        {
-        }
-        /**
-         * @return list<ReflectionParameter>
-         */
-        public function getParameters()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getShortName()
-        {
-        }
-        /**
-         * @return false|int
-         */
-        public function getStartLine()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function getStaticVariables()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function returnsReference()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasReturnType()
-        {
-        }
-        /**
-         * @return ReflectionType|null
-         */
-        public function getReturnType()
-        {
-        }
-    }
-    class ReflectionMethod
-    {
-        public const IS_STATIC = 16;
-        public const IS_PUBLIC = 1;
-        public const IS_PROTECTED = 2;
-        public const IS_PRIVATE = 4;
-        public const IS_ABSTRACT = 64;
-        public const IS_FINAL = 32;
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @var string
-         */
-        public $class;
-        /**
-         * @param string $class
-         * @param string $name
-         * @param bool $return
-         *
-         * @return null|string
-         */
-        public static function export($class, $name, $return)
-        {
-        }
-        /**
-         * @param object|string $class
-         * @param string $name
-         *
-         * @return void
-         */
-        public function __construct($class, $name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPublic()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPrivate()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isProtected()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isAbstract()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isFinal()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isStatic()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isConstructor()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDestructor()
-        {
-        }
-        /**
-         * @param object $object
-         *
-         * @return Closure|null
-         */
-        public function getClosure($object)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getModifiers()
-        {
-        }
-        /**
-         * @param null|object $object
-         * @param mixed $args
-         *
-         * @return mixed
-         */
-        public function invoke($object, $args)
-        {
-        }
-        /**
-         * @param null|object $object
-         * @param array<array-key, mixed> $args
-         *
-         * @return mixed
-         */
-        public function invokeArgs($object, $args)
-        {
-        }
-        /**
-         * @return ReflectionClass
-         */
-        public function getDeclaringClass()
-        {
-        }
-        /**
-         * @return ReflectionMethod
-         */
-        public function getPrototype()
-        {
-        }
-        /**
-         * @param bool $visible
-         *
-         * @return void
-         */
-        public function setAccessible($visible)
-        {
-        }
-    }
-    class ReflectionParameter
-    {
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @param string $function
-         * @param string $parameter
-         * @param bool $return
-         *
-         * @return null|string
-         */
-        public static function export($function, $parameter, $return)
-        {
-        }
-        /**
-         * @param mixed $function
-         * @param mixed $parameter
-         *
-         * @return void
-         */
-        public function __construct($function, $parameter)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPassedByReference()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function canBePassedByValue()
-        {
-        }
-        /**
-         * @return ReflectionFunctionAbstract
-         */
-        public function getDeclaringFunction()
-        {
-        }
-        /**
-         * @return ReflectionClass|null
-         */
-        public function getDeclaringClass()
-        {
-        }
-        /**
-         * @return ReflectionClass|null
-         */
-        public function getClass()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasType()
-        {
-        }
-        /**
-         * @return ReflectionType|null
-         */
-        public function getType()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isArray()
-        {
-        }
-        /**
-         * @return bool|null
-         */
-        public function isCallable()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function allowsNull()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getPosition()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isOptional()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDefaultValueAvailable()
-        {
-        }
-        /**
-         * @return mixed
-         */
-        public function getDefaultValue()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDefaultValueConstant()
-        {
-        }
-        /**
-         * @return null|string
-         */
-        public function getDefaultValueConstantName()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isVariadic()
-        {
-        }
-    }
-    class ReflectionProperty
-    {
-        public const IS_STATIC = 16;
-        public const IS_PUBLIC = 1;
-        public const IS_PROTECTED = 2;
-        public const IS_PRIVATE = 4;
-        /**
-         * @var mixed
-         */
-        public $name;
-        /**
-         * @var mixed
-         */
-        public $class;
-        /**
-         * @param mixed $class
-         * @param string $name
-         * @param bool $return
-         *
-         * @return null|string
-         */
-        public static function export($class, $name, $return)
-        {
-        }
-        /**
-         * @param mixed $class
-         * @param string $name
-         *
-         * @return void
-         */
-        public function __construct($class, $name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @param object $object
-         *
-         * @return mixed
-         */
-        public function getValue($object)
-        {
-        }
-        /**
-         * @param null|object $object
-         * @param mixed $value
-         *
-         * @return void
-         */
-        public function setValue($object, $value)
-        {
-        }
-        /**
-         * @param mixed $object
-         */
-        public function isInitialized($object)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPublic()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isPrivate()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isProtected()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isStatic()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDefault()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getModifiers()
-        {
-        }
-        /**
-         * @return ReflectionClass
-         */
-        public function getDeclaringClass()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getDocComment()
-        {
-        }
-        /**
-         * @param bool $visible
-         *
-         * @return void
-         */
-        public function setAccessible($visible)
-        {
-        }
-        /**
-         * @return ReflectionType|null
-         */
-        public function getType()
-        {
-        }
-        public function hasType()
-        {
-        }
-    }
-    class ReflectionType
-    {
-        /**
-         * @return bool
-         */
-        public function allowsNull()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isBuiltin()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-    }
-    interface Reflector
-    {
-        /**
-         * @return string
-         */
-        public abstract function __toString();
-    }
     class Requests
     {
         public const POST = 'POST';
@@ -14950,83 +12194,6 @@ namespace {
         {
         }
     }
-    class ResourceBundle
-    {
-        /**
-         * @param string $locale
-         * @param string $bundlename
-         * @param bool $fallback
-         *
-         * @return void
-         */
-        public function __construct($locale, $bundlename, $fallback)
-        {
-        }
-        /**
-         * @param string $locale
-         * @param string $bundlename
-         * @param bool $fallback
-         *
-         * @return ResourceBundle|null
-         */
-        public static function create($locale, $bundlename, $fallback)
-        {
-        }
-        /**
-         * @param int|string $index
-         * @param bool $fallback
-         *
-         * @return mixed
-         */
-        public function get($index, $fallback)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function count()
-        {
-        }
-        /**
-         * @param string $bundlename
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function getLocales($bundlename)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getErrorCode()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getErrorMessage()
-        {
-        }
-    }
-    class RuntimeException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
     const SECURE_AUTH_KEY = 'put your unique phrase here';
     const SECURE_AUTH_SALT = 'put your unique phrase here';
     const SERVICES_JSON_IN_ARR = 3;
@@ -15544,19 +12711,6 @@ namespace {
     const SODIUM_LIBRARY_MAJOR_VERSION = 9;
     const SODIUM_LIBRARY_MINOR_VERSION = 1;
     const SODIUM_LIBRARY_VERSION = '1.0.8';
-    interface Serializable
-    {
-        /**
-         * @return null|string
-         */
-        public abstract function serialize();
-        /**
-         * @param string $serialized
-         *
-         * @return void
-         */
-        public abstract function unserialize($serialized);
-    }
     class Services_JSON
     {
         public $_mb_strlen = false;
@@ -18656,127 +15810,6 @@ namespace {
         {
         }
     }
-    class SimpleXMLElement
-    {
-        /**
-         * @param string $data
-         * @param int $options
-         * @param bool $data_is_url
-         * @param string $ns
-         * @param bool $is_prefix
-         *
-         * @return void
-         */
-        public function __construct($data, $options, $data_is_url, $ns, $is_prefix)
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return bool
-         */
-        public function asXML($filename)
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return mixed
-         */
-        public function saveXML($filename)
-        {
-        }
-        /**
-         * @param string $path
-         *
-         * @return array<array-key, SimpleXMLElement>|false
-         */
-        public function xpath($path)
-        {
-        }
-        /**
-         * @param string $prefix
-         * @param string $ns
-         *
-         * @return bool
-         */
-        public function registerXPathNamespace($prefix, $ns)
-        {
-        }
-        /**
-         * @param string $ns
-         * @param bool $is_prefix
-         *
-         * @return SimpleXMLElement|null
-         */
-        public function attributes($ns, $is_prefix)
-        {
-        }
-        /**
-         * @param string $ns
-         * @param bool $is_prefix
-         *
-         * @return SimpleXMLElement
-         */
-        public function children($ns, $is_prefix)
-        {
-        }
-        /**
-         * @param bool $recursive
-         *
-         * @return array<array-key, string>
-         */
-        public function getNamespaces($recursive)
-        {
-        }
-        /**
-         * @param bool $recursive
-         * @param bool $from_root
-         *
-         * @return array<array-key, string>
-         */
-        public function getDocNamespaces($recursive, $from_root)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $value
-         * @param string $ns
-         *
-         * @return SimpleXMLElement
-         */
-        public function addChild($name, $value, $ns)
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $value
-         * @param string $ns
-         *
-         * @return void
-         */
-        public function addAttribute($name, $value, $ns)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function count()
-        {
-        }
-    }
     class Snoopy
     {
         public $host = 'www.php.net';
@@ -18878,468 +15911,6 @@ namespace {
         {
         }
         public function _prepare_post_body($formvars, $formfiles)
-        {
-        }
-    }
-    class SodiumException
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
-    }
-    class SplFileInfo
-    {
-        /**
-         * @param string $file_name
-         *
-         * @return void
-         */
-        public function __construct($file_name)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getPath()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getFilename()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getExtension()
-        {
-        }
-        /**
-         * @param string $suffix
-         *
-         * @return string
-         */
-        public function getBasename($suffix)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getPathname()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getPerms()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getInode()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getSize()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getOwner()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getGroup()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getATime()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getMTime()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getCTime()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getType()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isWritable()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isReadable()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isExecutable()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isFile()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isDir()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isLink()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getLinkTarget()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getRealPath()
-        {
-        }
-        /**
-         * @param string $class_name
-         *
-         * @return SplFileInfo
-         */
-        public function getFileInfo($class_name)
-        {
-        }
-        /**
-         * @param string $class_name
-         *
-         * @return SplFileInfo
-         */
-        public function getPathInfo($class_name)
-        {
-        }
-        /**
-         * @param string $mode
-         * @param bool $use_include_path
-         * @param resource $context
-         *
-         * @return SplFileObject
-         */
-        public function openFile($mode, $use_include_path, $context)
-        {
-        }
-        /**
-         * @param string $class_name
-         *
-         * @return void
-         */
-        public function setFileClass($class_name)
-        {
-        }
-        /**
-         * @param string $class_name
-         *
-         * @return void
-         */
-        public function setInfoClass($class_name)
-        {
-        }
-        public function _bad_state_ex()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
-        {
-        }
-    }
-    class SplFileObject
-    {
-        public const DROP_NEW_LINE = 1;
-        public const READ_AHEAD = 2;
-        public const SKIP_EMPTY = 4;
-        public const READ_CSV = 8;
-        /**
-         * @param string $filename
-         * @param string $mode
-         * @param bool $use_include_path
-         * @param mixed $context
-         *
-         * @return void
-         */
-        public function __construct($filename, $mode, $use_include_path, $context)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function rewind()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function eof()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function valid()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function fgets()
-        {
-        }
-        /**
-         * @param string $delimiter
-         * @param string $enclosure
-         * @param string $escape
-         *
-         * @return array<array-key, mixed>|false|null
-         */
-        public function fgetcsv($delimiter, $enclosure, $escape)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $fields
-         * @param string $delimiter
-         * @param string $enclosure
-         * @param string $escape
-         *
-         * @return false|int
-         */
-        public function fputcsv($fields, $delimiter, $enclosure, $escape)
-        {
-        }
-        /**
-         * @param string $delimiter
-         * @param string $enclosure
-         * @param string $escape
-         *
-         * @return void
-         */
-        public function setCsvControl($delimiter, $enclosure, $escape)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function getCsvControl()
-        {
-        }
-        /**
-         * @param int $operation
-         * @param int $w_wouldblock
-         *
-         * @return bool
-         */
-        public function flock($operation, $w_wouldblock)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function fflush()
-        {
-        }
-        /**
-         * @return false|int
-         */
-        public function ftell()
-        {
-        }
-        /**
-         * @param int $pos
-         * @param int $whence
-         *
-         * @return int
-         */
-        public function fseek($pos, $whence)
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function fgetc()
-        {
-        }
-        /**
-         * @return false|int
-         */
-        public function fpassthru()
-        {
-        }
-        /**
-         * @param string $allowable_tags
-         *
-         * @return false|string
-         */
-        public function fgetss($allowable_tags)
-        {
-        }
-        /**
-         * @param string $format
-         * @param float|int|string $w_vars
-         *
-         * @return array<array-key, mixed>|int
-         */
-        public function fscanf($format, $w_vars)
-        {
-        }
-        /**
-         * @param string $str
-         * @param int $length
-         *
-         * @return int
-         */
-        public function fwrite($str, $length)
-        {
-        }
-        /**
-         * @param int $length
-         *
-         * @return false|string
-         */
-        public function fread($length)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|false
-         */
-        public function fstat()
-        {
-        }
-        /**
-         * @param int $size
-         *
-         * @return bool
-         */
-        public function ftruncate($size)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|false|string
-         */
-        public function current()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function key()
-        {
-        }
-        /**
-         * @return void
-         */
-        public function next()
-        {
-        }
-        /**
-         * @param int $flags
-         *
-         * @return void
-         */
-        public function setFlags($flags)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getFlags()
-        {
-        }
-        /**
-         * @param int $max_len
-         *
-         * @return void
-         */
-        public function setMaxLineLen($max_len)
-        {
-        }
-        /**
-         * @return int
-         */
-        public function getMaxLineLen()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasChildren()
-        {
-        }
-        /**
-         * @return null
-         */
-        public function getChildren()
-        {
-        }
-        /**
-         * @param int $line_pos
-         *
-         * @return void
-         */
-        public function seek($line_pos)
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getCurrentLine()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function __toString()
         {
         }
     }
@@ -20074,25 +16645,6 @@ namespace {
         public function merge_originals_with($other)
         {
         }
-    }
-    class TypeError
-    {
-        /**
-         * @var mixed
-         */
-        protected $message;
-        /**
-         * @var mixed
-         */
-        protected $code;
-        /**
-         * @var mixed
-         */
-        protected $file;
-        /**
-         * @var mixed
-         */
-        protected $line;
     }
     class WP
     {
@@ -29628,7 +26180,7 @@ namespace {
         {
         }
     }
-    const WP_NETWORK_ADMIN = true;
+    const WP_NETWORK_ADMIN = false;
     class WP_Nav_Menu_Widget extends \WP_Widget
     {
         public function __construct()
@@ -37944,7 +34496,7 @@ namespace {
         {
         }
     }
-    const WP_USER_ADMIN = true;
+    const WP_USER_ADMIN = false;
     const WP_USE_THEMES = true;
     class WP_Upgrader
     {
@@ -40211,6 +36763,15 @@ namespace {
         {
         }
         /**
+         * @param string $comment_text
+         * @param WP_Comment|null $comment
+         *
+         * @return string
+         */
+        public function filter_comment_text($comment_text, $comment)
+        {
+        }
+        /**
          * @param WP_Comment $comment
          * @param int $depth
          * @param array<array-key, mixed> $args
@@ -40404,747 +36965,22 @@ namespace {
         {
         }
     }
+    const XDEBUG_CC_BRANCH_CHECK = 4;
+    const XDEBUG_CC_DEAD_CODE = 2;
+    const XDEBUG_CC_UNUSED = 1;
+    const XDEBUG_FILTER_CODE_COVERAGE = 512;
+    const XDEBUG_FILTER_NONE = 0;
+    const XDEBUG_FILTER_TRACING = 256;
+    const XDEBUG_NAMESPACE_BLACKLIST = 18;
+    const XDEBUG_NAMESPACE_WHITELIST = 17;
+    const XDEBUG_PATH_BLACKLIST = 2;
+    const XDEBUG_PATH_WHITELIST = 1;
+    const XDEBUG_STACK_NO_DESC = 1;
+    const XDEBUG_TRACE_APPEND = 1;
+    const XDEBUG_TRACE_COMPUTERIZED = 2;
+    const XDEBUG_TRACE_HTML = 4;
+    const XDEBUG_TRACE_NAKED_FILENAME = 8;
     const XMLRPC_REQUEST = true;
-    class XMLReader
-    {
-        public const NONE = 0;
-        public const ELEMENT = 1;
-        public const ATTRIBUTE = 2;
-        public const TEXT = 3;
-        public const CDATA = 4;
-        public const ENTITY_REF = 5;
-        public const ENTITY = 6;
-        public const PI = 7;
-        public const COMMENT = 8;
-        public const DOC = 9;
-        public const DOC_TYPE = 10;
-        public const DOC_FRAGMENT = 11;
-        public const NOTATION = 12;
-        public const WHITESPACE = 13;
-        public const SIGNIFICANT_WHITESPACE = 14;
-        public const END_ELEMENT = 15;
-        public const END_ENTITY = 16;
-        public const XML_DECLARATION = 17;
-        public const LOADDTD = 1;
-        public const DEFAULTATTRS = 2;
-        public const VALIDATE = 3;
-        public const SUBST_ENTITIES = 4;
-        /**
-         * @var int
-         */
-        public $attributeCount;
-        /**
-         * @var string
-         */
-        public $baseURI;
-        /**
-         * @var int
-         */
-        public $depth;
-        /**
-         * @var bool
-         */
-        public $hasAttributes;
-        /**
-         * @var bool
-         */
-        public $hasValue;
-        /**
-         * @var bool
-         */
-        public $isDefault;
-        /**
-         * @var bool
-         */
-        public $isEmptyElement;
-        /**
-         * @var string
-         */
-        public $localName;
-        /**
-         * @var string
-         */
-        public $name;
-        /**
-         * @var string
-         */
-        public $namespaceURI;
-        /**
-         * @var int
-         */
-        public $nodeType;
-        /**
-         * @var string
-         */
-        public $prefix;
-        /**
-         * @var string
-         */
-        public $value;
-        /**
-         * @var string
-         */
-        public $xmlLang;
-        /**
-         * @return bool
-         */
-        public function close()
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return null|string
-         */
-        public function getAttribute($name)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return null|string
-         */
-        public function getAttributeNo($index)
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $namespaceuri
-         *
-         * @return null|string
-         */
-        public function getAttributeNs($name, $namespaceuri)
-        {
-        }
-        /**
-         * @param int $property
-         *
-         * @return bool
-         */
-        public function getParserProperty($property)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function isValid()
-        {
-        }
-        /**
-         * @param string $prefix
-         *
-         * @return null|string
-         */
-        public function lookupNamespace($prefix)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return bool
-         */
-        public function moveToAttributeNo($index)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function moveToAttribute($name)
-        {
-        }
-        /**
-         * @param string $localname
-         * @param string $namespaceuri
-         *
-         * @return bool
-         */
-        public function moveToAttributeNs($localname, $namespaceuri)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function moveToElement()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function moveToFirstAttribute()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function moveToNextAttribute()
-        {
-        }
-        /**
-         * @param string $uri
-         * @param null|string $encoding
-         * @param int $options
-         *
-         * @return bool
-         */
-        public function open($uri, $encoding, $options)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function read()
-        {
-        }
-        /**
-         * @param string $localname
-         *
-         * @return bool
-         */
-        public function next($localname)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readInnerXml()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readOuterXml()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function readString()
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return bool
-         */
-        public function setSchema($filename)
-        {
-        }
-        /**
-         * @param int $property
-         * @param bool $value
-         *
-         * @return bool
-         */
-        public function setParserProperty($property, $value)
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return bool
-         */
-        public function setRelaxNGSchema($filename)
-        {
-        }
-        /**
-         * @param string $source
-         *
-         * @return bool
-         */
-        public function setRelaxNGSchemaSource($source)
-        {
-        }
-        /**
-         * @param string $source
-         * @param null|string $encoding
-         * @param int $options
-         *
-         * @return bool
-         */
-        public function XML($source, $encoding, $options)
-        {
-        }
-        /**
-         * @param DOMNode $basenode
-         *
-         * @return DOMNode|false
-         */
-        public function expand($basenode)
-        {
-        }
-    }
-    class ZipArchive
-    {
-        public const CREATE = 1;
-        public const EXCL = 2;
-        public const CHECKCONS = 4;
-        public const OVERWRITE = 8;
-        public const RDONLY = 16;
-        public const FL_NOCASE = 1;
-        public const FL_NODIR = 2;
-        public const FL_COMPRESSED = 4;
-        public const FL_UNCHANGED = 8;
-        public const FL_ENC_GUESS = 0;
-        public const FL_ENC_RAW = 64;
-        public const FL_ENC_STRICT = 128;
-        public const FL_ENC_UTF_8 = 2048;
-        public const FL_ENC_CP437 = 4096;
-        public const CM_DEFAULT = -1;
-        public const CM_STORE = 0;
-        public const CM_SHRINK = 1;
-        public const CM_REDUCE_1 = 2;
-        public const CM_REDUCE_2 = 3;
-        public const CM_REDUCE_3 = 4;
-        public const CM_REDUCE_4 = 5;
-        public const CM_IMPLODE = 6;
-        public const CM_DEFLATE = 8;
-        public const CM_DEFLATE64 = 9;
-        public const CM_PKWARE_IMPLODE = 10;
-        public const CM_BZIP2 = 12;
-        public const CM_LZMA = 14;
-        public const CM_LZMA2 = 33;
-        public const CM_XZ = 95;
-        public const CM_TERSE = 18;
-        public const CM_LZ77 = 19;
-        public const CM_WAVPACK = 97;
-        public const CM_PPMD = 98;
-        public const ER_OK = 0;
-        public const ER_MULTIDISK = 1;
-        public const ER_RENAME = 2;
-        public const ER_CLOSE = 3;
-        public const ER_SEEK = 4;
-        public const ER_READ = 5;
-        public const ER_WRITE = 6;
-        public const ER_CRC = 7;
-        public const ER_ZIPCLOSED = 8;
-        public const ER_NOENT = 9;
-        public const ER_EXISTS = 10;
-        public const ER_OPEN = 11;
-        public const ER_TMPOPEN = 12;
-        public const ER_ZLIB = 13;
-        public const ER_MEMORY = 14;
-        public const ER_CHANGED = 15;
-        public const ER_COMPNOTSUPP = 16;
-        public const ER_EOF = 17;
-        public const ER_INVAL = 18;
-        public const ER_NOZIP = 19;
-        public const ER_INTERNAL = 20;
-        public const ER_INCONS = 21;
-        public const ER_REMOVE = 22;
-        public const ER_DELETED = 23;
-        public const ER_ENCRNOTSUPP = 24;
-        public const ER_RDONLY = 25;
-        public const ER_NOPASSWD = 26;
-        public const ER_WRONGPASSWD = 27;
-        public const ER_OPNOTSUPP = 28;
-        public const ER_INUSE = 29;
-        public const ER_TELL = 30;
-        public const ER_COMPRESSED_DATA = 31;
-        public const ER_CANCELLED = 32;
-        public const OPSYS_DOS = 0;
-        public const OPSYS_AMIGA = 1;
-        public const OPSYS_OPENVMS = 2;
-        public const OPSYS_UNIX = 3;
-        public const OPSYS_VM_CMS = 4;
-        public const OPSYS_ATARI_ST = 5;
-        public const OPSYS_OS_2 = 6;
-        public const OPSYS_MACINTOSH = 7;
-        public const OPSYS_Z_SYSTEM = 8;
-        public const OPSYS_Z_CPM = 9;
-        public const OPSYS_CPM = 9;
-        public const OPSYS_WINDOWS_NTFS = 10;
-        public const OPSYS_MVS = 11;
-        public const OPSYS_VSE = 12;
-        public const OPSYS_ACORN_RISC = 13;
-        public const OPSYS_VFAT = 14;
-        public const OPSYS_ALTERNATE_MVS = 15;
-        public const OPSYS_BEOS = 16;
-        public const OPSYS_TANDEM = 17;
-        public const OPSYS_OS_400 = 18;
-        public const OPSYS_OS_X = 19;
-        public const OPSYS_DEFAULT = 3;
-        public const EM_NONE = 0;
-        public const EM_AES_128 = 257;
-        public const EM_AES_192 = 258;
-        public const EM_AES_256 = 259;
-        public const LIBZIP_VERSION = '1.6.1';
-        /**
-         * @var int
-         */
-        public $status;
-        /**
-         * @var int
-         */
-        public $statusSys;
-        /**
-         * @var int
-         */
-        public $numFiles;
-        /**
-         * @var string
-         */
-        public $filename;
-        /**
-         * @var string
-         */
-        public $comment;
-        /**
-         * @param string $source
-         * @param int $flags
-         *
-         * @return bool|int
-         */
-        public function open($source, $flags)
-        {
-        }
-        /**
-         * @param string $password
-         *
-         * @return bool
-         */
-        public function setPassword($password)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function close()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function count()
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function getStatusString()
-        {
-        }
-        /**
-         * @param string $dirname
-         *
-         * @return bool
-         */
-        public function addEmptyDir($dirname)
-        {
-        }
-        /**
-         * @param string $entryname
-         * @param string $content
-         *
-         * @return bool
-         */
-        public function addFromString($entryname, $content)
-        {
-        }
-        /**
-         * @param string $filepath
-         * @param string $entryname
-         * @param int $start
-         * @param int $length
-         *
-         * @return bool
-         */
-        public function addFile($filepath, $entryname, $start, $length)
-        {
-        }
-        /**
-         * @param string $pattern
-         * @param int $flags
-         * @param array<array-key, mixed> $options
-         *
-         * @return bool
-         */
-        public function addGlob($pattern, $flags, $options)
-        {
-        }
-        /**
-         * @param string $pattern
-         * @param string $path
-         * @param array<array-key, mixed> $options
-         *
-         * @return bool
-         */
-        public function addPattern($pattern, $path, $options)
-        {
-        }
-        /**
-         * @param int $index
-         * @param string $new_name
-         *
-         * @return bool
-         */
-        public function renameIndex($index, $new_name)
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $new_name
-         *
-         * @return bool
-         */
-        public function renameName($name, $new_name)
-        {
-        }
-        /**
-         * @param string $comment
-         *
-         * @return bool
-         */
-        public function setArchiveComment($comment)
-        {
-        }
-        /**
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getArchiveComment($flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param string $comment
-         *
-         * @return bool
-         */
-        public function setCommentIndex($index, $comment)
-        {
-        }
-        /**
-         * @param string $name
-         * @param string $comment
-         *
-         * @return bool
-         */
-        public function setCommentName($name, $comment)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getCommentIndex($index, $flags)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getCommentName($name, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return bool
-         */
-        public function deleteIndex($index)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function deleteName($name)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param int $flags
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function statName($filename, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $flags
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function statIndex($index, $flags)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param int $flags
-         *
-         * @return false|int
-         */
-        public function locateName($filename, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getNameIndex($index, $flags)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function unchangeArchive()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function unchangeAll()
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return bool
-         */
-        public function unchangeIndex($index)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function unchangeName($name)
-        {
-        }
-        /**
-         * @param string $pathto
-         * @param array<array-key, string>|string $files
-         *
-         * @return bool
-         */
-        public function extractTo($pathto, $files)
-        {
-        }
-        /**
-         * @param string $entryname
-         * @param int $len
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getFromName($entryname, $len, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $len
-         * @param int $flags
-         *
-         * @return false|string
-         */
-        public function getFromIndex($index, $len, $flags)
-        {
-        }
-        /**
-         * @param string $entryname
-         *
-         * @return false|resource
-         */
-        public function getStream($entryname)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $opsys
-         * @param int $attr
-         * @param int $flags
-         *
-         * @return bool
-         */
-        public function setExternalAttributesName($name, $opsys, $attr, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $opsys
-         * @param int $attr
-         * @param int $flags
-         *
-         * @return bool
-         */
-        public function setExternalAttributesIndex($index, $opsys, $attr, $flags)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $w_opsys
-         * @param int $w_attr
-         * @param int $flags
-         *
-         * @return bool
-         */
-        public function getExternalAttributesName($name, $w_opsys, $w_attr, $flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $w_opsys
-         * @param int $w_attr
-         * @param int $flags
-         *
-         * @return bool
-         */
-        public function getExternalAttributesIndex($index, $w_opsys, $w_attr, $flags)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $comp_method
-         * @param int $comp_flags
-         *
-         * @return bool
-         */
-        public function setCompressionName($name, $comp_method, $comp_flags)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $comp_method
-         * @param int $comp_flags
-         *
-         * @return bool
-         */
-        public function setCompressionIndex($index, $comp_method, $comp_flags)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $method
-         * @param string $password
-         *
-         * @return bool
-         */
-        public function setEncryptionName($name, $method, $password)
-        {
-        }
-        /**
-         * @param int $index
-         * @param string $method
-         * @param string $password
-         *
-         * @return bool
-         */
-        public function setEncryptionIndex($index, $method, $password)
-        {
-        }
-    }
     class _WP_Dependency
     {
         /**
@@ -41345,7 +37181,13 @@ namespace {
         {
         }
     }
-    function __()
+    /**
+     * @param string $text
+     * @param string $domain
+     *
+     * @return string
+     */
+    function __($text, $domain = 'default')
     {
     }
     /**
@@ -43378,7 +39220,14 @@ namespace {
     function _wptexturize_pushpop_element($text, $stack, $disabled_elements)
     {
     }
-    function _x()
+    /**
+     * @param string $text
+     * @param string $context
+     * @param string $domain
+     *
+     * @return string
+     */
+    function _x($text, $context, $domain = 'default')
     {
     }
     /**
@@ -45863,7 +41712,12 @@ namespace {
     function ent2ncr($text)
     {
     }
-    function esc_attr()
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
+    function esc_attr($text)
     {
     }
     /**
@@ -46532,254 +42386,6 @@ namespace {
      */
     function generic_ping($post_id = 0)
     {
-    }
-    class getID3
-    {
-        public const VERSION = '1.9.18-201907240906';
-        public const FREAD_BUFFER_SIZE = 32768;
-        public const ATTACHMENTS_NONE = false;
-        public const ATTACHMENTS_INLINE = true;
-        /**
-         * @var string
-         */
-        public $encoding;
-        /**
-         * @var string
-         */
-        public $encoding_id3v1;
-        /**
-         * @var bool
-         */
-        public $option_tag_id3v1;
-        /**
-         * @var bool
-         */
-        public $option_tag_id3v2;
-        /**
-         * @var bool
-         */
-        public $option_tag_lyrics3;
-        /**
-         * @var bool
-         */
-        public $option_tag_apetag;
-        /**
-         * @var bool
-         */
-        public $option_tags_process;
-        /**
-         * @var bool
-         */
-        public $option_tags_html;
-        /**
-         * @var bool
-         */
-        public $option_extra_info;
-        /**
-         * @var bool|string
-         */
-        public $option_save_attachments;
-        /**
-         * @var bool
-         */
-        public $option_md5_data;
-        /**
-         * @var bool
-         */
-        public $option_md5_data_source;
-        /**
-         * @var bool
-         */
-        public $option_sha1_data;
-        /**
-         * @var bool|null
-         */
-        public $option_max_2gb_check;
-        /**
-         * @var int
-         */
-        public $option_fread_buffer_size;
-        /**
-         * @var string
-         */
-        public $filename;
-        /**
-         * @var resource
-         */
-        public $fp;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $info;
-        /**
-         * @var string
-         */
-        public $tempdir;
-        /**
-         * @var int
-         */
-        public $memory_limit;
-        /**
-         * @var string
-         */
-        protected $startup_error;
-        /**
-         * @var string
-         */
-        protected $startup_warning;
-        public function __construct()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function version()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function fread_buffer_size()
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $optArray
-         *
-         * @return bool
-         */
-        public function setOption($optArray)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param int|null $filesize
-         *
-         * @return bool
-         *
-         * @throws getid3_exception
-         */
-        public function openfile($filename, $filesize = null, $fp = null)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param int|null $filesize
-         * @param string $original_filename
-         *
-         * @return array<array-key, mixed>
-         */
-        public function analyze($filename, $filesize = null, $original_filename = '', $fp = null)
-        {
-        }
-        /**
-         * @param string $message
-         *
-         * @return array<array-key, mixed>
-         */
-        public function error($message)
-        {
-        }
-        /**
-         * @param string $message
-         *
-         * @return bool
-         */
-        public function warning($message)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function CleanUp()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function GetFileFormatArray()
-        {
-        }
-        /**
-         * @param string $filedata
-         * @param string $filename
-         *
-         * @return false|mixed
-         */
-        public function GetFileFormat($filedata, $filename = '')
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array
-         * @param string $encoding
-         */
-        public function CharConvert($array, $encoding)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function HandleAllTags()
-        {
-        }
-        /**
-         * @param string $algorithm
-         *
-         * @return array<array-key, mixed>|bool
-         */
-        public function getHashdata($algorithm)
-        {
-        }
-        public function ChannelsBitratePlaytimeCalculations()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function CalculateCompressionRatioVideo()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function CalculateCompressionRatioAudio()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function CalculateReplayGain()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function ProcessAudioStreams()
-        {
-        }
-        /**
-         * @return bool|string
-         */
-        public function getid3_tempnam()
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         *
-         * @throws getid3_exception
-         */
-        public function include_module($name)
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return bool
-         */
-        public static function is_writable($filename)
-        {
-        }
     }
     /**
      * @return string
@@ -48831,7 +44437,13 @@ namespace {
     function get_oembed_response_data_rich($data, $post, $width, $height)
     {
     }
-    function get_option()
+    /**
+     * @param string $option
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    function get_option($option, $default = false)
     {
     }
     /**
@@ -51030,2385 +46642,6 @@ namespace {
     function get_year_link($year)
     {
     }
-    class getid3_ac3 extends \getid3_handler
-    {
-        public const syncword = 2935;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $AC3header;
-        /**
-         * @var int
-         */
-        public $BSIoffset;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param int $length
-         *
-         * @return float|int
-         */
-        public function readHeaderBSI($length)
-        {
-        }
-        /**
-         * @param int $fscod
-         *
-         * @return false|int|string
-         */
-        public static function sampleRateCodeLookup($fscod)
-        {
-        }
-        /**
-         * @param int $fscod2
-         *
-         * @return false|int|string
-         */
-        public static function sampleRateCodeLookup2($fscod2)
-        {
-        }
-        /**
-         * @param int $bsmod
-         * @param int $acmod
-         *
-         * @return false|string
-         */
-        public static function serviceTypeLookup($bsmod, $acmod)
-        {
-        }
-        /**
-         * @param int $acmod
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function audioCodingModeLookup($acmod)
-        {
-        }
-        /**
-         * @param int $cmixlev
-         *
-         * @return false|float|int|string
-         */
-        public static function centerMixLevelLookup($cmixlev)
-        {
-        }
-        /**
-         * @param int $surmixlev
-         *
-         * @return false|float|int|string
-         */
-        public static function surroundMixLevelLookup($surmixlev)
-        {
-        }
-        /**
-         * @param int $dsurmod
-         *
-         * @return false|string
-         */
-        public static function dolbySurroundModeLookup($dsurmod)
-        {
-        }
-        /**
-         * @param int $acmod
-         * @param bool $lfeon
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function channelsEnabledLookup($acmod, $lfeon)
-        {
-        }
-        /**
-         * @param int $compre
-         *
-         * @return float|int
-         */
-        public static function heavyCompression($compre)
-        {
-        }
-        /**
-         * @param int $roomtyp
-         *
-         * @return false|string
-         */
-        public static function roomTypeLookup($roomtyp)
-        {
-        }
-        /**
-         * @param int $frmsizecod
-         * @param int $fscod
-         *
-         * @return false|int
-         */
-        public static function frameSizeLookup($frmsizecod, $fscod)
-        {
-        }
-        /**
-         * @param int $frmsizecod
-         *
-         * @return false|int
-         */
-        public static function bitrateLookup($frmsizecod)
-        {
-        }
-        /**
-         * @param int $numblkscod
-         *
-         * @return false|int
-         */
-        public static function blocksPerSyncFrame($numblkscod)
-        {
-        }
-    }
-    class getid3_apetag extends \getid3_handler
-    {
-        /**
-         * @var bool|int|string
-         */
-        public $inline_attachments;
-        public $overrideendoffset = 0;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $APEheaderFooterData
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function parseAPEheaderFooter($APEheaderFooterData)
-        {
-        }
-        /**
-         * @param int $rawflagint
-         *
-         * @return array<array-key, mixed>
-         */
-        public function parseAPEtagFlags($rawflagint)
-        {
-        }
-        /**
-         * @param int $contenttypeid
-         *
-         * @return string
-         */
-        public function APEcontentTypeFlagLookup($contenttypeid)
-        {
-        }
-        /**
-         * @param string $itemkey
-         *
-         * @return bool
-         */
-        public function APEtagItemIsUTF8Lookup($itemkey)
-        {
-        }
-    }
-    class getid3_asf extends \getid3_handler
-    {
-        /**
-         * @param getID3 $getid3
-         */
-        public function __construct(\getID3 $getid3)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param int $CodecListType
-         *
-         * @return string
-         */
-        public static function codecListObjectTypeLookup($CodecListType)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function KnownGUIDs()
-        {
-        }
-        /**
-         * @param string $GUIDstring
-         *
-         * @return false|string
-         */
-        public static function GUIDname($GUIDstring)
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return string
-         */
-        public static function ASFIndexObjectIndexTypeLookup($id)
-        {
-        }
-        /**
-         * @param string $GUIDstring
-         *
-         * @return string
-         */
-        public static function GUIDtoBytestring($GUIDstring)
-        {
-        }
-        /**
-         * @param string $Bytestring
-         *
-         * @return string
-         */
-        public static function BytestringToGUID($Bytestring)
-        {
-        }
-        /**
-         * @param int $FILETIME
-         * @param bool $round
-         *
-         * @return float|int
-         */
-        public static function FILETIMEtoUNIXtime($FILETIME, $round = true)
-        {
-        }
-        /**
-         * @param int $WMpictureType
-         *
-         * @return string
-         */
-        public static function WMpictureTypeLookup($WMpictureType)
-        {
-        }
-        /**
-         * @param string $asf_header_extension_object_data
-         * @param int $unhandled_sections
-         *
-         * @return array<array-key, mixed>
-         */
-        public function HeaderExtensionObjectDataParse($asf_header_extension_object_data, $unhandled_sections)
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return string
-         */
-        public static function metadataLibraryObjectDataTypeLookup($id)
-        {
-        }
-        /**
-         * @param string $data
-         *
-         * @return array<array-key, mixed>
-         */
-        public function ASF_WMpicture($data)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function TrimConvert($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function TrimTerm($string)
-        {
-        }
-    }
-    class getid3_dts extends \getid3_handler
-    {
-        public const syncword = 'þ€';
-        /**
-         * @var int
-         */
-        public $readBinDataOffset;
-        public static $syncwords = 'Psalm could not infer this type';
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $bin
-         * @param int $length
-         *
-         * @return float|int
-         */
-        public function readBinData($bin, $length)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return false|int|string
-         */
-        public static function bitrateLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return false|int|string
-         */
-        public static function sampleRateLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return false|int
-         */
-        public static function bitPerSampleLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return false|int
-         */
-        public static function numChannelsLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public static function channelArrangementLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         * @param int $version
-         *
-         * @return false|int
-         */
-        public static function dialogNormalization($index, $version)
-        {
-        }
-    }
-    class getid3_exception extends \Exception
-    {
-        public $message;
-    }
-    class getid3_flac extends \getid3_handler
-    {
-        public const syncword = 'fLaC';
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function parseMETAdata()
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function parseSTREAMINFOdata($BlockData)
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return bool
-         */
-        public function parseSTREAMINFO($BlockData)
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return bool
-         */
-        public function parseAPPLICATION($BlockData)
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return bool
-         */
-        public function parseSEEKTABLE($BlockData)
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return bool
-         */
-        public function parseVORBIS_COMMENT($BlockData)
-        {
-        }
-        /**
-         * @param string $BlockData
-         *
-         * @return bool
-         */
-        public function parseCUESHEET($BlockData)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function parsePICTURE()
-        {
-        }
-        /**
-         * @param int $blocktype
-         *
-         * @return string
-         */
-        public static function metaBlockTypeLookup($blocktype)
-        {
-        }
-        /**
-         * @param int $applicationid
-         *
-         * @return string
-         */
-        public static function applicationIDLookup($applicationid)
-        {
-        }
-        /**
-         * @param int $type_id
-         *
-         * @return string
-         */
-        public static function pictureTypeLookup($type_id)
-        {
-        }
-    }
-    class getid3_flv extends \getid3_handler
-    {
-        public const magic = 'FLV';
-        /**
-         * @var int
-         */
-        public $max_frames;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return false|string
-         */
-        public static function audioFormatLookup($id)
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return false|int
-         */
-        public static function audioRateLookup($id)
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return false|int
-         */
-        public static function audioBitDepthLookup($id)
-        {
-        }
-        /**
-         * @param int $id
-         *
-         * @return false|string
-         */
-        public static function videoCodecLookup($id)
-        {
-        }
-    }
-    class getid3_handler
-    {
-        /**
-         * @var getID3
-         */
-        protected $getid3;
-        /**
-         * @var bool
-         */
-        protected $data_string_flag;
-        /**
-         * @var string
-         */
-        protected $data_string;
-        /**
-         * @var int
-         */
-        protected $data_string_position;
-        /**
-         * @var int
-         */
-        protected $data_string_length;
-        /**
-         * @var string
-         */
-        public $dependency_to;
-        /**
-         * @param getID3 $getid3
-         * @param null|string $call_module
-         */
-        public function __construct(\getID3 $getid3, $call_module = null)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public abstract function Analyze();
-        /**
-         * @param string $string
-         */
-        public function AnalyzeString($string)
-        {
-        }
-        /**
-         * @param string $string
-         */
-        public function setStringMode($string)
-        {
-        }
-        /**
-         * @return bool|int
-         */
-        protected function ftell()
-        {
-        }
-        /**
-         * @param int $bytes
-         *
-         * @return false|string
-         *
-         * @throws getid3_exception
-         */
-        protected function fread($bytes)
-        {
-        }
-        /**
-         * @param int $bytes
-         * @param int $whence
-         *
-         * @return int
-         *
-         * @throws getid3_exception
-         */
-        protected function fseek($bytes, $whence)
-        {
-        }
-        /**
-         * @return bool
-         */
-        protected function feof()
-        {
-        }
-        /**
-         * @param string $module
-         *
-         * @return bool
-         */
-        protected function isDependencyFor($module)
-        {
-        }
-        /**
-         * @param string $text
-         *
-         * @return bool
-         */
-        protected function error($text)
-        {
-        }
-        /**
-         * @param string $text
-         *
-         * @return bool
-         */
-        protected function warning($text)
-        {
-        }
-        /**
-         * @param string $text
-         */
-        protected function notice($text)
-        {
-        }
-        /**
-         * @param string $name
-         * @param int $offset
-         * @param int $length
-         * @param null|string $image_mime
-         *
-         * @return null|string
-         *
-         * @throws Exception
-         * @throws getid3_exception
-         */
-        public function saveAttachment($name, $offset, $length, $image_mime = null)
-        {
-        }
-    }
-    class getid3_id3v1 extends \getid3_handler
-    {
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $str
-         *
-         * @return string
-         */
-        public static function cutfield($str)
-        {
-        }
-        /**
-         * @param bool $allowSCMPXextended
-         *
-         * @return array<array-key, string>
-         */
-        public static function ArrayOfGenres($allowSCMPXextended = false)
-        {
-        }
-        /**
-         * @param string $genreid
-         * @param bool $allowSCMPXextended
-         *
-         * @return false|string
-         */
-        public static function LookupGenreName($genreid, $allowSCMPXextended = true)
-        {
-        }
-        /**
-         * @param string $genre
-         * @param bool $allowSCMPXextended
-         *
-         * @return false|string
-         */
-        public static function LookupGenreID($genre, $allowSCMPXextended = false)
-        {
-        }
-        /**
-         * @param string $OriginalGenre
-         *
-         * @return false|string
-         */
-        public static function StandardiseID3v1GenreName($OriginalGenre)
-        {
-        }
-        /**
-         * @param string $title
-         * @param string $artist
-         * @param string $album
-         * @param string $year
-         * @param int $genreid
-         * @param string $comment
-         * @param int|string $track
-         *
-         * @return string
-         */
-        public static function GenerateID3v1Tag($title, $artist, $album, $year, $genreid, $comment, $track = '')
-        {
-        }
-    }
-    class getid3_id3v2 extends \getid3_handler
-    {
-        public $StartingOffset = 0;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $genrestring
-         *
-         * @return array<array-key, mixed>
-         */
-        public function ParseID3v2GenreString($genrestring)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $parsedFrame
-         *
-         * @return bool
-         */
-        public function ParseID3v2Frame($parsedFrame)
-        {
-        }
-        /**
-         * @param string $data
-         *
-         * @return string
-         */
-        public function DeUnsynchronise($data)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public function LookupExtendedHeaderRestrictionsTagSizeLimits($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public function LookupExtendedHeaderRestrictionsTextEncodings($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public function LookupExtendedHeaderRestrictionsTextFieldSize($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public function LookupExtendedHeaderRestrictionsImageEncoding($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public function LookupExtendedHeaderRestrictionsImageSizeSize($index)
-        {
-        }
-        /**
-         * @param string $currencyid
-         *
-         * @return string
-         */
-        public function LookupCurrencyUnits($currencyid)
-        {
-        }
-        /**
-         * @param string $currencyid
-         *
-         * @return string
-         */
-        public function LookupCurrencyCountry($currencyid)
-        {
-        }
-        /**
-         * @param string $languagecode
-         * @param bool $casesensitive
-         *
-         * @return string
-         */
-        public static function LanguageLookup($languagecode, $casesensitive = false)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public static function ETCOEventLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public static function SYTLContentTypeLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         * @param bool $returnarray
-         *
-         * @return array<array-key, mixed>|string
-         */
-        public static function APICPictureTypeLookup($index, $returnarray = false)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public static function COMRReceivedAsLookup($index)
-        {
-        }
-        /**
-         * @param int $index
-         *
-         * @return string
-         */
-        public static function RVA2ChannelTypeLookup($index)
-        {
-        }
-        /**
-         * @param string $framename
-         *
-         * @return string
-         */
-        public static function FrameNameLongLookup($framename)
-        {
-        }
-        /**
-         * @param string $framename
-         *
-         * @return string
-         */
-        public static function FrameNameShortLookup($framename)
-        {
-        }
-        /**
-         * @param string $encoding
-         *
-         * @return string
-         */
-        public static function TextEncodingTerminatorLookup($encoding)
-        {
-        }
-        /**
-         * @param int $encoding
-         *
-         * @return string
-         */
-        public static function TextEncodingNameLookup($encoding)
-        {
-        }
-        /**
-         * @param string $string
-         * @param string $terminator
-         *
-         * @return string
-         */
-        public static function RemoveStringTerminator($string, $terminator)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function MakeUTF16emptyStringEmpty($string)
-        {
-        }
-        /**
-         * @param string $framename
-         * @param int $id3v2majorversion
-         *
-         * @return bool|int
-         */
-        public static function IsValidID3v2FrameName($framename, $id3v2majorversion)
-        {
-        }
-        /**
-         * @param string $numberstring
-         * @param bool $allowdecimal
-         * @param bool $allownegative
-         *
-         * @return bool
-         */
-        public static function IsANumber($numberstring, $allowdecimal = false, $allownegative = false)
-        {
-        }
-        /**
-         * @param string $datestamp
-         *
-         * @return bool
-         */
-        public static function IsValidDateStampString($datestamp)
-        {
-        }
-        /**
-         * @param int $majorversion
-         *
-         * @return int
-         */
-        public static function ID3v2HeaderLength($majorversion)
-        {
-        }
-        /**
-         * @param string $frame_name
-         *
-         * @return false|string
-         */
-        public static function ID3v22iTunesBrokenFrameName($frame_name)
-        {
-        }
-    }
-    class getid3_lib
-    {
-        /**
-         * @param string $string
-         * @param bool $hex
-         * @param bool $spaces
-         * @param string $htmlencoding
-         *
-         * @return string
-         */
-        public static function PrintHexBytes($string, $hex = true, $spaces = true, $htmlencoding = 'UTF-8')
-        {
-        }
-        /**
-         * @param float $floatnumber
-         *
-         * @return float|int
-         */
-        public static function trunc($floatnumber)
-        {
-        }
-        /**
-         * @param int|null $variable
-         * @param int $increment
-         *
-         * @return bool
-         */
-        public static function safe_inc($variable, $increment = 1)
-        {
-        }
-        /**
-         * @param float|int $floatnum
-         *
-         * @return float|int
-         */
-        public static function CastAsInt($floatnum)
-        {
-        }
-        /**
-         * @param int $num
-         *
-         * @return bool
-         */
-        public static function intValueSupported($num)
-        {
-        }
-        /**
-         * @param string $fraction
-         *
-         * @return float
-         */
-        public static function DecimalizeFraction($fraction)
-        {
-        }
-        /**
-         * @param string $binarynumerator
-         *
-         * @return float
-         */
-        public static function DecimalBinary2Float($binarynumerator)
-        {
-        }
-        /**
-         * @param string $binarypointnumber
-         * @param int $maxbits
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function NormalizeBinaryPoint($binarypointnumber, $maxbits = 52)
-        {
-        }
-        /**
-         * @param float $floatvalue
-         *
-         * @return string
-         */
-        public static function Float2BinaryDecimal($floatvalue)
-        {
-        }
-        /**
-         * @param float $floatvalue
-         * @param int $bits
-         *
-         * @return false|string
-         */
-        public static function Float2String($floatvalue, $bits)
-        {
-        }
-        /**
-         * @param string $byteword
-         *
-         * @return false|float
-         */
-        public static function LittleEndian2Float($byteword)
-        {
-        }
-        /**
-         * @param string $byteword
-         *
-         * @return false|float
-         */
-        public static function BigEndian2Float($byteword)
-        {
-        }
-        /**
-         * @param string $byteword
-         * @param bool $synchsafe
-         * @param bool $signed
-         *
-         * @return false|float|int
-         *
-         * @throws Exception
-         */
-        public static function BigEndian2Int($byteword, $synchsafe = false, $signed = false)
-        {
-        }
-        /**
-         * @param string $byteword
-         * @param bool $signed
-         *
-         * @return false|float|int
-         */
-        public static function LittleEndian2Int($byteword, $signed = false)
-        {
-        }
-        /**
-         * @param string $byteword
-         *
-         * @return string
-         */
-        public static function LittleEndian2Bin($byteword)
-        {
-        }
-        /**
-         * @param string $byteword
-         *
-         * @return string
-         */
-        public static function BigEndian2Bin($byteword)
-        {
-        }
-        /**
-         * @param int $number
-         * @param int $minbytes
-         * @param bool $synchsafe
-         * @param bool $signed
-         *
-         * @return string
-         *
-         * @throws Exception
-         */
-        public static function BigEndian2String($number, $minbytes = 1, $synchsafe = false, $signed = false)
-        {
-        }
-        /**
-         * @param int $number
-         *
-         * @return string
-         */
-        public static function Dec2Bin($number)
-        {
-        }
-        /**
-         * @param string $binstring
-         * @param bool $signed
-         *
-         * @return float|int
-         */
-        public static function Bin2Dec($binstring, $signed = false)
-        {
-        }
-        /**
-         * @param string $binstring
-         *
-         * @return string
-         */
-        public static function Bin2String($binstring)
-        {
-        }
-        /**
-         * @param int $number
-         * @param int $minbytes
-         * @param bool $synchsafe
-         *
-         * @return string
-         */
-        public static function LittleEndian2String($number, $minbytes = 1, $synchsafe = false)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array1
-         * @param array<array-key, mixed> $array2
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function array_merge_clobber($array1, $array2)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array1
-         * @param array<array-key, mixed> $array2
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function array_merge_noclobber($array1, $array2)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array1
-         * @param array<array-key, mixed> $array2
-         *
-         * @return array<array-key, mixed>|false|null
-         */
-        public static function flipped_array_merge_noclobber($array1, $array2)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $theArray
-         *
-         * @return bool
-         */
-        public static function ksort_recursive($theArray)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param int $numextensions
-         *
-         * @return string
-         */
-        public static function fileextension($filename, $numextensions = 1)
-        {
-        }
-        /**
-         * @param int $seconds
-         *
-         * @return string
-         */
-        public static function PlaytimeString($seconds)
-        {
-        }
-        /**
-         * @param int $macdate
-         *
-         * @return float|int
-         */
-        public static function DateMac2Unix($macdate)
-        {
-        }
-        /**
-         * @param string $rawdata
-         *
-         * @return float
-         */
-        public static function FixedPoint8_8($rawdata)
-        {
-        }
-        /**
-         * @param string $rawdata
-         *
-         * @return float
-         */
-        public static function FixedPoint16_16($rawdata)
-        {
-        }
-        /**
-         * @param string $rawdata
-         *
-         * @return float
-         */
-        public static function FixedPoint2_30($rawdata)
-        {
-        }
-        /**
-         * @param string $ArrayPath
-         * @param string $Separator
-         * @param mixed $Value
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function CreateDeepArray($ArrayPath, $Separator, $Value)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $arraydata
-         * @param bool $returnkey
-         *
-         * @return false|int
-         */
-        public static function array_max($arraydata, $returnkey = false)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $arraydata
-         * @param bool $returnkey
-         *
-         * @return false|int
-         */
-        public static function array_min($arraydata, $returnkey = false)
-        {
-        }
-        /**
-         * @param string $XMLstring
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function XML2array($XMLstring)
-        {
-        }
-        /**
-         * @param SimpleXMLElement|array<array-key, mixed> $XMLobject
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function SimpleXMLelement2array($XMLobject)
-        {
-        }
-        /**
-         * @param string $file
-         * @param int $offset
-         * @param int $end
-         * @param string $algorithm
-         *
-         * @return false|string
-         *
-         * @throws getid3_exception
-         */
-        public static function hash_data($file, $offset, $end, $algorithm)
-        {
-        }
-        /**
-         * @param string $filename_source
-         * @param string $filename_dest
-         * @param int $offset
-         * @param int $length
-         *
-         * @return bool
-         *
-         * @throws Exception
-         */
-        public static function CopyFileParts($filename_source, $filename_dest, $offset, $length)
-        {
-        }
-        /**
-         * @param int $charval
-         *
-         * @return string
-         */
-        public static function iconv_fallback_int_utf8($charval)
-        {
-        }
-        /**
-         * @param string $string
-         * @param bool $bom
-         *
-         * @return string
-         */
-        public static function iconv_fallback_iso88591_utf8($string, $bom = false)
-        {
-        }
-        /**
-         * @param string $string
-         * @param bool $bom
-         *
-         * @return string
-         */
-        public static function iconv_fallback_iso88591_utf16be($string, $bom = false)
-        {
-        }
-        /**
-         * @param string $string
-         * @param bool $bom
-         *
-         * @return string
-         */
-        public static function iconv_fallback_iso88591_utf16le($string, $bom = false)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_iso88591_utf16($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf8_iso88591($string)
-        {
-        }
-        /**
-         * @param string $string
-         * @param bool $bom
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf8_utf16be($string, $bom = false)
-        {
-        }
-        /**
-         * @param string $string
-         * @param bool $bom
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf8_utf16le($string, $bom = false)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf8_utf16($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16be_utf8($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16le_utf8($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16be_iso88591($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16le_iso88591($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16_iso88591($string)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function iconv_fallback_utf16_utf8($string)
-        {
-        }
-        /**
-         * @param string $in_charset
-         * @param string $out_charset
-         * @param string $string
-         *
-         * @return string
-         *
-         * @throws Exception
-         */
-        public static function iconv_fallback($in_charset, $out_charset, $string)
-        {
-        }
-        /**
-         * @param mixed $data
-         * @param string $charset
-         *
-         * @return mixed
-         */
-        public static function recursiveMultiByteCharString2HTML($data, $charset = 'ISO-8859-1')
-        {
-        }
-        /**
-         * @param float|int|string $string
-         * @param string $charset
-         *
-         * @return string
-         */
-        public static function MultiByteCharString2HTML($string, $charset = 'ISO-8859-1')
-        {
-        }
-        /**
-         * @param int $namecode
-         *
-         * @return string
-         */
-        public static function RGADnameLookup($namecode)
-        {
-        }
-        /**
-         * @param int $originatorcode
-         *
-         * @return string
-         */
-        public static function RGADoriginatorLookup($originatorcode)
-        {
-        }
-        /**
-         * @param int $rawadjustment
-         * @param int $signbit
-         *
-         * @return float
-         */
-        public static function RGADadjustmentLookup($rawadjustment, $signbit)
-        {
-        }
-        /**
-         * @param int $namecode
-         * @param int $originatorcode
-         * @param int $replaygain
-         *
-         * @return string
-         */
-        public static function RGADgainString($namecode, $originatorcode, $replaygain)
-        {
-        }
-        /**
-         * @param float $amplitude
-         *
-         * @return float
-         */
-        public static function RGADamplitude2dB($amplitude)
-        {
-        }
-        /**
-         * @param string $imgData
-         * @param array<array-key, mixed> $imageinfo
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function GetDataImageSize($imgData, $imageinfo = array())
-        {
-        }
-        /**
-         * @param string $mime_type
-         *
-         * @return string
-         */
-        public static function ImageExtFromMime($mime_type)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $ThisFileInfo
-         *
-         * @return bool
-         */
-        public static function CopyTagsToComments($ThisFileInfo)
-        {
-        }
-        /**
-         * @param string $key
-         * @param int $begin
-         * @param int $end
-         * @param string $file
-         * @param string $name
-         *
-         * @return string
-         */
-        public static function EmbeddedLookup($key, $begin, $end, $file, $name)
-        {
-        }
-        /**
-         * @param string $filename
-         * @param string $sourcefile
-         * @param bool $DieOnFailure
-         *
-         * @return bool
-         *
-         * @throws Exception
-         */
-        public static function IncludeDependency($filename, $sourcefile, $DieOnFailure = false)
-        {
-        }
-        /**
-         * @param string $string
-         *
-         * @return string
-         */
-        public static function trimNullByte($string)
-        {
-        }
-        /**
-         * @param string $path
-         *
-         * @return bool|float
-         */
-        public static function getFileSizeSyscall($path)
-        {
-        }
-        /**
-         * @param string $filename
-         *
-         * @return false|string
-         */
-        public static function truepath($filename)
-        {
-        }
-        /**
-         * @param string $path
-         * @param null|string $suffix
-         *
-         * @return string
-         */
-        public static function mb_basename($path, $suffix = null)
-        {
-        }
-    }
-    class getid3_lyrics3 extends \getid3_handler
-    {
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param int $endoffset
-         * @param int $version
-         * @param int $length
-         *
-         * @return bool
-         */
-        public function getLyrics3Data($endoffset, $version, $length)
-        {
-        }
-        /**
-         * @param string $rawtimestamp
-         *
-         * @return false|int
-         */
-        public function Lyrics3Timestamp2Seconds($rawtimestamp)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $Lyrics3data
-         *
-         * @return bool
-         */
-        public function Lyrics3LyricsTimestampParse($Lyrics3data)
-        {
-        }
-        /**
-         * @param string $char
-         *
-         * @return bool|null
-         */
-        public function IntString2Bool($char)
-        {
-        }
-    }
-    class getid3_matroska extends \getid3_handler
-    {
-        /**
-         * @var bool
-         */
-        public static $hide_clusters;
-        /**
-         * @var bool
-         */
-        public static $parse_whole_file;
-        public $EBMLbuffer = '';
-        public $EBMLbuffer_offset = 0;
-        public $EBMLbuffer_length = 0;
-        public $current_offset = 0;
-        public $unuseful_elements;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $info
-         */
-        public function parseEBML($info)
-        {
-        }
-        /**
-         * @param int $min_data
-         *
-         * @return bool
-         */
-        public function EnsureBufferHasEnoughData($min_data = 1024)
-        {
-        }
-        /**
-         * @return false|float|int
-         */
-        public function readEBMLint()
-        {
-        }
-        /**
-         * @param int $length
-         * @param bool $check_buffer
-         *
-         * @return false|string
-         */
-        public function readEBMLelementData($length, $check_buffer = false)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $element
-         * @param int $parent_end
-         * @param array<array-key, mixed>|bool $get_data
-         *
-         * @return bool
-         */
-        public function getEBMLelement($element, $parent_end, $get_data = false)
-        {
-        }
-        /**
-         * @param string $type
-         * @param int $line
-         * @param array<array-key, mixed> $element
-         */
-        public function unhandledElement($type, $line, $element)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $SimpleTagArray
-         *
-         * @return bool
-         */
-        public function ExtractCommentsSimpleTag($SimpleTagArray)
-        {
-        }
-        /**
-         * @param int $parent_end
-         *
-         * @return array<array-key, mixed>
-         */
-        public function HandleEMBLSimpleTag($parent_end)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $element
-         * @param int $block_type
-         * @param array<array-key, mixed> $info
-         *
-         * @return array<array-key, mixed>
-         */
-        public function HandleEMBLClusterBlock($element, $block_type, $info)
-        {
-        }
-        /**
-         * @param string $EBMLstring
-         *
-         * @return false|float|int
-         */
-        public static function EBML2Int($EBMLstring)
-        {
-        }
-        /**
-         * @param int $EBMLdatestamp
-         *
-         * @return float
-         */
-        public static function EBMLdate2unix($EBMLdatestamp)
-        {
-        }
-        /**
-         * @param int $target_type
-         *
-         * @return int|string
-         */
-        public static function TargetTypeValue($target_type)
-        {
-        }
-        /**
-         * @param int $lacingtype
-         *
-         * @return int|string
-         */
-        public static function BlockLacingType($lacingtype)
-        {
-        }
-        /**
-         * @param string $codecid
-         *
-         * @return string
-         */
-        public static function CodecIDtoCommonName($codecid)
-        {
-        }
-        /**
-         * @param int $value
-         *
-         * @return string
-         */
-        public static function EBMLidName($value)
-        {
-        }
-        /**
-         * @param int $value
-         *
-         * @return string
-         */
-        public static function displayUnit($value)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $streams
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function getDefaultStreamInfo($streams)
-        {
-        }
-    }
-    class getid3_mp3 extends \getid3_handler
-    {
-        /**
-         * @var bool
-         */
-        public $allow_bruteforce;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function GuessEncoderOptions()
-        {
-        }
-        /**
-         * @param int $offset
-         * @param array<array-key, mixed> $info
-         * @param bool $recursivesearch
-         * @param bool $ScanAsCBR
-         * @param bool $FastMPEGheaderScan
-         *
-         * @return bool
-         */
-        public function decodeMPEGaudioHeader($offset, $info, $recursivesearch = true, $ScanAsCBR = false, $FastMPEGheaderScan = false)
-        {
-        }
-        /**
-         * @param int $offset
-         * @param int $nextframetestoffset
-         * @param bool $ScanAsCBR
-         *
-         * @return bool
-         */
-        public function RecursiveFrameScanning($offset, $nextframetestoffset, $ScanAsCBR)
-        {
-        }
-        /**
-         * @param int $offset
-         * @param bool $deepscan
-         *
-         * @return false|int
-         */
-        public function FreeFormatFrameLength($offset, $deepscan = false)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function getOnlyMPEGaudioInfoBruteForce()
-        {
-        }
-        /**
-         * @param int $avdataoffset
-         * @param bool $BitrateHistogram
-         *
-         * @return bool
-         */
-        public function getOnlyMPEGaudioInfo($avdataoffset, $BitrateHistogram = false)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioVersionArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioLayerArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioBitrateArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioFrequencyArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioChannelModeArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioModeExtensionArray()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public static function MPEGaudioEmphasisArray()
-        {
-        }
-        /**
-         * @param string $head4
-         * @param bool $allowBitrate15
-         *
-         * @return bool
-         */
-        public static function MPEGaudioHeaderBytesValid($head4, $allowBitrate15 = false)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $rawarray
-         * @param bool $echoerrors
-         * @param bool $allowBitrate15
-         *
-         * @return bool
-         */
-        public static function MPEGaudioHeaderValid($rawarray, $echoerrors = false, $allowBitrate15 = false)
-        {
-        }
-        /**
-         * @param string $Header4Bytes
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public static function MPEGaudioHeaderDecode($Header4Bytes)
-        {
-        }
-        /**
-         * @param int|string $bitrate
-         * @param string $version
-         * @param string $layer
-         * @param bool $padding
-         * @param int $samplerate
-         *
-         * @return false|int
-         */
-        public static function MPEGaudioFrameLength($bitrate, $version, $layer, $padding, $samplerate)
-        {
-        }
-        /**
-         * @param float|int $bit_rate
-         *
-         * @return float|int|string
-         */
-        public static function ClosestStandardMP3Bitrate($bit_rate)
-        {
-        }
-        /**
-         * @param string $version
-         * @param string $channelmode
-         *
-         * @return int
-         */
-        public static function XingVBRidOffset($version, $channelmode)
-        {
-        }
-        /**
-         * @param int $VBRmethodID
-         *
-         * @return string
-         */
-        public static function LAMEvbrMethodLookup($VBRmethodID)
-        {
-        }
-        /**
-         * @param int $StereoModeID
-         *
-         * @return string
-         */
-        public static function LAMEmiscStereoModeLookup($StereoModeID)
-        {
-        }
-        /**
-         * @param int $SourceSampleFrequencyID
-         *
-         * @return string
-         */
-        public static function LAMEmiscSourceSampleFrequencyLookup($SourceSampleFrequencyID)
-        {
-        }
-        /**
-         * @param int $SurroundInfoID
-         *
-         * @return string
-         */
-        public static function LAMEsurroundInfoLookup($SurroundInfoID)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $LAMEtag
-         *
-         * @return string
-         */
-        public static function LAMEpresetUsedLookup($LAMEtag)
-        {
-        }
-    }
-    class getid3_ogg extends \getid3_handler
-    {
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $filedata
-         * @param int $filedataoffset
-         * @param array<array-key, mixed> $oggpageinfo
-         *
-         * @return bool
-         */
-        public function ParseVorbisPageHeader($filedata, $filedataoffset, $oggpageinfo)
-        {
-        }
-        /**
-         * @param string $filedata
-         * @param int $filedataoffset
-         * @param array<array-key, mixed> $oggpageinfo
-         *
-         * @return bool
-         */
-        public function ParseOpusPageHeader($filedata, $filedataoffset, $oggpageinfo)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|false
-         */
-        public function ParseOggPageHeader()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function ParseVorbisComments()
-        {
-        }
-        /**
-         * @param int $mode
-         *
-         * @return null|string
-         */
-        public static function SpeexBandModeLookup($mode)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $OggInfoArray
-         * @param int $SegmentNumber
-         *
-         * @return int
-         */
-        public static function OggPageSegmentLength($OggInfoArray, $SegmentNumber = 1)
-        {
-        }
-        /**
-         * @param int $nominal_bitrate
-         *
-         * @return float
-         */
-        public static function get_quality_from_nominal_bitrate($nominal_bitrate)
-        {
-        }
-        /**
-         * @param int $colorspace_id
-         *
-         * @return null|string
-         */
-        public static function TheoraColorSpace($colorspace_id)
-        {
-        }
-        /**
-         * @param int $pixelformat_id
-         *
-         * @return null|string
-         */
-        public static function TheoraPixelFormat($pixelformat_id)
-        {
-        }
-    }
-    class getid3_quicktime extends \getid3_handler
-    {
-        public $ReturnAtomData = true;
-        public $ParseAllPossibleAtoms = false;
-        /**
-         * @return bool
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param string $atomname
-         * @param int $atomsize
-         * @param string $atom_data
-         * @param int $baseoffset
-         * @param array<array-key, mixed> $atomHierarchy
-         * @param bool $ParseAllPossibleAtoms
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function QuicktimeParseAtom($atomname, $atomsize, $atom_data, $baseoffset, $atomHierarchy, $ParseAllPossibleAtoms)
-        {
-        }
-        /**
-         * @param string $atom_data
-         * @param int $baseoffset
-         * @param array<array-key, mixed> $atomHierarchy
-         * @param bool $ParseAllPossibleAtoms
-         *
-         * @return array<array-key, mixed>|false
-         */
-        public function QuicktimeParseContainerAtom($atom_data, $baseoffset, $atomHierarchy, $ParseAllPossibleAtoms)
-        {
-        }
-        /**
-         * @param string $data
-         * @param int $offset
-         *
-         * @return int
-         */
-        public function quicktime_read_mp4_descr_length($data, $offset)
-        {
-        }
-        /**
-         * @param int $languageid
-         *
-         * @return string
-         */
-        public function QuicktimeLanguageLookup($languageid)
-        {
-        }
-        /**
-         * @param string $codecid
-         *
-         * @return string
-         */
-        public function QuicktimeVideoCodecLookup($codecid)
-        {
-        }
-        /**
-         * @param string $codecid
-         *
-         * @return mixed|string
-         */
-        public function QuicktimeAudioCodecLookup($codecid)
-        {
-        }
-        /**
-         * @param string $compressionid
-         *
-         * @return string
-         */
-        public function QuicktimeDCOMLookup($compressionid)
-        {
-        }
-        /**
-         * @param int $colordepthid
-         *
-         * @return string
-         */
-        public function QuicktimeColorNameLookup($colordepthid)
-        {
-        }
-        /**
-         * @param int $stik
-         *
-         * @return string
-         */
-        public function QuicktimeSTIKLookup($stik)
-        {
-        }
-        /**
-         * @param int $audio_profile_id
-         *
-         * @return string
-         */
-        public function QuicktimeIODSaudioProfileName($audio_profile_id)
-        {
-        }
-        /**
-         * @param int $video_profile_id
-         *
-         * @return string
-         */
-        public function QuicktimeIODSvideoProfileName($video_profile_id)
-        {
-        }
-        /**
-         * @param int $rtng
-         *
-         * @return string
-         */
-        public function QuicktimeContentRatingLookup($rtng)
-        {
-        }
-        /**
-         * @param int $akid
-         *
-         * @return string
-         */
-        public function QuicktimeStoreAccountTypeLookup($akid)
-        {
-        }
-        /**
-         * @param int $sfid
-         *
-         * @return string
-         */
-        public function QuicktimeStoreFrontCodeLookup($sfid)
-        {
-        }
-        /**
-         * @param string $atom_data
-         *
-         * @return array<array-key, mixed>
-         */
-        public function QuicktimeParseNikonNCTG($atom_data)
-        {
-        }
-        /**
-         * @param string $keyname
-         * @param array<array-key, mixed>|string $data
-         * @param string $boxname
-         *
-         * @return bool
-         */
-        public function CopyToAppropriateCommentsSection($keyname, $data, $boxname = '')
-        {
-        }
-        /**
-         * @param string $lstring
-         * @param int $count
-         *
-         * @return string
-         */
-        public function LociString($lstring, $count)
-        {
-        }
-        /**
-         * @param string $nullterminatedstring
-         *
-         * @return string
-         */
-        public function NoNullString($nullterminatedstring)
-        {
-        }
-        /**
-         * @param string $pascalstring
-         *
-         * @return string
-         */
-        public function Pascal2String($pascalstring)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $info
-         * @param string $tag
-         * @param string $history
-         * @param array<array-key, mixed> $result
-         */
-        public function search_tag_by_key($info, $tag, $history, $result)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $info
-         * @param string $k
-         * @param string $v
-         * @param string $history
-         * @param array<array-key, mixed> $result
-         */
-        public function search_tag_by_pair($info, $k, $v, $history, $result)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $info
-         *
-         * @return array<array-key, mixed>
-         */
-        public function quicktime_time_to_sample_table($info)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $info
-         *
-         * @return int
-         */
-        public function quicktime_bookmark_time_scale($info)
-        {
-        }
-    }
-    class getid3_riff extends \getid3_handler
-    {
-        protected $container = 'riff';
-        /**
-         * @return bool
-         *
-         * @throws getid3_exception
-         */
-        public function Analyze()
-        {
-        }
-        /**
-         * @param int $startoffset
-         * @param int $maxoffset
-         *
-         * @return array<array-key, mixed>|false
-         *
-         * @throws Exception
-         * @throws getid3_exception
-         */
-        public function ParseRIFFAMV($startoffset, $maxoffset)
-        {
-        }
-        /**
-         * @param int $startoffset
-         * @param int $maxoffset
-         *
-         * @return array<array-key, mixed>|false
-         *
-         * @throws getid3_exception
-         */
-        public function ParseRIFF($startoffset, $maxoffset)
-        {
-        }
-        /**
-         * @param string $RIFFdata
-         *
-         * @return bool
-         */
-        public function ParseRIFFdata($RIFFdata)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $RIFFinfoArray
-         * @param array<array-key, mixed> $CommentsTargetArray
-         *
-         * @return bool
-         */
-        public static function parseComments($RIFFinfoArray, $CommentsTargetArray)
-        {
-        }
-        /**
-         * @param string $WaveFormatExData
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function parseWAVEFORMATex($WaveFormatExData)
-        {
-        }
-        /**
-         * @param string $WavPackChunkData
-         *
-         * @return bool
-         */
-        public function parseWavPackHeader($WavPackChunkData)
-        {
-        }
-        /**
-         * @param string $BITMAPINFOHEADER
-         * @param bool $littleEndian
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function ParseBITMAPINFOHEADER($BITMAPINFOHEADER, $littleEndian = true)
-        {
-        }
-        /**
-         * @param string $DIVXTAG
-         * @param bool $raw
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function ParseDIVXTAG($DIVXTAG, $raw = false)
-        {
-        }
-        /**
-         * @param string $tagshortname
-         *
-         * @return string
-         */
-        public static function waveSNDMtagLookup($tagshortname)
-        {
-        }
-        /**
-         * @param int $wFormatTag
-         *
-         * @return string
-         */
-        public static function wFormatTagLookup($wFormatTag)
-        {
-        }
-        /**
-         * @param string $fourcc
-         *
-         * @return string
-         */
-        public static function fourccLookup($fourcc)
-        {
-        }
-        /**
-         * @param string $byteword
-         * @param bool $signed
-         *
-         * @return false|float|int
-         */
-        public function EitherEndian2Int($byteword, $signed = false)
-        {
-        }
-    }
     /**
      * @param int $term_id
      * @param string $deprecated
@@ -54038,6 +47271,9 @@ namespace {
     function is_active_widget($callback = false, $widget_id = false, $id_base = false, $skip_inactive = true)
     {
     }
+    /**
+     * @return bool
+     */
     function is_admin()
     {
     }
@@ -54784,33 +48020,6 @@ namespace {
     function language_attributes($doctype = 'html')
     {
     }
-    class libXMLError
-    {
-        /**
-         * @var int
-         */
-        public $level;
-        /**
-         * @var int
-         */
-        public $code;
-        /**
-         * @var int
-         */
-        public $column;
-        /**
-         * @var string
-         */
-        public $message;
-        /**
-         * @var string
-         */
-        public $file;
-        /**
-         * @var int
-         */
-        public $line;
-    }
     /**
      * @param string $text
      *
@@ -55525,755 +48734,6 @@ namespace {
      */
     function mysql_to_rfc3339($date_string)
     {
-    }
-    class mysqli
-    {
-        /**
-         * @var int
-         */
-        public $affected_rows;
-        /**
-         * @var string
-         */
-        public $client_info;
-        /**
-         * @var int
-         */
-        public $client_version;
-        /**
-         * @var int
-         */
-        public $connect_errno;
-        /**
-         * @var string
-         */
-        public $connect_error;
-        /**
-         * @var int
-         */
-        public $errno;
-        /**
-         * @var string
-         */
-        public $error;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $error_list;
-        /**
-         * @var int
-         */
-        public $field_count;
-        /**
-         * @var string
-         */
-        public $host_info;
-        /**
-         * @var string
-         */
-        public $info;
-        /**
-         * @var mixed
-         */
-        public $insert_id;
-        /**
-         * @var string
-         */
-        public $server_info;
-        /**
-         * @var int
-         */
-        public $server_version;
-        /**
-         * @var string
-         */
-        public $sqlstate;
-        /**
-         * @var string
-         */
-        public $protocol_version;
-        /**
-         * @var int
-         */
-        public $thread_id;
-        /**
-         * @var int
-         */
-        public $warning_count;
-        /**
-         * @var mixed
-         */
-        public $stat;
-        /**
-         * @param bool $mode
-         *
-         * @return bool
-         */
-        public function autocommit($mode)
-        {
-        }
-        /**
-         * @param int $flags
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function begin_transaction($flags, $name)
-        {
-        }
-        /**
-         * @param string $user
-         * @param string $password
-         * @param string $database
-         *
-         * @return bool
-         */
-        public function change_user($user, $password, $database)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function character_set_name()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function close()
-        {
-        }
-        /**
-         * @param int $flags
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function commit($flags, $name)
-        {
-        }
-        /**
-         * @param mixed $host
-         * @param mixed $user
-         * @param mixed $password
-         * @param mixed $database
-         * @param mixed $port
-         * @param mixed $socket
-         */
-        public function connect($host, $user, $password, $database, $port, $socket)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function dump_debug_info()
-        {
-        }
-        /**
-         * @param string $message
-         *
-         * @return bool
-         */
-        public function debug($message)
-        {
-        }
-        /**
-         * @return object
-         */
-        public function get_charset()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function get_client_info()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|false
-         */
-        public function get_connection_stats()
-        {
-        }
-        public function get_server_info()
-        {
-        }
-        /**
-         * @return mysqli_warning
-         */
-        public function get_warnings()
-        {
-        }
-        /**
-         * @return mysqli
-         */
-        public function init()
-        {
-        }
-        /**
-         * @param int $processid
-         *
-         * @return bool
-         */
-        public function kill($processid)
-        {
-        }
-        /**
-         * @param string $query
-         *
-         * @return bool
-         */
-        public function multi_query($query)
-        {
-        }
-        /**
-         * @param string $host
-         * @param string $username
-         * @param string $passwd
-         * @param string $dbname
-         * @param int $port
-         * @param string $socket
-         *
-         * @return void
-         */
-        public function __construct($host, $username, $passwd, $dbname, $port, $socket)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function more_results()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function next_result()
-        {
-        }
-        /**
-         * @param int $option
-         * @param mixed $value
-         *
-         * @return bool
-         */
-        public function options($option, $value)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function ping()
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $w_read
-         * @param array<array-key, mixed> $w_error
-         * @param array<array-key, mixed> $w_reject
-         * @param int $sec
-         * @param int $usec
-         *
-         * @return false|int
-         */
-        public static function poll($w_read, $w_error, $w_reject, $sec, $usec)
-        {
-        }
-        /**
-         * @param string $query
-         *
-         * @return false|mysqli_stmt
-         */
-        public function prepare($query)
-        {
-        }
-        /**
-         * @param string $query
-         * @param int $resultmode
-         *
-         * @return bool|mysqli_result
-         */
-        public function query($query, $resultmode)
-        {
-        }
-        /**
-         * @param null|string $host
-         * @param string $username
-         * @param null|string $passwd
-         * @param string $dbname
-         * @param int $port
-         * @param string $socket
-         * @param int $flags
-         *
-         * @return bool
-         */
-        public function real_connect($host, $username, $passwd, $dbname, $port, $socket, $flags)
-        {
-        }
-        /**
-         * @param string $escapestr
-         *
-         * @return string
-         */
-        public function real_escape_string($escapestr)
-        {
-        }
-        /**
-         * @return false|mysqli_result
-         */
-        public function reap_async_query()
-        {
-        }
-        /**
-         * @param string $escapestr
-         *
-         * @return string
-         */
-        public function escape_string($escapestr)
-        {
-        }
-        /**
-         * @param string $query
-         *
-         * @return bool
-         */
-        public function real_query($query)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function release_savepoint($name)
-        {
-        }
-        /**
-         * @param int $flags
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function rollback($flags, $name)
-        {
-        }
-        /**
-         * @param string $name
-         *
-         * @return bool
-         */
-        public function savepoint($name)
-        {
-        }
-        /**
-         * @param string $dbname
-         *
-         * @return bool
-         */
-        public function select_db($dbname)
-        {
-        }
-        /**
-         * @param string $charset
-         *
-         * @return bool
-         */
-        public function set_charset($charset)
-        {
-        }
-        /**
-         * @param mixed $option
-         * @param mixed $value
-         */
-        public function set_opt($option, $value)
-        {
-        }
-        /**
-         * @param string $key
-         * @param string $cert
-         * @param string $ca
-         * @param string $capath
-         * @param string $cipher
-         *
-         * @return bool
-         */
-        public function ssl_set($key, $cert, $ca, $capath, $cipher)
-        {
-        }
-        /**
-         * @return false|string
-         */
-        public function stat()
-        {
-        }
-        /**
-         * @return mysqli_stmt
-         */
-        public function stmt_init()
-        {
-        }
-        /**
-         * @param int $option
-         *
-         * @return false|mysqli_result
-         */
-        public function store_result($option)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function thread_safe()
-        {
-        }
-        /**
-         * @return false|mysqli_result
-         */
-        public function use_result()
-        {
-        }
-        /**
-         * @param int $options
-         *
-         * @return bool
-         */
-        public function refresh($options)
-        {
-        }
-    }
-    class mysqli_result
-    {
-        /**
-         * @var int
-         */
-        public $current_field;
-        /**
-         * @var int
-         */
-        public $field_count;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $lengths;
-        /**
-         * @var int
-         */
-        public $num_rows;
-        /**
-         * @var mixed
-         */
-        public $type;
-        /**
-         * @param mysqli $link
-         * @param int $resultmode
-         *
-         * @return void
-         */
-        public function __construct($link, $resultmode)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function close()
-        {
-        }
-        /**
-         * @return void
-         */
-        public function free()
-        {
-        }
-        /**
-         * @param int $offset
-         *
-         * @return bool
-         */
-        public function data_seek($offset)
-        {
-        }
-        /**
-         * @return false|object
-         */
-        public function fetch_field()
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|false
-         */
-        public function fetch_fields()
-        {
-        }
-        /**
-         * @param int $fieldnr
-         *
-         * @return false|object
-         */
-        public function fetch_field_direct($fieldnr)
-        {
-        }
-        /**
-         * @param int $resulttype
-         *
-         * @return array<array-key, mixed>
-         */
-        public function fetch_all($resulttype)
-        {
-        }
-        /**
-         * @param int $resulttype
-         *
-         * @return array<array-key, mixed>|null
-         */
-        public function fetch_array($resulttype)
-        {
-        }
-        /**
-         * @return array<string, string>|null
-         */
-        public function fetch_assoc()
-        {
-        }
-        /**
-         * @param string $class_name
-         * @param array<array-key, mixed> $params
-         *
-         * @return null|object
-         */
-        public function fetch_object($class_name, $params)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>|null
-         */
-        public function fetch_row()
-        {
-        }
-        /**
-         * @param int $fieldnr
-         *
-         * @return bool
-         */
-        public function field_seek($fieldnr)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function free_result()
-        {
-        }
-    }
-    class mysqli_stmt
-    {
-        /**
-         * @var int
-         */
-        public $affected_rows;
-        /**
-         * @var int
-         */
-        public $insert_id;
-        /**
-         * @var int
-         */
-        public $num_rows;
-        /**
-         * @var int
-         */
-        public $param_count;
-        /**
-         * @var int
-         */
-        public $field_count;
-        /**
-         * @var int
-         */
-        public $errno;
-        /**
-         * @var string
-         */
-        public $error;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $error_list;
-        /**
-         * @var string
-         */
-        public $sqlstate;
-        /**
-         * @var mixed
-         */
-        public $id;
-        /**
-         * @param mysqli $link
-         * @param string $query
-         *
-         * @return void
-         */
-        public function __construct($link, $query)
-        {
-        }
-        /**
-         * @param int $attr
-         *
-         * @return false|int
-         */
-        public function attr_get($attr)
-        {
-        }
-        /**
-         * @param int $attr
-         * @param int $mode
-         *
-         * @return bool
-         */
-        public function attr_set($attr, $mode)
-        {
-        }
-        /**
-         * @param string $types
-         * @param mixed $var1
-         * @param mixed $args
-         *
-         * @return bool
-         */
-        public function bind_param($types, $var1, $args)
-        {
-        }
-        /**
-         * @param mixed $w_var1
-         * @param mixed $w_vars
-         *
-         * @return bool
-         */
-        public function bind_result($w_var1, $w_vars)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function close()
-        {
-        }
-        /**
-         * @param int $offset
-         *
-         * @return void
-         */
-        public function data_seek($offset)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function execute()
-        {
-        }
-        /**
-         * @return bool|null
-         */
-        public function fetch()
-        {
-        }
-        /**
-         * @return object
-         */
-        public function get_warnings()
-        {
-        }
-        /**
-         * @return false|mysqli_result
-         */
-        public function result_metadata()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function more_results()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function next_result()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function num_rows()
-        {
-        }
-        /**
-         * @param int $param_nr
-         * @param string $data
-         *
-         * @return bool
-         */
-        public function send_long_data($param_nr, $data)
-        {
-        }
-        /**
-         * @return void
-         */
-        public function free_result()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function reset()
-        {
-        }
-        /**
-         * @param string $query
-         *
-         * @return bool
-         */
-        public function prepare($query)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function store_result()
-        {
-        }
-        /**
-         * @return false|mysqli_result
-         */
-        public function get_result()
-        {
-        }
-    }
-    class mysqli_warning
-    {
-        /**
-         * @var string
-         */
-        public $message;
-        /**
-         * @var mixed
-         */
-        public $sqlstate;
-        /**
-         * @var int
-         */
-        public $errno;
-        /**
-         * @return void
-         */
-        protected function __construct()
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function next()
-        {
-        }
     }
     /**
      * @param string $path
@@ -59835,30 +52295,6 @@ namespace {
     {
     }
     /**
-     * @param array<array-key, mixed> $data
-     *
-     * @return string
-     */
-    function spyc_dump($data)
-    {
-    }
-    /**
-     * @param string $string
-     *
-     * @return array<array-key, mixed>
-     */
-    function spyc_load($string)
-    {
-    }
-    /**
-     * @param string $file
-     *
-     * @return array<array-key, mixed>
-     */
-    function spyc_load_file($file)
-    {
-    }
-    /**
      * @param resource $parser
      * @param string $tagName
      * @param array<array-key, mixed> $attrs
@@ -59882,9 +52318,6 @@ namespace {
      * @param string $description
      */
     function status_header($code, $description = '')
-    {
-    }
-    class stdClass
     {
     }
     /**
@@ -69702,12 +62135,6 @@ namespace {
         public function escape_by_ref($string)
         {
         }
-        /**
-         * @param string $query
-         * @param mixed $args
-         *
-         * @return null|string
-         */
         public function prepare($query, $args)
         {
         }
@@ -70438,259 +62865,6 @@ namespace {
      */
     function zeroise($number, $threshold)
     {
-    }
-}
-namespace Mustangostang {
-    class Spyc
-    {
-        public const REMPTY = '     ';
-        /**
-         * @var bool
-         */
-        public $setting_dump_force_quotes;
-        /**
-         * @var bool
-         */
-        public $setting_use_syck_is_possible;
-        public $_dumpIndent;
-        public $_dumpWordWrap;
-        public $_containsGroupAnchor = false;
-        public $_containsGroupAlias = false;
-        public $path;
-        public $result;
-        public $LiteralPlaceHolder = '___YAML_Literal_Block___';
-        public $SavedGroups = array();
-        public $indent;
-        /**
-         * @var array<array-key, mixed>
-         */
-        public $delayedPath;
-        public $_nodeId;
-        /**
-         * @param string $input
-         *
-         * @return array<array-key, mixed>
-         */
-        public function load($input)
-        {
-        }
-        /**
-         * @param string $file
-         *
-         * @return array<array-key, mixed>
-         */
-        public function loadFile($file)
-        {
-        }
-        /**
-         * @param string $input
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function YAMLLoad($input)
-        {
-        }
-        /**
-         * @param string $input
-         *
-         * @return array<array-key, mixed>
-         */
-        public static function YAMLLoadString($input)
-        {
-        }
-        /**
-         * @param \stdClass|array<array-key, mixed> $array
-         * @param int $indent
-         * @param int $wordwrap
-         * @param bool $no_opening_dashes
-         *
-         * @return string
-         */
-        public static function YAMLDump($array, $indent = false, $wordwrap = false, $no_opening_dashes = false)
-        {
-        }
-        /**
-         * @param array<array-key, mixed> $array
-         * @param int $indent
-         * @param int $wordwrap
-         *
-         * @return string
-         */
-        public function dump($array, $indent = false, $wordwrap = false, $no_opening_dashes = false)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function _yamlize($key, $value, $indent, $previous_key = -1, $first_key = 0, $source_array = null)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function _yamlizeArray($array, $indent)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function _dumpNode($key, $value, $indent, $previous_key = -1, $first_key = 0, $source_array = null)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function _doLiteralBlock($value, $indent)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function _doFolding($value, $indent)
-        {
-        }
-        public function isTrueWord($value)
-        {
-        }
-        public function isFalseWord($value)
-        {
-        }
-        public function isNullWord($value)
-        {
-        }
-        public function isTranslationWord($value)
-        {
-        }
-        public function coerceValue($value)
-        {
-        }
-        public static function getTranslations(array $words)
-        {
-        }
-        public function _load($input)
-        {
-        }
-        public function _loadString($input)
-        {
-        }
-        public function loadWithSource($Source)
-        {
-        }
-        public function loadFromSource($input)
-        {
-        }
-        public function loadFromString($input)
-        {
-        }
-        /**
-         * @param string $line
-         *
-         * @return array<array-key, mixed>
-         */
-        public function _parseLine($line)
-        {
-        }
-        /**
-         * @param string $value
-         *
-         * @return mixed
-         */
-        public function _toType($value)
-        {
-        }
-        /**
-         * @return array<array-key, mixed>
-         */
-        public function _inlineEscape($inline)
-        {
-        }
-        public function literalBlockContinues($line, $lineIndent)
-        {
-        }
-        public function referenceContentsByAlias($alias)
-        {
-        }
-        public function addArrayInline($array, $indent)
-        {
-        }
-        public function addArray($incoming_data, $incoming_indent)
-        {
-        }
-        public static function startsLiteralBlock($line)
-        {
-        }
-        public static function greedilyNeedNextLine($line)
-        {
-        }
-        public function addLiteralLine($literalBlock, $line, $literalBlockStyle, $indent = -1)
-        {
-        }
-        public function revertLiteralPlaceHolder($lineArray, $literalBlock)
-        {
-        }
-        public static function stripIndent($line, $indent = -1)
-        {
-        }
-        public function getParentPathByIndent($indent)
-        {
-        }
-        public function clearBiggerPathValues($indent)
-        {
-        }
-        public static function isComment($line)
-        {
-        }
-        public static function isEmpty($line)
-        {
-        }
-        public function isArrayElement($line)
-        {
-        }
-        public function isHashElement($line)
-        {
-        }
-        public function isLiteral($line)
-        {
-        }
-        public static function unquote($value)
-        {
-        }
-        public function startsMappedSequence($line)
-        {
-        }
-        public function returnMappedSequence($line)
-        {
-        }
-        public function checkKeysInValue($value)
-        {
-        }
-        public function returnMappedValue($line)
-        {
-        }
-        public function startsMappedValue($line)
-        {
-        }
-        public function isPlainArray($line)
-        {
-        }
-        public function returnPlainArray($line)
-        {
-        }
-        public function returnKeyValuePair($line)
-        {
-        }
-        public function returnArrayElement($line)
-        {
-        }
-        public function nodeContainsGroup($line)
-        {
-        }
-        public function addGroup($line, $group)
-        {
-        }
-        public function stripGroup($line, $group)
-        {
-        }
     }
 }
 namespace ParagonIE\Sodium {
@@ -71551,305 +63725,109 @@ namespace Sodium {
     {
     }
 }
-namespace Symfony\Component\Finder {
-    class Finder implements \IteratorAggregate, \Countable
-    {
-        public const IGNORE_VCS_FILES = 1;
-        public const IGNORE_DOT_FILES = 2;
-        public const IGNORE_VCS_IGNORED_FILES = 4;
-        public $mode = 0;
-        public $names = array();
-        public $notNames = array();
-        public $exclude = array();
-        public $filters = array();
-        public $depths = array();
-        public $sizes = array();
-        public $followLinks = false;
-        public $reverseSorting = false;
-        public $sort = false;
-        public $ignore = 0;
-        public $dirs = array();
-        public $dates = array();
-        public $iterators = array();
-        public $contains = array();
-        public $notContains = array();
-        public $paths = array();
-        public $notPaths = array();
-        public $ignoreUnreadableDirs = false;
-        public static $vcsPatterns = 'Psalm could not infer this type';
-        public function __construct()
-        {
-        }
-        /**
-         * @return static
-         */
-        public static function create()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function directories()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function files()
-        {
-        }
-        /**
-         * @param array<array-key, int|string>|int|string $levels
-         *
-         * @return static
-         */
-        public function depth($levels)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $dates
-         *
-         * @return static
-         */
-        public function date($dates)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function name($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function notName($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function contains($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function notContains($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function path($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $patterns
-         *
-         * @return static
-         */
-        public function notPath($patterns)
-        {
-        }
-        /**
-         * @param array<array-key, int|string>|int|string $sizes
-         *
-         * @return static
-         */
-        public function size($sizes)
-        {
-        }
-        /**
-         * @param array<array-key, mixed>|string $dirs
-         *
-         * @return static
-         */
-        public function exclude($dirs)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function ignoreDotFiles(bool $ignoreDotFiles)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function ignoreVCS(bool $ignoreVCS)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function ignoreVCSIgnored(bool $ignoreVCSIgnored)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $pattern
-         */
-        public static function addVCSPattern($pattern)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sort(\Closure $closure)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sortByName(bool $useNaturalSort = false)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sortByType()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sortByAccessedTime()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function reverseSorting()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sortByChangedTime()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function sortByModifiedTime()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function filter(\Closure $closure)
-        {
-        }
-        /**
-         * @return static
-         */
-        public function followLinks()
-        {
-        }
-        /**
-         * @return static
-         */
-        public function ignoreUnreadableDirs(bool $ignore = true)
-        {
-        }
-        /**
-         * @param array<array-key, string>|string $dirs
-         *
-         * @return static
-         *
-         * @throws Exception\DirectoryNotFoundException
-         */
-        public function in($dirs)
-        {
-        }
-        /**
-         * @return \Iterator|array<array-key, SplFileInfo>
-         *
-         * @throws \LogicException
-         */
-        public function getIterator()
-        {
-        }
-        /**
-         * @return static
-         *
-         * @throws \InvalidArgumentException
-         */
-        public function append(iterable $iterator)
-        {
-        }
-        /**
-         * @return bool
-         */
-        public function hasResults()
-        {
-        }
-        /**
-         * @return int
-         */
-        public function count()
-        {
-        }
-        public function searchInDirectory(string $dir) : \Iterator
-        {
-        }
-        public function normalizeDir(string $dir) : string
-        {
-        }
-    }
-    class SplFileInfo extends \SplFileInfo
-    {
-        public $relativePath;
-        public $relativePathname;
-        /**
-         * @param string $file
-         * @param string $relativePath
-         * @param string $relativePathname
-         */
-        public function __construct(string $file, string $relativePath, string $relativePathname)
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getRelativePath()
-        {
-        }
-        /**
-         * @return string
-         */
-        public function getRelativePathname()
-        {
-        }
-        public function getFilenameWithoutExtension() : string
-        {
-        }
-        /**
-         * @return string
-         *
-         * @throws \RuntimeException
-         */
-        public function getContents()
-        {
-        }
-    }
-}
-namespace Symfony\Component\Finder\Exception {
-    class DirectoryNotFoundException extends \InvalidArgumentException
-    {
-    }
-}
 namespace WP_CLI {
+    class Autoloader
+    {
+        /**
+         * @var array<array-key, mixed>
+         */
+        protected $namespaces;
+        public function __destruct()
+        {
+        }
+        public function register()
+        {
+        }
+        public function unregister()
+        {
+        }
+        /**
+         * @param string $root
+         * @param string $base_dir
+         * @param string $prefix
+         * @param string $suffix
+         * @param bool $lowercase
+         * @param bool $underscores
+         *
+         * @return Autoloader
+         */
+        public function add_namespace($root, $base_dir, $prefix = '', $suffix = '.php', $lowercase = false, $underscores = false)
+        {
+        }
+        /**
+         * @param string $class
+         */
+        public function autoload($class)
+        {
+        }
+        /**
+         * @param string $root
+         *
+         * @return string
+         */
+        protected function normalize_root($root)
+        {
+        }
+        /**
+         * @param string $string
+         *
+         * @return string
+         */
+        protected function remove_leading_backslash($string)
+        {
+        }
+        /**
+         * @param string $string
+         *
+         * @return string
+         */
+        protected function add_trailing_backslash($string)
+        {
+        }
+        /**
+         * @param string $string
+         *
+         * @return string
+         */
+        protected function add_trailing_slash($string)
+        {
+        }
+    }
+    class Completions
+    {
+        public $words;
+        public $opts = array();
+        public function __construct($line)
+        {
+        }
+        public function get_command($words)
+        {
+        }
+        public function get_global_parameters()
+        {
+        }
+        public function add($opt)
+        {
+        }
+        public function render()
+        {
+        }
+    }
+    class ComposerIO extends \Composer\IO\NullIO
+    {
+        public function isVerbose()
+        {
+        }
+        public function write($messages, $newline = true, $verbosity)
+        {
+        }
+        public function writeError($messages, $newline = true, $verbosity)
+        {
+        }
+        public static function output_clean_message($message)
+        {
+        }
+    }
     class Configurator
     {
         public const ALIAS_REGEX = '^@[A-Za-z0-9-_\\.\\-]+$';
@@ -72038,6 +64016,82 @@ namespace WP_CLI {
     class ExitException extends \Exception
     {
     }
+    class Extractor
+    {
+        /**
+         * @param string $dest
+         */
+        public static function extract($tarball_or_zip, $dest)
+        {
+        }
+        /**
+         * @param string $zipfile
+         * @param string $dest
+         */
+        public static function extract_zip($zipfile, $dest)
+        {
+        }
+        /**
+         * @param string $tarball
+         * @param string $dest
+         */
+        public static function extract_tarball($tarball, $dest)
+        {
+        }
+        /**
+         * @param string $source
+         * @param string $dest
+         */
+        public static function copy_overwrite_files($source, $dest)
+        {
+        }
+        /**
+         * @param string $dir
+         */
+        public static function rmdir($dir)
+        {
+        }
+        /**
+         * @param int $error_code
+         *
+         * @return int|string
+         */
+        public static function zip_error_msg($error_code)
+        {
+        }
+        /**
+         * @param Processrun $process_run
+         *
+         * @return int|string
+         */
+        public static function tar_error_msg($process_run)
+        {
+        }
+        /**
+         * @param string $path
+         *
+         * @return string
+         */
+        public static function get_first_subfolder($path)
+        {
+        }
+        /**
+         * @param string $dir
+         *
+         * @return bool
+         */
+        public static function ensure_dir_exists($dir)
+        {
+        }
+        /**
+         * @param string $path
+         *
+         * @return bool
+         */
+        public static function path_is_relative($path)
+        {
+        }
+    }
     class FileCache
     {
         /**
@@ -72189,6 +64243,208 @@ namespace WP_CLI {
          * @return \Symfony\Component\Finder\Finder
          */
         protected function get_finder()
+        {
+        }
+    }
+    class Formatter
+    {
+        /**
+         * @var array<array-key, mixed>
+         */
+        public $args;
+        /**
+         * @var string
+         */
+        public $prefix;
+        /**
+         * @param array<array-key, mixed> $assoc_args
+         * @param array<array-key, mixed>|null $fields
+         * @param bool|string $prefix
+         */
+        public function __construct($assoc_args, $fields = null, $prefix = false)
+        {
+        }
+        /**
+         * @param string $key
+         *
+         * @return mixed
+         */
+        public function __get($key)
+        {
+        }
+        /**
+         * @param \Iterator|array<array-key, mixed> $items
+         * @param array<array-key, mixed>|bool $ascii_pre_colorized
+         */
+        public function display_items($items, $ascii_pre_colorized = false)
+        {
+        }
+        /**
+         * @param mixed $item
+         * @param array<array-key, mixed>|bool $ascii_pre_colorized
+         */
+        public function display_item($item, $ascii_pre_colorized = false)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $items
+         * @param array<array-key, mixed>|bool $ascii_pre_colorized
+         */
+        public function format($items, $ascii_pre_colorized = false)
+        {
+        }
+        public function show_single_field($items, $field)
+        {
+        }
+        /**
+         * @param object $item
+         * @param string $field
+         *
+         * @return string
+         */
+        public function find_item_key($item, $field)
+        {
+        }
+        /**
+         * @param array<array-key, mixed>|object $data
+         * @param string $format
+         * @param array<array-key, mixed>|bool $ascii_pre_colorized
+         */
+        public function show_multiple_fields($data, $format, $ascii_pre_colorized = false)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $items
+         * @param array<array-key, mixed> $fields
+         * @param array<array-key, mixed>|bool $ascii_pre_colorized
+         */
+        public static function show_table($items, $fields, $ascii_pre_colorized = false)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $fields
+         *
+         * @return array<array-key, mixed>
+         */
+        public function assoc_array_to_rows($fields)
+        {
+        }
+        /**
+         * @param mixed $item
+         *
+         * @return mixed
+         */
+        public function transform_item_values_to_json($item)
+        {
+        }
+    }
+    class Inflector
+    {
+        /**
+         * @var array<array-key, mixed>
+         */
+        public static $plural;
+        /**
+         * @var array<array-key, mixed>
+         */
+        public static $singular;
+        /**
+         * @var array<array-key, mixed>
+         */
+        public static $uninflected;
+        /**
+         * @var array<array-key, mixed>
+         */
+        public static $cache;
+        /**
+         * @var array<array-key, mixed>
+         */
+        public static $initial_state;
+        /**
+         * @param string $word
+         *
+         * @return string
+         */
+        public static function tableize($word)
+        {
+        }
+        /**
+         * @param string $word
+         *
+         * @return string
+         */
+        public static function classify($word)
+        {
+        }
+        /**
+         * @param string $word
+         *
+         * @return string
+         */
+        public static function camelize($word)
+        {
+        }
+        /**
+         * @param string $string
+         * @param string $delimiters
+         *
+         * @return string
+         */
+        public static function ucwords($string, $delimiters = ' 
+	 -')
+        {
+        }
+        /**
+         * @return void
+         */
+        public static function reset()
+        {
+        }
+        /**
+         * @param string $type
+         * @param array<array-key, mixed> $rules
+         * @param bool $reset
+         *
+         * @return void
+         */
+        public static function rules($type, $rules, $reset = false)
+        {
+        }
+        /**
+         * @param string $word
+         *
+         * @return string
+         */
+        public static function pluralize($word)
+        {
+        }
+        /**
+         * @param string $word
+         *
+         * @return string
+         */
+        public static function singularize($word)
+        {
+        }
+    }
+    class NoOp
+    {
+        public function __set($key, $value)
+        {
+        }
+        public function __call($method, $args)
+        {
+        }
+    }
+    class PackageManagerEventSubscriber implements \Composer\EventDispatcher\EventSubscriberInterface
+    {
+        public static function getSubscribedEvents()
+        {
+        }
+        public static function pre_install(\Composer\Installer\PackageEvent $event)
+        {
+        }
+        public static function post_install(\Composer\Installer\PackageEvent $event)
         {
         }
     }
@@ -72565,6 +64821,95 @@ namespace WP_CLI {
         {
         }
     }
+    class SynopsisValidator
+    {
+        /**
+         * @var array<array-key, mixed>
+         */
+        public $spec;
+        /**
+         * @param string $synopsis
+         */
+        public function __construct($synopsis)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function get_unknown()
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $args
+         *
+         * @return bool
+         */
+        public function enough_positionals($args)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $args
+         *
+         * @return array<array-key, mixed>
+         */
+        public function unknown_positionals($args)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $assoc_args
+         *
+         * @return array<array-key, mixed>
+         */
+        public function validate_assoc($assoc_args)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $assoc_args
+         *
+         * @return array<array-key, mixed>|false
+         */
+        public function unknown_assoc($assoc_args)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $args
+         * @param string $operator
+         *
+         * @return array<array-key, mixed>
+         */
+        public function query_spec($args, $operator = 'AND')
+        {
+        }
+    }
+    class UpgraderSkin extends \WP_Upgrader_Skin
+    {
+        public $api;
+        public function header()
+        {
+        }
+        public function footer()
+        {
+        }
+        public function bulk_header()
+        {
+        }
+        public function bulk_footer()
+        {
+        }
+        public function error($error)
+        {
+        }
+        /**
+         * @param string $string
+         * @param array<array-key, mixed> $args
+         */
+        public function process_feedback($string, $args)
+        {
+        }
+    }
+    function is_customize_preview()
+    {
+    }
     class WpHttpCacheManager
     {
         /**
@@ -72616,6 +64961,296 @@ namespace WP_CLI {
          * @return bool
          */
         public function is_whitelisted($url)
+        {
+        }
+    }
+}
+namespace WP_CLI\Bootstrap {
+    class AutoloaderStep implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @var BootstrapState
+         */
+        protected $state;
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+        /**
+         * @return false|string
+         */
+        protected function get_custom_vendor_folder()
+        {
+        }
+        /**
+         * @return void
+         */
+        protected function handle_failure()
+        {
+        }
+        /**
+         * @return array<array-key, string>|false
+         */
+        protected abstract function get_autoloader_paths();
+    }
+    class BootstrapState
+    {
+        public const IS_PROTECTED_COMMAND = 'is_protected_command';
+        /**
+         * @var array<array-key, mixed>
+         */
+        public $state;
+        /**
+         * @param string $key
+         * @param mixed|null $fallback
+         *
+         * @return mixed
+         */
+        public function getValue($key, $fallback = null)
+        {
+        }
+        /**
+         * @param string $key
+         * @param mixed $value
+         *
+         * @return void
+         */
+        public function setValue($key, $value)
+        {
+        }
+    }
+    interface BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state);
+    }
+    class ConfigureRunner implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class DeclareAbstractBaseCommand implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class DeclareMainClass implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class DefineProtectedCommands implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function get_protected_commands()
+        {
+        }
+        /**
+         * @return string
+         */
+        public function get_current_command()
+        {
+        }
+    }
+    class IncludeFallbackAutoloader extends \WP_CLI\Bootstrap\AutoloaderStep
+    {
+        /**
+         * @return array<array-key, string>|false
+         */
+        protected function get_autoloader_paths()
+        {
+        }
+    }
+    class IncludeFrameworkAutoloader implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class IncludePackageAutoloader extends \WP_CLI\Bootstrap\AutoloaderStep
+    {
+        /**
+         * @return array<array-key, string>|false
+         */
+        protected function get_autoloader_paths()
+        {
+        }
+        /**
+         * @return void
+         */
+        protected function handle_failure()
+        {
+        }
+    }
+    class InitializeColorization implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class InitializeLogger implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+        public function declare_loggers()
+        {
+        }
+    }
+    class LaunchRunner implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class LoadDispatcher implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class LoadRequiredCommand implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class LoadUtilityFunctions implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class RegisterDeferredCommands implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+        public function add_deferred_commands()
+        {
+        }
+    }
+    class RegisterFrameworkCommands implements \WP_CLI\Bootstrap\BootstrapStep
+    {
+        /**
+         * @param BootstrapState $state
+         *
+         * @return BootstrapState
+         */
+        public function process(\WP_CLI\Bootstrap\BootstrapState $state)
+        {
+        }
+    }
+    class RunnerInstance
+    {
+        /**
+         * @return \WP_CLI\Runner
+         */
+        public function __invoke()
+        {
+        }
+    }
+}
+namespace WP_CLI\Compat {
+    trait FeedbackMethodTrait
+    {
+    }
+}
+namespace WP_CLI\Compat\Min_PHP_5_4 {
+    trait FeedbackMethodTrait
+    {
+        /**
+         * @param string $string
+         */
+        public function feedback($string)
+        {
+        }
+    }
+}
+namespace WP_CLI\Compat\Min_PHP_5_6 {
+    trait FeedbackMethodTrait
+    {
+        /**
+         * @param string $string
+         * @param mixed $args
+         */
+        public function feedback($string, $args)
         {
         }
     }
@@ -72946,6 +65581,135 @@ namespace WP_CLI\Dispatcher {
         }
     }
 }
+namespace WP_CLI\Fetchers {
+    class Base
+    {
+        /**
+         * @var string
+         */
+        protected $msg;
+        /**
+         * @param string $arg
+         *
+         * @return false|mixed
+         */
+        public abstract function get($arg);
+        /**
+         * @param string $arg
+         */
+        public function get_check($arg)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function get_many($args)
+        {
+        }
+    }
+}
+namespace WP_CLI\Iterators {
+    class CSV implements \Countable, \Iterator
+    {
+        public const ROW_SIZE = 4096;
+        public $filename;
+        public $file_pointer;
+        public $delimiter;
+        public $columns;
+        public $current_index;
+        public $current_element;
+        public function __construct($filename, $delimiter = ',')
+        {
+        }
+        public function rewind()
+        {
+        }
+        public function current()
+        {
+        }
+        public function key()
+        {
+        }
+        public function next()
+        {
+        }
+        public function count()
+        {
+        }
+        public function valid()
+        {
+        }
+    }
+    class Exception extends \RuntimeException
+    {
+    }
+    class Query implements \Iterator
+    {
+        public $chunk_size;
+        public $query = '';
+        public $count_query = '';
+        public $global_index = 0;
+        public $index_in_results = 0;
+        public $results = array();
+        public $row_count = 0;
+        public $offset = 0;
+        public $db = null;
+        public $depleted = false;
+        /**
+         * @param string $query
+         * @param int $chunk_size
+         */
+        public function __construct($query, $chunk_size = 500)
+        {
+        }
+        public function adjust_offset_for_shrinking_result_set()
+        {
+        }
+        public function load_items_from_db()
+        {
+        }
+        public function current()
+        {
+        }
+        public function key()
+        {
+        }
+        public function next()
+        {
+        }
+        public function rewind()
+        {
+        }
+        public function valid()
+        {
+        }
+    }
+    class Table extends \WP_CLI\Iterators\Query
+    {
+        /**
+         * @param array<array-key, mixed> $args
+         */
+        public function __construct($args = array())
+        {
+        }
+        public static function build_fields($fields)
+        {
+        }
+        public static function build_where_conditions($where)
+        {
+        }
+    }
+    class Transform extends \IteratorIterator
+    {
+        public $transformers = array();
+        public function add_transform($fn)
+        {
+        }
+        public function current()
+        {
+        }
+    }
+}
 namespace WP_CLI\Loggers {
     class Base
     {
@@ -73018,6 +65782,36 @@ namespace WP_CLI\Loggers {
         {
         }
     }
+    class Quiet extends \WP_CLI\Loggers\Base
+    {
+        /**
+         * @param string $message
+         */
+        public function info($message)
+        {
+        }
+        /**
+         * @param string $message
+         */
+        public function success($message)
+        {
+        }
+        /**
+         * @param string $message
+         */
+        public function warning($message)
+        {
+        }
+        /**
+         * @param string $message
+         */
+        public function error($message)
+        {
+        }
+        public function error_multi_line($message_lines)
+        {
+        }
+    }
     class Regular extends \WP_CLI\Loggers\Base
     {
         /**
@@ -73056,6 +65850,186 @@ namespace WP_CLI\Loggers {
     }
 }
 namespace cli {
+    class Arguments implements \ArrayAccess
+    {
+        protected $_flags = array();
+        protected $_options = array();
+        protected $_strict = false;
+        protected $_input = array();
+        protected $_invalid = array();
+        protected $_parsed;
+        protected $_lexer;
+        /**
+         * @param array<array-key, mixed> $options
+         */
+        public function __construct($options = array())
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function getArguments()
+        {
+        }
+        public function getHelpScreen()
+        {
+        }
+        /**
+         * @return string
+         */
+        public function asJSON()
+        {
+        }
+        /**
+         * @param mixed $offset
+         *
+         * @return bool
+         */
+        public function offsetExists($offset)
+        {
+        }
+        /**
+         * @param mixed $offset
+         *
+         * @return mixed
+         */
+        public function offsetGet($offset)
+        {
+        }
+        /**
+         * @param mixed $offset
+         * @param mixed $value
+         */
+        public function offsetSet($offset, $value)
+        {
+        }
+        /**
+         * @param mixed $offset
+         */
+        public function offsetUnset($offset)
+        {
+        }
+        /**
+         * @param mixed $flag
+         * @param array<array-key, mixed> $settings
+         *
+         * @return static
+         */
+        public function addFlag($flag, $settings = array())
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $flags
+         *
+         * @return static
+         */
+        public function addFlags($flags)
+        {
+        }
+        /**
+         * @param mixed $option
+         * @param array<array-key, mixed> $settings
+         *
+         * @return static
+         */
+        public function addOption($option, $settings = array())
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $options
+         *
+         * @return static
+         */
+        public function addOptions($options)
+        {
+        }
+        /**
+         * @param bool $strict
+         *
+         * @return static
+         */
+        public function setStrict($strict)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function getInvalidArguments()
+        {
+        }
+        /**
+         * @param mixed $flag
+         *
+         * @return array<array-key, mixed>
+         */
+        public function getFlag($flag)
+        {
+        }
+        public function getFlags()
+        {
+        }
+        public function hasFlags()
+        {
+        }
+        /**
+         * @param mixed $argument
+         *
+         * @return bool
+         */
+        public function isFlag($argument)
+        {
+        }
+        /**
+         * @param mixed $flag
+         *
+         * @return bool
+         */
+        public function isStackable($flag)
+        {
+        }
+        /**
+         * @param mixed $option
+         *
+         * @return array<array-key, mixed>
+         */
+        public function getOption($option)
+        {
+        }
+        public function getOptions()
+        {
+        }
+        public function hasOptions()
+        {
+        }
+        /**
+         * @param mixed $argument
+         *
+         * @return bool
+         */
+        public function isOption($argument)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         *
+         * @throws arguments\InvalidArguments
+         */
+        public function parse()
+        {
+        }
+        public function _applyDefaults()
+        {
+        }
+        public function _warn($message)
+        {
+        }
+        public function _parseFlag($argument)
+        {
+        }
+        public function _parseOption($option)
+        {
+        }
+    }
     class Colors
     {
         protected static $_colors = 'Psalm could not infer this type';
@@ -73147,6 +66121,169 @@ namespace cli {
         {
         }
         public static function clearStringCache()
+        {
+        }
+    }
+    class Memoize
+    {
+        protected $_memoCache = array();
+        public function __get($name)
+        {
+        }
+        protected function _unmemo($name)
+        {
+        }
+    }
+    class Notify
+    {
+        protected $_current = 0;
+        protected $_first = true;
+        protected $_interval;
+        protected $_message;
+        protected $_start;
+        protected $_timer;
+        /**
+         * @param string $msg
+         * @param int $interval
+         */
+        public function __construct($msg, $interval = 100)
+        {
+        }
+        /**
+         * @param bool $finish
+         */
+        public abstract function display($finish = false);
+        public function reset()
+        {
+        }
+        /**
+         * @return string
+         */
+        public function current()
+        {
+        }
+        /**
+         * @return int
+         */
+        public function elapsed()
+        {
+        }
+        /**
+         * @return int
+         */
+        public function speed()
+        {
+        }
+        /**
+         * @param int $time
+         *
+         * @return string
+         */
+        public function formatTime($time)
+        {
+        }
+        public function finish()
+        {
+        }
+        /**
+         * @param int $increment
+         */
+        public function increment($increment = 1)
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function shouldUpdate()
+        {
+        }
+        /**
+         * @param int $increment
+         */
+        public function tick($increment = 1)
+        {
+        }
+    }
+    class Progress extends \cli\Notify
+    {
+        protected $_total = 0;
+        /**
+         * @param string $msg
+         * @param int $total
+         * @param int $interval
+         */
+        public function __construct($msg, $total, $interval = 100)
+        {
+        }
+        /**
+         * @param int $total
+         *
+         * @throws \InvalidArgumentException
+         */
+        public function setTotal($total)
+        {
+        }
+        public function reset($total = null)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function current()
+        {
+        }
+        /**
+         * @return string
+         */
+        public function total()
+        {
+        }
+        /**
+         * @return int
+         */
+        public function estimated()
+        {
+        }
+        public function finish()
+        {
+        }
+        /**
+         * @param int $increment
+         */
+        public function increment($increment = 1)
+        {
+        }
+        /**
+         * @return float
+         */
+        public function percent()
+        {
+        }
+    }
+    class Shell
+    {
+        /**
+         * @return int
+         */
+        public static function columns()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public static function isPiped()
+        {
+        }
+        /**
+         * @param bool $hidden
+         */
+        public static function hide($hidden = true)
+        {
+        }
+        /**
+         * @return bool
+         */
+        public static function is_windows()
         {
         }
     }
@@ -73247,6 +66384,118 @@ namespace cli {
          * @throws \Exception
          */
         public static function setStream($whichStream, $stream)
+        {
+        }
+    }
+    class Table
+    {
+        protected $_renderer;
+        protected $_headers = array();
+        protected $_footers = array();
+        protected $_width = array();
+        protected $_rows = array();
+        /**
+         * @param array<array-key, mixed>|null $headers
+         * @param array<array-key, mixed>|null $rows
+         * @param array<array-key, mixed>|null $footers
+         */
+        public function __construct(?array $headers = null, ?array $rows = null, ?array $footers = null)
+        {
+        }
+        public function resetTable()
+        {
+        }
+        /**
+         * @param table\Renderer $renderer
+         */
+        public function setRenderer(\cli\table\Renderer $renderer)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $row
+         *
+         * @return array<array-key, mixed>
+         */
+        protected function checkRow(array $row)
+        {
+        }
+        public function display()
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function getDisplayLines()
+        {
+        }
+        /**
+         * @param int $column
+         */
+        public function sort($column)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $headers
+         */
+        public function setHeaders(array $headers)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $footers
+         */
+        public function setFooters(array $footers)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $row
+         */
+        public function addRow(array $row)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $rows
+         */
+        public function setRows(array $rows)
+        {
+        }
+        public function countRows()
+        {
+        }
+        public function setAsciiPreColorized($pre_colorized)
+        {
+        }
+        /**
+         * @param int $column
+         *
+         * @return bool
+         */
+        public function isAsciiPreColorized($column)
+        {
+        }
+    }
+    class Tree
+    {
+        protected $_renderer;
+        protected $_data = array();
+        /**
+         * @param tree\Renderer $renderer
+         */
+        public function setRenderer(\cli\tree\Renderer $renderer)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $data
+         */
+        public function setData(array $data)
+        {
+        }
+        /**
+         * @return null|string
+         */
+        public function render()
+        {
+        }
+        public function display()
         {
         }
     }
@@ -73400,5 +66649,382 @@ namespace cli {
      */
     function strwidth($string, $encoding = false)
     {
+    }
+}
+namespace cli\arguments {
+    class Argument extends \cli\Memoize
+    {
+        public $key;
+        public $_argument;
+        public $_raw;
+        /**
+         * @param string $argument
+         */
+        public function __construct($argument)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function __toString()
+        {
+        }
+        /**
+         * @return string
+         */
+        public function value()
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function raw()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function isLong()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function isShort()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function isArgument()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function isValue()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function canExplode()
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function exploded()
+        {
+        }
+    }
+    class HelpScreen
+    {
+        protected $_flags = array();
+        protected $_maxFlag = 0;
+        protected $_options = array();
+        protected $_maxOption = 0;
+        public function __construct(\cli\Arguments $arguments)
+        {
+        }
+        public function __toString()
+        {
+        }
+        public function setArguments(\cli\Arguments $arguments)
+        {
+        }
+        public function consumeArgumentFlags(\cli\Arguments $arguments)
+        {
+        }
+        public function consumeArgumentOptions(\cli\Arguments $arguments)
+        {
+        }
+        public function render()
+        {
+        }
+        public function _renderFlags()
+        {
+        }
+        public function _renderOptions()
+        {
+        }
+        public function _renderScreen($options, $max)
+        {
+        }
+        public function _consume($options)
+        {
+        }
+    }
+    class InvalidArguments extends \InvalidArgumentException
+    {
+        protected $arguments;
+        /**
+         * @param array<array-key, mixed> $arguments
+         */
+        public function __construct(array $arguments)
+        {
+        }
+        /**
+         * @return array<array-key, mixed>
+         */
+        public function getArguments()
+        {
+        }
+        public function _generateMessage()
+        {
+        }
+    }
+    class Lexer extends \cli\Memoize
+    {
+        public $_items = array();
+        public $_index = 0;
+        public $_length = 0;
+        public $_first = true;
+        /**
+         * @param array<array-key, mixed> $items
+         */
+        public function __construct(array $items)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function current()
+        {
+        }
+        /**
+         * @return Argument
+         */
+        public function peek()
+        {
+        }
+        public function next()
+        {
+        }
+        /**
+         * @return int
+         */
+        public function key()
+        {
+        }
+        public function rewind()
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function valid()
+        {
+        }
+        /**
+         * @param mixed $item
+         */
+        public function unshift($item)
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function end()
+        {
+        }
+        public function _shift()
+        {
+        }
+        public function _explode()
+        {
+        }
+    }
+}
+namespace cli\notify {
+    class Dots extends \cli\Notify
+    {
+        protected $_dots;
+        protected $_format = '{:msg}{:dots}  ({:elapsed}, {:speed}/s)';
+        protected $_iteration;
+        /**
+         * @param string $msg
+         * @param int $dots
+         * @param int $interval
+         *
+         * @throws \InvalidArgumentException
+         */
+        public function __construct($msg, $dots = 3, $interval = 100)
+        {
+        }
+        /**
+         * @param bool $finish
+         */
+        public function display($finish = false)
+        {
+        }
+    }
+    class Spinner extends \cli\Notify
+    {
+        protected $_chars = '-\\|/';
+        protected $_format = '{:msg} {:char}  ({:elapsed}, {:speed}/s)';
+        protected $_iteration = 0;
+        /**
+         * @param bool $finish
+         */
+        public function display($finish = false)
+        {
+        }
+    }
+}
+namespace cli\progress {
+    class Bar extends \cli\Progress
+    {
+        protected $_bars = '=>';
+        protected $_formatMessage = '{:msg}  {:percent}% [';
+        protected $_formatTiming = '] {:elapsed} / {:estimated}';
+        protected $_format = '{:msg}{:bar}{:timing}';
+        /**
+         * @param bool $finish
+         */
+        public function display($finish = false)
+        {
+        }
+        /**
+         * @param int $increment
+         * @param null|string $msg
+         */
+        public function tick($increment = 1, $msg = null)
+        {
+        }
+    }
+}
+namespace cli\table {
+    class Ascii extends \cli\table\Renderer
+    {
+        protected $_characters = 'Psalm could not infer this type';
+        protected $_border = null;
+        protected $_constraintWidth = null;
+        protected $_pre_colorized = false;
+        /**
+         * @param array<array-key, mixed> $widths
+         * @param bool $fallback
+         */
+        public function setWidths(array $widths, $fallback = false)
+        {
+        }
+        /**
+         * @param int $constraintWidth
+         */
+        public function setConstraintWidth($constraintWidth)
+        {
+        }
+        public function setCharacters(array $characters)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function border()
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $row
+         *
+         * @return string
+         */
+        public function row(array $row)
+        {
+        }
+        public function padColumn($content, $column)
+        {
+        }
+        public function setPreColorized($pre_colorized)
+        {
+        }
+        /**
+         * @param int $column
+         *
+         * @return bool
+         */
+        public function isPreColorized($column)
+        {
+        }
+    }
+    class Renderer
+    {
+        protected $_widths = array();
+        public function __construct(array $widths = array())
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $widths
+         * @param bool $fallback
+         */
+        public function setWidths(array $widths, $fallback = false)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function border()
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $row
+         *
+         * @return string
+         */
+        public abstract function row(array $row);
+    }
+    class Tabular extends \cli\table\Renderer
+    {
+        /**
+         * @param array<array-key, mixed> $row
+         *
+         * @return string
+         */
+        public function row(array $row)
+        {
+        }
+    }
+}
+namespace cli\tree {
+    class Ascii extends \cli\tree\Renderer
+    {
+        /**
+         * @param array<array-key, mixed> $tree
+         *
+         * @return string
+         */
+        public function render(array $tree)
+        {
+        }
+    }
+    class Markdown extends \cli\tree\Renderer
+    {
+        /**
+         * @var int
+         */
+        protected $_padding;
+        /**
+         * @param int|null $padding
+         */
+        public function __construct($padding = null)
+        {
+        }
+        /**
+         * @param array<array-key, mixed> $tree
+         * @param int $level
+         *
+         * @return string
+         */
+        public function render(array $tree, $level = 0)
+        {
+        }
+    }
+    class Renderer
+    {
+        /**
+         * @param array<array-key, mixed> $tree
+         *
+         * @return null|string
+         */
+        public abstract function render(array $tree);
     }
 }

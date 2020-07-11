@@ -1,5 +1,7 @@
 <?php
 
+define( 'HOUR_IN_SECONDS', 3600 );
+
 class WP_CLI {
 	/**
 	 *
@@ -8,6 +10,50 @@ class WP_CLI {
 	 * @return void
 	 */
 	static function add_command( string $command, $class ) {
+
+	}
+
+	/**
+	 * @param WP_Error|string $message
+	 * @param bool|int $exit
+	 *
+	 * @return (
+	 *     $exit is true
+	 *     ? no-return
+	 *     : null
+	 * )
+	 */
+	public static function error( $message, $exit = true ) {
+	}
+}
+
+class wpdb {
+	/**
+	 * @param string $query
+	 * @param array<scalar>|scalar $args
+	 * @return string|null
+	 */
+	public function prepare( $query, $args ) {
+
+	}
+	/**
+	 * Undocumented function
+	 *
+	 * @param string? $query
+	 * @param 'OBJECT'|'ARRAY_A'|'ARRAY_N'|'OBJECT_K' $object
+	 * @return (
+	 *     $object is 'OBJECT'
+	 *     ? list<ArrayObject<string, string>>
+	 *     : ( $object is 'ARRAY_A'
+	 *         ? list<array<string, scalar>>
+	 *         : ( $object is 'ARRAY_N'
+	 *               ? list<array<scalar>>
+	 *               : array<string, ArrayObject<string, scalar>>
+	 *           )
+	 *    )
+	 * )
+	 */
+	public function get_results( $query = null, $object = 'OBJECT' ) {
 
 	}
 }
