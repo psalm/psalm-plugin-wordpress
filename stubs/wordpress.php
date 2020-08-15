@@ -40925,11 +40925,11 @@ namespace {
     }
     /**
      * @param string $capability
-     * @param mixed $args
+     * @param mixed|null $args
      *
      * @return bool
      */
-    function current_user_can($capability, $args)
+    function current_user_can($capability, $args = null)
     {
     }
     /**
@@ -64390,8 +64390,8 @@ namespace WP_CLI {
          *
          * @return string
          */
-        public static function ucwords($string, $delimiters = ' 
-	 -')
+        public static function ucwords($string, $delimiters = '
+ -')
         {
         }
         /**
