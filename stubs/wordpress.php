@@ -64393,8 +64393,7 @@ namespace WP_CLI {
          *
          * @return string
          */
-        public static function ucwords($string, $delimiters = '
- -')
+        public static function ucwords($string, $delimiters = " \n\t\r\0\v-")
         {
         }
         /**
