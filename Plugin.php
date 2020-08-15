@@ -62,12 +62,12 @@ class Plugin implements PluginEntryPointInterface {
 
 		$name = $expr->args[0]->value->value;
 
-		var_dump( $name );
+		//var_dump( $name );
 		if ( $name === 'get_attached_file' ) {
 			return;
 		}
-		var_dump( $expr );
-		var_dump( $expr->getDocComment() );
+		//var_dump( $expr );
+		//var_dump( $expr->getDocComment() );
 		exit;
 	}
 }
