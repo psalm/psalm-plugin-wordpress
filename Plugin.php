@@ -14,7 +14,6 @@ use SimpleXMLElement;
 
 class Plugin implements PluginEntryPointInterface {
 
-	static $last_statement = null;
 	public function __invoke( RegistrationInterface $psalm, ?SimpleXMLElement $config = null ) {
 		$psalm->registerHooksFromClass( static::class );
 
@@ -69,7 +68,6 @@ class Plugin implements PluginEntryPointInterface {
 		}
 		var_dump( $expr );
 		var_dump( $expr->getDocComment() );
-		//var_dump( static::$last_statement );
 		exit;
 	}
 }
