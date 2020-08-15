@@ -39676,9 +39676,12 @@ namespace {
     {
     }
     /**
+     * @param string|array $key
+     * @param string|null $value
+     * @param string|null $uri
      * @return string
      */
-    function add_query_arg($args)
+    function add_query_arg($key, $value = null, $uri = null)
     {
     }
     /**
