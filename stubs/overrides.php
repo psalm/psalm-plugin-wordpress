@@ -147,3 +147,22 @@ function is_wp_error( $error ) : bool {
 function wp_list_pluck( array $list, string $column, string $index_key = null ) : array {
 
 }
+
+/**
+ * @param string $capability
+ * @param mixed|null $args
+ * @return bool
+ */
+function current_user_can($capability, $args = null): bool {
+
+}
+
+/**
+ * @param string|array $key
+ * @param string|null $value
+ * @param string|null $uri
+ * @return string
+ */
+function add_query_arg($key, ?string $value = null, ?string $uri = null): string {
+
+}

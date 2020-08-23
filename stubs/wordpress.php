@@ -40928,11 +40928,11 @@ namespace {
     }
     /**
      * @param string $capability
-     * @param mixed|null $args
+     * @param mixed $args
      *
      * @return bool
      */
-    function current_user_can($capability, $args = null)
+    function current_user_can($capability, $args)
     {
     }
     /**
