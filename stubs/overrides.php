@@ -178,3 +178,14 @@ function get_post($post = null, $output = OBJECT, $filter = 'raw')
 {
 
 }
+
+/**
+ * @param list<string> $wildcard_mime_types
+ * @param list<string> $real_mime_types
+ *
+ * @return array<string, list<string>>
+ */
+function wp_match_mime_types($wildcard_mime_types, $real_mime_types)
+{
+
+}
