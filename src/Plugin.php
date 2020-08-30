@@ -1,6 +1,6 @@
 <?php
 
-namespace PsalmWordpress;
+namespace PsalmWordPress;
 
 use PhpParser\Node\Expr\FuncCall;
 
