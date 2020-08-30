@@ -6,7 +6,7 @@
 	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
 	<projectFiles>
-		<file name="Plugin.php" />
+		<file name="src/Plugin.php" />
 	</projectFiles>
 	<plugins>
 		<pluginClass class="PsalmWordPress\Plugin"/>
