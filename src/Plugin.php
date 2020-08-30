@@ -31,8 +31,8 @@ class Plugin implements PluginEntryPointInterface {
 	 */
 	private function getStubFiles(): array {
 		return [
-			__DIR__ . '/stubs/wordpress.php',
-			__DIR__ . '/stubs/overrides.php',
+			__DIR__ . '/../stubs/wordpress.php',
+			__DIR__ . '/../stubs/overrides.php',
 		];
 	}
 
