@@ -1,5 +1,4 @@
-/vendor/
 composer.lock
 vendor
-/stubs/wordpress/
-/stubs/vendor/
+tests/_generated
+tests/_output
