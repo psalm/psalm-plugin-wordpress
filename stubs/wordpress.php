@@ -137,7 +137,7 @@ namespace {
          * @param WP_Error|array<array-key, mixed>|string $data
          * @param mixed $args
          */
-        public function feedback($data, $args)
+        public function feedback($data, ...$args)
         {
         }
         public function header()
@@ -211,7 +211,7 @@ namespace {
          * @param string $string
          * @param mixed $args
          */
-        public function feedback($string, $args)
+        public function feedback($string, ...$args)
         {
         }
         public function header()
@@ -572,9 +572,6 @@ namespace {
         {
         }
     }
-    const GRAPHEME_EXTR_COUNT = 0;
-    const GRAPHEME_EXTR_MAXBYTES = 1;
-    const GRAPHEME_EXTR_MAXCHARS = 2;
     class Gettext_Translations extends \Translations
     {
         /**
@@ -623,7 +620,7 @@ namespace {
         }
     }
     const IFRAME_REQUEST = true;
-    const IS_PROFILE_PAGE = 'Psalm could not infer this type';
+    const IS_PROFILE_PAGE = true;
     class IXR_Base64
     {
         public $data;
@@ -968,9 +965,6 @@ namespace {
         }
     }
     const MAGPIE_USER_AGENT = 'Psalm could not infer this type';
-    const MB_CASE_LOWER = 1;
-    const MB_CASE_TITLE = 2;
-    const MB_CASE_UPPER = 0;
     class MO extends \Gettext_Translations
     {
         public $_nplurals = 2;
@@ -1110,7 +1104,7 @@ namespace {
         public function MagpieRSS($source)
         {
         }
-        public function feed_start_element($p, $element, $attrs)
+        public function feed_start_element($p, $element, &$attrs)
         {
         }
         public function feed_cdata($p, $text)
@@ -1119,7 +1113,7 @@ namespace {
         public function feed_end_element($p, $el)
         {
         }
-        public function concat($str1, $str2 = '')
+        public function concat(&$str1, $str2 = '')
         {
         }
         public function append_content($text)
@@ -1179,7 +1173,7 @@ namespace {
          *
          * @return false
          */
-        public function translate_entry($entry)
+        public function translate_entry(&$entry)
         {
         }
         /**
@@ -1215,7 +1209,7 @@ namespace {
         /**
          * @param object $other
          */
-        public function merge_with($other)
+        public function merge_with(&$other)
         {
         }
     }
@@ -2513,7 +2507,7 @@ namespace {
          *
          * @return false|string
          */
-        public static function export_entry($entry)
+        public static function export_entry(&$entry)
         {
         }
         public static function match_begin_and_end_newlines($translation, $original)
@@ -2557,7 +2551,7 @@ namespace {
          * @param Translation_Entry $entry
          * @param string $po_comment_line
          */
-        public function add_comment_to_entry($entry, $po_comment_line)
+        public function add_comment_to_entry(&$entry, $po_comment_line)
         {
         }
         /**
@@ -2934,7 +2928,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function add($val, $addv)
+        public static function add(&$val, $addv)
         {
         }
         /**
@@ -3310,7 +3304,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function crypto_generichash_final($ctx, $length)
+        public static function crypto_generichash_final(&$ctx, $length)
         {
         }
         /**
@@ -3348,7 +3342,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function crypto_generichash_update($ctx, $message)
+        public static function crypto_generichash_update(&$ctx, $message)
         {
         }
         /**
@@ -3677,7 +3671,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function crypto_secretstream_xchacha20poly1305_push($state, $msg, $aad = '', $tag = 0)
+        public static function crypto_secretstream_xchacha20poly1305_push(&$state, $msg, $aad = '', $tag = 0)
         {
         }
         /**
@@ -3689,7 +3683,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function crypto_secretstream_xchacha20poly1305_pull($state, $msg, $aad = '')
+        public static function crypto_secretstream_xchacha20poly1305_pull(&$state, $msg, $aad = '')
         {
         }
         /**
@@ -3707,7 +3701,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function crypto_secretstream_xchacha20poly1305_rekey($state)
+        public static function crypto_secretstream_xchacha20poly1305_rekey(&$state)
         {
         }
         /**
@@ -3920,7 +3914,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function increment($var)
+        public static function increment(&$var)
         {
         }
         /**
@@ -3955,7 +3949,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function memzero($var)
+        public static function memzero(&$var)
         {
         }
         /**
@@ -5165,7 +5159,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function seed_keypair($pk, $sk, $seed)
+        public static function seed_keypair(&$pk, &$sk, $seed)
         {
         }
         /**
@@ -7528,7 +7522,7 @@ namespace {
          * @throws SodiumException
          * @throws TypeError
          */
-        public static function seed_keypair($pk, $sk, $seed)
+        public static function seed_keypair(&$pk, &$sk, $seed)
         {
         }
         /**
@@ -8065,7 +8059,7 @@ namespace {
          * @throws TypeError
          * @throws SodiumException
          */
-        public static function declareScalarType($mixedVar = null, $type = 'void', $argumentIndex = 0)
+        public static function declareScalarType(&$mixedVar = null, $type = 'void', $argumentIndex = 0)
         {
         }
         /**
@@ -8897,7 +8891,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_push($state, $msg, $aad = '', $tag = 0)
+        public static function secretstream_xchacha20poly1305_push(&$state, $msg, $aad = '', $tag = 0)
         {
         }
         /**
@@ -8909,7 +8903,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_pull($state, $cipher, $aad = '')
+        public static function secretstream_xchacha20poly1305_pull(&$state, $cipher, $aad = '')
         {
         }
         /**
@@ -8919,7 +8913,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_rekey($state)
+        public static function secretstream_xchacha20poly1305_rekey(&$state)
         {
         }
         /**
@@ -9441,7 +9435,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_push($state, $msg, $aad = '', $tag = 0)
+        public static function secretstream_xchacha20poly1305_push(&$state, $msg, $aad = '', $tag = 0)
         {
         }
         /**
@@ -9453,7 +9447,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_pull($state, $cipher, $aad = '')
+        public static function secretstream_xchacha20poly1305_pull(&$state, $cipher, $aad = '')
         {
         }
         /**
@@ -9463,7 +9457,7 @@ namespace {
          *
          * @throws SodiumException
          */
-        public static function secretstream_xchacha20poly1305_rekey($state)
+        public static function secretstream_xchacha20poly1305_rekey(&$state)
         {
         }
         /**
@@ -9899,22 +9893,22 @@ namespace {
         public function privCheckFormat($p_level = 0)
         {
         }
-        public function privParseOptions($p_options_list, $p_size, $v_result_list, $v_requested_options = false)
+        public function privParseOptions(&$p_options_list, $p_size, &$v_result_list, $v_requested_options = false)
         {
         }
-        public function privOptionDefaultThreshold($p_options)
+        public function privOptionDefaultThreshold(&$p_options)
         {
         }
-        public function privFileDescrParseAtt($p_file_list, $p_filedescr, $v_options, $v_requested_options = false)
+        public function privFileDescrParseAtt(&$p_file_list, &$p_filedescr, $v_options, $v_requested_options = false)
         {
         }
-        public function privFileDescrExpand($p_filedescr_list, $p_options)
+        public function privFileDescrExpand(&$p_filedescr_list, &$p_options)
         {
         }
-        public function privCreate($p_filedescr_list, $p_result_list, $p_options)
+        public function privCreate($p_filedescr_list, &$p_result_list, &$p_options)
         {
         }
-        public function privAdd($p_filedescr_list, $p_result_list, $p_options)
+        public function privAdd($p_filedescr_list, &$p_result_list, &$p_options)
         {
         }
         public function privOpenFd($p_mode)
@@ -9923,70 +9917,70 @@ namespace {
         public function privCloseFd()
         {
         }
-        public function privAddList($p_filedescr_list, $p_result_list, $p_options)
+        public function privAddList($p_filedescr_list, &$p_result_list, &$p_options)
         {
         }
-        public function privAddFileList($p_filedescr_list, $p_result_list, $p_options)
+        public function privAddFileList($p_filedescr_list, &$p_result_list, &$p_options)
         {
         }
-        public function privAddFile($p_filedescr, $p_header, $p_options)
+        public function privAddFile($p_filedescr, &$p_header, &$p_options)
         {
         }
-        public function privAddFileUsingTempFile($p_filedescr, $p_header, $p_options)
+        public function privAddFileUsingTempFile($p_filedescr, &$p_header, &$p_options)
         {
         }
-        public function privCalculateStoredFilename($p_filedescr, $p_options)
+        public function privCalculateStoredFilename(&$p_filedescr, &$p_options)
         {
         }
-        public function privWriteFileHeader($p_header)
+        public function privWriteFileHeader(&$p_header)
         {
         }
-        public function privWriteCentralFileHeader($p_header)
+        public function privWriteCentralFileHeader(&$p_header)
         {
         }
         public function privWriteCentralHeader($p_nb_entries, $p_size, $p_offset, $p_comment)
         {
         }
-        public function privList($p_list)
+        public function privList(&$p_list)
         {
         }
-        public function privConvertHeader2FileInfo($p_header, $p_info)
+        public function privConvertHeader2FileInfo($p_header, &$p_info)
         {
         }
-        public function privExtractByRule($p_file_list, $p_path, $p_remove_path, $p_remove_all_path, $p_options)
+        public function privExtractByRule(&$p_file_list, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
         {
         }
-        public function privExtractFile($p_entry, $p_path, $p_remove_path, $p_remove_all_path, $p_options)
+        public function privExtractFile(&$p_entry, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
         {
         }
-        public function privExtractFileUsingTempFile($p_entry, $p_options)
+        public function privExtractFileUsingTempFile(&$p_entry, &$p_options)
         {
         }
-        public function privExtractFileInOutput($p_entry, $p_options)
+        public function privExtractFileInOutput(&$p_entry, &$p_options)
         {
         }
-        public function privExtractFileAsString($p_entry, $p_string, $p_options)
+        public function privExtractFileAsString(&$p_entry, &$p_string, &$p_options)
         {
         }
-        public function privReadFileHeader($p_header)
+        public function privReadFileHeader(&$p_header)
         {
         }
-        public function privReadCentralFileHeader($p_header)
+        public function privReadCentralFileHeader(&$p_header)
         {
         }
-        public function privCheckFileHeaders($p_local_header, $p_central_header)
+        public function privCheckFileHeaders(&$p_local_header, &$p_central_header)
         {
         }
-        public function privReadEndCentralDir($p_central_dir)
+        public function privReadEndCentralDir(&$p_central_dir)
         {
         }
-        public function privDeleteByRule($p_result_list, $p_options)
+        public function privDeleteByRule(&$p_result_list, &$p_options)
         {
         }
         public function privDirCheck($p_dir, $p_is_dir = false)
         {
         }
-        public function privMerge($p_archive_to_add)
+        public function privMerge(&$p_archive_to_add)
         {
         }
         public function privDuplicate($p_archive_filename)
@@ -10394,7 +10388,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        protected static function set_defaults($url, $headers, $data, $type, $options)
+        protected static function set_defaults(&$url, &$headers, &$data, &$type, &$options)
         {
         }
         /**
@@ -10417,7 +10411,7 @@ namespace {
          *
          * @return null
          */
-        public static function parse_multiple($response, $request)
+        public static function parse_multiple(&$response, $request)
         {
         }
         /**
@@ -10469,7 +10463,7 @@ namespace {
         /**
          * @param Requests_Hooks $hooks
          */
-        public function register(\Requests_Hooks $hooks);
+        public function register(\Requests_Hooks &$hooks);
     }
     class Requests_Auth_Basic implements \Requests_Auth
     {
@@ -10492,19 +10486,19 @@ namespace {
         /**
          * @param Requests_Hooks $hooks
          */
-        public function register(\Requests_Hooks $hooks)
+        public function register(\Requests_Hooks &$hooks)
         {
         }
         /**
          * @param resource $handle
          */
-        public function curl_before_send($handle)
+        public function curl_before_send(&$handle)
         {
         }
         /**
          * @param string $out
          */
-        public function fsockopen_header($out)
+        public function fsockopen_header(&$out)
         {
         }
         /**
@@ -10715,10 +10709,10 @@ namespace {
          * @param string $type
          * @param array<array-key, mixed> $options
          */
-        public function before_request($url, $headers, $data, $type, $options)
+        public function before_request($url, &$headers, &$data, &$type, &$options)
         {
         }
-        public function before_redirect_check(\Requests_Response $return)
+        public function before_redirect_check(\Requests_Response &$return)
         {
         }
     }
@@ -11575,7 +11569,7 @@ namespace {
         /**
          * @param Requests_Hooks $hooks
          */
-        public function register(\Requests_Hooks $hooks);
+        public function register(\Requests_Hooks &$hooks);
     }
     class Requests_Proxy_HTTP implements \Requests_Proxy
     {
@@ -11606,32 +11600,32 @@ namespace {
         /**
          * @param Requests_Hooks $hooks
          */
-        public function register(\Requests_Hooks $hooks)
+        public function register(\Requests_Hooks &$hooks)
         {
         }
         /**
          * @param resource $handle
          */
-        public function curl_before_send($handle)
+        public function curl_before_send(&$handle)
         {
         }
         /**
          * @param string $remote_socket
          */
-        public function fsockopen_remote_socket($remote_socket)
+        public function fsockopen_remote_socket(&$remote_socket)
         {
         }
         /**
          * @param string $path
          * @param string $url
          */
-        public function fsockopen_remote_host_path($path, $url)
+        public function fsockopen_remote_host_path(&$path, $url)
         {
         }
         /**
          * @param string $out
          */
-        public function fsockopen_header($out)
+        public function fsockopen_header(&$out)
         {
         }
         /**
@@ -12947,7 +12941,7 @@ namespace {
          *
          * @return bool
          */
-        public function set_file($file)
+        public function set_file(&$file)
         {
         }
         /**
@@ -13139,7 +13133,7 @@ namespace {
          *
          * @return array<array-key, mixed>|true
          */
-        protected function fetch_data($cache)
+        protected function fetch_data(&$cache)
         {
         }
         /**
@@ -14997,7 +14991,7 @@ namespace {
         public function set_registry(\SimplePie_Registry $registry)
         {
         }
-        public function find($type, $working)
+        public function find($type, &$working)
         {
         }
         public function is_feed($file)
@@ -15009,16 +15003,16 @@ namespace {
         public function autodiscovery()
         {
         }
-        protected function search_elements_by_tag($name, $done, $feeds)
+        protected function search_elements_by_tag($name, &$done, $feeds)
         {
         }
         public function get_links()
         {
         }
-        public function extension($array)
+        public function extension(&$array)
         {
         }
-        public function body($array)
+        public function body(&$array)
         {
         }
     }
@@ -15169,7 +15163,7 @@ namespace {
         public static function get_build()
         {
         }
-        public static function debug($sp)
+        public static function debug(&$sp)
         {
         }
         public static function silence_errors($num, $str)
@@ -15331,7 +15325,7 @@ namespace {
         public function set_registry(\SimplePie_Registry $registry)
         {
         }
-        public function parse($data, $encoding)
+        public function parse(&$data, $encoding)
         {
         }
         public function get_error_code()
@@ -15904,7 +15898,7 @@ namespace {
         public function _check_timeout($fp)
         {
         }
-        public function _connect($fp)
+        public function _connect(&$fp)
         {
         }
         public function _disconnect($fp)
@@ -16093,7 +16087,7 @@ namespace {
          * @param string $line
          * @param int $key
          */
-        public static function trimNewlines($line, $key)
+        public static function trimNewlines(&$line, $key)
         {
         }
         /**
@@ -16120,7 +16114,7 @@ namespace {
         public function _compareseq($xoff, $xlim, $yoff, $ylim)
         {
         }
-        public function _shiftBoundaries($lines, $changed, $other_changed)
+        public function _shiftBoundaries($lines, &$changed, $other_changed)
         {
         }
     }
@@ -16146,7 +16140,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        public function _getLines($text_lines, $line_no, $end = false)
+        public function _getLines(&$text_lines, &$line_no, $end = false)
         {
         }
     }
@@ -16174,7 +16168,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        public function parseContextDiff($diff)
+        public function parseContextDiff(&$diff)
         {
         }
     }
@@ -16270,7 +16264,7 @@ namespace {
         public function render($diff)
         {
         }
-        public function _block($xbeg, $xlen, $ybeg, $ylen, $edits)
+        public function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
         {
         }
         public function _startDiff()
@@ -16364,7 +16358,7 @@ namespace {
 ')
         {
         }
-        public function _encode($string)
+        public function _encode(&$string)
         {
         }
     }
@@ -16552,7 +16546,7 @@ namespace {
         /**
          * @param object $other
          */
-        public function merge_with($other)
+        public function merge_with(&$other)
         {
         }
     }
@@ -16598,7 +16592,7 @@ namespace {
         /**
          * @param Translation_Entry $entry
          */
-        public function translate_entry($entry)
+        public function translate_entry(&$entry)
         {
         }
         /**
@@ -16636,13 +16630,13 @@ namespace {
          *
          * @return void
          */
-        public function merge_with($other)
+        public function merge_with(&$other)
         {
         }
         /**
          * @param object $other
          */
-        public function merge_originals_with($other)
+        public function merge_originals_with(&$other)
         {
         }
     }
@@ -16918,14 +16912,14 @@ namespace {
          * @param WP_Error|string $errors
          * @param mixed $args
          */
-        public function error($errors, $args)
+        public function error($errors, ...$args)
         {
         }
         /**
          * @param WP_Error|array<array-key, mixed>|string $data
          * @param mixed $args
          */
-        public function feedback($data, $args)
+        public function feedback($data, ...$args)
         {
         }
     }
@@ -20729,7 +20723,7 @@ namespace {
          *
          * @return array<array-key, mixed>|null
          */
-        protected function multidimensional($root, $keys, $create = false)
+        protected function multidimensional(&$root, $keys, $create = false)
         {
         }
         /**
@@ -23627,7 +23621,7 @@ namespace {
         /**
          * @param array<array-key, mixed> $args
          */
-        public function do_all_hook($args)
+        public function do_all_hook(&$args)
         {
         }
         /**
@@ -23787,7 +23781,7 @@ namespace {
          * @param array<array-key, mixed> $options
          * @param Requests_Response $original
          */
-        public static function browser_redirect_compatibility($location, $headers, $data, $options, $original)
+        public static function browser_redirect_compatibility($location, $headers, $data, &$options, $original)
         {
         }
         /**
@@ -23863,7 +23857,7 @@ namespace {
         /**
          * @param array<array-key, mixed> $r
          */
-        public static function buildCookieHeader($r)
+        public static function buildCookieHeader(&$r)
         {
         }
         /**
@@ -26098,7 +26092,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        protected function get_sql_for_query($query, $depth = 0)
+        protected function get_sql_for_query(&$query, $depth = 0)
         {
         }
         /**
@@ -26108,7 +26102,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        public function get_sql_for_clause($clause, $parent_query, $clause_key = '')
+        public function get_sql_for_clause(&$clause, $parent_query, $clause_key = '')
         {
         }
         /**
@@ -26497,7 +26491,7 @@ namespace {
          *
          * @return false|mixed
          */
-        public function get($key, $group = 'default', $force = false, $found = null)
+        public function get($key, $group = 'default', $force = false, &$found = null)
         {
         }
         /**
@@ -27299,7 +27293,7 @@ namespace {
          * @param int $per_page
          * @param array<array-key, mixed> $to_display
          */
-        public function _page_rows($children_pages, $count, $parent, $level, $pagenum, $per_page, $to_display)
+        public function _page_rows(&$children_pages, &$count, $parent, $level, $pagenum, $per_page, &$to_display)
         {
         }
         /**
@@ -27841,7 +27835,7 @@ namespace {
         /**
          * @param array<array-key, mixed> $q
          */
-        public function parse_tax_query($q)
+        public function parse_tax_query(&$q)
         {
         }
         /**
@@ -27849,7 +27843,7 @@ namespace {
          *
          * @return string
          */
-        protected function parse_search($q)
+        protected function parse_search(&$q)
         {
         }
         /**
@@ -27871,7 +27865,7 @@ namespace {
          *
          * @return string
          */
-        protected function parse_search_order($q)
+        protected function parse_search_order(&$q)
         {
         }
         /**
@@ -33312,7 +33306,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        protected function get_sql_for_query($query, $depth = 0)
+        protected function get_sql_for_query(&$query, $depth = 0)
         {
         }
         /**
@@ -33321,7 +33315,7 @@ namespace {
          *
          * @return array<array-key, mixed>
          */
-        public function get_sql_for_clause($clause, $parent_query)
+        public function get_sql_for_clause(&$clause, $parent_query)
         {
         }
         /**
@@ -33336,14 +33330,14 @@ namespace {
         /**
          * @param array<array-key, mixed> $query
          */
-        public function clean_query($query)
+        public function clean_query(&$query)
         {
         }
         /**
          * @param array<array-key, mixed> $query
          * @param string $resulting_field
          */
-        public function transform_query($query, $resulting_field)
+        public function transform_query(&$query, $resulting_field)
         {
         }
     }
@@ -33713,7 +33707,7 @@ namespace {
          * @param int $parent
          * @param int $level
          */
-        public function _rows($taxonomy, $terms, $children, $start, $per_page, $count, $parent = 0, $level = 0)
+        public function _rows($taxonomy, $terms, &$children, $start, $per_page, &$count, $parent = 0, $level = 0)
         {
         }
         /**
@@ -34353,7 +34347,7 @@ namespace {
         /**
          * @param array<array-key, WP_Theme> $themes
          */
-        public static function sort_by_name($themes)
+        public static function sort_by_name(&$themes)
         {
         }
         /**
@@ -34635,7 +34629,7 @@ namespace {
         /**
          * @param WP_Upgrader $upgrader
          */
-        public function set_upgrader($upgrader)
+        public function set_upgrader(&$upgrader)
         {
         }
         public function add_strings()
@@ -34673,7 +34667,7 @@ namespace {
          * @param string $string
          * @param mixed $args
          */
-        public function feedback($string, $args)
+        public function feedback($string, ...$args)
         {
         }
         public function before()
@@ -34887,7 +34881,7 @@ namespace {
          *
          * @return bool
          */
-        public function has_cap($cap, $args)
+        public function has_cap($cap, ...$args)
         {
         }
         /**
@@ -36512,7 +36506,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function start_lvl($output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36520,7 +36514,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_lvl($output, $depth = 0, $args = array())
+        public function end_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36530,7 +36524,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $current_object_id
          */
-        public function start_el($output, $object, $depth = 0, $args = array(), $current_object_id = 0)
+        public function start_el(&$output, $object, $depth = 0, $args = array(), $current_object_id = 0)
         {
         }
         /**
@@ -36539,7 +36533,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_el($output, $object, $depth = 0, $args = array())
+        public function end_el(&$output, $object, $depth = 0, $args = array())
         {
         }
         /**
@@ -36550,7 +36544,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param string $output
          */
-        public function display_element($element, $children_elements, $max_depth, $depth, $args, $output)
+        public function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output)
         {
         }
         /**
@@ -36560,7 +36554,7 @@ namespace {
          *
          * @return string
          */
-        public function walk($elements, $max_depth, $args)
+        public function walk($elements, $max_depth, ...$args)
         {
         }
         /**
@@ -36572,7 +36566,7 @@ namespace {
          *
          * @return string
          */
-        public function paged_walk($elements, $max_depth, $page_num, $per_page, $args)
+        public function paged_walk($elements, $max_depth, $page_num, $per_page, ...$args)
         {
         }
         /**
@@ -36587,7 +36581,7 @@ namespace {
          * @param object $e
          * @param array<array-key, mixed> $children_elements
          */
-        public function unset_children($e, $children_elements)
+        public function unset_children($e, &$children_elements)
         {
         }
     }
@@ -36606,7 +36600,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function start_lvl($output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36614,7 +36608,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_lvl($output, $depth = 0, $args = array())
+        public function end_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36624,7 +36618,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $id
          */
-        public function start_el($output, $category, $depth = 0, $args = array(), $id = 0)
+        public function start_el(&$output, $category, $depth = 0, $args = array(), $id = 0)
         {
         }
         /**
@@ -36633,7 +36627,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_el($output, $page, $depth = 0, $args = array())
+        public function end_el(&$output, $page, $depth = 0, $args = array())
         {
         }
     }
@@ -36654,7 +36648,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $id
          */
-        public function start_el($output, $category, $depth = 0, $args = array(), $id = 0)
+        public function start_el(&$output, $category, $depth = 0, $args = array(), $id = 0)
         {
         }
     }
@@ -36667,7 +36661,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function start_lvl($output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36675,7 +36669,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_lvl($output, $depth = 0, $args = array())
+        public function end_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36685,7 +36679,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $id
          */
-        public function start_el($output, $category, $depth = 0, $args = array(), $id = 0)
+        public function start_el(&$output, $category, $depth = 0, $args = array(), $id = 0)
         {
         }
         /**
@@ -36694,7 +36688,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_el($output, $category, $depth = 0, $args = array())
+        public function end_el(&$output, $category, $depth = 0, $args = array())
         {
         }
     }
@@ -36713,7 +36707,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function start_lvl($output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36721,7 +36715,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_lvl($output, $depth = 0, $args = array())
+        public function end_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36732,7 +36726,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param string $output
          */
-        public function display_element($element, $children_elements, $max_depth, $depth, $args, $output)
+        public function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output)
         {
         }
         /**
@@ -36742,7 +36736,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $id
          */
-        public function start_el($output, $comment, $depth = 0, $args = array(), $id = 0)
+        public function start_el(&$output, $comment, $depth = 0, $args = array(), $id = 0)
         {
         }
         /**
@@ -36751,7 +36745,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_el($output, $comment, $depth = 0, $args = array())
+        public function end_el(&$output, $comment, $depth = 0, $args = array())
         {
         }
         /**
@@ -36803,7 +36797,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function start_lvl($output, $depth = 0, $args = null)
+        public function start_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36811,7 +36805,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function end_lvl($output, $depth = 0, $args = null)
+        public function end_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36821,7 +36815,7 @@ namespace {
          * @param null|stdClass $args
          * @param int $id
          */
-        public function start_el($output, $item, $depth = 0, $args = null, $id = 0)
+        public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
         {
         }
         /**
@@ -36830,7 +36824,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function end_el($output, $item, $depth = 0, $args = null)
+        public function end_el(&$output, $item, $depth = 0, $args = null)
         {
         }
     }
@@ -36847,7 +36841,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function start_lvl($output, $depth = 0, $args = null)
+        public function start_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36855,7 +36849,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function end_lvl($output, $depth = 0, $args = null)
+        public function end_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36865,7 +36859,7 @@ namespace {
          * @param null|stdClass $args
          * @param int $id
          */
-        public function start_el($output, $item, $depth = 0, $args = null, $id = 0)
+        public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
         {
         }
     }
@@ -36876,7 +36870,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function start_lvl($output, $depth = 0, $args = null)
+        public function start_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36884,7 +36878,7 @@ namespace {
          * @param int $depth
          * @param null|stdClass $args
          */
-        public function end_lvl($output, $depth = 0, $args = null)
+        public function end_lvl(&$output, $depth = 0, $args = null)
         {
         }
         /**
@@ -36894,7 +36888,7 @@ namespace {
          * @param null|stdClass $args
          * @param int $id
          */
-        public function start_el($output, $item, $depth = 0, $args = null, $id = 0)
+        public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
         {
         }
     }
@@ -36913,7 +36907,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function start_lvl($output, $depth = 0, $args = array())
+        public function start_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36921,7 +36915,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_lvl($output, $depth = 0, $args = array())
+        public function end_lvl(&$output, $depth = 0, $args = array())
         {
         }
         /**
@@ -36931,7 +36925,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $current_page
          */
-        public function start_el($output, $page, $depth = 0, $args = array(), $current_page = 0)
+        public function start_el(&$output, $page, $depth = 0, $args = array(), $current_page = 0)
         {
         }
         /**
@@ -36940,7 +36934,7 @@ namespace {
          * @param int $depth
          * @param array<array-key, mixed> $args
          */
-        public function end_el($output, $page, $depth = 0, $args = array())
+        public function end_el(&$output, $page, $depth = 0, $args = array())
         {
         }
     }
@@ -36961,7 +36955,7 @@ namespace {
          * @param array<array-key, mixed> $args
          * @param int $id
          */
-        public function start_el($output, $page, $depth = 0, $args = array(), $id = 0)
+        public function start_el(&$output, $page, $depth = 0, $args = array(), $id = 0)
         {
         }
     }
@@ -37015,7 +37009,7 @@ namespace {
          * @var string
          */
         public $translations_path;
-        public function __construct($args)
+        public function __construct(...$args)
         {
         }
         /**
@@ -37212,10 +37206,10 @@ namespace {
     function __get_option($setting)
     {
     }
-    function __ngettext($args)
+    function __ngettext(...$args)
     {
     }
-    function __ngettext_noop($args)
+    function __ngettext_noop(...$args)
     {
     }
     /**
@@ -37717,7 +37711,7 @@ namespace {
     /**
      * @param WP_Post $post
      */
-    function _get_post_ancestors($post)
+    function _get_post_ancestors(&$post)
     {
     }
     /**
@@ -37743,7 +37737,7 @@ namespace {
      *
      * @return WP_Error|array<array-key, mixed>
      */
-    function _get_term_children($term_id, $terms, $taxonomy, $ancestors = array())
+    function _get_term_children($term_id, $terms, $taxonomy, &$ancestors = array())
     {
     }
     /**
@@ -37862,7 +37856,7 @@ namespace {
      *
      * @return string
      */
-    function _list_meta_row($entry, $count)
+    function _list_meta_row($entry, &$count)
     {
     }
     /**
@@ -37888,7 +37882,7 @@ namespace {
     /**
      * @param array<array-key, mixed>|object $category
      */
-    function _make_cat_compat($category)
+    function _make_cat_compat(&$category)
     {
     }
     /**
@@ -38070,7 +38064,7 @@ namespace {
      * @param array<array-key, mixed> $terms
      * @param string $taxonomy
      */
-    function _pad_term_counts($terms, $taxonomy)
+    function _pad_term_counts(&$terms, $taxonomy)
     {
     }
     /**
@@ -38078,7 +38072,7 @@ namespace {
      * @param array<array-key, mixed> $children
      * @param array<array-key, string> $result
      */
-    function _page_traverse_name($page_id, $children, $result)
+    function _page_traverse_name($page_id, &$children, &$result)
     {
     }
     /**
@@ -38215,7 +38209,7 @@ namespace {
      * @param array<array-key, mixed> $options
      * @param mixed $params
      */
-    function _register_widget_form_callback($id, $name, $form_callback, $options = array(), $params)
+    function _register_widget_form_callback($id, $name, $form_callback, $options = array(), ...$params)
     {
     }
     /**
@@ -38224,7 +38218,7 @@ namespace {
      * @param array<array-key, mixed> $options
      * @param mixed $params
      */
-    function _register_widget_update_callback($id_base, $update_callback, $options = array(), $params)
+    function _register_widget_update_callback($id_base, $update_callback, $options = array(), ...$params)
     {
     }
     /**
@@ -38628,13 +38622,13 @@ namespace {
      * @param string $username
      * @param string $profiles
      */
-    function _wp_credits_add_profile_link($display_name, $username, $profiles)
+    function _wp_credits_add_profile_link(&$display_name, $username, $profiles)
     {
     }
     /**
      * @param string $data
      */
-    function _wp_credits_build_object_link($data)
+    function _wp_credits_build_object_link(&$data)
     {
     }
     /**
@@ -38671,7 +38665,7 @@ namespace {
      * @param WP_Comment $comment
      * @param bool $show_date
      */
-    function _wp_dashboard_recent_comments_row($comment, $show_date = true)
+    function _wp_dashboard_recent_comments_row(&$comment, $show_date = true)
     {
     }
     /**
@@ -38794,7 +38788,7 @@ namespace {
      *
      * @return array<array-key, string>
      */
-    function _wp_handle_upload($file, $overrides, $time, $action)
+    function _wp_handle_upload(&$file, $overrides, $time, $action)
     {
     }
     /**
@@ -38907,7 +38901,7 @@ namespace {
     /**
      * @param array<array-key, mixed> $menu_items
      */
-    function _wp_menu_item_classes_by_context($menu_items)
+    function _wp_menu_item_classes_by_context(&$menu_items)
     {
     }
     /**
@@ -39217,7 +39211,7 @@ namespace {
      * @param array<array-key, string> $stack
      * @param array<array-key, string> $disabled_elements
      */
-    function _wptexturize_pushpop_element($text, $stack, $disabled_elements)
+    function _wptexturize_pushpop_element($text, &$stack, $disabled_elements)
     {
     }
     /**
@@ -39659,7 +39653,7 @@ namespace {
      * @param array<array-key, mixed>|string $feature
      * @param mixed $args
      */
-    function add_post_type_support($post_type, $feature, $args)
+    function add_post_type_support($post_type, $feature, ...$args)
     {
     }
     /**
@@ -39678,7 +39672,7 @@ namespace {
     /**
      * @return string
      */
-    function add_query_arg($args)
+    function add_query_arg(...$args)
     {
     }
     /**
@@ -39822,7 +39816,7 @@ namespace {
      *
      * @return bool|null
      */
-    function add_theme_support($feature, $args)
+    function add_theme_support($feature, ...$args)
     {
     }
     function add_thickbox()
@@ -40080,7 +40074,7 @@ namespace {
      *
      * @return bool
      */
-    function author_can($post, $capability, $args)
+    function author_can($post, $capability, ...$args)
     {
     }
     /**
@@ -40911,7 +40905,7 @@ namespace {
      *
      * @return bool
      */
-    function current_theme_supports($feature, $args)
+    function current_theme_supports($feature, ...$args)
     {
     }
     /**
@@ -40929,7 +40923,7 @@ namespace {
      *
      * @return bool
      */
-    function current_user_can($capability, $args)
+    function current_user_can($capability, ...$args)
     {
     }
     /**
@@ -40939,7 +40933,7 @@ namespace {
      *
      * @return bool
      */
-    function current_user_can_for_blog($blog_id, $capability, $args)
+    function current_user_can_for_blog($blog_id, $capability, ...$args)
     {
     }
     function customize_themes_print_templates()
@@ -41361,7 +41355,7 @@ namespace {
      * @param string $tag
      * @param mixed $arg
      */
-    function do_action($tag, $arg)
+    function do_action($tag, ...$arg)
     {
     }
     /**
@@ -43166,7 +43160,7 @@ namespace {
      *
      * @return WP_Comment|array<array-key, mixed>|null
      */
-    function get_comment($comment = null, $output)
+    function get_comment(&$comment = null, $output)
     {
     }
     /**
@@ -44516,7 +44510,7 @@ namespace {
      *
      * @return array<array-key, string>
      */
-    function get_page_hierarchy($pages, $page_id = 0)
+    function get_page_hierarchy(&$pages, $page_id = 0)
     {
     }
     /**
@@ -46378,7 +46372,7 @@ namespace {
      *
      * @return mixed
      */
-    function get_theme_support($feature, $args)
+    function get_theme_support($feature, ...$args)
     {
     }
     /**
@@ -48378,7 +48372,7 @@ namespace {
      *
      * @return array<array-key, string>
      */
-    function map_meta_cap($cap, $user_id, $args)
+    function map_meta_cap($cap, $user_id, ...$args)
     {
     }
     /**
@@ -49821,7 +49815,7 @@ namespace {
      * @param string $classname
      * @param mixed $params
      */
-    function register_sidebar_widget($name, $output_callback, $classname = '', $params)
+    function register_sidebar_widget($name, $output_callback, $classname = '', ...$params)
     {
     }
     /**
@@ -49888,7 +49882,7 @@ namespace {
      * @param int $height
      * @param mixed $params
      */
-    function register_widget_control($name, $control_callback, $width = '', $height = '', $params)
+    function register_widget_control($name, $control_callback, $width = '', $height = '', ...$params)
     {
     }
     /**
@@ -50919,7 +50913,7 @@ namespace {
      *
      * @return array<array-key, WP_Comment>
      */
-    function separate_comments($comments)
+    function separate_comments(&$comments)
     {
     }
     /**
@@ -51287,7 +51281,7 @@ namespace {
      *
      * @throws SodiumException
      */
-    function sodium_add($val, $addv)
+    function sodium_add(&$val, $addv)
     {
     }
     /**
@@ -51634,7 +51628,7 @@ namespace {
      * @throws SodiumException
      * @throws TypeError
      */
-    function sodium_crypto_generichash_final($ctx, $outputLength = 32)
+    function sodium_crypto_generichash_final(&$ctx, $outputLength = 32)
     {
     }
     /**
@@ -51666,7 +51660,7 @@ namespace {
      * @throws SodiumException
      * @throws TypeError
      */
-    function sodium_crypto_generichash_update($ctx, $message = '')
+    function sodium_crypto_generichash_update(&$ctx, $message = '')
     {
     }
     /**
@@ -51949,7 +51943,7 @@ namespace {
      *
      * @throws SodiumException
      */
-    function sodium_crypto_secretstream_xchacha20poly1305_pull($state, $cipher, $aad = '')
+    function sodium_crypto_secretstream_xchacha20poly1305_pull(&$state, $cipher, $aad = '')
     {
     }
     /**
@@ -51962,7 +51956,7 @@ namespace {
      *
      * @throws SodiumException
      */
-    function sodium_crypto_secretstream_xchacha20poly1305_push($state, $msg, $aad = '', $tag = 0)
+    function sodium_crypto_secretstream_xchacha20poly1305_push(&$state, $msg, $aad = '', $tag = 0)
     {
     }
     /**
@@ -51972,7 +51966,7 @@ namespace {
      *
      * @throws SodiumException
      */
-    function sodium_crypto_secretstream_xchacha20poly1305_rekey($state)
+    function sodium_crypto_secretstream_xchacha20poly1305_rekey(&$state)
     {
     }
     /**
@@ -52181,7 +52175,7 @@ namespace {
      * @throws SodiumException
      * @throws TypeError
      */
-    function sodium_increment($string)
+    function sodium_increment(&$string)
     {
     }
     /**
@@ -52216,7 +52210,7 @@ namespace {
      * @throws SodiumException
      * @throws TypeError
      */
-    function sodium_memzero($str)
+    function sodium_memzero(&$str)
     {
     }
     /**
@@ -53489,13 +53483,13 @@ namespace {
     /**
      * @param array<array-key, mixed> $pages
      */
-    function update_page_cache($pages)
+    function update_page_cache(&$pages)
     {
     }
     /**
      * @param array<array-key, WP_Post> $posts
      */
-    function update_post_cache($posts)
+    function update_post_cache(&$posts)
     {
     }
     /**
@@ -53504,7 +53498,7 @@ namespace {
      * @param bool $update_term_cache
      * @param bool $update_meta_cache
      */
-    function update_post_caches($posts, $post_type = 'post', $update_term_cache = true, $update_meta_cache = true)
+    function update_post_caches(&$posts, $post_type = 'post', $update_term_cache = true, $update_meta_cache = true)
     {
     }
     /**
@@ -53879,7 +53873,7 @@ namespace {
      *
      * @return bool
      */
-    function user_can($user, $capability, $args)
+    function user_can($user, $capability, ...$args)
     {
     }
     /**
@@ -54149,7 +54143,7 @@ namespace {
      *
      * @return string
      */
-    function walk_category_dropdown_tree($args)
+    function walk_category_dropdown_tree(...$args)
     {
     }
     /**
@@ -54157,7 +54151,7 @@ namespace {
      *
      * @return string
      */
-    function walk_category_tree($args)
+    function walk_category_tree(...$args)
     {
     }
     /**
@@ -54173,7 +54167,7 @@ namespace {
     /**
      * @return string
      */
-    function walk_page_dropdown_tree($args)
+    function walk_page_dropdown_tree(...$args)
     {
     }
     /**
@@ -54233,7 +54227,7 @@ namespace {
      * @param array<array-key, mixed> $metadata
      * @param array<array-key, mixed> $data
      */
-    function wp_add_id3_tag_data($metadata, $data)
+    function wp_add_id3_tag_data(&$metadata, $data)
     {
     }
     /**
@@ -54953,7 +54947,7 @@ namespace {
      *
      * @return bool|mixed
      */
-    function wp_cache_get($key, $group = '', $force = false, $found = null)
+    function wp_cache_get($key, $group = '', $force = false, &$found = null)
     {
     }
     /**
@@ -55557,7 +55551,7 @@ namespace {
      *
      * @return bool
      */
-    function wp_dashboard_cached_rss_widget($widget_id, $callback, $check_urls = array(), $args)
+    function wp_dashboard_cached_rss_widget($widget_id, $callback, $check_urls = array(), ...$args)
     {
     }
     function wp_dashboard_empty()
@@ -56955,7 +56949,7 @@ namespace {
      *
      * @return WP_Post|array<array-key, mixed>|null
      */
-    function wp_get_post_revision($post, $output, $filter = 'raw')
+    function wp_get_post_revision(&$post, $output, $filter = 'raw')
     {
     }
     /**
@@ -57270,7 +57264,7 @@ namespace {
      *
      * @return array<array-key, mixed>
      */
-    function wp_handle_sideload($file, $overrides = false, $time = null)
+    function wp_handle_sideload(&$file, $overrides = false, $time = null)
     {
     }
     /**
@@ -57280,10 +57274,10 @@ namespace {
      *
      * @return array<array-key, mixed>
      */
-    function wp_handle_upload($file, $overrides = false, $time = null)
+    function wp_handle_upload(&$file, $overrides = false, $time = null)
     {
     }
-    function wp_handle_upload_error($file, $message)
+    function wp_handle_upload_error(&$file, $message)
     {
     }
     /**
@@ -57369,7 +57363,7 @@ namespace {
      * @param callable $content_func
      * @param mixed $args
      */
-    function wp_iframe($content_func, $args)
+    function wp_iframe($content_func, ...$args)
     {
     }
     /**
@@ -57751,7 +57745,7 @@ namespace {
      *
      * @return bool
      */
-    function wp_kses_attr_check($name, $value, $whole, $vless, $element, $allowed_html)
+    function wp_kses_attr_check(&$name, &$value, &$whole, $vless, $element, $allowed_html)
     {
     }
     /**
@@ -58744,7 +58738,7 @@ namespace {
      * @param string $string
      * @param array<array-key, mixed> $array
      */
-    function wp_parse_str($string, $array)
+    function wp_parse_str($string, &$array)
     {
     }
     /**
@@ -59264,7 +59258,7 @@ namespace {
      * @param array<array-key, mixed> $options
      * @param mixed $params
      */
-    function wp_register_sidebar_widget($id, $name, $output_callback, $options = array(), $params)
+    function wp_register_sidebar_widget($id, $name, $output_callback, $options = array(), ...$params)
     {
     }
     /**
@@ -59300,7 +59294,7 @@ namespace {
      * @param array<array-key, mixed> $options
      * @param mixed $params
      */
-    function wp_register_widget_control($id, $name, $control_callback, $options = array(), $params)
+    function wp_register_widget_control($id, $name, $control_callback, $options = array(), ...$params)
     {
     }
     /**
@@ -60069,7 +60063,7 @@ namespace {
      *
      * @return string
      */
-    function wp_sprintf($pattern, $args)
+    function wp_sprintf($pattern, ...$args)
     {
     }
     /**
@@ -60983,7 +60977,7 @@ namespace {
          *
          * @return null|string
          */
-        public function escape($data)
+        public function escape(&$data)
         {
         }
         /**
@@ -62132,10 +62126,10 @@ namespace {
         /**
          * @param string $string
          */
-        public function escape_by_ref($string)
+        public function escape_by_ref(&$string)
         {
         }
-        public function prepare($query, $args)
+        public function prepare($query, ...$args)
         {
         }
         /**
@@ -63337,7 +63331,7 @@ namespace Sodium {
      * @throws \SodiumException
      * @throws \TypeError
      */
-    function crypto_generichash_final($ctx, $outputLength = 32)
+    function crypto_generichash_final(&$ctx, $outputLength = 32)
     {
     }
     /**
@@ -63361,7 +63355,7 @@ namespace Sodium {
      * @throws \SodiumException
      * @throws \TypeError
      */
-    function crypto_generichash_update($ctx, $message = '')
+    function crypto_generichash_update(&$ctx, $message = '')
     {
     }
     /**
@@ -63694,7 +63688,7 @@ namespace Sodium {
      * @throws \SodiumException
      * @throws \TypeError
      */
-    function memzero($str)
+    function memzero(&$str)
     {
     }
     /**
@@ -63889,7 +63883,7 @@ namespace WP_CLI {
         public function unmix_assoc_args($mixed_args, $global_assoc = array(), $local_assoc = array())
         {
         }
-        public function assoc_arg_to_runtime_config($key, $value, $runtime_config)
+        public function assoc_arg_to_runtime_config($key, $value, &$runtime_config)
         {
         }
         /**
@@ -63915,14 +63909,14 @@ namespace WP_CLI {
         /**
          * @param mixed $val
          */
-        public static function arrayify($val)
+        public static function arrayify(&$val)
         {
         }
         /**
          * @param string $path
          * @param string $base
          */
-        public static function absolutize($path, $base)
+        public static function absolutize(&$path, $base)
         {
         }
     }
@@ -64261,7 +64255,7 @@ namespace WP_CLI {
          * @param array<array-key, mixed>|null $fields
          * @param bool|string $prefix
          */
-        public function __construct($assoc_args, $fields = null, $prefix = false)
+        public function __construct(&$assoc_args, $fields = null, $prefix = false)
         {
         }
         /**
@@ -64773,7 +64767,7 @@ namespace WP_CLI {
          * @param array<array-key, mixed> $list
          * @param string $parent
          */
-        public function enumerate_commands(\WP_CLI\Dispatcher\CompositeCommand $command, array $list, $parent = '')
+        public function enumerate_commands(\WP_CLI\Dispatcher\CompositeCommand $command, array &$list, $parent = '')
         {
         }
         public function enable_error_reporting()
@@ -64793,7 +64787,7 @@ namespace WP_CLI {
          *
          * @return string
          */
-        public static function render($synopsis)
+        public static function render(&$synopsis)
         {
         }
         /**
@@ -65250,7 +65244,7 @@ namespace WP_CLI\Compat\Min_PHP_5_6 {
          * @param string $string
          * @param mixed $args
          */
-        public function feedback($string, $args)
+        public function feedback($string, ...$args)
         {
         }
     }
@@ -65445,7 +65439,7 @@ namespace WP_CLI\Dispatcher {
          *
          * @return Subcommand|false
          */
-        public function find_subcommand($args)
+        public function find_subcommand(&$args)
         {
         }
         /**
@@ -65482,7 +65476,7 @@ namespace WP_CLI\Dispatcher {
          *
          * @return Subcommand|false
          */
-        public function find_subcommand($args)
+        public function find_subcommand(&$args)
         {
         }
     }
