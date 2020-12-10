@@ -167,17 +167,6 @@ function add_query_arg($key, ?string $value = null, ?string $uri = null): string
 
 }
 
-/**
- * @param WP_Post|int|null $post
- * @param string $output
- * @param string $filter
- *
- * @return WP_Post|array<array-key, mixed>|null
- */
-function get_post($post = null, $output = OBJECT, $filter = 'raw')
-{
-
-}
 
 /**
  * @param list<string> $wildcard_mime_types
