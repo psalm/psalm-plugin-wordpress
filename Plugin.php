@@ -9,6 +9,7 @@ use Psalm\Codebase;
 use Psalm\Internal\Analyzer\FileAnalyzer;
 use Psalm\CodeLocation;
 use Psalm\Context;
+use Psalm\IssueBuffer;
 use Psalm\Plugin\PluginEntryPointInterface;
 use Psalm\Plugin\RegistrationInterface;
 use Psalm\Plugin\Hook\AfterEveryFunctionCallAnalysisInterface;
@@ -36,10 +37,10 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	 */
 	public static $hooks = [];
 
-	public function __invoke( RegistrationInterface $psalm, ?SimpleXMLElement $config = null ) {
-		$psalm->registerHooksFromClass( static::class );
-		array_map( [ $psalm, 'addStubFile' ], $this->getStubFiles() );
-		Psalm\Config::getInstance()->before_analyze_file[] = __CLASS__;
+	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
+		$registration->registerHooksFromClass( static::class );
+		array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
+		//Psalm\Config::getInstance()->before_analyze_file[] = __CLASS__;
 	}
 
 	/**
@@ -48,34 +49,53 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	private function getStubFiles(): array {
 
 		return [
-			__DIR__ . '/stubs/wordpress.php',
-			// __DIR__ . '/stubs/parent.php',
+			__DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
 			__DIR__ . '/stubs/overrides.php',
 		];
 	}
 
-	protected static function loadStubbedHooks() {
+	protected static function loadStubbedHooks() : void {
 		if ( static::$hooks ) {
 			return;
 		}
 
-		$hooks = [];
-		$file_hooks = file_get_contents( __DIR__ . '/stubs/hooks.txt' );
-		$lines = explode( "\n", $file_hooks );
-		foreach ( $lines as $line ) {
-			$hook = json_decode( $line, true );
-			if ( ! $hook ) {
-				continue;
-			}
-			$hooks[ $hook['name'] ] = [
-				'types' => array_map( [ Type::class, 'parseString' ], $hook['types'] ),
-			];
-		}
+		$hooks = array_merge(
+			static::getHooksFromFile( 'vendor/johnbillion/wp-hooks/hooks/actions.json' ),
+			static::getHooksFromFile( 'vendor/johnbillion/wp-hooks/hooks/filters.json' )
+		);
 
 		static::$hooks = $hooks;
 	}
 
-	public static function beforeAnalyzeFile( StatementsSource $statements_source, Context $file_context, FileStorage $file_storage, Codebase $codebase ) {
+	/**
+	 *
+	 * @param string $filepath
+	 * @return array<string, array{ types: list<Union> }>
+	 */
+	protected static function getHooksFromFile( string $filepath ) : array {
+		/** @var list<array{ name: string, file: string, type: 'action'|'filter', doc: array{ description: string, long_description: string, long_description_html: string, tags: list<array{ name: string, content: string, types?: list<string>}> } }> */
+		$hooks = json_decode( file_get_contents( $filepath ), true );
+		$hook_map = [];
+		foreach ( $hooks as $hook ) {
+			$params = array_filter( $hook['doc']['tags'], function ( $tag ) {
+				return $tag['name'] === 'param';
+			} );
+
+			$types = array_column( $params, 'types' );
+
+			$types = array_map( function ( $type ) : string {
+				return implode( '|', $type );
+			}, $types );
+
+			$hook_map[ $hook['name'] ] = [
+				'types' => array_map( [ Type::class, 'parseString' ], $types ),
+			];
+		}
+
+		return $hook_map;
+	}
+
+	public static function beforeAnalyzeFile( StatementsSource $statements_source, Context $file_context, FileStorage $file_storage, Codebase $codebase ) : void {
 		$statements = $codebase->getStatementsForFile( $statements_source->getFilePath() );
 		$traverser = new PhpParser\NodeTraverser;
 		$traverser->addVisitor( new NodeVisitor() );
@@ -112,7 +132,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		$name = $expr->args[0]->value->value;
 
-		$this->loadStubbedHooks();
+		static::loadStubbedHooks();
 
 		// Check if this hook is already documented.
 		if ( isset( static::$hooks[ $name ] ) ) {
@@ -143,6 +163,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 			return $type;
 		}, array_slice( $expr->args, 1 ) );
+
 		static::registerHook( $name, $types );
 	}
 
@@ -159,20 +180,29 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		array $call_args,
 		Context $context = null,
 		CodeLocation $code_location = null
-	) {
+	) : ?array {
 		//To do check if is in enum
 		// $hooks = array_map( function ( string $hook ) : TLiteralString {
 		// 	return new TLiteralString( $hook );
 		// }, array_keys( static::$hooks ) );
 		static::loadStubbedHooks();
-		// Todo: test concat
-		$hook = static::$hooks[ $call_args[0]->value->value ] ?? null;
+
+		/** @var string */
+		$hook_name = $call_args[0]->value->value;
+		$hook = static::$hooks[ $hook_name ] ?? null;
+
 		if ( ! $hook ) {
-			var_dump( 'Hook not found!!!' );
+			IssueBuffer::accepts(
+				new HookNotFound(
+					'Hook ' . $hook_name . ' not found.',
+					$code_location
+				)
+			);
 			return [];
 		}
 
 		// Check how many args the filter is registered with.
+		/** @var int */
 		$num_args = $call_args[ 3 ]->value->value ?? 1;
 		// Limit the required type params on the hook to match the registered number.
 		$hook_types = array_slice( $hook['types'], 0, $num_args );
@@ -202,19 +232,13 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 	/**
 	 * @param string $hook
+	 * @param list<Union> $types
 	 * @return void
 	 */
 	public static function registerHook( string $hook, array $types ) {
 		static::$hooks[ $hook ] = [
 			'types' => $types,
 		];
-
-		$data = [
-			'name' => $hook,
-			'types' => array_map( 'strval', $types ),
-		];
-
-		file_put_contents( 'hooks.txt', json_encode( $data ) . "\n", FILE_APPEND );
 	}
 }
 
@@ -256,3 +280,5 @@ class NodeVisitor extends PhpParser\NodeVisitorAbstract {
 		}
 	}
 }
+
+class HookNotFound extends \Psalm\Issue\PluginIssue {}
