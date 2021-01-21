@@ -22,4 +22,4 @@ This [Psalm](https://psalm.dev/) plugin provides all WordPress (and WP CLI) stub
 - [x] Stubs for all of WordPress Core
 - [x] Stubs for WP CLI
 - [x] Types for `apply_filters` return values.
-- [ ] Types for `add_filter` / `add_action` (coming soon)
+- [x] Types for `add_filter` / `add_action`
