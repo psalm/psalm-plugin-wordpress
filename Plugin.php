@@ -40,7 +40,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
 		$registration->registerHooksFromClass( static::class );
 		array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
-		//Psalm\Config::getInstance()->before_analyze_file[] = __CLASS__;
+		static::loadStubbedHooks();
 	}
 
 	/**
@@ -56,6 +56,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 	protected static function loadStubbedHooks() : void {
 		if ( static::$hooks ) {
+			var_dump( 'already got ' . count( static::$hooks ) . 'stubs' );
 			return;
 		}
 
@@ -98,11 +99,16 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	public static function beforeAnalyzeFile( StatementsSource $statements_source, Context $file_context, FileStorage $file_storage, Codebase $codebase ) : void {
 		$statements = $codebase->getStatementsForFile( $statements_source->getFilePath() );
 		$traverser = new PhpParser\NodeTraverser;
-		$traverser->addVisitor( new NodeVisitor() );
+		$hook_visitor = new HookNodeVisitor();
+		$traverser->addVisitor( $hook_visitor );
 		try {
 			$traverser->traverse( $statements );
 		} catch ( Exception $e ) {
 
+		}
+
+		foreach ( $hook_visitor->hooks as $hook_name => $types ) {
+			static::registerHook( $hook_name, $types );
 		}
 	}
 
@@ -131,9 +137,6 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		}
 
 		$name = $expr->args[0]->value->value;
-
-		static::loadStubbedHooks();
-
 		// Check if this hook is already documented.
 		if ( isset( static::$hooks[ $name ] ) ) {
 			return;
@@ -174,6 +177,11 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		];
 	}
 
+	/**
+     * @param  list<PhpParser\Node\Arg>    $call_args
+     *
+     * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
+     */
 	public static function getFunctionParams(
 		StatementsSource $statements_source,
 		string $function_id,
@@ -181,23 +189,25 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		Context $context = null,
 		CodeLocation $code_location = null
 	) : ?array {
-		//To do check if is in enum
-		// $hooks = array_map( function ( string $hook ) : TLiteralString {
-		// 	return new TLiteralString( $hook );
-		// }, array_keys( static::$hooks ) );
 		static::loadStubbedHooks();
 
-		/** @var string */
+		// Currently we only support detecting the hook name if it's a string.
+		if ( ! $call_args[0]->value instanceof String_ ) {
+			return null;
+		}
+
 		$hook_name = $call_args[0]->value->value;
 		$hook = static::$hooks[ $hook_name ] ?? null;
 
 		if ( ! $hook ) {
-			IssueBuffer::accepts(
-				new HookNotFound(
-					'Hook ' . $hook_name . ' not found.',
-					$code_location
-				)
-			);
+			if ( $code_location ) {
+				IssueBuffer::accepts(
+					new HookNotFound(
+						'Hook ' . $hook_name . ' not found.',
+						$code_location
+					)
+				);
+			}
 			return [];
 		}
 
@@ -242,8 +252,12 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	}
 }
 
-class NodeVisitor extends PhpParser\NodeVisitorAbstract {
-	protected $last_doc = [];
+class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
+	/** @var ?PhpParser\Comment\Doc */
+	protected $last_doc = null;
+
+	/** @var array<string, list<Union>> */
+	public $hooks = [];
 
 	public function enterNode( PhpParser\Node $origNode ) {
 		$apply_functions = [
@@ -261,23 +275,27 @@ class NodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 		if ( $this->last_doc && $origNode instanceof FuncCall && $origNode->name instanceof Name && in_array( (string) $origNode->name, $apply_functions, true ) ) {
 			if ( ! $origNode->args[0]->value instanceof String_ ) {
-				$this->last_doc = [];
-				return;
+				$this->last_doc = null;
+				return null;
 			}
 
 			$hook_name = $origNode->args[0]->value->value;
-			$comment = Psalm\DocComment::parse( $this->last_doc );
+			$comment = Psalm\DocComment::parsePreservingLength( $this->last_doc );
 
 			// Todo: test namespace resolution.
-			$comments = Psalm\Internal\Analyzer\CommentAnalyzer::extractFunctionDocblockInfo( $this->last_doc );
+			$comments = Psalm\Internal\PhpVisitor\Reflector\FunctionLikeDocblockParser::parse( $this->last_doc );
 
 			// Todo: handle no comments
+			/** @psalm-suppress InternalProperty */
 			$types = array_map( function ( array $comment_type ) : Union {
 				return Type::parseString( $comment_type['type'] );
 			}, $comments->params );
-			Plugin::registerHook( $hook_name, $types );
-			$this->last_doc = [];
+			$types = array_values( $types );
+			$this->hooks[ $hook_name ] = $types;
+			$this->last_doc = null;
 		}
+
+		return null;
 	}
 }
 
