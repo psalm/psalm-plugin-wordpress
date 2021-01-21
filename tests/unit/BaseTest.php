@@ -10,53 +10,22 @@ use Psalm\Internal\Provider\FileStorageProvider;
 use Psalm\Tests\Internal\Provider;
 
 class BaseTest extends Psalm\Tests\TestCase {
-	protected static $static_file_provider = null;
-	protected static $static_project_analyzer = null;
-	public static function setUpBeforeClass() : void {
-		parent::setUpBeforeClass();
-		static::$static_file_provider = new \Psalm\Tests\Internal\Provider\FakeFileProvider();
-
-        $config = new TestConfig();
-		$config->addPluginClass( 'PsalmWordPress\\Plugin' );
-
-        $providers = new Providers(
-            static::$static_file_provider,
-            new Provider\FakeParserCacheProvider()
-        );
-
-        static::$static_project_analyzer = new ProjectAnalyzer(
-            $config,
-            $providers
-		);
-
-		$config->initializePlugins( static::$static_project_analyzer );
-
-		$config->visitStubFiles( static::$static_project_analyzer->getCodebase() );
-	}
 	public function setUp() : void {
-		$this->project_analyzer = static::$static_project_analyzer;
-		$this->file_provider = static::$static_file_provider;
-	}
-
-	public function tearDown() : void {
-
+		parent::setUp();
+		$this->project_analyzer->getConfig()->initializePlugins( $this->project_analyzer );
+		$this->project_analyzer->getConfig()->visitStubFiles( $this->project_analyzer->getCodebase() );
 	}
 
 	/**
 	 * @return Config
 	 */
 	protected function makeConfig() : Config {
+		$config = new TestConfig();
+		$config->addPluginClass( 'PsalmWordPress\\Plugin' );
 		return $config;
 	}
 
-	/**
-	 * @param  string         $file_path
-	 * @param  \Psalm\Context $context
-	 *
-	 * @return void
-	 */
-	public function analyzeFile($file_path, \Psalm\Context $context, bool $track_unused_suppressions = true)
-	{
+	public function analyzeFile($file_path, \Psalm\Context $context, bool $track_unused_suppressions = true, bool $taint_flow_tracking = false) : void {
 		$codebase = $this->project_analyzer->getCodebase();
 		$codebase->addFilesToAnalyze([$file_path => $file_path]);
 

@@ -25,4 +25,4 @@ jobs:
         export COMPOSER_ROOT_VERSION=dev-master
         composer install --no-interaction --no-progress  --no-suggest
     - name: Run Tests
-      run: vendor/bin/codecept run
+      run: vendor/bin/phpunit

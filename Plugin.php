@@ -56,7 +56,6 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 	protected static function loadStubbedHooks() : void {
 		if ( static::$hooks ) {
-			var_dump( 'already got ' . count( static::$hooks ) . 'stubs' );
 			return;
 		}
 
