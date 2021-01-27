@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "vimeo/psalm": "^4.1",
+        "vimeo/psalm": "^4",
         "johnbillion/wp-hooks": "^0.4.4"
     },
     "require-dev": {
