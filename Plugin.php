@@ -49,7 +49,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	private function getStubFiles(): array {
 
 		return [
-			__DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+			getcwd() . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
 			__DIR__ . '/stubs/overrides.php',
 		];
 	}
