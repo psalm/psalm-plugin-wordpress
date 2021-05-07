@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PsalmWordPress\\Tests\\": "tests",
+            "PsalmWordPress\\Tests\\": ["tests", "tests/unit"],
             "Psalm\\Tests\\": "vendor/vimeo/psalm/tests/"
         }
     },
