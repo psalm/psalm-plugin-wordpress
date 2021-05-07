@@ -3,7 +3,7 @@ namespace PsalmWordPress\Tests;
 
 use Psalm;
 
-class FiltersTest extends BaseTest {
+class FiltersTest extends BaseTestCase {
 	use Psalm\Tests\Traits\InvalidCodeAnalysisTestTrait;
 	use Psalm\Tests\Traits\ValidCodeAnalysisTestTrait;
 
