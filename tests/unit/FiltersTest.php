@@ -43,7 +43,7 @@ class FiltersTest extends BaseTestCase {
 				/**
 				 * @param int $missing_sizes
 				 * @param int $image_meta
-				 * @param int   $attachment_id
+				 * @param int $attachment_id
 				 */
 				$result = apply_filters( 'test_filter', 1, 2, 3 );
 
