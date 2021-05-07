@@ -35,6 +35,9 @@
         }
     },
     "config": {
+        "preferred-install": {
+            "vimeo/psalm": "source"
+        },
         "sort-packages": true
     },
     "scripts" : {
