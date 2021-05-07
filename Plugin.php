@@ -220,7 +220,6 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return new FunctionLikeParameter( 'param', false, $type, null, null, false );
 		}, $hook_types );
 
-		$is_filter = $function_id === 'add_filter';
 		$is_action = $function_id === 'add_action';
 
 		$return = [
