@@ -89,7 +89,7 @@ class FiltersTest extends BaseTestCase {
 					return 1;
 				} );
 				EOD,
-				'error_message' => 'InvalidArdgument',
+				'error_message' => 'InvalidArgument',
 			]
 		];
 	}
