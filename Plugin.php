@@ -44,12 +44,56 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	}
 
 	/**
+	 * resolve a vendor-relative directory-path to the absolute package directory
+	 *
+	 * the plugin must run both from the source file in the repository (current working directory)
+	 * as well as when required as a composer package when the current working directory may not
+	 * have a vendor/ folder and the package directory is detected relative to this file.
+	 *
+	 * @param string $path of a folder, relative, inside vendor/ (composer), must start with 'vendor/' marker
+	 * @return string
+	 */
+	private static function getVendorDir(string $path) : string {
+		$vendor = 'vendor/';
+		$self = 'humanmade/psalm-plugin-wordpress';
+
+		if (0 !== strpos($path, $vendor)) {
+			throw new \BadMethodCallException(
+				sprintf('$path must start with "%s", "%s" given', $vendor, $path)
+			);
+		}
+
+		$cwd = getcwd();
+
+		// prefer path relative to current working directory (original default)
+		$cwdPath = $cwd . '/' . $path;
+		if (is_dir($cwdPath)) {
+			return $cwdPath;
+		}
+
+		// check running as composer package inside a vendor folder
+		$pkgSelfDir = __DIR__;
+		$vendorDir = dirname($pkgSelfDir, 2);
+		if ($pkgSelfDir === $vendorDir . '/' . $self) {
+			// likely plugin is running as composer package, let's try for the path
+			$pkgPath = substr($path, strlen($vendor));
+			$vendorPath = $vendorDir . '/' . $pkgPath;
+			if (is_dir($vendorPath)) {
+				return $vendorPath;
+			}
+		}
+
+		// original default behaviour
+		return $cwdPath;
+	}
+
+	/**
 	 * @return string[]
 	 */
 	private function getStubFiles(): array {
 
 		return [
-			getcwd() . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+			self::getVendorDir('vendor/php-stubs/wordpress-stubs') . '/wordpress-stubs.php',
 			__DIR__ . '/stubs/overrides.php',
 		];
 	}
@@ -59,9 +103,11 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return;
 		}
 
+		$wpHooksDataDir = self::getVendorDir('vendor/johnbillion/wp-hooks/hooks');
+
 		$hooks = array_merge(
-			static::getHooksFromFile( 'vendor/johnbillion/wp-hooks/hooks/actions.json' ),
-			static::getHooksFromFile( 'vendor/johnbillion/wp-hooks/hooks/filters.json' )
+			static::getHooksFromFile( $wpHooksDataDir . '/actions.json' ),
+			static::getHooksFromFile( $wpHooksDataDir . '/filters.json' )
 		);
 
 		static::$hooks = $hooks;
