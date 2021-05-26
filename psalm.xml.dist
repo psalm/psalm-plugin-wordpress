@@ -8,8 +8,12 @@
 	<projectFiles>
 		<file name="./test.php" />
 		<file name="./Plugin.php" />
+		<ignoreFiles>
+			<directory name="vendor"/>
+		</ignoreFiles>
 	</projectFiles>
 	<plugins>
 		<pluginClass class="PsalmWordPress\Plugin" />
+		<pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
 	</plugins>
 </psalm>

@@ -223,10 +223,10 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	}
 
 	/**
-     * @param  list<PhpParser\Node\Arg>    $call_args
-     *
-     * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
-     */
+	 * @param  list<PhpParser\Node\Arg>    $call_args
+	 *
+	 * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
+	 */
 	public static function getFunctionParams(
 		StatementsSource $statements_source,
 		string $function_id,
@@ -266,7 +266,6 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return new FunctionLikeParameter( 'param', false, $type, null, null, false );
 		}, $hook_types );
 
-		$is_filter = $function_id === 'add_filter';
 		$is_action = $function_id === 'add_action';
 
 		$return = [
@@ -329,13 +328,15 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 			// Todo: test namespace resolution.
 			$comments = Psalm\Internal\PhpVisitor\Reflector\FunctionLikeDocblockParser::parse( $this->last_doc );
-
 			// Todo: handle no comments
 			/** @psalm-suppress InternalProperty */
 			$types = array_map( function ( array $comment_type ) : Union {
 				return Type::parseString( $comment_type['type'] );
 			}, $comments->params );
 			$types = array_values( $types );
+			if ( empty( $types ) ) {
+				return;
+			}
 			$this->hooks[ $hook_name ] = $types;
 			$this->last_doc = null;
 		}

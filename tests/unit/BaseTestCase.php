@@ -9,7 +9,7 @@ use Psalm\Internal\Provider\Providers;
 use Psalm\Internal\Provider\FileStorageProvider;
 use Psalm\Tests\Internal\Provider;
 
-class BaseTest extends Psalm\Tests\TestCase {
+abstract class BaseTestCase extends Psalm\Tests\TestCase {
 	public function setUp() : void {
 		parent::setUp();
 		$this->project_analyzer->getConfig()->initializePlugins( $this->project_analyzer );

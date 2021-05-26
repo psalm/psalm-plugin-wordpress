@@ -3,7 +3,7 @@ namespace PsalmWordPress\Tests;
 
 use Psalm;
 
-class FiltersTest extends BaseTest {
+class FiltersTest extends BaseTestCase {
 	use Psalm\Tests\Traits\InvalidCodeAnalysisTestTrait;
 	use Psalm\Tests\Traits\ValidCodeAnalysisTestTrait;
 
@@ -43,7 +43,7 @@ class FiltersTest extends BaseTest {
 				/**
 				 * @param int $missing_sizes
 				 * @param int $image_meta
-				 * @param int   $attachment_id
+				 * @param int $attachment_id
 				 */
 				$result = apply_filters( 'test_filter', 1, 2, 3 );
 
@@ -89,7 +89,7 @@ class FiltersTest extends BaseTest {
 					return 1;
 				} );
 				EOD,
-				'error_message' => 'InvalidArdgument',
+				'error_message' => 'InvalidArgument',
 			]
 		];
 	}

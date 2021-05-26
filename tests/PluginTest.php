@@ -15,7 +15,7 @@ class PluginTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		$this->registration = $this->prophesize( RegistrationInterface::class );
 	}
 
