@@ -94,6 +94,9 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		return [
 			self::getVendorDir('vendor/php-stubs/wordpress-stubs') . '/wordpress-stubs.php',
+			self::getVendorDir('vendor/php-stubs/wp-cli-stubs') . '/wp-cli-stubs.php',
+			self::getVendorDir('vendor/php-stubs/wp-cli-stubs') . '/wp-cli-commands-stubs.php',
+			self::getVendorDir('vendor/php-stubs/wp-cli-stubs') . '/wp-cli-i18n-stubs.php',
 			__DIR__ . '/stubs/overrides.php',
 		];
 	}

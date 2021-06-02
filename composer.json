@@ -13,6 +13,7 @@
         "ext-simplexml": "*",
         "johnbillion/wp-hooks": "^0.4.4",
         "php-stubs/wordpress-stubs": "^5.5",
+        "php-stubs/wp-cli-stubs": "^2.5",
         "vimeo/psalm": "^4"
     },
     "require-dev": {
