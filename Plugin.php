@@ -130,6 +130,29 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 				return $tag['name'] === 'param';
 			} );
 
+			$params = array_map( function ( array $param ) : array {
+				if ( isset( $param['types'] ) && $param['types'] !== [ 'array' ] ) {
+					return $param;
+				}
+				if ( substr_count( $param['content'], '{' ) !== 1 ) {
+					// Unable to parse nested array style phpdoc.
+					return $param;
+				}
+
+				$found = preg_match_all( '/\@type[\s]+([^ ]+)\s+\$(\w+)/', $param['content'], $matches, PREG_SET_ORDER );
+				if ( ! $found ) {
+					return $param;
+				}
+				$array_properties = [];
+				foreach ( $matches as $match ) {
+					$array_properties[] = $match[2] . ': ' . $match[1];
+				}
+				$array_string = 'array{ ' . implode( ', ', $array_properties ) . ' }';
+				$param['types'] = [ $array_string ];
+				return $param;
+
+			}, $params );
+
 			$types = array_column( $params, 'types' );
 
 			$types = array_map( function ( $type ) : string {
