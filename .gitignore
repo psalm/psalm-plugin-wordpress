@@ -3,3 +3,4 @@ composer.lock
 vendor
 /stubs/wordpress/
 /stubs/vendor/
+.phpunit.result.cache
