@@ -112,7 +112,7 @@ function get_option( string $option, $default = null ) {}
 /**
  *
  * @param string $path
- * @param "https"|"http" $scheme
+ * @param "https"|"http"|"relative"|"rest" $scheme
  * @return string
  */
 function home_url( string $path = null, $scheme = null ) : string {
