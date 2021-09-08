@@ -7,9 +7,10 @@ class WP_CLI {
 	 *
 	 * @param string $command
 	 * @param callable|class-string $class
+	 * @param array{before_invoke?: callable, after_invoke?: callable, shortdesc?: string, longdesc?: string, synopsis?: string, when?: string, is_deferred?: bool} $args
 	 * @return void
 	 */
-	static function add_command( string $command, $class ) {
+	static function add_command( string $command, $class, array $args = [] ) {
 
 	}
 
@@ -111,7 +112,7 @@ function get_option( string $option, $default = null ) {}
 /**
  *
  * @param string $path
- * @param "https"|"http" $scheme
+ * @param "https"|"http"|"relative"|"rest" $scheme
  * @return string
  */
 function home_url( string $path = null, $scheme = null ) : string {
