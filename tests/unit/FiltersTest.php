@@ -90,6 +90,17 @@ class FiltersTest extends BaseTestCase {
 				} );
 				EOD,
 				'error_message' => 'InvalidArgument',
+			],
+			'add_filter instead of add_action' => [
+				<<<'EOD'
+				<?php
+				do_action( 'test_action' );
+
+				add_filter( 'test_action', function () {
+					echo 'some stuff';
+				} );
+				EOD,
+				'error_message' => 'HookNotFound',
 			]
 		];
 	}

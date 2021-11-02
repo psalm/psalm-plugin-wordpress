@@ -160,6 +160,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			}, $types );
 
 			$hook_map[ $hook['name'] ] = [
+				'hook_type' => $hook['type'],
 				'types' => array_map( [ Type::class, 'parseString' ], $types ),
 			];
 		}
@@ -178,8 +179,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		}
 
-		foreach ( $hook_visitor->hooks as $hook_name => $types ) {
-			static::registerHook( $hook_name, $types );
+		foreach ( $hook_visitor->hooks as $hook_name => $hook ) {
+			static::registerHook( $hook_name, $hook['types'], $hook['hook_type'] );
 		}
 	}
 
@@ -190,16 +191,23 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		StatementsSource $statements_source,
 		Codebase $codebase
 	): void {
-		$apply_functions = [
+		$apply_filter_functions = [
 			'apply_filters',
 			'apply_filters_ref_array',
 			'apply_filters_deprecated',
+		];
+
+		$do_action_functions = [
 			'do_action',
 			'do_action_ref_array',
 			'do_action_deprecated',
 		];
 
-		if ( ! in_array( $function_id, $apply_functions, true ) ) {
+		if ( in_array( $function_id, $apply_filter_functions, true ) ) {
+			$hook_type = 'filter';
+		} elseif ( in_array( $function_id, $do_action_functions, true) ) {
+			$hook_type = 'action';
+		} else {
 			return;
 		}
 
@@ -238,7 +246,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return $type;
 		}, array_slice( $expr->args, 1 ) );
 
-		static::registerHook( $name, $types );
+		static::registerHook( $name, $types, $hook_type );
 	}
 
 	public static function getFunctionIds() : array {
@@ -269,12 +277,37 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		$hook_name = $call_args[0]->value->value;
 		$hook = static::$hooks[ $hook_name ] ?? null;
+		$is_action = $function_id === 'add_action';
 
 		if ( ! $hook ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
 						'Hook ' . $hook_name . ' not found.',
+						$code_location
+					)
+				);
+			}
+			return [];
+		}
+
+		if ( $is_action && 'action' !== $hook['hook_type'] ) {
+			if ( $code_location ) {
+				IssueBuffer::accepts(
+					new HookNotFound(
+						'Hook ' . $hook_name . ' is a filter not an action.',
+						$code_location
+					)
+				);
+			}
+			return [];
+		}
+
+		if ( ! $is_action && 'filter' !== $hook['hook_type'] ) {
+			if ( $code_location ) {
+				IssueBuffer::accepts(
+					new HookNotFound(
+						'Hook ' . $hook_name . ' is an action not a filter.',
 						$code_location
 					)
 				);
@@ -292,8 +325,6 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return new FunctionLikeParameter( 'param', false, $type, null, null, false );
 		}, $hook_types );
 
-		$is_action = $function_id === 'add_action';
-
 		$return = [
 			new FunctionLikeParameter( 'Hook', false, Type::parseString( 'string' ), null, null, false ),
 			new FunctionLikeParameter( 'Callback', false, new Union( [
@@ -305,7 +336,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 				),
 			] ), null, null, false ),
 			new FunctionLikeParameter( 'Priority', false, Type::parseString( 'int|null' ) ),
-			new FunctionLikeParameter( 'Priority', false, Type::parseString( 'int|null' ) ),
+			new FunctionLikeParameter( 'Args', false, Type::parseString( 'int|null' ) ),
 		];
 		return $return;
 	}
@@ -315,8 +346,9 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	 * @param list<Union> $types
 	 * @return void
 	 */
-	public static function registerHook( string $hook, array $types ) {
+	public static function registerHook( string $hook, array $types, string $hook_type = 'filter' ) {
 		static::$hooks[ $hook ] = [
+			'hook_type' => $hook_type,
 			'types' => $types,
 		];
 	}
@@ -330,10 +362,13 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 	public $hooks = [];
 
 	public function enterNode( PhpParser\Node $origNode ) {
-		$apply_functions = [
+		$apply_filter_functions = [
 			'apply_filters',
 			'apply_filters_ref_array',
 			'apply_filters_deprecated',
+		];
+
+		$do_action_functions = [
 			'do_action',
 			'do_action_ref_array',
 			'do_action_deprecated',
@@ -343,7 +378,14 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			$this->last_doc = $origNode->getDocComment();
 		}
 
-		if ( $this->last_doc && $origNode instanceof FuncCall && $origNode->name instanceof Name && in_array( (string) $origNode->name, $apply_functions, true ) ) {
+		if ( $this->last_doc && $origNode instanceof FuncCall && $origNode->name instanceof Name ) {
+			if ( in_array( (string) $origNode->name, $apply_filter_functions, true ) ) {
+				$hook_type = 'filter';
+			} elseif ( in_array( (string) $origNode->name, $do_action_functions, true) ) {
+				$hook_type = 'action';
+			} else {
+				return null;
+			}
 			if ( ! $origNode->args[0]->value instanceof String_ ) {
 				$this->last_doc = null;
 				return null;
@@ -363,7 +405,10 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			if ( empty( $types ) ) {
 				return;
 			}
-			$this->hooks[ $hook_name ] = $types;
+			$this->hooks[ $hook_name ] = [
+				'hook_type' => $hook_type,
+				'types' => $types,
+			];
 			$this->last_doc = null;
 		}
 
