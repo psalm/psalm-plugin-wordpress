@@ -36,6 +36,11 @@ class Plugin implements
 	FunctionParamsProviderInterface,
 	PluginEntryPointInterface {
 	/**
+	 * @var array<string, bool|array<string>>
+	 */
+	public static $configHooks = [];
+
+	/**
 	 * @var array<string, array{types: list<Union>}>
 	 */
 	public static $hooks = [];
@@ -48,6 +53,77 @@ class Plugin implements
 		if ( ! isset( $config->useDefaultStubs['value'] ) || (string) $config->useDefaultStubs['value'] !== 'false' ) {
 			array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
 		}
+
+		// if useDefaultHooks is not set or set to anything except false, we want to load the hooks included in this plugin
+		$configHooks = array( 'useDefaultHooks' => false );
+		if ( !isset( $config->useDefaultHooks['value'] ) || (string) $config->useDefaultHooks['value'] !== 'false' ) {
+			$configHooks['useDefaultHooks'] = true;
+		}
+
+		if ( !empty( $config->hooks ) ) {
+			$configHooks['hooks'] = array();
+			$cwd = getcwd();
+			foreach ( $config->hooks as $hook_data ) {
+				foreach ( $hook_data as $type => $data ) {
+					if ( $type === 'file' ) {
+						$file = (string) $data['name'];
+						if ( substr( $file, 0, 1 ) !== '/' ) {
+							$file = $cwd . '/' . $file;
+						}
+
+						if ( !is_file( $file ) ) {
+							throw new \BadMethodCallException(
+								sprintf('Hook file "%s" does not exist', $file)
+							);
+						}
+
+						// file as key, to avoid loading the same hooks multiple times
+						$configHooks['hooks'][ $file ] = $file;
+					} elseif ( $type === 'directory' ) {
+						$directory = rtrim( (string) $data['name'], '/' );
+						if ( substr( $directory, 0, 1 ) !== '/' ) {
+							$directory = $cwd . '/' . $directory;
+						}
+
+						if ( !is_dir( $directory ) ) {
+							throw new \BadMethodCallException(
+								sprintf('Hook directory "%s" does not exist', $directory)
+							);
+						}
+
+						if ( isset( $data['recursive'] ) && (string) $data['recursive'] === 'true' ) {
+							$directories = glob($directory . '/*' , GLOB_ONLYDIR);
+						}
+
+						if ( empty( $directories ) ) {
+							$directories = array( $directory );
+						} else {
+							$directories[] = $directory;
+
+							// might have duplicates if the directory is explicitly specified and also passed in recursive directory
+							$directories = array_unique( $directories );
+						}
+
+						foreach ( $directories as $directory ) {
+							$actions = $directory . '/actions.json';
+							if ( is_file( $actions ) ) {
+								$configHooks['hooks'][ $actions ] = $actions;
+							}
+
+							$filters = $directory . '/filters.json';
+							if ( is_file( $filters ) ) {
+								$configHooks['hooks'][ $filters ] = $filters;
+							}
+						}
+					}
+				}
+			}
+
+			// don't need the keys anymore and ensures array_merge runs smoothly later on
+			$configHooks['hooks'] = array_values( $configHooks['hooks'] );
+		}
+
+		static::$configHooks = $configHooks;
 
 		static::loadStubbedHooks();
 	}
@@ -115,10 +191,18 @@ class Plugin implements
 			return;
 		}
 
-		$wp_hooks_data_dir = self::getVendorDir('vendor/wp-hooks/wordpress-core/hooks');
+		if ( static::$configHooks['useDefaultHooks'] !== false ) {
+			$wp_hooks_data_dir = self::getVendorDir('vendor/wp-hooks/wordpress-core/hooks');
 
-		static::loadHooksFromFile( $wp_hooks_data_dir . '/actions.json' );
-		static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
+			static::loadHooksFromFile( $wp_hooks_data_dir . '/actions.json' );
+			static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
+		}
+
+		if ( isset( static::$configHooks['hooks'] ) ) {
+			foreach ( static::$configHooks['hooks'] as $file ) {
+				static::loadHooksFromFile( $file );
+			}
+		}
 	}
 
 	protected static function loadHooksFromFile( string $filepath ) : void {
