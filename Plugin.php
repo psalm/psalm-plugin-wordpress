@@ -39,7 +39,12 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
 		$registration->registerHooksFromClass( static::class );
-		array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
+
+		// if useDefaultStubs is not set or set to anything except false, we want to load the stubs included in this plugin
+		if ( !isset( $config->useDefaultStubs['value'] ) || (string) $config->useDefaultStubs['value'] !== 'false' ) {
+			array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
+		}
+
 		static::loadStubbedHooks();
 	}
 
