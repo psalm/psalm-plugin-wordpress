@@ -11,7 +11,7 @@
     ],
     "require": {
         "ext-simplexml": "*",
-        "johnbillion/wp-hooks": "^0.4.4",
+        "johnbillion/wp-hooks": "^0.7.1",
         "php-stubs/wordpress-stubs": "^5.5",
         "php-stubs/wordpress-globals": "^0.2.0",
         "php-stubs/wp-cli-stubs": "^2.5",

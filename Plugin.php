@@ -126,7 +126,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		/** @var list<array{ name: string, file: string, type: 'action'|'filter', doc: array{ description: string, long_description: string, long_description_html: string, tags: list<array{ name: string, content: string, types?: list<string>}> } }> */
 		$hooks = json_decode( file_get_contents( $filepath ), true );
 		$hook_map = [];
-		foreach ( $hooks as $hook ) {
+		foreach ( $hooks['hooks'] as $hook ) {
 			$params = array_filter( $hook['doc']['tags'], function ( $tag ) {
 				return $tag['name'] === 'param';
 			} );
