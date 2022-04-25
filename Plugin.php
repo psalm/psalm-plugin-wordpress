@@ -33,12 +33,21 @@ use Exception;
 class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysisInterface, FunctionParamsProviderInterface, BeforeFileAnalysisInterface {
 
 	/**
+	 * @var bool
+	 */
+	public static $requireAllParams = false;
+
+	/**
 	 * @var array<string, array{types: list<Union>}>
 	 */
 	public static $hooks = [];
 
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
 		$registration->registerHooksFromClass( static::class );
+
+		if ( isset( $config->requireAllParams['value'] ) && $config->requireAllParams['value'] === 'true' ) {
+			static::$requireAllParams = true;
+		}
 
 		// if useDefaultStubs is not set or set to anything except false, we want to load the stubs included in this plugin
 		if ( !isset( $config->useDefaultStubs['value'] ) || (string) $config->useDefaultStubs['value'] !== 'false' ) {
@@ -262,6 +271,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		return [
 			'add_action',
 			'add_filter',
+			'do_action',
+			'apply_filters',
 		];
 	}
 
@@ -286,9 +297,13 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		$hook_name = $call_args[0]->value->value;
 		$hook = static::$hooks[ $hook_name ] ?? null;
+		$hook_type = $hook['hook_type'] ?? '';
 		$is_action = $function_id === 'add_action';
+		$is_do_action = $function_id === 'do_action';
+		$is_invoke = $is_do_action || $function_id === 'apply_filters';
 
-		if ( ! $hook ) {
+		// if we declare/invoke the hook the hook obviously exists
+		if ( ! $is_invoke && ! $hook ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
@@ -301,7 +316,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		}
 
 		// action_reference for do_action_ref_array
-		if ( $is_action && !in_array( $hook['hook_type'], array( 'action', 'action_reference' ), true ) ) {
+		if ( ( $is_action || $is_do_action ) && !in_array( $hook_type, array( 'action', 'action_reference' ), true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
@@ -314,7 +329,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		}
 
 		// filter_reference for apply_filters_ref_array
-		if ( ! $is_action && !in_array( $hook['hook_type'], array( 'filter', 'filter_reference' ), true ) ) {
+		if ( ! $is_action && ! $is_do_action && !in_array( $hook_type, array( 'filter', 'filter_reference' ), true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
@@ -327,8 +342,17 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		}
 
 		// Check how many args the filter is registered with.
+		if ( $is_invoke && static::$requireAllParams === true ) {
+			// require all parameters, no matter how many
+			$num_args = PHP_INT_MAX;
+		} elseif ( $is_invoke ) {
+			// need to deduct 1, since the first argument (string) is the hardcoded hook name, which is added manually later on, since it's not in the PHPDoc
+			$num_args = count( $call_args ) - 1;
+		} else {
 		/** @var int */
 		$num_args = $call_args[ 3 ]->value->value ?? 1;
+		}
+
 		// Limit the required type params on the hook to match the registered number.
 		$hook_types = array_slice( $hook['types'], 0, $num_args );
 
@@ -337,13 +361,21 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 		}, $hook_types );
 
 		// Actions must return null/void. Filters must return the same type as the first param.
-		if ( $is_action ) {
+		if ( $is_action || $is_do_action ) {
 			$return_type = Type::parseString( 'void|null' );
 		} elseif ( isset( $hook['types'][0] ) ) {
 			$return_type = $hook['types'][0];
 		} else {
 			// unknown due to lack of PHPDoc - but a filter must always return something - mixed is the most generic case
 			$return_type = Type::parseString( 'mixed' );
+		}
+
+		// check that the types passed to filter are of the type that is specified in PHPDoc
+		if ( $is_invoke ) {
+			$return = [
+				new FunctionLikeParameter( 'Hook', false, Type::parseString( 'string' ), null, null, false ),
+			];
+			return array_merge( $return, $hook_params );
 		}
 
 		$return = [
