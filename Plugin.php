@@ -297,7 +297,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return [];
 		}
 
-		if ( $is_action && 'action' !== $hook['hook_type'] ) {
+		// action_reference for do_action_ref_array
+		if ( $is_action && !in_array( $hook['hook_type'], array( 'action', 'action_reference' ), true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
@@ -309,7 +310,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return [];
 		}
 
-		if ( ! $is_action && 'filter' !== $hook['hook_type'] ) {
+		// filter_reference for apply_filters_ref_array
+		if ( ! $is_action && !in_array( $hook['hook_type'], array( 'filter', 'filter_reference' ), true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
