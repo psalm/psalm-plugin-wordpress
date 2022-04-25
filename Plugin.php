@@ -165,6 +165,9 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 				return implode( '|', $type );
 			}, $types );
 
+			// remove empty elements which can happen with invalid phpdoc (type and variable reversed)
+			$types = array_filter( $types );
+
 			$hook_map[ $hook['name'] ] = [
 				'hook_type' => $hook['type'],
 				'types' => array_map( [ Type::class, 'parseString' ], $types ),
@@ -331,14 +334,23 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 			return new FunctionLikeParameter( 'param', false, $type, null, null, false );
 		}, $hook_types );
 
+		// Actions must return null/void. Filters must return the same type as the first param.
+		if ( $is_action ) {
+			$return_type = Type::parseString( 'void|null' );
+		} elseif ( isset( $hook['types'][0] ) ) {
+			$return_type = $hook['types'][0];
+		} else {
+			// unknown due to lack of PHPDoc - but a filter must always return something - mixed is the most generic case
+			$return_type = Type::parseString( 'mixed' );
+		}
+
 		$return = [
 			new FunctionLikeParameter( 'Hook', false, Type::parseString( 'string' ), null, null, false ),
 			new FunctionLikeParameter( 'Callback', false, new Union( [
 				new TCallable(
 					'callable',
 					$hook_params,
-					// Actions must return null/void. Filters must return the same type as the first param.
-					$is_action ? Type::parseString( 'void|null' ) : $hook['types'][0]
+					$return_type
 				),
 			] ), null, null, false ),
 			new FunctionLikeParameter( 'Priority', false, Type::parseString( 'int|null' ) ),
