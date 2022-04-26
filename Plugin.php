@@ -114,12 +114,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 
 		$wpHooksDataDir = self::getVendorDir('vendor/johnbillion/wp-hooks/hooks');
 
-		$hooks = array_merge(
-			static::getHooksFromFile( $wpHooksDataDir . '/actions.json' ),
-			static::getHooksFromFile( $wpHooksDataDir . '/filters.json' )
-		);
-
-		static::$hooks = $hooks;
+		static::loadHooksFromFile( $wpHooksDataDir . '/actions.json' );
+		static::loadHooksFromFile( $wpHooksDataDir . '/filters.json' );
 	}
 
 	/**
@@ -127,7 +123,7 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	 * @param string $filepath
 	 * @return array<string, array{ types: list<Union> }>
 	 */
-	protected static function getHooksFromFile( string $filepath ) : array {
+	protected static function loadHooksFromFile( string $filepath ) : void {
 		/** @var list<array{ name: string, file: string, type: 'action'|'filter', doc: array{ description: string, long_description: string, long_description_html: string, tags: list<array{ name: string, content: string, types?: list<string>}> } }> */
 		$hooks = json_decode( file_get_contents( $filepath ), true );
 		$hook_map = [];
@@ -165,16 +161,11 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 				return implode( '|', $type );
 			}, $types );
 
-			// remove empty elements which can happen with invalid phpdoc (type and variable reversed)
+			// remove empty elements which can happen with invalid phpdoc - must be done before parseString to avoid notice there
 			$types = array_filter( $types );
 
-			$hook_map[ $hook['name'] ] = [
-				'hook_type' => $hook['type'],
-				'types' => array_map( [ Type::class, 'parseString' ], $types ),
-			];
+			static::registerHook( $hook['name'], array_map( [ Type::class, 'parseString' ], $types ), $hook['type'] );
 		}
-
-		return $hook_map;
 	}
 
 	public static function beforeAnalyzeFile( StatementsSource $statements_source, Context $file_context, FileStorage $file_storage, Codebase $codebase ) : void {
@@ -367,6 +358,20 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 	 * @return void
 	 */
 	public static function registerHook( string $hook, array $types, string $hook_type = 'filter' ) {
+		// remove empty elements which can happen with invalid phpdoc
+		$types = array_filter( $types );
+
+		// do not assign empty types if we already have this hook registered
+		if ( isset( static::$hooks[ $hook ] ) && empty( $types ) ) {
+			return;
+		}
+
+		// if this hook is registered already
+		if ( isset( static::$hooks[ $hook ] ) ) {
+			// if we have more types than already registered we overwrite existing ones, but keep the additional ones (array_merge would combine them which is wrong)
+			$types = $types + static::$hooks[ $hook ]['types'];
+		}
+
 		static::$hooks[ $hook ] = [
 			'hook_type' => $hook_type,
 			'types' => $types,
@@ -437,3 +442,4 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 }
 
 class HookNotFound extends \Psalm\Issue\PluginIssue {}
+
