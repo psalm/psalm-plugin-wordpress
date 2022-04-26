@@ -3,6 +3,9 @@
 namespace PsalmWordpress;
 
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Stmt\Return_;
+use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt\Echo_;
 use PhpParser;
 use PhpParser\Node\Scalar\String_;
 use Psalm\Codebase;
@@ -394,8 +397,15 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			'do_action_deprecated',
 		];
 
-		if ( $origNode->getDocComment() ) {
+		// "return apply_filters" will assign the phpdoc to the return instead of the apply_filters, so we need to store it
+		// "$var = apply_filters" directly after a function declaration
+		// "echo apply_filters"
+		// cannot do this for all cases, as often it will assign completely wrong stuff otherwise
+		if ( $origNode->getDocComment() && ( $origNode instanceof FuncCall || $origNode instanceof Return_ || $origNode instanceof Variable || $origNode instanceof Echo_ ) ) {
 			$this->last_doc = $origNode->getDocComment();
+		} elseif ( isset( $this->last_doc ) && ! $origNode instanceof FuncCall ) {
+			// if it's set already and this is not a FuncCall, reset it to null, since there's something else and it would be used incorrectly
+			$this->last_doc = null;
 		}
 
 		if ( $this->last_doc && $origNode instanceof FuncCall && $origNode->name instanceof Name ) {
