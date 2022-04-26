@@ -412,19 +412,45 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			}
 
 			$hook_name = $origNode->args[0]->value->value;
-			$comment = Psalm\DocComment::parsePreservingLength( $this->last_doc );
 
-			// Todo: test namespace resolution.
-			$comments = Psalm\Internal\PhpVisitor\Reflector\FunctionLikeDocblockParser::parse( $this->last_doc );
-			// Todo: handle no comments
-			/** @psalm-suppress InternalProperty */
-			$types = array_map( function ( array $comment_type ) : Union {
-				return Type::parseString( $comment_type['type'] );
-			}, $comments->params );
-			$types = array_values( $types );
-			if ( empty( $types ) ) {
-				return;
+			$doc_comment = $this->last_doc->getText();
+
+			$doc_factory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+			try {
+				$doc_block = $doc_factory->create( $doc_comment );
+			} catch ( \RuntimeException $e ) {
+				return null;
+			} catch ( \InvalidArgumentException $e ) {
+				return null;
 			}
+
+			/** @var \phpDocumentor\Reflection\DocBlock\Tags\Param[] */
+			$params = $doc_block->getTagsByName( 'param' );
+
+			$types = [];
+			foreach ( $params as $param ) {
+				// might be instanceof \phpDocumentor\Reflection\DocBlock\Tags\invalidTag if the param is invalid
+				if( ! ( $param instanceof \phpDocumentor\Reflection\DocBlock\Tags\Param ) ) {
+					// set to mixed - if we skip it, it will mess up all subsequent args
+					$types[] = 'mixed';
+					continue;
+				}
+				$param_type = $param->getType();
+				if ( is_null( $param_type ) ) {
+					// set to mixed - if we skip it, it will mess up all subsequent args
+					$types[] = 'mixed';
+					continue;
+				}
+
+				$types[] = $param_type->__toString();
+			}
+
+			if ( empty( $types ) ) {
+				return null;
+			}
+
+			$types = array_map( [ Type::class, 'parseString' ], $types );
+
 			$this->hooks[ $hook_name ] = [
 				'hook_type' => $hook_type,
 				'types' => $types,
