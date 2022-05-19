@@ -294,7 +294,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 					new HookNotFound(
 						'Hook ' . $hook_name . ' not found',
 						$code_location
-					)
+					),
+					$statements_source->getSuppressedIssues()
 				);
 			}
 			return [];
@@ -307,7 +308,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 					new HookNotFound(
 						'Hook ' . $hook_name . ' is a filter not an action',
 						$code_location
-					)
+					),
+					$statements_source->getSuppressedIssues()
 				);
 			}
 			return [];
@@ -320,7 +322,8 @@ class Plugin implements PluginEntryPointInterface, AfterEveryFunctionCallAnalysi
 					new HookNotFound(
 						'Hook ' . $hook_name . ' is an action not a filter',
 						$code_location
-					)
+					),
+					$statements_source->getSuppressedIssues()
 				);
 			}
 			return [];
