@@ -175,7 +175,14 @@ class Plugin implements
 			// Must be done before parseString to avoid notice there.
 			$types = array_filter( $types );
 
-			static::registerHook( $hook['name'], array_map( [ Type::class, 'parseString' ], $types ), $hook['type'] );
+			// skip invalid ones
+			try {
+				$parsed_types = array_map( [ Type::class, 'parseString' ], $types );
+			} catch ( \Psalm\Exception\TypeParseTreeException $e ) {
+				continue;
+			}
+
+			static::registerHook( $hook['name'], $parsed_types, $hook['type'] );
 		}
 	}
 
