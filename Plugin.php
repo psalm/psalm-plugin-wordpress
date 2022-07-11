@@ -115,7 +115,7 @@ class Plugin implements
 			return;
 		}
 
-		$wp_hooks_data_dir = self::getVendorDir( 'vendor/johnbillion/wp-hooks/hooks' );
+		$wp_hooks_data_dir = self::getVendorDir('vendor/wp-hooks/wordpress-core/hooks');
 
 		static::loadHooksFromFile( $wp_hooks_data_dir . '/actions.json' );
 		static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
