@@ -18,6 +18,7 @@
         "vimeo/psalm": "^4"
     },
     "require-dev": {
+        "humanmade/coding-standards": "^1.2",
         "phpunit/phpunit": "^9.0",
         "psalm/plugin-phpunit": "^0.15.1"
     },
@@ -38,6 +39,9 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
         "preferred-install": {
             "vimeo/psalm": "source"
         },
@@ -50,7 +54,7 @@
             "@analyze"
         ],
         "analyze": "psalm",
-        "cs-check": "phpcs",
+        "cs-check": "phpcs -ps --colors",
         "cs-fix": "phpcbf",
         "test": "codecept run",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
