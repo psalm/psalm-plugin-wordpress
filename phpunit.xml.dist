@@ -8,8 +8,8 @@
          beStrictAboutTestsThatDoNotTestAnything="false"
          beStrictAboutTodoAnnotatedTests="true"
          colors="true"
-         verbose="true"
          executionOrder="default"
+         verbose="true"
 >
     <testsuites>
         <testsuite name="psalm">
