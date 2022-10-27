@@ -309,7 +309,7 @@ class Plugin implements
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
-						'Hook ' . $hook_name . ' not found',
+						'Hook "' . $hook_name . '" not found',
 						$code_location
 					),
 					$statements_source->getSuppressedIssues()
@@ -323,7 +323,7 @@ class Plugin implements
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
-						'Hook ' . $hook_name . ' is a filter not an action',
+						'Hook "' . $hook_name . '" is a filter not an action',
 						$code_location
 					),
 					$statements_source->getSuppressedIssues()
@@ -337,7 +337,7 @@ class Plugin implements
 			if ( $code_location ) {
 				IssueBuffer::accepts(
 					new HookNotFound(
-						'Hook ' . $hook_name . ' is an action not a filter',
+						'Hook "' . $hook_name . '" is an action not a filter',
 						$code_location
 					),
 					$statements_source->getSuppressedIssues()
