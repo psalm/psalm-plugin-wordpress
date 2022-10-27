@@ -17,9 +17,12 @@ use Psalm\Codebase;
 use Psalm\CodeLocation;
 use Psalm\Context;
 use Psalm\IssueBuffer;
-use Psalm\Plugin\Hook\AfterEveryFunctionCallAnalysisInterface;
-use Psalm\Plugin\Hook\BeforeFileAnalysisInterface;
-use Psalm\Plugin\Hook\FunctionParamsProviderInterface;
+use Psalm\Plugin\EventHandler\AfterEveryFunctionCallAnalysisInterface;
+use Psalm\Plugin\EventHandler\BeforeFileAnalysisInterface;
+use Psalm\Plugin\EventHandler\Event\AfterEveryFunctionCallAnalysisEvent;
+use Psalm\Plugin\EventHandler\Event\BeforeFileAnalysisEvent;
+use Psalm\Plugin\EventHandler\Event\FunctionParamsProviderEvent;
+use Psalm\Plugin\EventHandler\FunctionParamsProviderInterface;
 use Psalm\Plugin\PluginEntryPointInterface;
 use Psalm\Plugin\RegistrationInterface;
 use Psalm\StatementsSource;
@@ -36,7 +39,7 @@ class Plugin implements
 	FunctionParamsProviderInterface,
 	PluginEntryPointInterface {
 	/**
-	 * @var array<string, array{types: list<Union>}>
+	 * @var array<string, array{hook_type: string, types: list<Union>}>
 	 */
 	public static $hooks = [];
 
@@ -180,11 +183,12 @@ class Plugin implements
 	}
 
 	public static function beforeAnalyzeFile(
-		StatementsSource $statements_source,
-		Context $file_context,
-		FileStorage $file_storage,
-		Codebase $codebase
+		BeforeFileAnalysisEvent $event
 	) : void {
+
+		$statements_source = $event->getStatementsSource();
+		$codebase = $event->getCodebase();
+
 		$statements = $codebase->getStatementsForFile( $statements_source->getFilePath() );
 		$traverser = new PhpParser\NodeTraverser;
 		$hook_visitor = new HookNodeVisitor();
@@ -201,11 +205,7 @@ class Plugin implements
 	}
 
 	public static function afterEveryFunctionCallAnalysis(
-		FuncCall $expr,
-		string $function_id,
-		Context $context,
-		StatementsSource $statements_source,
-		Codebase $codebase
+		AfterEveryFunctionCallAnalysisEvent $event
 	) : void {
 		$apply_filter_functions = [
 			'apply_filters',
@@ -219,6 +219,9 @@ class Plugin implements
 			'do_action_deprecated',
 		];
 
+
+		$function_id = $event->getFunctionId();
+
 		if ( in_array( $function_id, $apply_filter_functions, true ) ) {
 			$hook_type = 'filter';
 		} elseif ( in_array( $function_id, $do_action_functions, true ) ) {
@@ -227,15 +230,20 @@ class Plugin implements
 			return;
 		}
 
-		if ( ! $expr->args[0]->value instanceof String_ ) {
+		$expr = $event->getExpr();
+		$call_args = $expr->getRawArgs();
+
+		if ( ! $call_args[0]->value instanceof String_ ) {
 			return;
 		}
 
-		$name = $expr->args[0]->value->value;
+		$name = $call_args[0]->value->value;
 		// Check if this hook is already documented.
 		if ( isset( static::$hooks[ $name ] ) ) {
 			return;
 		}
+
+		$statements_source = $event->getStatementsSource();
 
 		$types = array_map( function ( Arg $arg ) use ( $statements_source ) {
 			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
@@ -260,7 +268,7 @@ class Plugin implements
 			}
 
 			return $type;
-		}, array_slice( $expr->args, 1 ) );
+		}, array_slice( $call_args, 1 ) );
 
 		static::registerHook( $name, $types, $hook_type );
 	}
@@ -278,18 +286,20 @@ class Plugin implements
 	 * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
 	 */
 	public static function getFunctionParams(
-		StatementsSource $statements_source,
-		string $function_id,
-		array $call_args,
-		Context $context = null,
-		CodeLocation $code_location = null
+		FunctionParamsProviderEvent $event
 	) : ?array {
 		static::loadStubbedHooks();
+
+		$call_args = $event->getCallArgs();
 
 		// Currently we only support detecting the hook name if it's a string.
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			return null;
 		}
+
+		$statements_source = $event->getStatementsSource();
+		$function_id = $event->getFunctionId();
+		$code_location = $event->getCodeLocation();
 
 		$hook_name = $call_args[0]->value->value;
 		$hook = static::$hooks[ $hook_name ] ?? null;
