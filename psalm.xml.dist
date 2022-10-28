@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
-<psalm xmlns="https://getpsalm.org/schema/config"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-       totallyTyped="true"
+<psalm
+	xmlns="https://getpsalm.org/schema/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+	totallyTyped="true"
 >
 	<projectFiles>
 		<file name="./test.php" />

@@ -1,39 +1,39 @@
 <?xml version="1.0"?>
 <ruleset name="PsalmWordPress">
-    <file>Plugin.php</file>
-    <file>tests</file>
+	<file>Plugin.php</file>
+	<file>tests</file>
 
-    <rule ref="HM">
-        <!-- Exclude filename related sniffs -->
-        <exclude name="HM.Files" />
-        <exclude name="WordPress.Files" />
+	<rule ref="HM">
+		<!-- Exclude filename related sniffs -->
+		<exclude name="HM.Files" />
+		<exclude name="WordPress.Files" />
 
-        <!-- Exclude short description sniff so short `@var` notation can be used -->
-        <exclude name="Generic.Commenting.DocComment.MissingShort" />
+		<!-- Exclude short description sniff so short `@var` notation can be used -->
+		<exclude name="Generic.Commenting.DocComment.MissingShort" />
 
-        <!-- Exclude missing block comment sniffs -->
-        <exclude name="Squiz.Commenting.ClassComment.Missing" />
-        <exclude name="Squiz.Commenting.FileComment.Missing" />
-        <exclude name="Squiz.Commenting.FunctionComment.Missing" />
+		<!-- Exclude missing block comment sniffs -->
+		<exclude name="Squiz.Commenting.ClassComment.Missing" />
+		<exclude name="Squiz.Commenting.FileComment.Missing" />
+		<exclude name="Squiz.Commenting.FunctionComment.Missing" />
 
-        <!-- Exclude missing block tags and comment sniffs -->
-        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
-        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
-        <exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch" />
-        <exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
+		<!-- Exclude missing block tags and comment sniffs -->
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+		<exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch" />
+		<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
 
-        <!-- Exclude multiple classes sniff -->
-        <exclude name="HM.Classes.OnlyClassInFile.FoundMultipleDeclarations" />
-        <exclude name="PSR1.Classes.ClassDeclaration.MultipleClasses" />
+		<!-- Exclude multiple classes sniff -->
+		<exclude name="HM.Classes.OnlyClassInFile.FoundMultipleDeclarations" />
+		<exclude name="PSR1.Classes.ClassDeclaration.MultipleClasses" />
 
-        <!-- Exclude snake_case property sniffs -->
-        <exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase" />
-        <exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
+		<!-- Exclude snake_case property sniffs -->
+		<exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
 
-        <!-- This sniff does not support Psalm types -->
-        <exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint" />
+		<!-- This sniff does not support Psalm types -->
+		<exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint" />
 
-        <!-- This sniff does not respect references in comments and documentation -->
-        <exclude name="PSR2R.Namespaces.UnusedUseStatement.UnusedUse" />
-    </rule>
+		<!-- This sniff does not respect references in comments and documentation -->
+		<exclude name="PSR2R.Namespaces.UnusedUseStatement.UnusedUse" />
+	</rule>
 </ruleset>
