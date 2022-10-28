@@ -125,6 +125,12 @@ class Plugin implements
 	}
 
 	protected static function loadHooksFromFile( string $filepath ) : void {
+		$data = json_decode( file_get_contents( $filepath ), true );
+
+		if ( ! isset( $data['hooks'] ) || ! is_iterable( $data['hooks'] ) ) {
+			return;
+		}
+
 		/**
 		 * @var list<array{
 		 *     name: string,
@@ -138,9 +144,9 @@ class Plugin implements
 		 *     }
 		 * }>
 		 */
-		$hooks = json_decode( file_get_contents( $filepath ), true );
-		$hook_map = [];
-		foreach ( $hooks['hooks'] as $hook ) {
+		$hooks = $data['hooks'];
+
+		foreach ( $hooks as $hook ) {
 			$params = array_filter( $hook['doc']['tags'], function ( $tag ) {
 				return $tag['name'] === 'param';
 			} );
@@ -176,7 +182,7 @@ class Plugin implements
 
 			// Remove empty elements which can happen with invalid PHPDoc.
 			// Must be done before parseString to avoid notice there.
-			$types = array_filter( $types );
+			$types = array_values( array_filter( $types ) );
 
 			static::registerHook( $hook['name'], array_map( [ Type::class, 'parseString' ], $types ), $hook['type'] );
 		}
@@ -219,7 +225,6 @@ class Plugin implements
 			'do_action_deprecated',
 		];
 
-
 		$function_id = $event->getFunctionId();
 
 		if ( in_array( $function_id, $apply_filter_functions, true ) ) {
@@ -233,6 +238,10 @@ class Plugin implements
 		$expr = $event->getExpr();
 		$call_args = $expr->getRawArgs();
 
+		if ( ! $call_args[0] instanceof Arg ) {
+			return;
+		}
+
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			return;
 		}
@@ -245,30 +254,35 @@ class Plugin implements
 
 		$statements_source = $event->getStatementsSource();
 
-		$types = array_map( function ( Arg $arg ) use ( $statements_source ) {
-			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
-			if ( ! $type ) {
-				$type = Type::parseString( 'mixed' );
-			} else {
-				$sub_types = array_values( $type->getAtomicTypes() );
-				$sub_types = array_map( function ( Atomic $type ) : Atomic {
-					if ( $type instanceof Atomic\TTrue || $type instanceof Atomic\TFalse ) {
-						return new Atomic\TBool;
-					} elseif ( $type instanceof Atomic\TLiteralString ) {
-						return new Atomic\TString;
-					} elseif ( $type instanceof Atomic\TLiteralInt ) {
-						return new Atomic\TInt;
-					} elseif ( $type instanceof Atomic\TLiteralFloat ) {
-						return new Atomic\TFloat;
-					}
-
-					return $type;
-				}, $sub_types );
-				$type = new Union( $sub_types );
+		$types = array_map( function ( $arg ) use ( $statements_source ) {
+			if ( ! $arg instanceof Arg ) {
+				return Type::parseString( 'mixed' );
 			}
 
-			return $type;
+			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			if ( ! $type ) {
+				return Type::parseString( 'mixed' );
+			}
+
+			$sub_types = array_values( $type->getAtomicTypes() );
+			$sub_types = array_map( function ( Atomic $type ) : Atomic {
+				if ( $type instanceof Atomic\TTrue || $type instanceof Atomic\TFalse ) {
+					return new Atomic\TBool;
+				} elseif ( $type instanceof Atomic\TLiteralString ) {
+					return new Atomic\TString;
+				} elseif ( $type instanceof Atomic\TLiteralInt ) {
+					return new Atomic\TInt;
+				} elseif ( $type instanceof Atomic\TLiteralFloat ) {
+					return new Atomic\TFloat;
+				}
+
+				return $type;
+			}, $sub_types );
+
+			return new Union( $sub_types );
 		}, array_slice( $call_args, 1 ) );
+
+		$types = array_values( $types );
 
 		static::registerHook( $name, $types, $hook_type );
 	}
@@ -281,8 +295,6 @@ class Plugin implements
 	}
 
 	/**
-	 * @param  list<PhpParser\Node\Arg>    $call_args
-	 *
 	 * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
 	 */
 	public static function getFunctionParams(
@@ -387,7 +399,7 @@ class Plugin implements
 	 */
 	public static function registerHook( string $hook, array $types, string $hook_type = 'filter' ) : void {
 		// Remove empty elements which can happen with invalid PHPDoc.
-		$types = array_filter( $types );
+		$types = array_values( array_filter( $types ) );
 
 		// Do not assign empty types if we already have this hook registered.
 		if ( isset( static::$hooks[ $hook ] ) && empty( $types ) ) {
@@ -409,13 +421,17 @@ class Plugin implements
 }
 
 class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
-	/** @var ?PhpParser\Comment\Doc */
+	/**
+	 * @var ?PhpParser\Comment\Doc
+	 */
 	protected $last_doc = null;
 
-	/** @var array<string, list<Union>> */
+	/**
+	 * @var array<string, array{hook_type: string, types: list<Union>}>
+	 */
 	public $hooks = [];
 
-	public function enterNode( PhpParser\Node $orig_node ) {
+	public function enterNode( PhpParser\Node $node ) {
 		$apply_filter_functions = [
 			'apply_filters',
 			'apply_filters_ref_array',
@@ -434,35 +450,39 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		// "echo apply_filters" cannot do this for all cases,
 		// as often it will assign completely wrong stuff otherwise.
 		if (
-			$orig_node->getDocComment() && (
-				$orig_node instanceof FuncCall ||
-				$orig_node instanceof Return_ ||
-				$orig_node instanceof Variable ||
-				$orig_node instanceof Echo_
+			$node->getDocComment() && (
+				$node instanceof FuncCall ||
+				$node instanceof Return_ ||
+				$node instanceof Variable ||
+				$node instanceof Echo_
 			)
 		) {
-			$this->last_doc = $orig_node->getDocComment();
-		} elseif ( isset( $this->last_doc ) && ! $orig_node instanceof FuncCall ) {
+			$this->last_doc = $node->getDocComment();
+		} elseif ( isset( $this->last_doc ) && ! $node instanceof FuncCall ) {
 			// If it's set already and this is not a FuncCall, reset it to null,
 			// since there's something else and it would be used incorrectly.
 			$this->last_doc = null;
 		}
 
-		if ( $this->last_doc && $orig_node instanceof FuncCall && $orig_node->name instanceof Name ) {
-			if ( in_array( (string) $orig_node->name, $apply_filter_functions, true ) ) {
+		if ( $this->last_doc && $node instanceof FuncCall && $node->name instanceof Name ) {
+			if ( in_array( (string) $node->name, $apply_filter_functions, true ) ) {
 				$hook_type = 'filter';
-			} elseif ( in_array( (string) $orig_node->name, $do_action_functions, true ) ) {
+			} elseif ( in_array( (string) $node->name, $do_action_functions, true ) ) {
 				$hook_type = 'action';
 			} else {
 				return null;
 			}
 
-			if ( ! $orig_node->args[0]->value instanceof String_ ) {
+			if ( ! $node->args[0] instanceof Arg ) {
+				return null;
+			}
+
+			if ( ! $node->args[0]->value instanceof String_ ) {
 				$this->last_doc = null;
 				return null;
 			}
 
-			$hook_name = $orig_node->args[0]->value->value;
+			$hook_name = $node->args[0]->value->value;
 
 			$doc_comment = $this->last_doc->getText();
 
