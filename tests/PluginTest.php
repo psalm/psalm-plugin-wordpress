@@ -1,4 +1,5 @@
 <?php
+
 namespace PsalmWordPress\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -15,15 +16,14 @@ class PluginTest extends TestCase {
 	/**
 	 * @return void
 	 */
-	public function setUp(): void {
+	public function setUp() : void {
 		$this->registration = $this->prophesize( RegistrationInterface::class );
 	}
 
 	/**
 	 * @test
-	 * @return void
 	 */
-	public function hasEntryPoint() {
+	public function hasEntryPoint() : void {
 		$this->expectNotToPerformAssertions();
 		$plugin = new Plugin();
 		$plugin( $this->registration->reveal(), null );

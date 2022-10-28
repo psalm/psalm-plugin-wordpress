@@ -4,12 +4,13 @@
 			<strong>WordPress plugin for Psalm</strong><br />
 			Write type-safe WordPress code.
 		</td>
-		<td align="right" width="20%">
+		<td align="right" width="30%">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			A <strong><a href="https://hmn.md/">Human Made</a></strong> project. Maintained by @joehoyle.
+			A <strong><a href="https://hmn.md/">Human Made</a></strong> project.<br />
+			Maintained by @joehoyle.
 		</td>
 		<td align="center">
 			<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" />

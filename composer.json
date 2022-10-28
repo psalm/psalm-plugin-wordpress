@@ -1,59 +1,63 @@
 {
-    "name": "humanmade/psalm-plugin-wordpress",
-    "description": "WordPress stubs and plugin for Psalm.",
-    "type": "psalm-plugin",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Joe Hoyle",
-            "email": "joehoyle@gmail.com"
-        }
-    ],
-    "require": {
-        "ext-simplexml": "*",
-        "johnbillion/wp-hooks": "^0.8.0",
-        "php-stubs/wordpress-stubs": "^5.5",
-        "php-stubs/wordpress-globals": "^0.2.0",
-        "php-stubs/wp-cli-stubs": "^2.5",
-        "vimeo/psalm": "^4"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.0",
-        "psalm/plugin-phpunit": "^0.15.1"
-    },
-    "extra": {
-        "psalm" : {
-            "pluginClass": "PsalmWordPress\\Plugin"
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "PsalmWordPress\\": ["."]
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PsalmWordPress\\Tests\\": ["tests", "tests/unit"],
-            "Psalm\\Tests\\": "vendor/vimeo/psalm/tests/"
-        }
-    },
-    "config": {
-        "preferred-install": {
-            "vimeo/psalm": "source"
-        },
-        "sort-packages": true
-    },
-    "scripts" : {
-        "check": [
-            "@cs-check",
-            "@test",
-            "@analyze"
-        ],
-        "analyze": "psalm",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "test": "codecept run",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "generate-wordpress-stubs": "cd wordpress ; composer init -n ; composer require "
-    }
+	"name": "humanmade/psalm-plugin-wordpress",
+	"description": "WordPress stubs and plugin for Psalm.",
+	"type": "psalm-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Joe Hoyle",
+			"email": "joehoyle@gmail.com"
+		}
+	],
+	"require": {
+		"ext-simplexml": "*",
+		"johnbillion/wp-hooks": "^0.8.0",
+		"php-stubs/wordpress-stubs": "^5.5",
+		"php-stubs/wordpress-globals": "^0.2.0",
+		"php-stubs/wp-cli-stubs": "^2.5",
+		"vimeo/psalm": "^4"
+	},
+	"require-dev": {
+		"humanmade/coding-standards": "^1.2",
+		"phpunit/phpunit": "^9.0",
+		"psalm/plugin-phpunit": "^0.15.1"
+	},
+	"extra": {
+		"psalm" : {
+			"pluginClass": "PsalmWordPress\\Plugin"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"PsalmWordPress\\": ["."]
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PsalmWordPress\\Tests\\": ["tests", "tests/unit"],
+			"Psalm\\Tests\\": "vendor/vimeo/psalm/tests/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"preferred-install": {
+			"vimeo/psalm": "source"
+		},
+		"sort-packages": true
+	},
+	"scripts" : {
+		"check": [
+			"@cs-check",
+			"@test",
+			"@analyze"
+		],
+		"analyze": "psalm",
+		"cs-check": "phpcs -ps --colors",
+		"cs-fix": "phpcbf",
+		"test": "codecept run",
+		"test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+		"generate-wordpress-stubs": "cd wordpress ; composer init -n ; composer require "
+	}
 }

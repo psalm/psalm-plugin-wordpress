@@ -1,13 +1,15 @@
 <?php
+
 namespace PsalmWordPress\Tests;
 
-use Psalm;
+use Psalm\Tests\Traits\InvalidCodeAnalysisTestTrait;
+use Psalm\Tests\Traits\ValidCodeAnalysisTestTrait;
 
 class FiltersTest extends BaseTestCase {
-	use Psalm\Tests\Traits\InvalidCodeAnalysisTestTrait;
-	use Psalm\Tests\Traits\ValidCodeAnalysisTestTrait;
+	use InvalidCodeAnalysisTestTrait;
+	use ValidCodeAnalysisTestTrait;
 
-	 /**
+	/**
 	 * @return iterable<string,array{string,assertions?:array<string,string>,error_levels?:string[]}>
 	 */
 	public function providerValidCodeParse() : iterable {
@@ -54,7 +56,7 @@ class FiltersTest extends BaseTestCase {
 					return 1;
 				}, 10, 3 );
 				EOD,
-			]
+			],
 		];
 	}
 
@@ -101,7 +103,7 @@ class FiltersTest extends BaseTestCase {
 				} );
 				EOD,
 				'error_message' => 'HookNotFound',
-			]
+			],
 		];
 	}
 }
