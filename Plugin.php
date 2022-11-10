@@ -115,7 +115,7 @@ class Plugin implements
 			return;
 		}
 
-		$wp_hooks_data_dir = self::getVendorDir( 'vendor/johnbillion/wp-hooks/hooks' );
+		$wp_hooks_data_dir = self::getVendorDir('vendor/wp-hooks/wordpress-core/hooks');
 
 		static::loadHooksFromFile( $wp_hooks_data_dir . '/actions.json' );
 		static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
@@ -175,7 +175,20 @@ class Plugin implements
 			// Must be done before parseString to avoid notice there.
 			$types = array_filter( $types );
 
-			static::registerHook( $hook['name'], array_map( [ Type::class, 'parseString' ], $types ), $hook['type'] );
+			// skip invalid ones
+			try {
+				$parsed_types = array_map( [ Type::class, 'parseString' ], $types );
+			} catch ( \Psalm\Exception\TypeParseTreeException $e ) {
+				continue;
+			}
+
+			static::registerHook( $hook['name'], $parsed_types, $hook['type'] );
+
+			if ( isset( $hook['aliases'] ) && is_array( $hook['aliases'] ) ) {
+				foreach ( $hook['aliases'] as $alias_name ) {
+					static::registerHook( $alias_name, $parsed_types, $hook['type'] );
+				}
+			}
 		}
 	}
 
