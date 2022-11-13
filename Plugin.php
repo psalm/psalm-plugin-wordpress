@@ -1,6 +1,6 @@
 <?php
 
-namespace PsalmWordpress;
+namespace PsalmWordPress;
 
 use BadMethodCallException;
 use Exception;
