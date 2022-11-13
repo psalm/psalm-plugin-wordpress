@@ -2,7 +2,9 @@
 
 namespace PsalmWordpress;
 
+use BadMethodCallException;
 use Exception;
+use InvalidArgumentException;
 use phpDocumentor;
 use PhpParser;
 use PhpParser\Node\Arg;
@@ -16,6 +18,7 @@ use Psalm;
 use Psalm\Codebase;
 use Psalm\CodeLocation;
 use Psalm\Context;
+use Psalm\Exception\TypeParseTreeException;
 use Psalm\IssueBuffer;
 use Psalm\Plugin\Hook\AfterEveryFunctionCallAnalysisInterface;
 use Psalm\Plugin\Hook\BeforeFileAnalysisInterface;
@@ -28,6 +31,7 @@ use Psalm\Storage\FunctionLikeParameter;
 use Psalm\Type;
 use Psalm\Type\Atomic;
 use Psalm\Type\Union;
+use RuntimeException;
 use SimpleXMLElement;
 
 class Plugin implements
@@ -35,6 +39,7 @@ class Plugin implements
 	BeforeFileAnalysisInterface,
 	FunctionParamsProviderInterface,
 	PluginEntryPointInterface {
+
 	/**
 	 * @var array<string, bool|array<string>>
 	 */
@@ -54,14 +59,15 @@ class Plugin implements
 			array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
 		}
 
-		// if useDefaultHooks is not set or set to anything except false, we want to load the hooks included in this plugin
-		$configHooks = array( 'useDefaultHooks' => false );
-		if ( !isset( $config->useDefaultHooks['value'] ) || (string) $config->useDefaultHooks['value'] !== 'false' ) {
-			$configHooks['useDefaultHooks'] = true;
+		// If useDefaultHooks is not set or set to anything except false,
+		// we want to load the hooks included in this plugin.
+		$config_hooks = [ 'useDefaultHooks' => false ];
+		if ( ! isset( $config->useDefaultHooks['value'] ) || (string) $config->useDefaultHooks['value'] !== 'false' ) {
+			$config_hooks['useDefaultHooks'] = true;
 		}
 
-		if ( !empty( $config->hooks ) ) {
-			$configHooks['hooks'] = array();
+		if ( ! empty( $config->hooks ) ) {
+			$config_hooks['hooks'] = [];
 			$cwd = getcwd();
 			foreach ( $config->hooks as $hook_data ) {
 				foreach ( $hook_data as $type => $data ) {
@@ -71,59 +77,60 @@ class Plugin implements
 							$file = $cwd . '/' . $file;
 						}
 
-						if ( !is_file( $file ) ) {
-							throw new \BadMethodCallException(
-								sprintf('Hook file "%s" does not exist', $file)
+						if ( ! is_file( $file ) ) {
+							throw new BadMethodCallException(
+								sprintf( 'Hook file "%s" does not exist', $file )
 							);
 						}
 
-						// file as key, to avoid loading the same hooks multiple times
-						$configHooks['hooks'][ $file ] = $file;
+						// File as key, to avoid loading the same hooks multiple times.
+						$config_hooks['hooks'][ $file ] = $file;
 					} elseif ( $type === 'directory' ) {
 						$directory = rtrim( (string) $data['name'], '/' );
 						if ( substr( $directory, 0, 1 ) !== '/' ) {
 							$directory = $cwd . '/' . $directory;
 						}
 
-						if ( !is_dir( $directory ) ) {
-							throw new \BadMethodCallException(
-								sprintf('Hook directory "%s" does not exist', $directory)
+						if ( ! is_dir( $directory ) ) {
+							throw new BadMethodCallException(
+								sprintf( 'Hook directory "%s" does not exist', $directory )
 							);
 						}
 
 						if ( isset( $data['recursive'] ) && (string) $data['recursive'] === 'true' ) {
-							$directories = glob($directory . '/*' , GLOB_ONLYDIR);
+							$directories = glob( $directory . '/*', GLOB_ONLYDIR );
 						}
 
 						if ( empty( $directories ) ) {
-							$directories = array( $directory );
+							$directories = [ $directory ];
 						} else {
 							$directories[] = $directory;
 
-							// might have duplicates if the directory is explicitly specified and also passed in recursive directory
+							// Might have duplicates if the directory is explicitly
+							// specified and also passed in recursive directory.
 							$directories = array_unique( $directories );
 						}
 
 						foreach ( $directories as $directory ) {
 							$actions = $directory . '/actions.json';
 							if ( is_file( $actions ) ) {
-								$configHooks['hooks'][ $actions ] = $actions;
+								$config_hooks['hooks'][ $actions ] = $actions;
 							}
 
 							$filters = $directory . '/filters.json';
 							if ( is_file( $filters ) ) {
-								$configHooks['hooks'][ $filters ] = $filters;
+								$config_hooks['hooks'][ $filters ] = $filters;
 							}
 						}
 					}
 				}
 			}
 
-			// don't need the keys anymore and ensures array_merge runs smoothly later on
-			$configHooks['hooks'] = array_values( $configHooks['hooks'] );
+			// Don't need the keys anymore and ensures array_merge runs smoothly later on.
+			$config_hooks['hooks'] = array_values( $config_hooks['hooks'] );
 		}
 
-		static::$configHooks = $configHooks;
+		static::$configHooks = $config_hooks;
 
 		static::loadStubbedHooks();
 	}
@@ -143,7 +150,7 @@ class Plugin implements
 		$self = 'humanmade/psalm-plugin-wordpress';
 
 		if ( 0 !== strpos( $path, $vendor ) ) {
-			throw new \BadMethodCallException(
+			throw new BadMethodCallException(
 				sprintf( '$path must start with "%s", "%s" given', $vendor, $path )
 			);
 		}
@@ -192,7 +199,7 @@ class Plugin implements
 		}
 
 		if ( static::$configHooks['useDefaultHooks'] !== false ) {
-			$wp_hooks_data_dir = self::getVendorDir('vendor/wp-hooks/wordpress-core/hooks');
+			$wp_hooks_data_dir = self::getVendorDir( 'vendor/wp-hooks/wordpress-core/hooks' );
 
 			static::loadHooksFromFile( $wp_hooks_data_dir . '/actions.json' );
 			static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
@@ -259,10 +266,10 @@ class Plugin implements
 			// Must be done before parseString to avoid notice there.
 			$types = array_filter( $types );
 
-			// skip invalid ones
+			// Skip invalid ones.
 			try {
 				$parsed_types = array_map( [ Type::class, 'parseString' ], $types );
-			} catch ( \Psalm\Exception\TypeParseTreeException $e ) {
+			} catch ( TypeParseTreeException $e ) {
 				continue;
 			}
 
@@ -370,8 +377,7 @@ class Plugin implements
 	}
 
 	/**
-	 * @param  list<PhpParser\Node\Arg>    $call_args
-	 *
+	 * @param  list<PhpParser\Node\Arg> $call_args
 	 * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
 	 */
 	public static function getFunctionParams(
@@ -556,9 +562,9 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			$doc_factory = phpDocumentor\Reflection\DocBlockFactory::createInstance();
 			try {
 				$doc_block = $doc_factory->create( $doc_comment );
-			} catch ( \RuntimeException $e ) {
+			} catch ( RuntimeException $e ) {
 				return null;
-			} catch ( \InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException $e ) {
 				return null;
 			}
 
