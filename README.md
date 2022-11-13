@@ -31,11 +31,11 @@ If you follow the installation instructions, the `psalm-plugin` command will add
 ```xml
 <?xml version="1.0"?>
 <psalm xmlns="https://getpsalm.org/schema/config">
-    <!-- project configuration -->
+	<!-- project configuration -->
 
-    <plugins>
-        <pluginClass class="PsalmWordPress\Plugin" />
-    </plugins>
+	<plugins>
+		<pluginClass class="PsalmWordPress\Plugin" />
+	</plugins>
 </psalm>
 ```
 
@@ -43,7 +43,7 @@ If you do not want to use the default WordPress stubs, which are part of this pl
 
 ```xml
 <pluginClass class="PsalmWordPress\Plugin">
-    <useDefaultStubs value="false" />
+	<useDefaultStubs value="false" />
 </pluginClass>
 ```
 
@@ -51,7 +51,7 @@ If you do not want to use the default WordPress hooks, which are part of this pl
 
 ```xml
 <pluginClass class="PsalmWordPress\Plugin">
-    <useDefaultHooks value="false" />
+	<useDefaultHooks value="false" />
 </pluginClass>
 ```
 
@@ -59,11 +59,11 @@ You can also provide custom hooks:
 
 ```xml
 <pluginClass class="PsalmWordPress\Plugin">
-    <hooks>
-        <directory name="some/dir/hooks" recursive="true" />
-        <directory name="/absolute/other/dir/hooks" />
-        <file name="my-special-hooks/actions.json" />
-    </hooks>
+	<hooks>
+		<directory name="some/dir/hooks" recursive="true" />
+		<directory name="/absolute/other/dir/hooks" />
+		<file name="my-special-hooks/actions.json" />
+	</hooks>
 </pluginClass>
 ```
 
