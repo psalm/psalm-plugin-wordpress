@@ -41,12 +41,15 @@ class Plugin implements
 	PluginEntryPointInterface {
 
 	/**
-	 * @var array<string, bool|array<string>>
+	 * @var array{useDefaultHooks: bool, hooks: list<string>}
 	 */
-	public static $configHooks = [];
+	public static $configHooks = [
+		'useDefaultHooks' => false,
+		'hooks'           => [],
+	];
 
 	/**
-	 * @var array<string, array{types: list<Union>}>
+	 * @var array<string, array{hook_type: string, types: list<Union>}>
 	 */
 	public static $hooks = [];
 
@@ -61,18 +64,21 @@ class Plugin implements
 
 		// If useDefaultHooks is not set or set to anything except false,
 		// we want to load the hooks included in this plugin.
-		$config_hooks = [ 'useDefaultHooks' => false ];
+		static::$configHooks['useDefaultHooks'] = false;
 		if ( ! isset( $config->useDefaultHooks['value'] ) || (string) $config->useDefaultHooks['value'] !== 'false' ) {
-			$config_hooks['useDefaultHooks'] = true;
+			static::$configHooks['useDefaultHooks'] = true;
 		}
 
 		if ( ! empty( $config->hooks ) ) {
-			$config_hooks['hooks'] = [];
+			$hooks = [];
 			$cwd = getcwd();
+			/**
+			 * @var array<string, array{name: string, recursive?: string}> $hook_data
+			 */
 			foreach ( $config->hooks as $hook_data ) {
 				foreach ( $hook_data as $type => $data ) {
 					if ( $type === 'file' ) {
-						$file = (string) $data['name'];
+						$file = $data['name'];
 						if ( substr( $file, 0, 1 ) !== '/' ) {
 							$file = $cwd . '/' . $file;
 						}
@@ -84,9 +90,9 @@ class Plugin implements
 						}
 
 						// File as key, to avoid loading the same hooks multiple times.
-						$config_hooks['hooks'][ $file ] = $file;
+						$hooks[ $file ] = $file;
 					} elseif ( $type === 'directory' ) {
-						$directory = rtrim( (string) $data['name'], '/' );
+						$directory = rtrim( $data['name'], '/' );
 						if ( substr( $directory, 0, 1 ) !== '/' ) {
 							$directory = $cwd . '/' . $directory;
 						}
@@ -97,13 +103,14 @@ class Plugin implements
 							);
 						}
 
-						if ( isset( $data['recursive'] ) && (string) $data['recursive'] === 'true' ) {
+						if ( isset( $data['recursive'] ) && $data['recursive'] === 'true' ) {
 							$directories = glob( $directory . '/*', GLOB_ONLYDIR );
 						}
 
 						if ( empty( $directories ) ) {
 							$directories = [ $directory ];
 						} else {
+							/** @var string[] $directories */
 							$directories[] = $directory;
 
 							// Might have duplicates if the directory is explicitly
@@ -114,12 +121,12 @@ class Plugin implements
 						foreach ( $directories as $directory ) {
 							$actions = $directory . '/actions.json';
 							if ( is_file( $actions ) ) {
-								$config_hooks['hooks'][ $actions ] = $actions;
+								$hooks[ $actions ] = $actions;
 							}
 
 							$filters = $directory . '/filters.json';
 							if ( is_file( $filters ) ) {
-								$config_hooks['hooks'][ $filters ] = $filters;
+								$hooks[ $filters ] = $filters;
 							}
 						}
 					}
@@ -127,10 +134,8 @@ class Plugin implements
 			}
 
 			// Don't need the keys anymore and ensures array_merge runs smoothly later on.
-			$config_hooks['hooks'] = array_values( $config_hooks['hooks'] );
+			static::$configHooks['hooks'] = array_values( $hooks );
 		}
-
-		static::$configHooks = $config_hooks;
 
 		static::loadStubbedHooks();
 	}
@@ -205,17 +210,22 @@ class Plugin implements
 			static::loadHooksFromFile( $wp_hooks_data_dir . '/filters.json' );
 		}
 
-		if ( isset( static::$configHooks['hooks'] ) ) {
-			foreach ( static::$configHooks['hooks'] as $file ) {
-				static::loadHooksFromFile( $file );
-			}
+		foreach ( static::$configHooks['hooks'] as $file ) {
+			static::loadHooksFromFile( $file );
 		}
 	}
 
 	protected static function loadHooksFromFile( string $filepath ) : void {
+		$data = json_decode( file_get_contents( $filepath ), true );
+
+		if ( ! isset( $data['hooks'] ) || ! is_iterable( $data['hooks'] ) ) {
+			return;
+		}
+
 		/**
 		 * @var list<array{
 		 *     name: string,
+		 *     aliases?: list<string>,
 		 *     file: string,
 		 *     type: 'action'|'filter',
 		 *     doc: array{
@@ -226,9 +236,9 @@ class Plugin implements
 		 *     }
 		 * }>
 		 */
-		$hooks = json_decode( file_get_contents( $filepath ), true );
-		$hook_map = [];
-		foreach ( $hooks['hooks'] as $hook ) {
+		$hooks = $data['hooks'];
+
+		foreach ( $hooks as $hook ) {
 			$params = array_filter( $hook['doc']['tags'], function ( $tag ) {
 				return $tag['name'] === 'param';
 			} );
@@ -264,7 +274,7 @@ class Plugin implements
 
 			// Remove empty elements which can happen with invalid PHPDoc.
 			// Must be done before parseString to avoid notice there.
-			$types = array_filter( $types );
+			$types = array_values( array_filter( $types ) );
 
 			// Skip invalid ones.
 			try {
@@ -275,7 +285,7 @@ class Plugin implements
 
 			static::registerHook( $hook['name'], $parsed_types, $hook['type'] );
 
-			if ( isset( $hook['aliases'] ) && is_array( $hook['aliases'] ) ) {
+			if ( isset( $hook['aliases'] ) ) {
 				foreach ( $hook['aliases'] as $alias_name ) {
 					static::registerHook( $alias_name, $parsed_types, $hook['type'] );
 				}
@@ -331,6 +341,10 @@ class Plugin implements
 			return;
 		}
 
+		if ( ! $expr->args[0] instanceof Arg ) {
+			return;
+		}
+
 		if ( ! $expr->args[0]->value instanceof String_ ) {
 			return;
 		}
@@ -341,30 +355,36 @@ class Plugin implements
 			return;
 		}
 
-		$types = array_map( function ( Arg $arg ) use ( $statements_source ) {
-			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
-			if ( ! $type ) {
-				$type = Type::parseString( 'mixed' );
-			} else {
-				$sub_types = array_values( $type->getAtomicTypes() );
-				$sub_types = array_map( function ( Atomic $type ) : Atomic {
-					if ( $type instanceof Atomic\TTrue || $type instanceof Atomic\TFalse ) {
-						return new Atomic\TBool;
-					} elseif ( $type instanceof Atomic\TLiteralString ) {
-						return new Atomic\TString;
-					} elseif ( $type instanceof Atomic\TLiteralInt ) {
-						return new Atomic\TInt;
-					} elseif ( $type instanceof Atomic\TLiteralFloat ) {
-						return new Atomic\TFloat;
-					}
-
-					return $type;
-				}, $sub_types );
-				$type = new Union( $sub_types );
+		$types = array_map( function ( $arg ) use ( $statements_source ) {
+			if ( ! $arg instanceof Arg ) {
+				return Type::parseString( 'mixed' );
 			}
 
-			return $type;
+			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			if ( ! $type ) {
+				return Type::parseString( 'mixed' );
+				$type = Type::parseString( 'mixed' );
+			}
+
+			$sub_types = array_values( $type->getAtomicTypes() );
+			$sub_types = array_map( function ( Atomic $type ) : Atomic {
+				if ( $type instanceof Atomic\TTrue || $type instanceof Atomic\TFalse ) {
+					return new Atomic\TBool;
+				} elseif ( $type instanceof Atomic\TLiteralString ) {
+					return new Atomic\TString;
+				} elseif ( $type instanceof Atomic\TLiteralInt ) {
+					return new Atomic\TInt;
+				} elseif ( $type instanceof Atomic\TLiteralFloat ) {
+					return new Atomic\TFloat;
+				}
+
+				return $type;
+			}, $sub_types );
+
+			return new Union( $sub_types );
 		}, array_slice( $expr->args, 1 ) );
+
+		$types = array_values( $types );
 
 		static::registerHook( $name, $types, $hook_type );
 	}
@@ -408,6 +428,7 @@ class Plugin implements
 					$statements_source->getSuppressedIssues()
 				);
 			}
+
 			return [];
 		}
 
@@ -480,7 +501,7 @@ class Plugin implements
 	 */
 	public static function registerHook( string $hook, array $types, string $hook_type = 'filter' ) : void {
 		// Remove empty elements which can happen with invalid PHPDoc.
-		$types = array_filter( $types );
+		$types = array_values( array_filter( $types ) );
 
 		// Do not assign empty types if we already have this hook registered.
 		if ( isset( static::$hooks[ $hook ] ) && empty( $types ) ) {
@@ -502,13 +523,17 @@ class Plugin implements
 }
 
 class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
-	/** @var ?PhpParser\Comment\Doc */
+	/**
+	 * @var ?PhpParser\Comment\Doc
+	 */
 	protected $last_doc = null;
 
-	/** @var array<string, list<Union>> */
+	/**
+	 * @var array<string, array{hook_type: string, types: list<Union>}>
+	 */
 	public $hooks = [];
 
-	public function enterNode( PhpParser\Node $orig_node ) {
+	public function enterNode( PhpParser\Node $node ) {
 		$apply_filter_functions = [
 			'apply_filters',
 			'apply_filters_ref_array',
@@ -527,35 +552,39 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		// "echo apply_filters" cannot do this for all cases,
 		// as often it will assign completely wrong stuff otherwise.
 		if (
-			$orig_node->getDocComment() && (
-				$orig_node instanceof FuncCall ||
-				$orig_node instanceof Return_ ||
-				$orig_node instanceof Variable ||
-				$orig_node instanceof Echo_
+			$node->getDocComment() && (
+				$node instanceof FuncCall ||
+				$node instanceof Return_ ||
+				$node instanceof Variable ||
+				$node instanceof Echo_
 			)
 		) {
-			$this->last_doc = $orig_node->getDocComment();
-		} elseif ( isset( $this->last_doc ) && ! $orig_node instanceof FuncCall ) {
+			$this->last_doc = $node->getDocComment();
+		} elseif ( isset( $this->last_doc ) && ! $node instanceof FuncCall ) {
 			// If it's set already and this is not a FuncCall, reset it to null,
 			// since there's something else and it would be used incorrectly.
 			$this->last_doc = null;
 		}
 
-		if ( $this->last_doc && $orig_node instanceof FuncCall && $orig_node->name instanceof Name ) {
-			if ( in_array( (string) $orig_node->name, $apply_filter_functions, true ) ) {
+		if ( $this->last_doc && $node instanceof FuncCall && $node->name instanceof Name ) {
+			if ( in_array( (string) $node->name, $apply_filter_functions, true ) ) {
 				$hook_type = 'filter';
-			} elseif ( in_array( (string) $orig_node->name, $do_action_functions, true ) ) {
+			} elseif ( in_array( (string) $node->name, $do_action_functions, true ) ) {
 				$hook_type = 'action';
 			} else {
 				return null;
 			}
 
-			if ( ! $orig_node->args[0]->value instanceof String_ ) {
+			if ( ! $node->args[0] instanceof Arg ) {
+				return null;
+			}
+
+			if ( ! $node->args[0]->value instanceof String_ ) {
 				$this->last_doc = null;
 				return null;
 			}
 
-			$hook_name = $orig_node->args[0]->value->value;
+			$hook_name = $node->args[0]->value->value;
 
 			$doc_comment = $this->last_doc->getText();
 
