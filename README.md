@@ -73,7 +73,7 @@ Further details about plugins can be found on [Psalm's website](https://psalm.de
 
 Feel free to open a PR to fix bugs or add features!
 
-In addition, have a look at psalm's [CONTRIBUTING.md](https://github.com/vimeo/psalm/blob/master/CONTRIBUTING.md).
+In addition, have a look at Psalm's [contribution guidelines](https://github.com/vimeo/psalm/blob/master/CONTRIBUTING.md).
 
 ## Who made this
 
