@@ -17,11 +17,30 @@ This [Psalm](https://psalm.dev/) plugin provides all WordPress and WP CLI stubs,
 
 `composer require --dev humanmade/plugin-wordpress`
 
-and add this to your psalm.xml config:
+and add this to your psalm.xml config before the `</psalm>` tag
 
 ```
-<plugins xmlns="https://getpsalm.org/schema/config">	
+<plugins xmlns="https://getpsalm.org/schema/config">
     <pluginClass class="PsalmWordPress\Plugin" />
+</plugins>
+```
+
+Additional configuration options of this plugin can be set like this:
+
+```
+<plugins xmlns="https://getpsalm.org/schema/config">
+    <pluginClass class="PsalmWordPress\Plugin">
+        <!-- set to false, if you do not want to use the default WP stubs, which are part of this plugin -->
+        <useDefaultStubs value="false" />
+        <!-- set to false, if you do not want to use the default WP hooks, which are part of this plugin -->
+        <useDefaultHooks value="false" />
+        <!-- optionally, you can also load custom hooks -->
+        <hooks>
+            <directory name="some/dir/hooks" recursive="true" />
+            <directory name="/absolute/other/dir/hooks" />
+            <file name="my-special-hooks/actions.json" />
+        </hooks>
+    </pluginClass>
 </plugins>
 ```
 
