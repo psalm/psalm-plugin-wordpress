@@ -192,6 +192,7 @@ class Plugin implements
 			self::getVendorDir( 'vendor/php-stubs/wp-cli-stubs' ) . '/wp-cli-stubs.php',
 			self::getVendorDir( 'vendor/php-stubs/wp-cli-stubs' ) . '/wp-cli-commands-stubs.php',
 			self::getVendorDir( 'vendor/php-stubs/wp-cli-stubs' ) . '/wp-cli-i18n-stubs.php',
+			__DIR__ . '/stubs/globals.php',
 			__DIR__ . '/stubs/overrides.php',
 		];
 	}

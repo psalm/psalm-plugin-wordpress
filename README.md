@@ -43,7 +43,7 @@ Further details about plugins can be found on [Psalm's website](https://psalm.de
 
 ### Default WordPress stubs
 
-If you do not want to use the default WordPress stubs, which are part of this plugin, `useDefaultStubs` must be set to `false`:
+If you do not want to use the default WordPress class/method/function stubs, which are part of this plugin, `useDefaultStubs` must be set to `false`:
 
 ```xml
 <pluginClass class="PsalmWordPress\Plugin">
