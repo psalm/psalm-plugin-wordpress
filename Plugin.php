@@ -257,10 +257,12 @@ class Plugin implements
 				if ( ! $found ) {
 					return $param;
 				}
+
 				$array_properties = [];
 				foreach ( $matches as $match ) {
 					$array_properties[] = $match[2] . ': ' . $match[1];
 				}
+
 				$array_string = 'array{ ' . implode( ', ', $array_properties ) . ' }';
 				$param['types'] = [ $array_string ];
 				return $param;
@@ -363,7 +365,6 @@ class Plugin implements
 			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
 			if ( ! $type ) {
 				return Type::parseString( 'mixed' );
-				$type = Type::parseString( 'mixed' );
 			}
 
 			$sub_types = array_values( $type->getAtomicTypes() );
@@ -443,6 +444,7 @@ class Plugin implements
 					$statements_source->getSuppressedIssues()
 				);
 			}
+
 			return [];
 		}
 
@@ -457,6 +459,7 @@ class Plugin implements
 					$statements_source->getSuppressedIssues()
 				);
 			}
+
 			return [];
 		}
 
@@ -493,6 +496,7 @@ class Plugin implements
 			new FunctionLikeParameter( 'Priority', false, Type::parseString( 'int|null' ) ),
 			new FunctionLikeParameter( 'Args', false, Type::parseString( 'int|null' ) ),
 		];
+
 		return $return;
 	}
 
