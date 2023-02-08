@@ -1,4 +1,4 @@
-<h1>WordPress plugin for Psalm</h1>
+# WordPress plugin for Psalm
 
 [![Packagist](https://img.shields.io/packagist/v/humanmade/psalm-plugin-wordpress.svg)](https://packagist.org/packages/humanmade/psalm-plugin-wordpress)
 [![Packagist](https://img.shields.io/packagist/dt/humanmade/psalm-plugin-wordpress.svg)](https://packagist.org/packages/humanmade/psalm-plugin-wordpress)
@@ -39,6 +39,10 @@ If you follow the installation instructions, the `psalm-plugin` command will add
 </psalm>
 ```
 
+Further details about plugins can be found on [Psalm's website](https://psalm.dev/docs/running_psalm/plugins/using_plugins/).
+
+### Default WordPress stubs
+
 If you do not want to use the default WordPress stubs, which are part of this plugin, `useDefaultStubs` must be set to `false`:
 
 ```xml
@@ -47,6 +51,8 @@ If you do not want to use the default WordPress stubs, which are part of this pl
 </pluginClass>
 ```
 
+### Default WordPress hooks
+
 If you do not want to use the default WordPress hooks, which are part of this plugin, `useDefaultHooks` must be set to `false`:
 
 ```xml
@@ -54,6 +60,8 @@ If you do not want to use the default WordPress hooks, which are part of this pl
 	<useDefaultHooks value="false" />
 </pluginClass>
 ```
+
+### Custom stubs
 
 You can also provide custom hooks:
 
@@ -67,7 +75,14 @@ You can also provide custom hooks:
 </pluginClass>
 ```
 
-Further details about plugins can be found on [Psalm's website](https://psalm.dev/docs/running_psalm/plugins/using_plugins/).
+If a directory is provided, the plugin will search for the following files:
+
+* `actions.json`
+* `filters.json`
+* `hooks.json`
+
+The plugin expects a JSON representation of the hooks as per [wp-hooks/generator](https://github.com/wp-hooks/generator).
+
 
 ## Interested in contributing?
 
