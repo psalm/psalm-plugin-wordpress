@@ -119,14 +119,11 @@ class Plugin implements
 						}
 
 						foreach ( $directories as $directory ) {
-							$actions = $directory . '/actions.json';
-							if ( is_file( $actions ) ) {
-								$hooks[ $actions ] = $actions;
-							}
-
-							$filters = $directory . '/filters.json';
-							if ( is_file( $filters ) ) {
-								$hooks[ $filters ] = $filters;
+							foreach ( [ 'actions', 'filters', 'hooks' ] as $file_name ) {
+								$file_path = $directory . '/' . $file_name . '.json';
+								if ( is_file( $file_path ) ) {
+									$hooks[ $file_path ] = $file_path;
+								}
 							}
 						}
 					}
