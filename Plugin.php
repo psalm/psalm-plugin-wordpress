@@ -359,7 +359,12 @@ class Plugin implements
 				return Type::parseString( 'mixed' );
 			}
 
-			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			try {
+				$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			} catch (\UnexpectedValueException $e) {
+				$type = null;
+			}
+
 			if ( ! $type ) {
 				return Type::parseString( 'mixed' );
 			}
