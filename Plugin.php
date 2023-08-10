@@ -33,6 +33,7 @@ use Psalm\Type\Atomic;
 use Psalm\Type\Union;
 use RuntimeException;
 use SimpleXMLElement;
+use UnexpectedValueException;
 
 class Plugin implements
 	AfterEveryFunctionCallAnalysisInterface,
@@ -361,7 +362,7 @@ class Plugin implements
 
 			try {
 				$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
-			} catch (\UnexpectedValueException $e) {
+			} catch (UnexpectedValueException $e) {
 				$type = null;
 			}
 
