@@ -33,6 +33,7 @@ use Psalm\Type\Atomic;
 use Psalm\Type\Union;
 use RuntimeException;
 use SimpleXMLElement;
+use UnexpectedValueException;
 
 class Plugin implements
 	AfterEveryFunctionCallAnalysisInterface,
@@ -359,7 +360,12 @@ class Plugin implements
 				return Type::parseString( 'mixed' );
 			}
 
-			$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			try {
+				$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
+			} catch (UnexpectedValueException $e) {
+				$type = null;
+			}
+
 			if ( ! $type ) {
 				return Type::parseString( 'mixed' );
 			}
