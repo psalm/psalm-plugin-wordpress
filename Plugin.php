@@ -362,7 +362,7 @@ class Plugin implements
 
 			try {
 				$type = $statements_source->getNodeTypeProvider()->getType( $arg->value );
-			} catch (UnexpectedValueException $e) {
+			} catch ( UnexpectedValueException $e ) {
 				$type = null;
 			}
 
