@@ -61,7 +61,7 @@ If you do not want to use the default WordPress hooks, which are part of this pl
 </pluginClass>
 ```
 
-### Custom stubs
+### Custom hooks
 
 You can also provide custom hooks:
 
