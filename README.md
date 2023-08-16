@@ -83,6 +83,30 @@ If a directory is provided, the plugin will search for the following files:
 
 The plugin expects a JSON representation of the hooks as per [wp-hooks/generator](https://github.com/wp-hooks/generator).
 
+### WordPress paths
+
+To help Psalm analyze your project you might need to define some of WordPress' default global constants such as those for paths.
+
+```xml
+<?xml version="1.0"?>
+<psalm autoloader="tests/bootstrap.php" xmlns="https://getpsalm.org/schema/config">
+	<!-- project configuration -->
+</psalm>
+```
+
+The following example bootstrap file is for a Bedrock installation:
+
+```php
+<?php
+
+require_once dirname( __DIR__ ) . '/config/application.php';
+
+define( 'WPMU_PLUGIN_DIR', WP_CONTENT_DIR . '/mu-plugins' );
+
+define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
+```
+
+You could require WordPress' default constants functions but that requires a lot more boilerplating to allow those functions to effectively define constants.
 
 ## Interested in contributing?
 
