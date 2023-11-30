@@ -111,13 +111,11 @@ class Plugin implements
 				$base_dir = getcwd();
 			}
 
-			/**
-			 * @var array<string, array{name: string, recursive?: string}> $hook_data
-			 */
 			foreach ( $config->hooks as $hook_data ) {
 				foreach ( $hook_data as $type => $data ) {
 					if ( $type === 'file' ) {
-						$file = $data['name'];
+						// this is a SimpleXmlElement, therefore we need to cast it to string!
+						$file = (string) $data['name'];
 						if ( $file[0] !== '/' ) {
 							$file = $base_dir . '/' . $file;
 						}
@@ -131,7 +129,7 @@ class Plugin implements
 						// File as key, to avoid loading the same hooks multiple times.
 						$hooks[ $file ] = $file;
 					} elseif ( $type === 'directory' ) {
-						$directory = rtrim( $data['name'], '/' );
+						$directory = rtrim( (string) $data['name'], '/' );
 						if ( $directory[0] !== '/' ) {
 							$directory = $base_dir . '/' . $directory;
 						}
@@ -142,7 +140,7 @@ class Plugin implements
 							);
 						}
 
-						if ( isset( $data['recursive'] ) && $data['recursive'] === 'true' ) {
+						if ( isset( $data['recursive'] ) && (string) $data['recursive'] === 'true' ) {
 							$directories = glob( $directory . '/*', GLOB_ONLYDIR );
 						}
 
