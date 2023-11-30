@@ -87,7 +87,9 @@ class Plugin implements
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
 		$registration->registerHooksFromClass( static::class );
 
-		if ( isset( $config->requireAllParams['value'] ) && $config->requireAllParams['value'] === 'true' ) {
+
+		// if all possible params of an apply_filters should be required
+		if ( isset( $config->requireAllParams['value'] ) && (string) $config->requireAllParams['value'] === 'true' ) {
 			static::$requireAllParams = true;
 		}
 
