@@ -322,8 +322,9 @@ class Plugin implements
 
 			// not all types are documented, assume "mixed" for undocumented
 			if ( count( $types ) < $hook['args'] ) {
-				$fill_types = array_fill( count( $types ), $hook['args'] - count( $types ), 'mixed' );
-				$types = array_merge( $types, $fill_types );
+				$fill_types = array_fill( 0, $hook['args'], 'mixed' );
+				$types = $types + $fill_types;
+				ksort( $types );
 			}
 
 			// skip invalid ones
@@ -898,7 +899,7 @@ class Plugin implements
 				} else {
 					// should never happen, since we always assume "mixed" as default already and apply_filters must have at least 1 arg which is the value that is filtered
 					// this might be worth to debug, if anybody ever encounters this
-					throw new UnexpectedValueException( 'You found a bug for hook "' . $hook_name . '". Please open an issue with a code sample on https://github.com/humanmade/psalm-plugin-wordpress', 0 );
+					throw new UnexpectedValueException( 'You found a bug for hook "' . $hook_name . '". Please open an issue with a code sample on https://github.com/psalm/psalm-plugin-wordpress', 0 );
 
 					// alternatively handle it with mixed for add_filter
 					// $hook_types = [ Type::getMixed() ];
@@ -1469,8 +1470,15 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			/** @var array<phpDocumentor\Reflection\DocBlock\Tags\Param|phpDocumentor\Reflection\DocBlock\Tags\InvalidTag> */
 			$params = $doc_block->getTagsByName( 'param' );
 
+			$i = 0;
 			$types = [];
 			foreach ( $params as $param ) {
+				if ( $i >= $num_args ) {
+					break;
+				}
+
+				++$i;
+
 				if( ! ( $param instanceof phpDocumentor\Reflection\DocBlock\Tags\Param ) ) {
 					// set to mixed - if we skip it, it will mess up all subsequent args
 					$types[] = Type::getMixed();
@@ -1484,6 +1492,12 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				}
 
 				$types[] = Type::parseString( $param_type->__toString() );
+			}
+
+			if ( count( $types ) < $num_args ) {
+				// we have a list, so we can just array merge instead of "+" and ksort
+				$fill_types = array_fill( count( $types ), $num_args - count( $types ), Type::getMixed() );
+				$types = array_merge( $types, $fill_types );
 			}
 
 			// cannot assign to hooks directly, as this would mean we overwrite if this hook exists multiple times in this file
