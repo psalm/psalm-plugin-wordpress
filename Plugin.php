@@ -87,7 +87,6 @@ class Plugin implements
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
 		$registration->registerHooksFromClass( static::class );
 
-
 		// if all possible params of an apply_filters should be required
 		if ( isset( $config->requireAllParams['value'] ) && (string) $config->requireAllParams['value'] === 'true' ) {
 			static::$requireAllParams = true;
@@ -383,11 +382,26 @@ class Plugin implements
 			return '{$' . $arg->name . '}';
 		}
 
+		if ( $arg instanceof PhpParser\Node\Scalar\Encapsed ) {
+			$hook_name = '';
+			foreach ( $arg->parts as $part ) {
+				$resolved_part = static::getDynamicHookName( $part );
+				if ( $resolved_part === null ) {
+					return null;
+				}
+
+				$hook_name .= $resolved_part;
+			}
+
+			return $hook_name;
+		}
+
 		if ( $arg instanceof PhpParser\Node\Expr\BinaryOp\Concat ) {
 			$hook_name = static::getDynamicHookName( $arg->left );
 			if ( is_null( $hook_name ) ) {
 				return null;
 			}
+
 			$temp = static::getDynamicHookName( $arg->right );
 			if ( is_null( $temp ) ) {
 				return null;
@@ -398,7 +412,7 @@ class Plugin implements
 			return $hook_name;
 		}
 
-		if ( $arg instanceof String_ ) {
+		if ( $arg instanceof String_ || $arg instanceof PhpParser\Node\Scalar\EncapsedStringPart ) {
 			return $arg->value;
 		}
 
