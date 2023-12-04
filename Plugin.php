@@ -606,9 +606,34 @@ class Plugin implements
 		}
 
 		if ( ! $call_args[0]->value instanceof String_ ) {
-			$hook_name = static::getDynamicHookName( $call_args[0]->value );
-			if ( is_null( $hook_name ) ) {
-				return;
+			$statements_source = $event->getStatementsSource();
+			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			if ( ! $union ) {
+				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
+			}
+
+			$potential_hook_name = false;
+			if ( $union && $union->isSingleStringLiteral() ) {
+				$potential_hook_name = $union->getSingleStringLiteral()->value;
+			}
+
+			if ( $potential_hook_name && isset( static::$hooks[ $potential_hook_name ] ) ) {
+				$hook_name = $potential_hook_name;
+			} else {
+				$hook_name = static::getDynamicHookName( $call_args[0]->value );
+				if ( is_null( $hook_name ) && ! $potential_hook_name ) {
+					return;
+				}
+
+				if ( $potential_hook_name ) {
+					if ( is_null( $hook_name ) || ! isset( static::$hooks[ $hook_name ] ) ) {
+						// if it's not registered yet, use the resolved hook name
+						$hook_name = $potential_hook_name;
+					} elseif ( isset( static::$hooks[ $hook_name ] ) ) {
+						// if it's registered already, store the resolved name hook too
+						static::$hooks[ $potential_hook_name ] = static::$hooks[ $hook_name ];
+					}
+				}
 			}
 		} else {
 			$hook_name = $call_args[0]->value->value;
@@ -784,16 +809,29 @@ class Plugin implements
 		}
 
 		if ( ! $call_args[0]->value instanceof String_ ) {
-			// add_action/filter param/return types will not report any false positive errors
-			// also this is not supported anyway, since it's highly unlikely, someone uses the same variable name in add_action as they did in do_action, so this is useless
-			if ( ! $is_invoke && ! $is_utility ) {
-				return null;
+			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			if ( ! $union ) {
+				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
 			}
 
-			// dynamic do_action/apply_filters will return as "mixed" if we do not set an explicit type, due to some buggy behavior in psalm, so we try to get the dynamic hook name and match it up
-			$hook_name = static::getDynamicHookName( $call_args[0]->value );
-			if ( is_null( $hook_name ) ) {
-				return null;
+			$potential_hook_name = false;
+			if ( $union && $union->isSingleStringLiteral() ) {
+				$potential_hook_name = $union->getSingleStringLiteral()->value;
+			}
+
+			if ( $potential_hook_name && isset( static::$hooks[ $potential_hook_name ] ) ) {
+				$hook_name = $potential_hook_name;
+			} else {
+				$hook_name = static::getDynamicHookName( $call_args[0]->value );
+				if ( is_null( $hook_name ) && ! $potential_hook_name ) {
+					return null;
+				}
+
+				if ( $potential_hook_name ) {
+					if ( is_null( $hook_name ) || ! isset( static::$hooks[ $hook_name ] ) ) {
+						$hook_name = $potential_hook_name;
+					}
+				}
 			}
 		} else {
 			$hook_name = $call_args[0]->value->value;
@@ -1044,10 +1082,30 @@ class Plugin implements
 
 		// only apply_filters left to handle
 		if ( ! $call_args[0]->value instanceof String_ ) {
-			// dynamic do_action/apply_filters will return as "mixed" if we do not set an explicit type, due to some buggy behavior in psalm, so we try to get the dynamic hook name and match it up
-			$hook_name = static::getDynamicHookName( $call_args[0]->value );
-			if ( is_null( $hook_name ) ) {
-				return static::getTypeFromArg( $call_args[1]->value, $event->getContext(), $event->getStatementsSource() );
+			$statements_source = $event->getStatementsSource();
+			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			if ( ! $union ) {
+				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
+			}
+
+			$potential_hook_name = false;
+			if ( $union && $union->isSingleStringLiteral() ) {
+				$potential_hook_name = $union->getSingleStringLiteral()->value;
+			}
+
+			if ( $potential_hook_name && isset( static::$hooks[ $potential_hook_name ] ) ) {
+				$hook_name = $potential_hook_name;
+			} else {
+				$hook_name = static::getDynamicHookName( $call_args[0]->value );
+				if ( is_null( $hook_name ) && ! $potential_hook_name ) {
+					return static::getTypeFromArg( $call_args[1]->value, $event->getContext(), $event->getStatementsSource() );
+				}
+
+				if ( $potential_hook_name ) {
+					if ( is_null( $hook_name ) || ! isset( static::$hooks[ $hook_name ] ) ) {
+						$hook_name = $potential_hook_name;
+					}
+				}
 			}
 		} else {
 			$hook_name = $call_args[0]->value->value;
