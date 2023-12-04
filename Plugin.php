@@ -375,7 +375,7 @@ class Plugin implements
 		}
 	}
 
-	private static function getDynamicHookName( object $arg ) : ?string {
+	public static function getDynamicHookName( object $arg ) : ?string {
 		// variable or 'foo' . $bar variable hook name
 		// "foo_{$my_var}_bar" is the wp-hooks-generator style, we need to mimic
 		if ( $arg instanceof Variable ) {
@@ -708,7 +708,7 @@ class Plugin implements
 	}
 
 	/**
-	 * @return ?array<int, \Psalm\Storage\FunctionLikeParameter>
+	 * @return ?array<int, Psalm\Storage\FunctionLikeParameter>
 	 */
 	public static function getFunctionParams( FunctionParamsProviderEvent $event ) : ?array {
 		$function_id = $event->getFunctionId();
@@ -1355,12 +1355,16 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				}
 			} elseif ( preg_match( '/_deprecated_hook$/', (string) $node->name ) === 1 ) {
 				// ignore dynamic hooks
-				if ( ! $node->args[0]->value instanceof String_ ) {
+				if ( $node->args[0]->value instanceof String_ ) {
+					$hook_name = $node->args[0]->value->value;
+				} else {
+					$hook_name = Plugin::getDynamicHookName( $node->args[0]->value );
+				}
+
+				if (!$hook_name) {
 					$this->last_doc = null;
 					return null;
 				}
-
-				$hook_name = $node->args[0]->value->value;
 
 				// hook type is irrelevant and won't be used when overriding
 				// in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set
@@ -1378,13 +1382,16 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			$types = [];
 			$override_num_args_from_docblock = false;
 			if ( $hook_type === 'cron-action' ) {
-				// ignore dynamic cron hooks
-				if ( ! $node->args[ $hook_index ]->value instanceof String_ ) {
+				if ( $node->args[ $hook_index ]->value instanceof String_ ) {
+					$hook_name = $node->args[ $hook_index ]->value->value;
+				} else {
+					$hook_name = Plugin::getDynamicHookName( $node->args[ $hook_index ]->value );
+				}
+
+				if (!$hook_name) {
 					$this->last_doc = null;
 					return null;
 				}
-
-				$hook_name = $node->args[ $hook_index ]->value->value;
 
 				// if it's not documented (which it honestly never is for these), we need to get the number of args and assign mixed
 				// the args are passed as array as element after hook name in all cases
@@ -1429,13 +1436,16 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				// since it's just a regular action and we don't need to differentiate anymore now
 				$hook_type = 'action';
 			} else {
-				// ignore dynamic hooks, would need like existing getDynamicHookName method in this class too
-				if ( ! $node->args[0]->value instanceof String_ ) {
+				if ( $node->args[0]->value instanceof String_ ) {
+					$hook_name = $node->args[0]->value->value;
+				} else {
+					$hook_name = Plugin::getDynamicHookName( $node->args[0]->value );
+				}
+
+				if (!$hook_name) {
 					$this->last_doc = null;
 					return null;
 				}
-
-				$hook_name = $node->args[0]->value->value;
 
 				// the first arg is the hook name, which gets skipped, so we need to "-1"
 				$num_args = count( $node->args ) - 1;
