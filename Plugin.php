@@ -932,7 +932,7 @@ class Plugin implements
 		$hook_types = $is_invoke ? $hook_types : array_slice( $hook_types, 0, $required_params_count );
 
 		// if the required args in add_action are higher than what the hook is called with in some cases
-		if ( $required_params_count > $hook['minimum_invoke_args'] && !$is_invoke ) {
+		if ( $required_params_count > $hook['minimum_invoke_args'] && ! $is_invoke ) {
 			// all args that go above the minimum invoke args must be set to optional, as the filter is called
 			// only after we sliced above already (since we need to include all params, just need to change if they're optional or not)
 			$required_params_count = $hook['minimum_invoke_args'];
@@ -1083,7 +1083,7 @@ class Plugin implements
 			$statements_source,
 		);
 
-		if ( !$mode_type && $parser_param instanceof PhpParser\Node\Expr\ConstFetch ) {
+		if ( ! $mode_type && $parser_param instanceof PhpParser\Node\Expr\ConstFetch ) {
 			$mode_type = ConstFetchAnalyzer::getConstType(
 				$statements_source,
 				$parser_param->name->toString(),
@@ -1102,7 +1102,7 @@ class Plugin implements
 			$statements_source,
 		);
 
-		if ( !$extended_var_id ) {
+		if ( ! $extended_var_id ) {
 			return null;
 		}
 
@@ -1147,7 +1147,7 @@ class Plugin implements
 					break;
 				}
 
-				if ( !$param_type->isSingle() ) {
+				if ( ! $param_type->isSingle() ) {
 					continue;
 				}
 
@@ -1361,7 +1361,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					$hook_name = Plugin::getDynamicHookName( $node->args[0]->value );
 				}
 
-				if (!$hook_name) {
+				if ( ! $hook_name ) {
 					$this->last_doc = null;
 					return null;
 				}
@@ -1388,7 +1388,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					$hook_name = Plugin::getDynamicHookName( $node->args[ $hook_index ]->value );
 				}
 
-				if (!$hook_name) {
+				if ( ! $hook_name ) {
 					$this->last_doc = null;
 					return null;
 				}
@@ -1442,7 +1442,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					$hook_name = Plugin::getDynamicHookName( $node->args[0]->value );
 				}
 
-				if (!$hook_name) {
+				if ( ! $hook_name ) {
 					$this->last_doc = null;
 					return null;
 				}
