@@ -1362,6 +1362,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			}
 
 			$types = [];
+			$override_num_args_from_docblock = false;
 			if ( $hook_type === 'cron-action' ) {
 				// ignore dynamic cron hooks
 				if ( ! $node->args[ $hook_index ]->value instanceof String_ ) {
@@ -1405,6 +1406,10 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					// theoretically possible it's an empty element, in which case this would be wrong, but then no empty variable should be set here in the first place
 					$num_args = 1;
 					$types = [ Type::getMixed() ];
+
+					// if we have a docblock, override the num_args with the docblock declared params, as this is more correct
+					// as otherwise we get lots of optional parameters required in callbacks all the time
+					$override_num_args_from_docblock = true;
 				}
 
 				// since it's just a regular action and we don't need to differentiate anymore now
@@ -1469,6 +1474,9 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 			/** @var array<phpDocumentor\Reflection\DocBlock\Tags\Param|phpDocumentor\Reflection\DocBlock\Tags\InvalidTag> */
 			$params = $doc_block->getTagsByName( 'param' );
+			if ( $override_num_args_from_docblock === true && count( $params ) > $num_args ) {
+				$num_args = count( $params );
+			}
 
 			$i = 0;
 			$types = [];
