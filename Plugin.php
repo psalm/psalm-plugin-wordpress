@@ -1133,25 +1133,27 @@ class Plugin implements
 	}
 
 	protected static function getTypeFromArg( $parser_param, Context $context, StatementsSource $statements_source ) : ?Union {
-		$mode_type = SimpleTypeInferer::infer(
-			$statements_source->getCodebase(),
-			$statements_source->node_data,
-			$parser_param,
-			$statements_source->getAliases(),
-			$statements_source,
-		);
-
-		if ( ! $mode_type && $parser_param instanceof PhpParser\Node\Expr\ConstFetch ) {
-			$mode_type = ConstFetchAnalyzer::getConstType(
+		if ( isset( $statements_source->node_data ) ) {
+			$mode_type = SimpleTypeInferer::infer(
+				$statements_source->getCodebase(),
+				$statements_source->node_data,
+				$parser_param,
+				$statements_source->getAliases(),
 				$statements_source,
-				$parser_param->name->toString(),
-				true,
-				$context,
 			);
-		}
 
-		if ( $mode_type ) {
-			return $mode_type;
+			if ( ! $mode_type && $parser_param instanceof PhpParser\Node\Expr\ConstFetch ) {
+				$mode_type = ConstFetchAnalyzer::getConstType(
+					$statements_source,
+					$parser_param->name->toString(),
+					true,
+					$context,
+				);
+			}
+
+			if ( $mode_type ) {
+				return $mode_type;
+			}
 		}
 
 		$extended_var_id = ExpressionIdentifier::getExtendedVarId(
