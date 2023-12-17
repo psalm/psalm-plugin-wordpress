@@ -83,6 +83,16 @@ If a directory is provided, the plugin will search for the following files:
 
 The plugin expects a JSON representation of the hooks as per [wp-hooks/generator](https://github.com/wp-hooks/generator).
 
+### Require passing all parameters
+
+If you want to get an error if `apply_filters` and `do_action` do not have the same number of parameters in all cases, `requireAllParams` must be set to `true`:
+
+```xml
+<pluginClass class="PsalmWordPress\Plugin">
+	<requireAllParams value="true" />
+</pluginClass>
+```
+
 ### WordPress paths
 
 To help Psalm analyze your project you might need to define some of WordPress' default global constants such as those for paths.

@@ -15,12 +15,12 @@
 		"php-stubs/wordpress-stubs": "^6.0",
 		"php-stubs/wordpress-globals": "^0.2.0",
 		"php-stubs/wp-cli-stubs": "^2.7",
-		"vimeo/psalm": "^4"
+		"vimeo/psalm": "^5"
 	},
 	"require-dev": {
 		"humanmade/coding-standards": "^1.2",
 		"phpunit/phpunit": "^9.0",
-		"psalm/plugin-phpunit": "^0.15.1"
+		"psalm/plugin-phpunit": "^0.18.4"
 	},
 	"extra": {
 		"psalm" : {

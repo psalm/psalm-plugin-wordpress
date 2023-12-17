@@ -17,12 +17,15 @@ class FiltersTest extends BaseTestCase {
 			'add_filter with docblock' => [
 				<<<'EOD'
 				<?php
+				$missing_sizes = array();
+				$image_meta = array();
+
 				/**
 				 * @param array $missing_sizes Array with the missing image sub-sizes.
 				 * @param array $image_meta    The image meta data.
 				 * @param int   $attachment_id The image attachment post ID.
 				 */
-				$result = apply_filters( 'test_get_missing_image_subsizes', 1, 2, 3 );
+				$result = apply_filters( 'test_get_missing_image_subsizes', $missing_sizes, $image_meta, 3 );
 
 				add_filter( 'test_get_missing_image_subsizes', function ( array $sizes, array $image_meta, int $attachment_id ) {
 					return $sizes;
@@ -32,6 +35,7 @@ class FiltersTest extends BaseTestCase {
 			'add_filter with no docblock' => [
 				<<<'EOD'
 				<?php
+				/** @psalm-suppress MixedAssignment */
 				$result = apply_filters( 'test_filter', true, 1, 1.1 );
 
 				add_filter( 'test_filter', function ( bool $param1, int $param2, float $param3 ) {
@@ -50,7 +54,7 @@ class FiltersTest extends BaseTestCase {
 				$result = apply_filters( 'test_filter', 1, 2, 3 );
 
 				/** documented above */
-				$result = apply_filters( 'test_filter', true, 1, 1.1 );
+				$result = apply_filters( 'test_filter', 15, 1, 2 );
 
 				add_filter( 'test_filter', function ( int $param1, int $param2, int $param3 ) {
 					return 1;
