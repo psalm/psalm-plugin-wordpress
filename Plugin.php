@@ -481,6 +481,12 @@ class Plugin implements
 			return rtrim( $temp, '}' ) . '[' . $key . ']}';
 		}
 
+		// isn't actually supported by the wp-hooks-generator yet and will be handled as regular string there
+		// just handle it generically here for the time being
+		if ( $arg instanceof PhpParser\Node\Expr\ConstFetch ) {
+			return '{$variable}';
+		}
+
 		// other types not supported yet
 		// add handling if encountered @todo
 		throw new UnexpectedValueException( 'Unsupported dynamic hook name with type ' . get_class( $arg ), 0 );
