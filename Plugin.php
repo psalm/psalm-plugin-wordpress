@@ -412,7 +412,7 @@ class Plugin implements
 			return $hook_name;
 		}
 
-		if ( $arg instanceof String_ || $arg instanceof PhpParser\Node\Scalar\EncapsedStringPart ) {
+		if ( $arg instanceof String_ || $arg instanceof PhpParser\Node\Scalar\EncapsedStringPart || $arg instanceof PhpParser\Node\Scalar\LNumber ) {
 			return $arg->value;
 		}
 
@@ -476,7 +476,13 @@ class Plugin implements
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ), 0 );
 			}
 
-			$key = $key_hook_name[0] === '{' ? trim( $key_hook_name, '{}' ) : "'" . $key_hook_name . "'";
+			if ( $key_hook_name[0] === '{' ) {
+				$key = trim( $key_hook_name, '{}' );
+			} elseif ( is_numeric( $key_hook_name ) ) {
+				$key = $key_hook_name;
+			} else {
+				$key = "'" . $key_hook_name . "'";
+			}
 
 			return rtrim( $temp, '}' ) . '[' . $key . ']}';
 		}
