@@ -17,7 +17,7 @@ use PhpParser\Node\Stmt\Echo_;
 use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
-use PhpParser\Node\Stmt\UseUse;
+use PhpParser\Node\UseItem;
 use Psalm;
 use Psalm\CodeLocation;
 use Psalm\Config;
@@ -382,7 +382,7 @@ class Plugin implements
 			return '{$' . $arg->name . '}';
 		}
 
-		if ( $arg instanceof PhpParser\Node\Scalar\Encapsed ) {
+		if ( $arg instanceof PhpParser\Node\Scalar\Encapsed || $arg instanceof PhpParser\Node\Scalar\InterpolatedString ) {
 			$hook_name = '';
 			foreach ( $arg->parts as $part ) {
 				$resolved_part = static::getDynamicHookName( $part );
@@ -412,7 +412,7 @@ class Plugin implements
 			return $hook_name;
 		}
 
-		if ( $arg instanceof String_ || $arg instanceof PhpParser\Node\Scalar\EncapsedStringPart || $arg instanceof PhpParser\Node\Scalar\LNumber ) {
+		if ( $arg instanceof String_ || $arg instanceof PhpParser\Node\Scalar\EncapsedStringPart || $arg instanceof PhpParser\Node\InterpolatedStringPart || $arg instanceof PhpParser\Node\Scalar\LNumber || $arg instanceof PhpParser\Node\Scalar\Int_ ) {
 			return $arg->value;
 		}
 
@@ -1352,7 +1352,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		}
 
 		// normal "use" statements
-		if ( $node instanceof UseUse ) {
+		if ( $node instanceof PhpParser\Node\Stmt\UseUse || $node instanceof UseItem ) {
 			// must implode, before we remove the class name from the array
 			$fqcn = $node->name->toString();
 
@@ -1499,9 +1499,9 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 							$types[] = Type::getString();
 						} elseif ( $item->value instanceof Array_ || $item->value instanceof PhpParser\Node\Expr\Cast\Array_ ) {
 							$types[] = Type::getArray();
-						} elseif ( $item->value instanceof PhpParser\Node\Scalar\LNumber || $item->value instanceof PhpParser\Node\Expr\Cast\Int_ ) {
+						} elseif ( $item->value instanceof PhpParser\Node\Scalar\LNumber || $item->value instanceof PhpParser\Node\Scalar\Int_ || $item->value instanceof PhpParser\Node\Expr\Cast\Int_ ) {
 							$types[] = Type::getInt();
-						} elseif ( $item->value instanceof PhpParser\Node\Scalar\DNumber || $item->value instanceof PhpParser\Node\Expr\Cast\Double ) {
+						} elseif ( $item->value instanceof PhpParser\Node\Scalar\DNumber || $item->value instanceof PhpParser\Node\Scalar\Float_ || $item->value instanceof PhpParser\Node\Expr\Cast\Double ) {
 							$types[] = Type::getFloat();
 						} elseif ( ( $item->value instanceof PhpParser\Node\Expr\ConstFetch && in_array( strtolower( $item->value->name->toString() ), [ 'false', 'true' ], true ) ) || $item->value instanceof PhpParser\Node\Expr\Cast\Bool_ ) {
 							$types[] = Type::getBool();
