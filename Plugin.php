@@ -878,7 +878,7 @@ class Plugin implements
 			// like this, it will give error that the do_action does not expect any arguments, thus prompting the dev to add phpdoc or remove args
 			// if this should be ignored return []; instead
 			// return [
-			//	new FunctionLikeParameter( 'Hook', false, Type::getNonEmptyString(), null, null, null, false ),
+			//	new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
 			// ];
 			return [];
 		}
@@ -931,11 +931,25 @@ class Plugin implements
 		}
 
 		// Check how many args the filter is registered with.
+		$accepted_args_provided = false;
 		if ( $is_invoke ) {
 			// need to deduct 1, since the first argument (string) is the hardcoded hook name, which is added manually later on, since it's not in the PHPDoc
 			$num_args = count( $call_args ) - 1;
 		} else {
-			$num_args = isset( $call_args[ 3 ]->value->value ) ? max( 0, (int) $call_args[ 3 ]->value->value ) : 1;
+			$num_args = 1;
+			if ( isset( $call_args[ 3 ]->value->value ) && !isset( $call_args[ 3 ]->name ) ) {
+				$num_args = max( 0, (int) $call_args[ 3 ]->value->value );
+				$accepted_args_provided = true;
+			}
+
+			// named arguments
+			foreach ( $call_args as $call_arg ) {
+				if ( isset( $call_arg->name ) && $call_arg->name instanceof PhpParser\Node\Identifier && $call_arg->name->name === 'accepted_args' ) {
+					$num_args = max( 0, (int) $call_arg->value->value );
+					$accepted_args_provided = true;
+					break;
+				}
+			}
 		}
 
 		// if the PHPDoc is missing from the do_action/apply_filters, the types can be empty - we assign "mixed" when loading stubs in that case though to avoid this
@@ -950,7 +964,9 @@ class Plugin implements
 			} else {
 				// add_action default has 1 arg, but this hook does not accept any args
 				if ( $is_action ) {
-					if ( $code_location ) {
+					// if accepted args are not provided, it will use the default value, so we need to give an error
+					// if it's provided psalm will report an InvalidArgument error by default already
+					if ( $code_location && $accepted_args_provided === false ) {
 						IssueBuffer::accepts(
 							new HookInvalidArgs(
 								'Hook "' . $hook_name . '" does not accept any args, but the default number of args of add_action is 1. Please pass 0 as 4th argument',
@@ -1032,8 +1048,9 @@ class Plugin implements
 		$args_type = $max_params === 0 || $min_args >= $max_params ? Type::getInt( false, $max_params ) : new Union([ new TIntRange( $min_args, $max_params )] );
 
 		$return = [
-			new FunctionLikeParameter( 'Hook', false, Type::getNonEmptyString(), null, null, null, false ),
-			new FunctionLikeParameter( 'Callback', false, new Union( [
+			// the first argument of each FunctionLikeParameter must match the param name of the function to allow the use of named arguments
+			new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
+			new FunctionLikeParameter( 'callback', false, new Union( [
 				new TCallable(
 					'callable',
 					$hook_params,
@@ -1041,8 +1058,8 @@ class Plugin implements
 				),
 			] ), null, null, null, false ),
 			// $is_optional arg in FunctionLikeParameter is true by default, so we can just set type of int directly without null (since it's not nullable anyway)
-			new FunctionLikeParameter( 'Priority', false, Type::getInt() ),
-			new FunctionLikeParameter( 'Args', false, $args_type ),
+			new FunctionLikeParameter( 'priority', false, Type::getInt() ),
+			new FunctionLikeParameter( 'accepted_args', false, $args_type ),
 		];
 
 		return $return;
