@@ -16,7 +16,7 @@
 	"support": {
 		"issues": "https://github.com/psalm/psalm-plugin-wordpress/issues",
 		"source": "https://github.com/psalm/psalm-plugin-wordpress"
-	}
+	},
 	"require": {
 		"ext-simplexml": "*",
 		"wp-hooks/wordpress-core": "^1.3.0",
