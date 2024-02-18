@@ -424,7 +424,7 @@ class Plugin implements
 
 		if ( $arg instanceof PhpParser\Node\Expr\StaticCall ) {
 			if ( ! $arg->name instanceof PhpParser\Node\Identifier ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			// hook name with Foo:bar()
@@ -436,7 +436,7 @@ class Plugin implements
 			// need to check recursively
 			$temp = static::getDynamicHookName( $arg->class );
 			if ( is_null( $temp ) ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with class type ' . get_class( $arg->class ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with class type ' . get_class( $arg->class ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			$append_method_call = '()';
@@ -445,13 +445,13 @@ class Plugin implements
 
 		if ( $arg instanceof PhpParser\Node\Expr\PropertyFetch || $arg instanceof PhpParser\Node\Expr\MethodCall ) {
 			if ( ! $arg->name instanceof PhpParser\Node\Identifier ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			// need to check recursively
 			$temp = static::getDynamicHookName( $arg->var );
 			if ( is_null( $temp ) ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			$append_method_call = $arg instanceof PhpParser\Node\Expr\MethodCall ? '()' : '';
@@ -467,13 +467,13 @@ class Plugin implements
 		if ( $arg instanceof PhpParser\Node\Expr\ArrayDimFetch ) {
 			$key_hook_name = static::getDynamicHookName( $arg->dim );
 			if ( is_null( $key_hook_name ) ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with key type ' . get_class( $arg->dim ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with key type ' . get_class( $arg->dim ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			// need to check recursively
 			$temp = static::getDynamicHookName( $arg->var );
 			if ( is_null( $temp ) ) {
-				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getLine(), 0 );
+				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
 			if ( $key_hook_name[0] === '{' ) {
@@ -495,7 +495,7 @@ class Plugin implements
 
 		// other types not supported yet
 		// add handling if encountered @todo
-		throw new UnexpectedValueException( 'Unsupported dynamic hook name with type ' . get_class( $arg ) . ' on line ' . $arg->getLine(), 0 );
+		throw new UnexpectedValueException( 'Unsupported dynamic hook name with type ' . get_class( $arg ) . ' on line ' . $arg->getStartLine(), 0 );
 	}
 
 	/**
@@ -1318,13 +1318,13 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		];
 
 		// see visitor.php for original code
-		if ( ( $this->useNamespace !== '' || $this->useStatements !== [] || $this->useStatementsNonClass !== false ) && $this->maxLine > $node->getLine() ) {
+		if ( ( $this->useNamespace !== '' || $this->useStatements !== [] || $this->useStatementsNonClass !== false ) && $this->maxLine > $node->getStartLine() ) {
 			$this->useNamespace = '';
 			$this->useStatements = [];
 			$this->useStatementsNonClass = false;
 		}
 
-		$this->maxLine = $node->getLine();
+		$this->maxLine = $node->getStartLine();
 
 		if ( $node instanceof Namespace_ ) {
 			// as soon as there is a new namespace, we need to empty the useStatements, as there will be new ones for the given namespace
