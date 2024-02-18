@@ -1,6 +1,6 @@
 {
 	"name": "humanmade/psalm-plugin-wordpress",
-	"description": "WordPress stubs and plugin for Psalm.",
+	"description": "WordPress stubs and plugin for Psalm static analysis.",
 	"type": "psalm-plugin",
 	"license": "MIT",
 	"authors": [
