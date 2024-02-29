@@ -489,7 +489,7 @@ class Plugin implements
 
 		// isn't actually supported by the wp-hooks-generator yet and will be handled as regular string there
 		// just handle it generically here for the time being
-		if ( $arg instanceof PhpParser\Node\Expr\ConstFetch ) {
+		if ( $arg instanceof PhpParser\Node\Expr\ConstFetch || $arg instanceof PhpParser\Node\Expr\ClassConstFetch ) {
 			return '{$variable}';
 		}
 
