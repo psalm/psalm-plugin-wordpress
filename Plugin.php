@@ -619,7 +619,11 @@ class Plugin implements
 
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			$statements_source = $event->getStatementsSource();
-			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			try {
+				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			} catch (UnexpectedValueException $e) {
+				$union = null;
+			}
 			if ( ! $union ) {
 				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
 			}
@@ -821,7 +825,11 @@ class Plugin implements
 		}
 
 		if ( ! $call_args[0]->value instanceof String_ ) {
-			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			try {
+				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			} catch (UnexpectedValueException $e) {
+				$union = null;
+			}
 			if ( ! $union ) {
 				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
 			}
@@ -1112,7 +1120,11 @@ class Plugin implements
 		// only apply_filters left to handle
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			$statements_source = $event->getStatementsSource();
-			$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			try {
+				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
+			} catch (UnexpectedValueException $e) {
+				$union = null;
+			}
 			if ( ! $union ) {
 				$union = static::getTypeFromArg( $call_args[0]->value, $event->getContext(), $statements_source );
 			}
