@@ -4,6 +4,7 @@
 [![Packagist](https://img.shields.io/packagist/dt/humanmade/psalm-plugin-wordpress.svg)](https://packagist.org/packages/humanmade/psalm-plugin-wordpress)
 
 Write type-safe WordPress code.
+This plugin supports WordPress 3 and newer (4, 5, 6, currently WP 6.7) and generally also works on WordPress trunk and beta/RC versions.
 
 This [Psalm](https://psalm.dev/) plugin provides all WordPress and WP CLI stubs, so your WordPress based project or plugin will have type information for calls to WordPress APIs. This ensures your WordPress plugin or theme has less bugs!
 
