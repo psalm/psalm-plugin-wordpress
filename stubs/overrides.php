@@ -93,7 +93,7 @@ function apply_filters( string $hook_name, $value, ...$args ) {}
  * | PHP_URL_QUERY    | 6 |
  * | PHP_URL_FRAGMENT | 7 |
  *
- * @template TComponent of (-1|0|1|2|3|4|5|6|7)
+ * @template TComponent of (-1|PHP_URL_*)
  * @param string $url
  * @param TComponent $component
  * @return (
