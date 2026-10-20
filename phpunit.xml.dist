@@ -2,15 +2,12 @@
 <phpunit
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-	bootstrap="vendor/autoload.php"
+	bootstrap="tests/bootstrap.php"
 	backupGlobals="false"
-	beStrictAboutCoversAnnotation="true"
 	beStrictAboutOutputDuringTests="true"
 	beStrictAboutTestsThatDoNotTestAnything="false"
-	beStrictAboutTodoAnnotatedTests="true"
 	colors="true"
 	executionOrder="default"
-	verbose="true"
 >
 	<testsuites>
 		<testsuite name="psalm">
