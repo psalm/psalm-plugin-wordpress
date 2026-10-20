@@ -1,0 +1,11 @@
+{
+	"description": "Psalm plugin for WordPress - coding standards, which need a newer PHP than the plugin supports",
+	"require": {
+		"humanmade/coding-standards": "^2.5"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

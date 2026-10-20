@@ -144,14 +144,14 @@ function get_option( string $option, $default = null ) {}
  *   type: string,
  * }>
  */
-function get_settings_errors( $setting = '', $sanitize = false ) : array {}
+function get_settings_errors( $setting = '', $sanitize = false ): array {}
 
 /**
  * @param string $path
  * @param 'https'|'http'|'relative'|'rest' $scheme
  * @return string
  */
-function home_url( string $path = '', $scheme = null ) : string {}
+function home_url( string $path = '', $scheme = null ): string {}
 
 /**
  * @template TArgs of array<array-key, mixed>
@@ -166,7 +166,7 @@ function wp_parse_args( $args, $defaults ) {}
  * @param WP_Error|mixed $error
  * @psalm-assert-if-true WP_Error $error
  */
-function is_wp_error( $error ) : bool {}
+function is_wp_error( $error ): bool {}
 
 /**
  * @template T
@@ -175,4 +175,4 @@ function is_wp_error( $error ) : bool {}
  * @param K $column
  * @return list<T>
  */
-function wp_list_pluck( array $list, string $column, string $index_key = null ) : array {}
+function wp_list_pluck( array $list, string $column, string $index_key = null ): array {}

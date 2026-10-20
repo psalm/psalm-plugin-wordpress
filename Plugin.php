@@ -86,7 +86,7 @@ class Plugin implements
 	 */
 	public static $parseErrors = [];
 
-	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ) : void {
+	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ): void {
 		$registration->registerHooksFromClass( static::class );
 
 		// if all possible params of an apply_filters should be required
@@ -187,7 +187,7 @@ class Plugin implements
 	 * @param string $path Path of a folder, relative, inside `vendor/` (Composer).
 	 *                     Must start with `vendor/` marker.
 	 */
-	private static function getVendorDir( string $path ) : string {
+	private static function getVendorDir( string $path ): string {
 		$vendor = 'vendor/';
 		$self = 'humanmade/psalm-plugin-wordpress';
 
@@ -224,7 +224,7 @@ class Plugin implements
 	/**
 	 * @return string[]
 	 */
-	private function getStubFiles() : array {
+	private function getStubFiles(): array {
 		return [
 			self::getVendorDir( 'vendor/php-stubs/wordpress-stubs' ) . '/wordpress-stubs.php',
 			self::getVendorDir( 'vendor/php-stubs/wordpress-globals' ) . '/wordpress-globals.php',
@@ -236,7 +236,7 @@ class Plugin implements
 		];
 	}
 
-	protected static function loadStubbedHooks() : void {
+	protected static function loadStubbedHooks(): void {
 		if ( static::$hooks ) {
 			return;
 		}
@@ -253,7 +253,7 @@ class Plugin implements
 		}
 	}
 
-	protected static function loadHooksFromFile( string $filepath ) : void {
+	protected static function loadHooksFromFile( string $filepath ): void {
 		$data = json_decode( file_get_contents( $filepath ), true );
 		if ( ! isset( $data['hooks'] ) || ! is_array( $data['hooks'] ) ) {
 			static::$parseErrors[] = 'Invalid hook file ' . $filepath;
@@ -283,7 +283,7 @@ class Plugin implements
 				return $tag['name'] === 'param';
 			});
 
-			$params = array_map( function ( array $param ) : array {
+			$params = array_map( function ( array $param ): array {
 				if ( isset( $param['types'] ) && $param['types'] !== [ 'array' ] ) {
 					return $param;
 				}
@@ -316,7 +316,7 @@ class Plugin implements
 			// remove empty elements which can happen with invalid phpdoc - must be done before parseString to avoid notice there
 			$types = array_filter( $types );
 
-			$types = array_map( function ( $type ) : string {
+			$types = array_map( function ( $type ): string {
 				natcasesort( $type );
 				return implode( '|', $type );
 			}, $types );
@@ -360,16 +360,16 @@ class Plugin implements
 		}
 	}
 
-	public static function beforeAnalyzeFile( BeforeFileAnalysisEvent $event ) : void {
+	public static function beforeAnalyzeFile( BeforeFileAnalysisEvent $event ): void {
 		$file_path = $event->getStatementsSource()->getFilePath();
 		$statements = $event->getCodebase()->getStatementsForFile( $file_path );
-		$traverser = new PhpParser\NodeTraverser;
+		$traverser = new PhpParser\NodeTraverser();
 		$hook_visitor = new HookNodeVisitor();
 		$traverser->addVisitor( $hook_visitor );
 		try {
 			$traverser->traverse( $statements );
 		} catch ( Exception $e ) {
-
+			// collecting the hooks of the file is best effort: register those found before the failure
 		}
 
 		foreach ( $hook_visitor->hooks as $hook ) {
@@ -377,7 +377,7 @@ class Plugin implements
 		}
 	}
 
-	public static function getDynamicHookName( object $arg ) : ?string {
+	public static function getDynamicHookName( object $arg ): ?string {
 		// variable or 'foo' . $bar variable hook name
 		// "foo_{$my_var}_bar" is the wp-hooks-generator style, we need to mimic
 		if ( $arg instanceof Variable ) {
@@ -503,7 +503,7 @@ class Plugin implements
 	/**
 	 * @return Hook|null
 	 */
-	public static function getDynamicHookData( string $hook_name, bool $is_action_not_filter = false ) : ?array {
+	public static function getDynamicHookData( string $hook_name, bool $is_action_not_filter = false ): ?array {
 		// fully dynamic hooks like {$tag} cannot be used here, as they would match many hooks
 		// same for {$tag}_{$hello}
 		$normalized_hook_name = preg_replace( '/{(?:[^{}]+|(?R))*+}/', '{$abc}', $hook_name );
@@ -524,7 +524,7 @@ class Plugin implements
 		$dynamic_hook_names = array_combine( $dynamic_hook_names, $normalized_dynamic_hook_names );
 
 		// sort descending from longest to shortest, to avoid shorter dynamic hooks accidentally matching
-		uasort( $dynamic_hook_names, function( string $a, string $b ) {
+		uasort( $dynamic_hook_names, function ( string $a, string $b ) {
 			return strlen( $b ) - strlen( $a );
 		});
 
@@ -591,7 +591,7 @@ class Plugin implements
 		return null;
 	}
 
-	public static function afterEveryFunctionCallAnalysis( AfterEveryFunctionCallAnalysisEvent $event ) : void {
+	public static function afterEveryFunctionCallAnalysis( AfterEveryFunctionCallAnalysisEvent $event ): void {
 		$apply_filter_functions = [
 			'apply_filters',
 			'apply_filters_ref_array',
@@ -623,7 +623,7 @@ class Plugin implements
 			$statements_source = $event->getStatementsSource();
 			try {
 				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
-			} catch (UnexpectedValueException $e) {
+			} catch ( UnexpectedValueException $e ) {
 				$union = null;
 			}
 			if ( ! $union ) {
@@ -667,7 +667,7 @@ class Plugin implements
 		// Check if this hook is already documented.
 		if ( isset( static::$hooks[ $hook_name ] ) ) {
 			if (
-				! in_array( $function_id, ['apply_filters_deprecated', 'do_action_deprecated'], true ) &&
+				! in_array( $function_id, [ 'apply_filters_deprecated', 'do_action_deprecated' ], true ) &&
 				static::$hooks[ $hook_name ]['deprecated'] === true
 			) {
 				$statements_source = $event->getStatementsSource();
@@ -696,15 +696,15 @@ class Plugin implements
 				$type = Type::getMixed();
 			} else {
 				$sub_types = array_values( $type->getAtomicTypes() );
-				$sub_types = array_map( function ( Atomic $type ) : Atomic {
+				$sub_types = array_map( function ( Atomic $type ): Atomic {
 					if ( $type instanceof Atomic\TTrue || $type instanceof Atomic\TFalse ) {
-						return new Atomic\TBool;
+						return new Atomic\TBool();
 					} elseif ( $type instanceof Atomic\TLiteralString ) {
-						return new Atomic\TString;
+						return new Atomic\TString();
 					} elseif ( $type instanceof Atomic\TLiteralInt ) {
-						return new Atomic\TInt;
+						return new Atomic\TInt();
 					} elseif ( $type instanceof Atomic\TLiteralFloat ) {
-						return new Atomic\TFloat;
+						return new Atomic\TFloat();
 					}
 
 					return $type;
@@ -716,7 +716,7 @@ class Plugin implements
 		}, array_slice( $call_args, 1 ) );
 
 		$is_deprecated = false;
-		if ( in_array( $function_id, ['apply_filters_deprecated', 'do_action_deprecated'], true ) ) {
+		if ( in_array( $function_id, [ 'apply_filters_deprecated', 'do_action_deprecated' ], true ) ) {
 			$is_deprecated = true;
 		}
 
@@ -728,7 +728,7 @@ class Plugin implements
 	 *
 	 * @psalm-pure
 	 */
-	public static function getFunctionIds() : array {
+	public static function getFunctionIds(): array {
 		return [
 			'add_action',
 			'add_filter',
@@ -755,7 +755,7 @@ class Plugin implements
 	/**
 	 * @return ?array<int, Psalm\Storage\FunctionLikeParameter>
 	 */
-	public static function getFunctionParams( FunctionParamsProviderEvent $event ) : ?array {
+	public static function getFunctionParams( FunctionParamsProviderEvent $event ): ?array {
 		$function_id = $event->getFunctionId();
 		if ( ! in_array( $function_id, static::getFunctionIds(), true ) ) {
 			return null;
@@ -766,7 +766,7 @@ class Plugin implements
 		}
 
 		// @todo not supported yet below
-		if ( in_array( $function_id, ['do_action_ref_array', 'do_action_deprecated', 'apply_filters_ref_array', 'apply_filters_deprecated'], true ) ) {
+		if ( in_array( $function_id, [ 'do_action_ref_array', 'do_action_deprecated', 'apply_filters_ref_array', 'apply_filters_deprecated' ], true ) ) {
 			return null;
 		}
 
@@ -796,13 +796,13 @@ class Plugin implements
 		if (
 			in_array(
 				$function_id,
-				array(
+				[
 					'did_action',
 					'doing_action',
 					'has_action',
 					'remove_action',
 					'remove_all_actions',
-				),
+				],
 				true
 			)
 		) {
@@ -810,13 +810,13 @@ class Plugin implements
 			$is_action_not_filter = true;
 		} elseif (
 			in_array( $function_id,
-				array(
+				[
 					'did_filter',
 					'doing_filter',
 					'has_filter',
 					'remove_filter',
 					'remove_all_filters',
-				),
+				],
 				true
 			)
 		) {
@@ -831,7 +831,7 @@ class Plugin implements
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			try {
 				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
-			} catch (UnexpectedValueException $e) {
+			} catch ( UnexpectedValueException $e ) {
 				$union = null;
 			}
 			if ( ! $union ) {
@@ -890,7 +890,7 @@ class Plugin implements
 			// like this, it will give error that the do_action does not expect any arguments, thus prompting the dev to add phpdoc or remove args
 			// if this should be ignored return []; instead
 			// return [
-			//	new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
+			// new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
 			// ];
 			return [];
 		}
@@ -949,8 +949,8 @@ class Plugin implements
 			$num_args = count( $call_args ) - 1;
 		} else {
 			$num_args = 1;
-			if ( isset( $call_args[ 3 ]->value->value ) && !isset( $call_args[ 3 ]->name ) ) {
-				$num_args = max( 0, (int) $call_args[ 3 ]->value->value );
+			if ( isset( $call_args[3]->value->value ) && ! isset( $call_args[3]->name ) ) {
+				$num_args = max( 0, (int) $call_args[3]->value->value );
 				$accepted_args_provided = true;
 			}
 
@@ -1016,7 +1016,7 @@ class Plugin implements
 			$required_params_count = $hook['minimum_invoke_args'];
 		}
 
-		$hook_params = array_map( function ( Union $type ) use ( &$required_params_count ) : FunctionLikeParameter {
+		$hook_params = array_map( function ( Union $type ) use ( &$required_params_count ): FunctionLikeParameter {
 			$is_optional = $required_params_count > 0 ? false : true;
 			$required_params_count--;
 
@@ -1059,7 +1059,7 @@ class Plugin implements
 			}
 		}
 
-		$args_type = $max_params === 0 || $min_args >= $max_params ? Type::getInt( false, $max_params ) : new Union([ new TIntRange( $min_args, $max_params )] );
+		$args_type = $max_params === 0 || $min_args >= $max_params ? Type::getInt( false, $max_params ) : new Union( [ new TIntRange( $min_args, $max_params ) ] );
 
 		$return = [
 			// the first argument of each FunctionLikeParameter must match the param name of the function to allow the use of named arguments
@@ -1078,7 +1078,7 @@ class Plugin implements
 		return $return;
 	}
 
-	public static function getFunctionReturnType( FunctionReturnTypeProviderEvent $event ) : ?Union {
+	public static function getFunctionReturnType( FunctionReturnTypeProviderEvent $event ): ?Union {
 		if ( $event->getFunctionId() === 'wp_parse_url' ) {
 			return ParseUrlReturnTypeProvider::getFunctionReturnType( $event );
 		}
@@ -1100,7 +1100,7 @@ class Plugin implements
 		if (
 			in_array(
 				$event->getFunctionId(),
-				array(
+				[
 					'did_action',
 					'did_filter',
 					'doing_action',
@@ -1111,7 +1111,7 @@ class Plugin implements
 					'remove_filter',
 					'remove_all_actions',
 					'remove_all_filters',
-				),
+				],
 				true
 			)
 		) {
@@ -1127,7 +1127,7 @@ class Plugin implements
 			$statements_source = $event->getStatementsSource();
 			try {
 				$union = $statements_source->getNodeTypeProvider()->getType( $call_args[0]->value );
-			} catch (UnexpectedValueException $e) {
+			} catch ( UnexpectedValueException $e ) {
 				$union = null;
 			}
 			if ( ! $union ) {
@@ -1178,7 +1178,7 @@ class Plugin implements
 		}
 	}
 
-	protected static function getTypeFromArg( $parser_param, Context $context, StatementsSource $statements_source ) : ?Union {
+	protected static function getTypeFromArg( $parser_param, Context $context, StatementsSource $statements_source ): ?Union {
 		if ( isset( $statements_source->node_data ) ) {
 			$mode_type = SimpleTypeInferer::infer(
 				$statements_source->getCodebase(),
@@ -1558,7 +1558,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				$num_args = count( $node->args ) - 1;
 
 				// cron actions cannot be deprecated, which means we only need to check this here
-				if ( in_array( (string) $node->name, ['apply_filters_deprecated', 'do_action_deprecated'], true ) ) {
+				if ( in_array( (string) $node->name, [ 'apply_filters_deprecated', 'do_action_deprecated' ], true ) ) {
 					$is_deprecated = true;
 				}
 			}
@@ -1618,7 +1618,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 				++$i;
 
-				if( ! ( $param instanceof phpDocumentor\Reflection\DocBlock\Tags\Param ) ) {
+				if ( ! ( $param instanceof phpDocumentor\Reflection\DocBlock\Tags\Param ) ) {
 					// set to mixed - if we skip it, it will mess up all subsequent args
 					$types[] = Type::getMixed();
 					continue;
