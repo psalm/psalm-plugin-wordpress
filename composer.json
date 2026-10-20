@@ -23,12 +23,14 @@
 		"php-stubs/wordpress-stubs": "^6.0",
 		"php-stubs/wordpress-globals": "^0.2.0",
 		"php-stubs/wp-cli-stubs": "^2.7",
-		"vimeo/psalm": "^5 || ^6"
+		"psalm/psalm-plugin-api": "^0.4",
+		"vimeo/psalm": "^7|dev-master"
 	},
 	"require-dev": {
+		"dg/bypass-finals": "^1.5",
 		"humanmade/coding-standards": "^1.2",
-		"phpunit/phpunit": "^9.0",
-		"psalm/plugin-phpunit": "^0.18.4"
+		"phpunit/phpunit": "^10.5 || ^11.5",
+		"psalm/plugin-phpunit": "^0.21"
 	},
 	"extra": {
 		"psalm" : {

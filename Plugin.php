@@ -9,11 +9,13 @@ use phpDocumentor;
 use PhpParser;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Echo_;
+use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
@@ -723,6 +725,8 @@ class Plugin implements
 
 	/**
 	 * @return non-empty-list<lowercase-string>
+	 *
+	 * @psalm-pure
 	 */
 	public static function getFunctionIds() : array {
 		return [
@@ -1062,7 +1066,6 @@ class Plugin implements
 			new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
 			new FunctionLikeParameter( 'callback', false, new Union( [
 				new TCallable(
-					'callable',
 					$hook_params,
 					$return_type
 				),
@@ -1431,9 +1434,10 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		// "$var = apply_filters" directly after a function declaration
 		// "echo apply_filters"
 		// cannot do this for all cases, as often it will assign completely wrong stuff otherwise
-		if ( $node->getDocComment() && ( $node instanceof FuncCall || $node instanceof Return_ || $node instanceof Variable || $node instanceof Echo_ ) ) {
+		// PHP-Parser 5 attaches the phpdoc of "$var = apply_filters" to the expression statement only
+		if ( $node->getDocComment() && ( $node instanceof FuncCall || $node instanceof Return_ || $node instanceof Variable || $node instanceof Echo_ || $node instanceof Expression ) ) {
 			$this->last_doc = $node->getDocComment();
-		} elseif ( isset( $this->last_doc ) && ! $node instanceof FuncCall ) {
+		} elseif ( isset( $this->last_doc ) && ! $node instanceof FuncCall && ! $node instanceof Assign && ! $node instanceof Variable ) {
 			// if it's set already and this is not a FuncCall, reset it to null, since there's something else and it would be used incorrectly
 			$this->last_doc = null;
 		}

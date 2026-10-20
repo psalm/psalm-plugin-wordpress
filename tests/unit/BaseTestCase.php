@@ -47,6 +47,13 @@ abstract class BaseTestCase extends Psalm\Tests\TestCase {
 }
 
 class TestConfig extends Psalm\Tests\TestConfig {
+	public function __construct() {
+		parent::__construct();
+
+		// Psalm 7 reports the docblock issues of the stubs plugins add, and the third-party WordPress stubs have some
+		$this->setAdvancedErrorLevel( 'InvalidDocblock', [ [ 'type' => 'suppress', 'directory' => [ [ 'name' => 'vendor' ] ] ] ], 'error' );
+	}
+
 	protected function getContents() : string {
 		return '<?xml version="1.0"?>
 			<projectFiles>
