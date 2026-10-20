@@ -17,6 +17,7 @@ class WP_CLI {
 	 * } $args
 	 * @return bool
 	 */
+	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
 	public static function add_command( string $name, $callable, array $args = [] ) {}
 
 	/**
@@ -29,6 +30,7 @@ class WP_CLI {
 	 *     : null
 	 * )
 	 */
+	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
 	public static function error( $message, $exit = true ) {}
 }
 
@@ -43,7 +45,7 @@ class wpdb {
 	/**
 	 * @template TObject of ARRAY_A|ARRAY_N|OBJECT|OBJECT_K
 	 * @param string|null $query
-	 * @psalm-param TObject $object
+	 * @psalm-param TObject $output
 	 * @return (
 	 *     TObject is OBJECT
 	 *     ? list<ArrayObject<string, string>>
@@ -56,7 +58,7 @@ class wpdb {
 	 *       )
 	 * )|null
 	 */
-	public function get_results( $query = null, $object = \OBJECT ) {}
+	public function get_results( $query = null, $output = \OBJECT ) {}
 }
 
 /**
@@ -117,10 +119,10 @@ function wp_parse_url( string $url, int $component = -1 ) {}
 
 /**
  * @param string $option
- * @param mixed $default
+ * @param mixed $default_value
  * @return mixed
  */
-function get_option( string $option, $default = null ) {}
+function get_option( string $option, $default_value = null ) {}
 
 /**
  * @return array[] {
@@ -144,14 +146,14 @@ function get_option( string $option, $default = null ) {}
  *   type: string,
  * }>
  */
-function get_settings_errors( $setting = '', $sanitize = false ) : array {}
+function get_settings_errors( $setting = '', $sanitize = false ): array {}
 
 /**
  * @param string $path
  * @param 'https'|'http'|'relative'|'rest' $scheme
  * @return string
  */
-function home_url( string $path = '', $scheme = null ) : string {}
+function home_url( string $path = '', $scheme = null ): string {}
 
 /**
  * @template TArgs of array<array-key, mixed>
@@ -166,13 +168,13 @@ function wp_parse_args( $args, $defaults ) {}
  * @param WP_Error|mixed $error
  * @psalm-assert-if-true WP_Error $error
  */
-function is_wp_error( $error ) : bool {}
+function is_wp_error( $error ): bool {}
 
 /**
  * @template T
  * @template K
- * @param array<array-key, array<K, T>> $list
- * @param K $column
+ * @param array<array-key, array<K, T>> $input_list
+ * @param K $field
  * @return list<T>
  */
-function wp_list_pluck( array $list, string $column, string $index_key = null ) : array {}
+function wp_list_pluck( array $input_list, string $field, string $index_key = null ): array {}

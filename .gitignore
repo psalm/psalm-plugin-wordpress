@@ -3,3 +3,4 @@ composer.lock
 /stubs/wordpress/
 /stubs/vendor/
 /vendor/
+/tools/phpcs/vendor/

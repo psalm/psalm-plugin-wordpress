@@ -31,9 +31,6 @@ jobs:
 
       - name: Install dependencies
         run: composer install --ansi --no-interaction --no-progress
-        env:
-          # humanmade/coding-standards requires wp-coding-standards/wpcs 2.3.0, which has a security advisory
-          COMPOSER_NO_SECURITY_BLOCKING: 1
 
       - name: Run Tests
         run: vendor/bin/phpunit

@@ -28,7 +28,6 @@
 	},
 	"require-dev": {
 		"dg/bypass-finals": "^1.5",
-		"humanmade/coding-standards": "^1.2",
 		"phpunit/phpunit": "^10.5 || ^11.5",
 		"psalm/plugin-phpunit": "^0.21"
 	},
@@ -49,9 +48,6 @@
 		}
 	},
 	"config": {
-		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
-		},
 		"preferred-install": {
 			"vimeo/psalm": "source"
 		},
@@ -64,8 +60,14 @@
 			"@analyze"
 		],
 		"analyze": "psalm",
-		"cs-check": "phpcs -ps --colors",
-		"cs-fix": "phpcbf",
+		"cs-check": [
+			"@composer --working-dir=tools/phpcs update --no-interaction --quiet",
+			"tools/phpcs/vendor/bin/phpcs -ps --colors"
+		],
+		"cs-fix": [
+			"@composer --working-dir=tools/phpcs update --no-interaction --quiet",
+			"tools/phpcs/vendor/bin/phpcbf"
+		],
 		"test": "codecept run",
 		"test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
 		"generate-wordpress-stubs": "cd wordpress ; composer init -n ; composer require "

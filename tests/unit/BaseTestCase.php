@@ -10,7 +10,7 @@ use Psalm\Internal\Provider\FileStorageProvider;
 use Psalm\Tests\Internal\Provider;
 
 abstract class BaseTestCase extends Psalm\Tests\TestCase {
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 		$this->project_analyzer->getConfig()->initializePlugins( $this->project_analyzer );
 		$this->project_analyzer->getConfig()->visitStubFiles( $this->project_analyzer->getCodebase() );
@@ -19,7 +19,7 @@ abstract class BaseTestCase extends Psalm\Tests\TestCase {
 	/**
 	 * @return Config
 	 */
-	protected function makeConfig() : Config {
+	protected function makeConfig(): Config {
 		$config = new TestConfig();
 		$config->addPluginClass( 'PsalmWordPress\\Plugin' );
 		return $config;
@@ -30,7 +30,7 @@ abstract class BaseTestCase extends Psalm\Tests\TestCase {
 		\Psalm\Context $context,
 		bool $track_unused_suppressions = true,
 		bool $taint_flow_tracking = false
-	) : void {
+	): void {
 		$codebase = $this->project_analyzer->getCodebase();
 		$codebase->addFilesToAnalyze( [ $file_path => $file_path ] );
 
@@ -54,7 +54,7 @@ class TestConfig extends Psalm\Tests\TestConfig {
 		$this->setAdvancedErrorLevel( 'InvalidDocblock', [ [ 'type' => 'suppress', 'directory' => [ [ 'name' => 'vendor' ] ] ] ], 'error' );
 	}
 
-	protected function getContents() : string {
+	protected function getContents(): string {
 		return '<?xml version="1.0"?>
 			<projectFiles>
 				<directory name="./" />
