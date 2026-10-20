@@ -24,7 +24,7 @@
 		"php-stubs/wordpress-globals": "^0.2.0",
 		"php-stubs/wp-cli-stubs": "^2.7",
 		"psalm/psalm-plugin-api": "^0.4",
-		"vimeo/psalm": "^7|dev-master"
+		"vimeo/psalm": "^7.0.0-rc5|dev-master"
 	},
 	"require-dev": {
 		"dg/bypass-finals": "^1.5",
