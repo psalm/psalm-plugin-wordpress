@@ -23,10 +23,7 @@
 		<exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch" />
 		<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
 
-		<!-- Exclude the sniff requiring inline comments to end with a full stop -->
-		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
-
-		<!-- Exclude multiple classes sniff -->
+		<!-- Exclude multiple classes sniffs (WPCS 3 adds the same check as Generic.Files.OneObjectStructurePerFile) -->
 		<exclude name="HM.Classes.OnlyClassInFile.FoundMultipleDeclarations" />
 		<exclude name="PSR1.Classes.ClassDeclaration.MultipleClasses" />
 		<exclude name="Generic.Files.OneObjectStructurePerFile.MultipleFound" />

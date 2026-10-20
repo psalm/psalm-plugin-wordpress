@@ -89,17 +89,17 @@ class Plugin implements
 	public function __invoke( RegistrationInterface $registration, ?SimpleXMLElement $config = null ): void {
 		$registration->registerHooksFromClass( static::class );
 
-		// if all possible params of an apply_filters should be required
+		// if all possible params of an apply_filters should be required.
 		if ( isset( $config->requireAllParams['value'] ) && (string) $config->requireAllParams['value'] === 'true' ) {
 			static::$requireAllParams = true;
 		}
 
-		// if useDefaultStubs is not set or set to anything except false, we want to load the stubs included in this plugin
+		// if useDefaultStubs is not set or set to anything except false, we want to load the stubs included in this plugin.
 		if ( ! isset( $config->useDefaultStubs['value'] ) || (string) $config->useDefaultStubs['value'] !== 'false' ) {
 			array_map( [ $registration, 'addStubFile' ], $this->getStubFiles() );
 		}
 
-		// if useDefaultHooks is not set or set to anything except false, we want to load the hooks included in this plugin
+		// if useDefaultHooks is not set or set to anything except false, we want to load the hooks included in this plugin.
 		if ( ! isset( $config->useDefaultHooks['value'] ) || (string) $config->useDefaultHooks['value'] !== 'false' ) {
 			static::$configHooks['useDefaultHooks'] = true;
 		}
@@ -302,7 +302,7 @@ class Plugin implements
 
 				$array_properties = [];
 				foreach ( $matches as $match ) {
-					// use as property as key to avoid setting the same property twice in case it is incorrectly set twice
+					// use as property as key to avoid setting the same property twice in case it is incorrectly set twice.
 					$array_properties[ $match[2] ] = $match[2] . ': ' . $match[1];
 				}
 
@@ -313,7 +313,7 @@ class Plugin implements
 
 			$types = array_column( $params, 'types' );
 
-			// remove empty elements which can happen with invalid phpdoc - must be done before parseString to avoid notice there
+			// remove empty elements which can happen with invalid phpdoc - must be done before parseString to avoid notice there.
 			$types = array_filter( $types );
 
 			$types = array_map( function ( $type ): string {
@@ -321,14 +321,14 @@ class Plugin implements
 				return implode( '|', $type );
 			}, $types );
 
-			// not all types are documented, assume "mixed" for undocumented
+			// not all types are documented, assume "mixed" for undocumented.
 			if ( count( $types ) < $hook['args'] ) {
 				$fill_types = array_fill( 0, $hook['args'], 'mixed' );
 				$types = $types + $fill_types;
 				ksort( $types );
 			}
 
-			// skip invalid ones
+			// skip invalid ones.
 			try {
 				$parsed_types = array_map( [ Type::class, 'parseString' ], $types );
 			} catch ( TypeParseTreeException $e ) {
@@ -369,7 +369,7 @@ class Plugin implements
 		try {
 			$traverser->traverse( $statements );
 		} catch ( Exception $e ) {
-			// collecting the hooks of the file is best effort: register those found before the failure
+			// collecting the hooks of the file is best effort: register those found before the failure.
 		}
 
 		foreach ( $hook_visitor->hooks as $hook ) {
@@ -379,7 +379,7 @@ class Plugin implements
 
 	public static function getDynamicHookName( object $arg ): ?string {
 		// variable or 'foo' . $bar variable hook name
-		// "foo_{$my_var}_bar" is the wp-hooks-generator style, we need to mimic
+		// "foo_{$my_var}_bar" is the wp-hooks-generator style, we need to mimic.
 		if ( $arg instanceof Variable ) {
 			return '{$' . $arg->name . '}';
 		}
@@ -429,13 +429,13 @@ class Plugin implements
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
-			// hook name with Foo:bar()
+			// hook name with Foo:bar().
 			if ( $arg->class instanceof Name ) {
 				// @todo this can be handled here, however the WP hooks generator creates output that does not match the other format at all and needs to be fixed first
 				return null;
 			}
 
-			// need to check recursively
+			// need to check recursively.
 			$temp = static::getDynamicHookName( $arg->class );
 			if ( is_null( $temp ) ) {
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with class type ' . get_class( $arg->class ) . ' on line ' . $arg->getStartLine(), 0 );
@@ -450,7 +450,7 @@ class Plugin implements
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with name type ' . get_class( $arg->name ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
-			// need to check recursively
+			// need to check recursively.
 			$temp = static::getDynamicHookName( $arg->var );
 			if ( is_null( $temp ) ) {
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getStartLine(), 0 );
@@ -462,7 +462,7 @@ class Plugin implements
 		}
 
 		if ( $arg instanceof FuncCall ) {
-			// mostly relevant for add_action - can just assume any variable name without using the function name, since it's useless (e.g. basename, dirname,... are common ones)
+			// mostly relevant for add_action - can just assume any variable name without using the function name, since it's useless (e.g. basename, dirname,... are common ones).
 			return '{$variable}';
 		}
 
@@ -472,7 +472,7 @@ class Plugin implements
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with key type ' . get_class( $arg->dim ) . ' on line ' . $arg->getStartLine(), 0 );
 			}
 
-			// need to check recursively
+			// need to check recursively.
 			$temp = static::getDynamicHookName( $arg->var );
 			if ( is_null( $temp ) ) {
 				throw new UnexpectedValueException( 'Unsupported dynamic hook name with var type ' . get_class( $arg->var ) . ' on line ' . $arg->getStartLine(), 0 );
@@ -490,13 +490,13 @@ class Plugin implements
 		}
 
 		// isn't actually supported by the wp-hooks-generator yet and will be handled as regular string there
-		// just handle it generically here for the time being
+		// just handle it generically here for the time being.
 		if ( $arg instanceof PhpParser\Node\Expr\ConstFetch || $arg instanceof PhpParser\Node\Expr\ClassConstFetch ) {
 			return '{$variable}';
 		}
 
 		// other types not supported yet
-		// add handling if encountered @todo
+		// add handling if encountered @todo.
 		throw new UnexpectedValueException( 'Unsupported dynamic hook name with type ' . get_class( $arg ) . ' on line ' . $arg->getStartLine(), 0 );
 	}
 
@@ -505,7 +505,7 @@ class Plugin implements
 	 */
 	public static function getDynamicHookData( string $hook_name, bool $is_action_not_filter = false ): ?array {
 		// fully dynamic hooks like {$tag} cannot be used here, as they would match many hooks
-		// same for {$tag}_{$hello}
+		// same for {$tag}_{$hello}.
 		$normalized_hook_name = preg_replace( '/{(?:[^{}]+|(?R))*+}/', '{$abc}', $hook_name );
 		$hook_dynamic_removed = ltrim( $normalized_hook_name, '_' );
 		if ( empty( $hook_dynamic_removed ) ) {
@@ -513,33 +513,33 @@ class Plugin implements
 		}
 
 		// register dynamic actions - here we can use the static name from the add_action to register it
-		// this ensures that add_action for those will give correct error (e.g. if the 4th argument is not 0 for ajax) and we don't need to ignore these
+		// this ensures that add_action for those will give correct error (e.g. if the 4th argument is not 0 for ajax) and we don't need to ignore these.
 		$all_hook_names = array_keys( static::$hooks );
-		// dynamic hooks exist as some_{$variable}_text
+		// dynamic hooks exist as some_{$variable}_text.
 		$dynamic_hook_names = preg_grep( '/{\$/', $all_hook_names );
 
-		// normalize variable name length, to ensure longer variable names don't cause wrong sorting leading to incorrect replacements later on
+		// normalize variable name length, to ensure longer variable names don't cause wrong sorting leading to incorrect replacements later on.
 		$normalized_dynamic_hook_names = preg_replace( '/{(?:[^{}]+|(?R))*+}/', '{$abc}', $dynamic_hook_names );
 
 		$dynamic_hook_names = array_combine( $dynamic_hook_names, $normalized_dynamic_hook_names );
 
-		// sort descending from longest to shortest, to avoid shorter dynamic hooks accidentally matching
+		// sort descending from longest to shortest, to avoid shorter dynamic hooks accidentally matching.
 		uasort( $dynamic_hook_names, function ( string $a, string $b ) {
 			return strlen( $b ) - strlen( $a );
 		});
 
-		// the hook name has a variable, so we first check it against hooks that use a variable too only, to see if we get a match here already
+		// the hook name has a variable, so we first check it against hooks that use a variable too only, to see if we get a match here already.
 		$dynamic_hook_name_key = array_search( $normalized_hook_name, $dynamic_hook_names, true );
 		if ( $dynamic_hook_name_key !== false && $is_action_not_filter && static::$hooks[ $dynamic_hook_name_key ]['hook_type'] !== 'action' ) {
-			// action used as filter
+			// action used as filter.
 			return null;
 		} elseif ( $dynamic_hook_name_key !== false && ! $is_action_not_filter && static::$hooks[ $dynamic_hook_name_key ]['hook_type'] !== 'filter' ) {
-			// filter used as action
+			// filter used as action.
 			return null;
 		} elseif ( $dynamic_hook_name_key !== false ) {
 			$dynamic_hook = static::$hooks[ $dynamic_hook_name_key ];
 
-			// it's already in the correct format, so we just need to assign it to the non-dynamic name
+			// it's already in the correct format, so we just need to assign it to the non-dynamic name.
 			static::$hooks[ $hook_name ] = [
 				'hook_type' => $dynamic_hook['hook_type'],
 				'types' => $dynamic_hook['types'],
@@ -552,7 +552,7 @@ class Plugin implements
 
 		foreach ( $dynamic_hook_names as $dynamic_hook_name => $normalized_dynamic_hook_name ) {
 			if ( $is_action_not_filter && ! in_array( static::$hooks[ $dynamic_hook_name ]['hook_type'], [ 'action', 'action_reference', 'action_deprecated' ], true ) ) {
-				// don't match actions with filters here, so we will get an error later on
+				// don't match actions with filters here, so we will get an error later on.
 				continue;
 			}
 
@@ -561,22 +561,22 @@ class Plugin implements
 			}
 
 			// fully dynamic hooks like {$tag} cannot be used here, as they would match all hooks
-			// same for {$tag}_{$hello}
+			// same for {$tag}_{$hello}.
 			$dynamic_removed = ltrim( str_replace( '{$abc}', '', $normalized_dynamic_hook_name ), '_' );
 			if ( empty( $dynamic_removed ) ) {
 				continue;
 			}
 
-			// need to escape it beforehand, since we insert regex into it
+			// need to escape it beforehand, since we insert regex into it.
 			$preg_hook_name = preg_quote( $normalized_dynamic_hook_name, '/' );
 			// dot for dynamic hook names, e.g. load-edit.php
-			// may contain a variable if the hook name is dynamic too
+			// may contain a variable if the hook name is dynamic too.
 			$preg_hook_name = str_replace( '\{\$abc\}', '({\$)?[\w:>.[\]\'$\/-]+}?', $preg_hook_name );
 
 			if ( preg_match( '/^' . $preg_hook_name . '$/', $hook_name ) === 1 ) {
 				$dynamic_hook = static::$hooks[ $dynamic_hook_name ];
 
-				// it's already in the correct format, so we just need to assign it to the non-dynamic name
+				// it's already in the correct format, so we just need to assign it to the non-dynamic name.
 				static::$hooks[ $hook_name ] = [
 					'hook_type' => $dynamic_hook['hook_type'],
 					'types' => $dynamic_hook['types'],
@@ -610,7 +610,7 @@ class Plugin implements
 		} elseif ( in_array( $function_id, $do_action_functions, true ) ) {
 			$hook_type = 'action';
 		} elseif ( preg_match( '/_deprecated_hook$/', $function_id ) !== 1 ) {
-			// there are custom implementations of "deprecated_hook", e.g. for "wcs", so we need to preg match it
+			// there are custom implementations of "deprecated_hook", e.g. for "wcs", so we need to preg match it.
 			return;
 		}
 
@@ -645,10 +645,10 @@ class Plugin implements
 
 				if ( $potential_hook_name ) {
 					if ( is_null( $hook_name ) || ! isset( static::$hooks[ $hook_name ] ) ) {
-						// if it's not registered yet, use the resolved hook name
+						// if it's not registered yet, use the resolved hook name.
 						$hook_name = $potential_hook_name;
 					} elseif ( isset( static::$hooks[ $hook_name ] ) ) {
-						// if it's registered already, store the resolved name hook too
+						// if it's registered already, store the resolved name hook too.
 						static::$hooks[ $potential_hook_name ] = static::$hooks[ $hook_name ];
 					}
 				}
@@ -659,7 +659,7 @@ class Plugin implements
 
 		if ( preg_match( '/_deprecated_hook$/', $function_id ) === 1 ) {
 			// hook type is irrelevant and won't be used when overriding
-			// in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set
+			// in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set.
 			static::registerHook( $hook_name, [], '', true );
 			return;
 		}
@@ -775,13 +775,13 @@ class Plugin implements
 		$statements_source = $event->getStatementsSource();
 		$code_location = $event->getCodeLocation();
 
-		// output any parse errors
+		// output any parse errors.
 		foreach ( static::$parseErrors as $error_message ) {
-			// do not allow suppressing this
+			// do not allow suppressing this.
 			IssueBuffer::accepts(
 				new InvalidDocblock(
 					$error_message,
-					$code_location // this can be completely wrong (even completely wrong file), since the parse error might be taken from the hooks file, so ideally we would create the correct code location before adding to $parseErrors
+					$code_location // this can be completely wrong (even completely wrong file), since the parse error might be taken from the hooks file, so ideally we would create the correct code location before adding to $parseErrors.
 				)
 			);
 		}
@@ -867,7 +867,7 @@ class Plugin implements
 			$hook = static::getDynamicHookData( $hook_name, $is_action_not_filter );
 		}
 
-		// if we declare/invoke the hook, the hook obviously exists
+		// if we declare/invoke the hook, the hook obviously exists.
 		if ( ! $is_invoke && ! $hook ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
@@ -885,19 +885,17 @@ class Plugin implements
 		// if the $hook is still not set, it means we have a do_action/apply_filters here
 		// it may be empty if it's missing in the actions/filters.json
 		// or if it's not documented in the file. e.g. a do_action without a phpdoc, an action that is only declared in a wp_schedule_event,... and thus not picked up by beforeAnalyzeFile
-		// since we have no details on it, we skip it
+		// since we have no details on it, we skip it.
 		if ( ! $hook ) {
-			// like this, it will give error that the do_action does not expect any arguments, thus prompting the dev to add phpdoc or remove args
-			// if this should be ignored return []; instead
-			// return [
-			// new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
-			// ];
+			// we ignore it by returning no params; returning only the hook name param instead, i.e.
+			// new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false )
+			// would give an error that the do_action does not expect any arguments, prompting the dev to add phpdoc or remove args.
 			return [];
 		}
 
 		$hook_type = $hook['hook_type'] ?? '';
 
-		// action_reference for do_action_ref_array
+		// action_reference for do_action_ref_array.
 		if ( $is_action_not_filter && ! in_array( $hook_type, [ 'action', 'action_reference', 'action_deprecated' ], true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
@@ -912,7 +910,7 @@ class Plugin implements
 			return [];
 		}
 
-		// filter_reference for apply_filters_ref_array
+		// filter_reference for apply_filters_ref_array.
 		if ( ! $is_action_not_filter && ! in_array( $hook_type, [ 'filter', 'filter_reference', 'filter_deprecated' ], true ) ) {
 			if ( $code_location ) {
 				IssueBuffer::accepts(
@@ -937,7 +935,7 @@ class Plugin implements
 			);
 		}
 
-		// don't modify the param types for utility types, since the stubbed ones are fine
+		// don't modify the param types for utility types, since the stubbed ones are fine.
 		if ( $is_utility ) {
 			return null;
 		}
@@ -945,7 +943,7 @@ class Plugin implements
 		// Check how many args the filter is registered with.
 		$accepted_args_provided = false;
 		if ( $is_invoke ) {
-			// need to deduct 1, since the first argument (string) is the hardcoded hook name, which is added manually later on, since it's not in the PHPDoc
+			// need to deduct 1, since the first argument (string) is the hardcoded hook name, which is added manually later on, since it's not in the PHPDoc.
 			$num_args = count( $call_args ) - 1;
 		} else {
 			$num_args = 1;
@@ -954,7 +952,7 @@ class Plugin implements
 				$accepted_args_provided = true;
 			}
 
-			// named arguments
+			// named arguments.
 			foreach ( $call_args as $call_arg ) {
 				if ( isset( $call_arg->name ) && $call_arg->name instanceof PhpParser\Node\Identifier && $call_arg->name->name === 'accepted_args' ) {
 					$num_args = max( 0, (int) $call_arg->value->value );
@@ -967,17 +965,17 @@ class Plugin implements
 		// if the PHPDoc is missing from the do_action/apply_filters, the types can be empty - we assign "mixed" when loading stubs in that case though to avoid this
 		// this means these hooks really do not accept any args and the arg
 		// this will cause "InvalidArgument" error for add_action/add_filter and TooManyArguments error for do_action/apply_filters
-		// except where it actually has 0 args
+		// except where it actually has 0 args.
 		if ( empty( $hook['types'] ) && $num_args !== 0 ) {
 			if ( $is_invoke ) {
 				// impossible, as it would have been populated with "mixed" already
-				// kept for completeness sake
+				// kept for completeness sake.
 				$hook_types = array_fill( 0, $num_args, Type::getMixed() );
 			} else {
-				// add_action default has 1 arg, but this hook does not accept any args
+				// add_action default has 1 arg, but this hook does not accept any args.
 				if ( $is_action ) {
 					// if accepted args are not provided, it will use the default value, so we need to give an error
-					// if it's provided psalm will report an InvalidArgument error by default already
+					// if it's provided psalm will report an InvalidArgument error by default already.
 					if ( $code_location && $accepted_args_provided === false ) {
 						IssueBuffer::accepts(
 							new HookInvalidArgs(
@@ -990,11 +988,10 @@ class Plugin implements
 					$hook_types = [];
 				} else {
 					// should never happen, since we always assume "mixed" as default already and apply_filters must have at least 1 arg which is the value that is filtered
-					// this might be worth to debug, if anybody ever encounters this
+					// this might be worth to debug, if anybody ever encounters this.
 					throw new UnexpectedValueException( 'You found a bug for hook "' . $hook_name . '". Please open an issue with a code sample on https://github.com/psalm/psalm-plugin-wordpress', 0 );
 
-					// alternatively handle it with mixed for add_filter
-					// $hook_types = [ Type::getMixed() ];
+					// alternatively, add_filter could handle it as mixed, by setting $hook_types to [ Type::getMixed() ].
 				}
 			}
 		} else {
@@ -1003,16 +1000,16 @@ class Plugin implements
 
 		$max_params = count( $hook_types );
 
-		// when not all params should be required, we set all others to optional
+		// when not all params should be required, we set all others to optional.
 		$required_params_count = static::$requireAllParams === true && $is_invoke ? $max_params : $num_args;
 
-		// we must slice for add_action/add_filter, to get the number of params matching the number of add_action/filter args, so it will report an error if the number is wrong
+		// we must slice for add_action/add_filter, to get the number of params matching the number of add_action/filter args, so it will report an error if the number is wrong.
 		$hook_types = $is_invoke ? $hook_types : array_slice( $hook_types, 0, $required_params_count );
 
-		// if the required args in add_action are higher than what the hook is called with in some cases
+		// if the required args in add_action are higher than what the hook is called with in some cases.
 		if ( $required_params_count > $hook['minimum_invoke_args'] && ! $is_invoke ) {
 			// all args that go above the minimum invoke args must be set to optional, as the filter is called
-			// only after we sliced above already (since we need to include all params, just need to change if they're optional or not)
+			// only after we sliced above already (since we need to include all params, just need to change if they're optional or not).
 			$required_params_count = $hook['minimum_invoke_args'];
 		}
 
@@ -1023,38 +1020,38 @@ class Plugin implements
 			return new FunctionLikeParameter( 'param', false, $type, null, null, null, $is_optional );
 		}, $hook_types );
 
-		// check that the types passed to filter are of the type that is specified in PHPDoc
+		// check that the types passed to filter are of the type that is specified in PHPDoc.
 		if ( $is_invoke ) {
 			$return = [
-				// generic non-empty string (don't use $hook_name, as it will report false positives for dynamic hook names that contain a variable)
+				// generic non-empty string (don't use $hook_name, as it will report false positives for dynamic hook names that contain a variable).
 				new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
 			];
 
 			return array_merge( $return, $hook_params );
 		}
 
-		// add_action callback return value can be anything, but is discarded anyway, therefore should be void
+		// add_action callback return value can be anything, but is discarded anyway, therefore should be void.
 		$min_args = 0;
 		if ( $is_action ) {
 			// by setting this to "Type::getVoid()", the callback can return ANY value (e.g. int, string,...)
 			// by setting this to "Type::getNull()", the callback must explicitly return null or void
-			// using null is too strict, as you would have to create tons of unnecessary wrapper functions then
+			// using null is too strict, as you would have to create tons of unnecessary wrapper functions then.
 			$return_type = Type::getVoid();
 		} else {
-			// technically 0 is allowed for add_filter, however it doesn't make sense since any previously filtered values would not be used and this is the wrong way to use a filter
+			// technically 0 is allowed for add_filter, however it doesn't make sense since any previously filtered values would not be used and this is the wrong way to use a filter.
 			$min_args = 1;
 			if ( isset( $hook['types'][0] ) ) {
-				// add_filter callback must return the same type as the first documented parameter (2nd arg)
+				// add_filter callback must return the same type as the first documented parameter (2nd arg).
 				$return_type = $hook['types'][0];
 
 				// for bool we can use 0, so "__return_true" and "__return_false" can be used without error, as for bool only (!) filters the previous value doesn't matter
 				// allow this for "mixed" too, since it could be bool and we don't want to force types on badly/non-documented filters
-				// same for single int type, where any previously filtered in values are often irrelevant
+				// same for single int type, where any previously filtered in values are often irrelevant.
 				if ( $return_type->isBool() || $return_type->isMixed() || $return_type->isInt() ) {
 					$min_args = 0;
 				}
 			} else {
-				// unknown due to lack of PHPDoc - but a filter must always return something - mixed is the most generic case
+				// unknown due to lack of PHPDoc - but a filter must always return something - mixed is the most generic case.
 				$return_type = Type::getMixed();
 			}
 		}
@@ -1062,7 +1059,7 @@ class Plugin implements
 		$args_type = $max_params === 0 || $min_args >= $max_params ? Type::getInt( false, $max_params ) : new Union( [ new TIntRange( $min_args, $max_params ) ] );
 
 		$return = [
-			// the first argument of each FunctionLikeParameter must match the param name of the function to allow the use of named arguments
+			// the first argument of each FunctionLikeParameter must match the param name of the function to allow the use of named arguments.
 			new FunctionLikeParameter( 'hook_name', false, Type::getNonEmptyString(), null, null, null, false ),
 			new FunctionLikeParameter( 'callback', false, new Union( [
 				new TCallable(
@@ -1096,7 +1093,7 @@ class Plugin implements
 			return null;
 		}
 
-		// use the stubbed type for those
+		// use the stubbed type for those.
 		if (
 			in_array(
 				$event->getFunctionId(),
@@ -1122,7 +1119,7 @@ class Plugin implements
 
 		$call_args = $event->getCallArgs();
 
-		// only apply_filters left to handle
+		// only apply_filters left to handle.
 		if ( ! $call_args[0]->value instanceof String_ ) {
 			$statements_source = $event->getStatementsSource();
 			try {
@@ -1162,18 +1159,18 @@ class Plugin implements
 			$hook = static::getDynamicHookData( $hook_name, false );
 		}
 
-		// if it's not a filter
+		// if it's not a filter.
 		if ( isset( $hook['hook_type'] ) && ! in_array( $hook['hook_type'], [ 'filter', 'filter_reference', 'filter_deprecated' ], true ) ) {
 			// can't happen unless there is a filter and an action with the same name
-			// or a dynamic filter name matches an action name
+			// or a dynamic filter name matches an action name.
 			return Type::getNull();
 		}
 
 		if ( isset( $hook['types'][0] ) ) {
-			// add_filter callback must return the same type as the first documented parameter (2nd arg)
+			// add_filter callback must return the same type as the first documented parameter (2nd arg).
 			return $hook['types'][0];
 		} else {
-			// unknown due to lack of PHPDoc
+			// unknown due to lack of PHPDoc.
 			return static::getTypeFromArg( $call_args[1]->value, $event->getContext(), $event->getStatementsSource() );
 		}
 	}
@@ -1212,7 +1209,7 @@ class Plugin implements
 			return null;
 		}
 
-		// if it's set return the type of the variable, otherwise set it to null (mixed via fallback)
+		// if it's set return the type of the variable, otherwise set it to null (mixed via fallback).
 		return $context->vars_in_scope[ $extended_var_id ] ?? null;
 	}
 
@@ -1222,18 +1219,18 @@ class Plugin implements
 	 * @return void
 	 */
 	public static function registerHook( string $hook_name, array $types, string $hook_type, bool $is_deprecated ) {
-		// remove empty elements which can happen with invalid phpdoc
+		// remove empty elements which can happen with invalid phpdoc.
 		$types = array_filter( $types );
 		$minimum_invoke_args = count( $types );
 
-		// do not assign empty types if we already have this hook registered
+		// do not assign empty types if we already have this hook registered.
 		if ( isset( static::$hooks[ $hook_name ] ) && $minimum_invoke_args === 0 ) {
-			// allow overriding the deprecated in this case though - e.g. for calls to "_deprecated_hook"
+			// allow overriding the deprecated in this case though - e.g. for calls to "_deprecated_hook".
 			if ( static::$hooks[ $hook_name ]['deprecated'] === false ) {
 				static::$hooks[ $hook_name ]['deprecated'] = $is_deprecated;
 			}
 
-			// filter must have at least 1 arg to work
+			// filter must have at least 1 arg to work.
 			if ( $hook_type !== '' && $hook_type !== 'filter' && static::$hooks[ $hook_name ]['minimum_invoke_args'] !== 0 ) {
 				static::$hooks[ $hook_name ]['minimum_invoke_args'] = 0;
 			}
@@ -1241,15 +1238,15 @@ class Plugin implements
 			return;
 		}
 
-		// if this hook is registered already
+		// if this hook is registered already.
 		if ( isset( static::$hooks[ $hook_name ] ) ) {
 			$minimum_invoke_args = static::$hooks[ $hook_name ]['hook_type'] === '' ? $minimum_invoke_args : min( static::$hooks[ $hook_name ]['minimum_invoke_args'], $minimum_invoke_args );
 			// if we have more types than already registered, we overwrite existing ones, but keep additional ones (array_merge would combine them which is wrong)
 			// except where type is "mixed" and we have a more specific type, we keep the more specific type
-			// we do not merge types together, as this would lead to a complete chaos and no PHPDocs matching up whatsoever
+			// we do not merge types together, as this would lead to a complete chaos and no PHPDocs matching up whatsoever.
 			foreach ( $types as $key => $param_type ) {
 				if ( ! isset( static::$hooks[ $hook_name ]['types'][ $key ] ) ) {
-					// new type has more types than existing
+					// new type has more types than existing.
 					break;
 				}
 
@@ -1263,21 +1260,21 @@ class Plugin implements
 			}
 			$types = $types + static::$hooks[ $hook_name ]['types'];
 
-			// if keys are missing in one of the 2 arrays, it can lead to incorrect param order, so we have to sort by key
+			// if keys are missing in one of the 2 arrays, it can lead to incorrect param order, so we have to sort by key.
 			ksort( $types );
 
-			// if it's deprecated anywhere, keep it deprecated
+			// if it's deprecated anywhere, keep it deprecated.
 			$is_deprecated = static::$hooks[ $hook_name ]['deprecated'] === true ? true : $is_deprecated;
 		}
 
-		// if there are keys missing, e.g. they were removed from the array_filter due to invalid docblock, we need to set them
+		// if there are keys missing, e.g. they were removed from the array_filter due to invalid docblock, we need to set them.
 		if ( array_values( $types ) !== $types ) {
 			for ( $i = 0; $i < count( $types ); $i++ ) {
 				if ( isset( $types[ $i ] ) ) {
 					continue;
 				}
 
-				// assign mixed, since we do not have a valid phpdoc for it
+				// assign mixed, since we do not have a valid phpdoc for it.
 				$types[ $i ] = Type::getMixed();
 			}
 
@@ -1339,19 +1336,19 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 		$event_functions = [
 			'wp_schedule_event',
-			// WooCommerce action scheduler
+			// WooCommerce action scheduler.
 			'as_schedule_recurring_action',
 			'as_schedule_cron_action',
 		];
 
 		$single_event_functions = [
 			'wp_schedule_single_event',
-			// WooCommerce action scheduler
+			// WooCommerce action scheduler.
 			'as_schedule_single_action',
 			'as_enqueue_async_action',
 		];
 
-		// see visitor.php for original code
+		// see visitor.php for original code.
 		if ( ( $this->useNamespace !== '' || $this->useStatements !== [] || $this->useStatementsNonClass !== false ) && $this->maxLine > $node->getStartLine() ) {
 			$this->useNamespace = '';
 			$this->useStatements = [];
@@ -1361,41 +1358,41 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		$this->maxLine = $node->getStartLine();
 
 		if ( $node instanceof Namespace_ ) {
-			// as soon as there is a new namespace, we need to empty the useStatements, as there will be new ones for the given namespace
+			// as soon as there is a new namespace, we need to empty the useStatements, as there will be new ones for the given namespace.
 			$this->useNamespace = $node->name->toString();
 			$this->useStatements = [];
 			$this->useStatementsNonClass = false;
 			return null;
 		}
 
-		// normal "use" statements
+		// normal "use" statements.
 		if ( $node instanceof PhpParser\Node\Stmt\UseUse || $node instanceof UseItem ) {
-			// must implode, before we remove the class name from the array
+			// must implode, before we remove the class name from the array.
 			$fqcn = $node->name->toString();
 
-			// sometimes happens as an artifact of GroupUse below and can be ignored
+			// sometimes happens as an artifact of GroupUse below and can be ignored.
 			if ( empty( $fqcn ) ) {
 				return null;
 			}
 
-			// some have unnecessary leading \ in "use", we need to remove
+			// some have unnecessary leading \ in "use", we need to remove.
 			$fqcn = ltrim( $fqcn, '\\' );
 
 			// technically not needed, since the namespace is included in the stubs
-			// changing it anyway, to make things easier to follow/read, as the stubs are a massive file usually
+			// changing it anyway, to make things easier to follow/read, as the stubs are a massive file usually.
 			$fqcn = preg_replace( '/^namespace\\\\/', $this->useNamespace . '\\', $fqcn, 1 );
 
-			// if "as" is used, it's set as alias
+			// if "as" is used, it's set as alias.
 			if ( ! empty( $node->alias->name ) ) {
 				// class names are unique, so we use them as keys of the array
-				// however it might already be set by a GroupUse, in which case we don't want to override it, as we would set a wrong value here
+				// however it might already be set by a GroupUse, in which case we don't want to override it, as we would set a wrong value here.
 				if ( empty( $this->useStatements[ $node->alias->name ] ) ) {
 					$this->useStatements[ $node->alias->name ] = $fqcn;
 				}
 			} else {
 				$class_name = $node->name->getLast();
 
-				// might already be set by a GroupUse
+				// might already be set by a GroupUse.
 				if ( empty( $this->useStatements[ $class_name ] ) ) {
 					$this->useStatements[ $class_name ] = $fqcn;
 				}
@@ -1404,9 +1401,9 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			return null;
 		}
 
-		// like "use superWC\special\{Order, Extra\Refund, User};"
+		// like "use superWC\special\{Order, Extra\Refund, User};".
 		if ( $node instanceof GroupUse ) {
-			// some have unnecessary leading \ in them, we need to remove first
+			// some have unnecessary leading \ in them, we need to remove first.
 			$fqcn_prefix = ltrim( $node->prefix->toString(), '\\' );
 
 			foreach ( $node->uses as $use_object ) {
@@ -1415,7 +1412,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					continue;
 				}
 
-				// some have invalid leading \ in them, we need to remove first
+				// some have invalid leading \ in them, we need to remove first.
 				$fqcn = $fqcn_prefix . '\\' . ltrim( $fqcn, '\\' );
 				$fqcn = preg_replace( '/^namespace\\\\/', $this->useNamespace . '\\', $fqcn, 1 );
 
@@ -1428,7 +1425,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 			return null;
 		}
-		// end of visitor.php duplicate code
+		// end of visitor.php duplicate code.
 
 		// "return apply_filters" will assign the phpdoc to the return instead of the apply_filters, so we need to store it
 		// "$var = apply_filters" directly after a function declaration
@@ -1438,7 +1435,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 		if ( $node->getDocComment() && ( $node instanceof FuncCall || $node instanceof Return_ || $node instanceof Variable || $node instanceof Echo_ || $node instanceof Expression ) ) {
 			$this->last_doc = $node->getDocComment();
 		} elseif ( isset( $this->last_doc ) && ! $node instanceof FuncCall && ! $node instanceof Assign && ! $node instanceof Variable ) {
-			// if it's set already and this is not a FuncCall, reset it to null, since there's something else and it would be used incorrectly
+			// if it's set already and this is not a FuncCall, reset it to null, since there's something else and it would be used incorrectly.
 			$this->last_doc = null;
 		}
 
@@ -1451,7 +1448,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				$hook_type = 'action';
 			} elseif ( in_array( (string) $node->name, $event_functions, true ) ) {
 				$hook_type = 'cron-action';
-				// the 3rd arg (index key 2) is the hook name
+				// the 3rd arg (index key 2) is the hook name.
 				$hook_index = 2;
 			} elseif ( in_array( (string) $node->name, $single_event_functions, true ) ) {
 				$hook_type = 'cron-action';
@@ -1461,7 +1458,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					$hook_index = 0;
 				}
 			} elseif ( preg_match( '/_deprecated_hook$/', (string) $node->name ) === 1 ) {
-				// ignore dynamic hooks
+				// ignore dynamic hooks.
 				if ( $node->args[0]->value instanceof String_ ) {
 					$hook_name = $node->args[0]->value->value;
 				} else {
@@ -1474,7 +1471,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				}
 
 				// hook type is irrelevant and won't be used when overriding
-				// in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set
+				// in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set.
 				$this->hooks[] = [
 					'name' => $hook_name,
 					'hook_type' => '',
@@ -1502,15 +1499,15 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 
 				// if it's not documented (which it honestly never is for these), we need to get the number of args and assign mixed
 				// the args are passed as array as element after hook name in all cases
-				// args are optional, so by default we will have 0
+				// args are optional, so by default we will have 0.
 				$num_args = 0;
 				if ( isset( $node->args[ $hook_index + 1 ] ) && $node->args[ $hook_index + 1 ] instanceof Arg && $node->args[ $hook_index + 1 ]->value instanceof Array_ ) {
 					$cron_args = $node->args[ $hook_index + 1 ]->value->items;
 					$num_args = count( $cron_args );
 
-					// see if we can assign better types, than just mixed for all
+					// see if we can assign better types, than just mixed for all.
 					foreach ( $cron_args as $item ) {
-						// cron events only use array values, keys are ignored by WP
+						// cron events only use array values, keys are ignored by WP.
 						if ( $item->value instanceof Variable ) {
 							$types[] = Type::getMixed();
 						} elseif ( $item->value instanceof String_ || $item->value instanceof PhpParser\Node\Expr\Cast\String_ ) {
@@ -1531,16 +1528,16 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					}
 				} elseif ( isset( $node->args[ $hook_index + 1 ] ) && $node->args[ $hook_index + 1 ] instanceof Arg && $node->args[ $hook_index + 1 ]->value instanceof Variable ) {
 					// there's something there, but we cannot determine the type. Theoretically could be multiple args, but we cannot determine.
-					// theoretically possible it's an empty element, in which case this would be wrong, but then no empty variable should be set here in the first place
+					// theoretically possible it's an empty element, in which case this would be wrong, but then no empty variable should be set here in the first place.
 					$num_args = 1;
 					$types = [ Type::getMixed() ];
 
 					// if we have a docblock, override the num_args with the docblock declared params, as this is more correct
-					// as otherwise we get lots of optional parameters required in callbacks all the time
+					// as otherwise we get lots of optional parameters required in callbacks all the time.
 					$override_num_args_from_docblock = true;
 				}
 
-				// since it's just a regular action and we don't need to differentiate anymore now
+				// since it's just a regular action and we don't need to differentiate anymore now.
 				$hook_type = 'action';
 			} else {
 				if ( $node->args[0]->value instanceof String_ ) {
@@ -1554,26 +1551,26 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 					return null;
 				}
 
-				// the first arg is the hook name, which gets skipped, so we need to "-1"
+				// the first arg is the hook name, which gets skipped, so we need to "-1".
 				$num_args = count( $node->args ) - 1;
 
-				// cron actions cannot be deprecated, which means we only need to check this here
+				// cron actions cannot be deprecated, which means we only need to check this here.
 				if ( in_array( (string) $node->name, [ 'apply_filters_deprecated', 'do_action_deprecated' ], true ) ) {
 					$is_deprecated = true;
 				}
 			}
 
 			$has_valid_docblock = true;
-			// an undocumented filter or action invoke
+			// an undocumented filter or action invoke.
 			if ( is_null( $this->last_doc ) ) {
 				$has_valid_docblock = false;
 			} else {
 				$doc_comment = $this->last_doc->getText();
 
-				// reset it right away, in case the docblock is invalid and we return early
+				// reset it right away, in case the docblock is invalid and we return early.
 				$this->last_doc = null;
 
-				// quick and dirty
+				// quick and dirty.
 				if ( $is_deprecated === false && preg_match( '/\* *@deprecated/', $doc_comment ) === 1 ) {
 					$is_deprecated = true;
 				}
@@ -1619,13 +1616,13 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 				++$i;
 
 				if ( ! ( $param instanceof phpDocumentor\Reflection\DocBlock\Tags\Param ) ) {
-					// set to mixed - if we skip it, it will mess up all subsequent args
+					// set to mixed - if we skip it, it will mess up all subsequent args.
 					$types[] = Type::getMixed();
 					continue;
 				}
 				$param_type = $param->getType();
 				if ( is_null( $param_type ) ) {
-					// set to mixed - if we skip it, it will mess up all subsequent args
+					// set to mixed - if we skip it, it will mess up all subsequent args.
 					$types[] = Type::getMixed();
 					continue;
 				}
@@ -1634,13 +1631,13 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract {
 			}
 
 			if ( count( $types ) < $num_args ) {
-				// we have a list, so we can just array merge instead of "+" and ksort
+				// we have a list, so we can just array merge instead of "+" and ksort.
 				$fill_types = array_fill( count( $types ), $num_args - count( $types ), Type::getMixed() );
 				$types = array_merge( $types, $fill_types );
 			}
 
 			// cannot assign to hooks directly, as this would mean we overwrite if this hook exists multiple times in this file
-			// all type handling logic is better handled in a single place later where hooks get registered
+			// all type handling logic is better handled in a single place later where hooks get registered.
 			$this->hooks[] = [
 				'name' => $hook_name,
 				'hook_type' => $hook_type,
