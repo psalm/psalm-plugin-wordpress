@@ -38,9 +38,4 @@
 		<!-- This sniff does not respect references in comments and documentation -->
 		<exclude name="PSR2R.Namespaces.UnusedUseStatement.UnusedUse" />
 	</rule>
-
-	<!-- The stubs keep the parameter names of the functions they override, for named arguments -->
-	<rule ref="Universal.NamingConventions.NoReservedKeywordParameterNames">
-		<exclude-pattern>stubs/*</exclude-pattern>
-	</rule>
 </ruleset>
