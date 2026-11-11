@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="7.3.0@6480ee65f252d9829b0c5a49d44c1fa263babfa2">
+  <file src="Plugin.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$statements_source]]></code>
+    </ArgumentTypeCoercion>
+    <InternalClass>
+      <code><![CDATA[ConstFetchAnalyzer::getConstType(
+                    $statements_source,
+                    $parser_param->name->toString(),
+                    true,
+                    $context,
+                )]]></code>
+      <code><![CDATA[ExpressionIdentifier::getExtendedVarId(
+            $parser_param,
+            null,
+            $statements_source,
+        )]]></code>
+      <code><![CDATA[ParseUrlReturnTypeProvider::getFunctionReturnType($event)]]></code>
+      <code><![CDATA[SimpleTypeInferer::infer(
+                $statements_source->getCodebase(),
+                $statements_source->node_data,
+                $parser_param,
+                $statements_source->getAliases(),
+                $statements_source,
+            )]]></code>
+    </InternalClass>
+    <InternalMethod>
+      <code><![CDATA[ConstFetchAnalyzer::getConstType(
+                    $statements_source,
+                    $parser_param->name->toString(),
+                    true,
+                    $context,
+                )]]></code>
+      <code><![CDATA[ExpressionIdentifier::getExtendedVarId(
+            $parser_param,
+            null,
+            $statements_source,
+        )]]></code>
+      <code><![CDATA[ParseUrlReturnTypeProvider::getFunctionReturnType($event)]]></code>
+      <code><![CDATA[SimpleTypeInferer::infer(
+                $statements_source->getCodebase(),
+                $statements_source->node_data,
+                $parser_param,
+                $statements_source->getAliases(),
+                $statements_source,
+            )]]></code>
+    </InternalMethod>
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$this->useStatements]]></code>
+      <code><![CDATA[$this->useStatements]]></code>
+      <code><![CDATA[$this->useStatements]]></code>
+      <code><![CDATA[$this->useStatements]]></code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidReturnStatement>
+      <code><![CDATA[$arg->value]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[?string]]></code>
+    </InvalidReturnType>
+    <MissingParamType>
+      <code><![CDATA[$parser_param]]></code>
+    </MissingParamType>
+    <NoInterfaceProperties>
+      <code><![CDATA[$statements_source->node_data]]></code>
+    </NoInterfaceProperties>
+    <PossiblyFalseArgument>
+      <code><![CDATA[file_get_contents($filepath)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code><![CDATA[$base_dir]]></code>
+      <code><![CDATA[$base_dir]]></code>
+      <code><![CDATA[$cwd]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[str_replace('{$abc}', '', $normalized_dynamic_hook_name)]]></code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidOperand>
+      <code><![CDATA[$arg->name]]></code>
+    </PossiblyInvalidOperand>
+    <PossiblyNullArgument>
+      <code><![CDATA[$arg->dim]]></code>
+      <code><![CDATA[$code_location]]></code>
+      <code><![CDATA[$event->getContext()]]></code>
+      <code><![CDATA[$normalized_dynamic_hook_names]]></code>
+      <code><![CDATA[$normalized_hook_name]]></code>
+    </PossiblyNullArgument>
+    <PossiblyUndefinedVariable>
+      <code><![CDATA[$doc_block]]></code>
+      <code><![CDATA[$hook_type]]></code>
+      <code><![CDATA[$hook_type]]></code>
+      <code><![CDATA[$hook_type]]></code>
+    </PossiblyUndefinedVariable>
+    <RedundantCondition>
+      <code><![CDATA[isset($call_arg->name) && $call_arg->name instanceof PhpParser\Node\Identifier]]></code>
+    </RedundantCondition>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $extended_var_id]]></code>
+      <code><![CDATA[! $found]]></code>
+      <code><![CDATA[! $hook_name]]></code>
+      <code><![CDATA[! $hook_name]]></code>
+      <code><![CDATA[! $hook_name]]></code>
+      <code><![CDATA[! $potential_hook_name]]></code>
+      <code><![CDATA[! $potential_hook_name]]></code>
+      <code><![CDATA[! $potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[$potential_hook_name]]></code>
+      <code><![CDATA[empty($config->hooks)]]></code>
+      <code><![CDATA[empty($hook['types'])]]></code>
+      <code><![CDATA[empty($node->alias->name)]]></code>
+      <code><![CDATA[empty($this->useStatements[ $class_name ])]]></code>
+      <code><![CDATA[empty($this->useStatements[ $node->alias->name ])]]></code>
+      <code><![CDATA[empty($use_object->alias->name)]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UndefinedPropertyFetch>
+      <code><![CDATA[$call_arg->value->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index + 1 ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index ]->value]]></code>
+      <code><![CDATA[$node->args[ $hook_index ]->value]]></code>
+      <code><![CDATA[$node->args[0]->value]]></code>
+      <code><![CDATA[$node->args[0]->value]]></code>
+      <code><![CDATA[$node->args[0]->value]]></code>
+      <code><![CDATA[$node->args[0]->value]]></code>
+    </UndefinedPropertyFetch>
+  </file>
+  <file src="test.php">
+    <HookNotFound>
+      <code><![CDATA[add_filter('admin_notices', function () {
+    echo 'hi';
+})]]></code>
+      <code><![CDATA[add_filter('foo', function (bool $post): void {
+    new WP_Post(new stdClass());
+}, 10, 2)]]></code>
+    </HookNotFound>
+    <UnusedClosureParam>
+      <code><![CDATA[$post]]></code>
+    </UnusedClosureParam>
+    <UnusedVariable>
+      <code><![CDATA[$uploads]]></code>
+      <code><![CDATA[$url_host]]></code>
+      <code><![CDATA[$url_parts]]></code>
+      <code><![CDATA[$url_port]]></code>
+    </UnusedVariable>
+  </file>
+</files>
