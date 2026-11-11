@@ -51,7 +51,7 @@ use SimpleXMLElement;
 /**
  * @psalm-type Hook = array{hook_type: string, types: list<Union>, deprecated: bool, minimum_invoke_args: int<0, max>}
  */
-class Plugin implements
+final class Plugin implements
     AfterEveryFunctionCallAnalysisInterface,
     BeforeFileAnalysisInterface,
     FunctionParamsProviderInterface,
@@ -81,6 +81,7 @@ class Plugin implements
      */
     public static $parseErrors = [];
 
+    #[\Override]
     public function __invoke(RegistrationInterface $registration, ?\SimpleXMLElement $config = null): void
     {
         $registration->registerHooksFromClass(static::class);
@@ -360,6 +361,7 @@ class Plugin implements
         }
     }
 
+    #[\Override]
     public static function beforeAnalyzeFile(BeforeFileAnalysisEvent $event): void
     {
         $file_path = $event->getStatementsSource()->getFilePath();
@@ -594,6 +596,7 @@ class Plugin implements
         return null;
     }
 
+    #[\Override]
     public static function afterEveryFunctionCallAnalysis(AfterEveryFunctionCallAnalysisEvent $event): void
     {
         $apply_filter_functions = [
@@ -732,6 +735,7 @@ class Plugin implements
      *
      * @psalm-pure
      */
+    #[\Override]
     public static function getFunctionIds(): array
     {
         return [
@@ -760,6 +764,7 @@ class Plugin implements
     /**
      * @return ?array<int, Psalm\Storage\FunctionLikeParameter>
      */
+    #[\Override]
     public static function getFunctionParams(FunctionParamsProviderEvent $event): ?array
     {
         $function_id = $event->getFunctionId();
@@ -1082,6 +1087,7 @@ class Plugin implements
         return $return;
     }
 
+    #[\Override]
     public static function getFunctionReturnType(FunctionReturnTypeProviderEvent $event): ?Union
     {
         if ($event->getFunctionId() === 'wp_parse_url') {
@@ -1304,7 +1310,7 @@ class Plugin implements
     }
 }
 
-class HookNodeVisitor extends PhpParser\NodeVisitorAbstract
+final class HookNodeVisitor extends PhpParser\NodeVisitorAbstract
 {
     /** @var ?PhpParser\Comment\Doc */
     protected $last_doc = null;
@@ -1332,6 +1338,7 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract
      */
     protected $useStatementsNonClass = false;
 
+    #[\Override]
     public function enterNode(PhpParser\Node $node)
     {
         $apply_filter_functions = [
@@ -1663,8 +1670,8 @@ class HookNodeVisitor extends PhpParser\NodeVisitorAbstract
     }
 }
 
-class HookNotFound extends PluginIssue {}
+final class HookNotFound extends PluginIssue {}
 
-class HookInvalidArgs extends PluginIssue {}
+final class HookInvalidArgs extends PluginIssue {}
 
-class DeprecatedHook extends PluginIssue {}
+final class DeprecatedHook extends PluginIssue {}
