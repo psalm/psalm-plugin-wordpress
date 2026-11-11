@@ -61,6 +61,29 @@ class FiltersTest extends BaseTestCase {
 				}, 10, 3 );
 				EOD,
 			],
+			'add_filter in a global namespace block after a named one' => [
+				<<<'EOD'
+				<?php
+				namespace Shop {
+					use Shop\Catalog\Product as Item;
+
+					function noop(): void {}
+				}
+
+				namespace {
+					final class Item {}
+
+					/**
+					 * @param Item $item The item.
+					 */
+					$result = apply_filters( 'test_global_namespace_block', new Item() );
+
+					add_filter( 'test_global_namespace_block', function ( Item $item ) {
+						return $item;
+					} );
+				}
+				EOD,
+			],
 		];
 	}
 
