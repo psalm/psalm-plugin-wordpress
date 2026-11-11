@@ -3,6 +3,8 @@
 	xmlns="https://getpsalm.org/schema/config"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+	errorBaseline="psalm-baseline.xml"
+	findUnusedPsalmSuppress="true"
 >
 	<projectFiles>
 		<file name="./test.php" />
@@ -11,6 +13,14 @@
 			<directory name="vendor" />
 		</ignoreFiles>
 	</projectFiles>
+	<issueHandlers>
+		<!-- The WordPress and WP-CLI stubs loaded by the plugin have docblocks Psalm can't parse -->
+		<InvalidDocblock>
+			<errorLevel type="suppress">
+				<directory name="vendor" />
+			</errorLevel>
+		</InvalidDocblock>
+	</issueHandlers>
 	<plugins>
 		<pluginClass class="PsalmWordPress\Plugin" />
 		<pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
