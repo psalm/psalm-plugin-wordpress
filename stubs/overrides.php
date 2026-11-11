@@ -2,63 +2,65 @@
 
 // phpcs:disable HM.Functions.NamespacedFunctions.MissingNamespace,PEAR.NamingConventions.ValidClassName.StartWithCapital,PSR1.Classes.ClassDeclaration.MissingNamespace,Squiz.Commenting.FunctionComment.InvalidNoReturn,Squiz.Commenting.FunctionComment.MissingParamName
 
-class WP_CLI {
-	/**
-	 * @param string $name
-	 * @param callable|class-string $callable
-	 * @param array{
-	 *     before_invoke?: callable,
-	 *     after_invoke?: callable,
-	 *     shortdesc?: string,
-	 *     longdesc?: string,
-	 *     synopsis?: string,
-	 *     when?: string,
-	 *     is_deferred?: bool
-	 * } $args
-	 * @return bool
-	 */
-	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
-	public static function add_command( string $name, $callable, array $args = [] ) {}
+class WP_CLI
+{
+    /**
+     * @param string $name
+     * @param callable|class-string $callable
+     * @param array{
+     *     before_invoke?: callable,
+     *     after_invoke?: callable,
+     *     shortdesc?: string,
+     *     longdesc?: string,
+     *     synopsis?: string,
+     *     when?: string,
+     *     is_deferred?: bool
+     * } $args
+     * @return bool
+     */
+    // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
+    public static function add_command(string $name, $callable, array $args = []) {}
 
-	/**
-	 * @template TExit of bool|int
-	 * @param string|WP_Error|Exception|Throwable $message
-	 * @psalm-param TExit $exit
-	 * @return (
-	 *     TExit is true
-	 *     ? no-return
-	 *     : null
-	 * )
-	 */
-	// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
-	public static function error( $message, $exit = true ) {}
+    /**
+     * @template TExit of bool|int
+     * @param string|WP_Error|Exception|Throwable $message
+     * @psalm-param TExit $exit
+     * @return (
+     *     TExit is true
+     *     ? no-return
+     *     : null
+     * )
+     */
+    // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames -- WP-CLI's parameter name, for named arguments.
+    public static function error($message, $exit = true) {}
 }
 
-class wpdb {
-	/**
-	 * @param string $query
-	 * @param array<scalar>|scalar $args
-	 * @return string|void
-	 */
-	public function prepare( $query, $args ) {}
+class wpdb
+{
+    /**
+     * @param string $query
+     * @param array<scalar>|scalar $args
+     * @return string|void
+     */
+    public function prepare($query, $args) {}
 
-	/**
-	 * @template TObject of ARRAY_A|ARRAY_N|OBJECT|OBJECT_K
-	 * @param string|null $query
-	 * @psalm-param TObject $output
-	 * @return (
-	 *     TObject is OBJECT
-	 *     ? list<ArrayObject<string, string>>
-	 *     : ( TObject is ARRAY_A
-	 *         ? list<array<string, scalar>>
-	 *         : ( TObject is ARRAY_N
-	 *             ? list<array<scalar>>
-	 *             : array<string, ArrayObject<string, scalar>>
-	 *           )
-	 *       )
-	 * )|null
-	 */
-	public function get_results( $query = null, $output = \OBJECT ) {}
+    /**
+     * @template TObject of ARRAY_A|ARRAY_N|OBJECT|OBJECT_K
+     * @param string|null $query
+     * @psalm-param TObject $output
+     * @return (
+     *     TObject is OBJECT
+     *     ? list<ArrayObject<string, string>>
+     *     : ( TObject is ARRAY_A
+     *         ? list<array<string, scalar>>
+     *         : ( TObject is ARRAY_N
+     *             ? list<array<scalar>>
+     *             : array<string, ArrayObject<string, scalar>>
+     *           )
+     *       )
+     * )|null
+     */
+    public function get_results($query = null, $output = \OBJECT) {}
 }
 
 /**
@@ -79,7 +81,7 @@ function wp_get_upload_dir() {}
  * @psalm-param TFilterValue $value
  * @return TFilterValue
  */
-function apply_filters( string $hook_name, $value, ...$args ) {}
+function apply_filters(string $hook_name, $value, ...$args) {}
 
 /**
  * | Component        |   |
@@ -115,14 +117,14 @@ function apply_filters( string $hook_name, $value, ...$args ) {}
  *     )
  *  )|false
  */
-function wp_parse_url( string $url, int $component = -1 ) {}
+function wp_parse_url(string $url, int $component = -1) {}
 
 /**
  * @param string $option
  * @param mixed $default_value
  * @return mixed
  */
-function get_option( string $option, $default_value = null ) {}
+function get_option(string $option, $default_value = null) {}
 
 /**
  * @return array[] {
@@ -146,14 +148,14 @@ function get_option( string $option, $default_value = null ) {}
  *   type: string,
  * }>
  */
-function get_settings_errors( $setting = '', $sanitize = false ): array {}
+function get_settings_errors($setting = '', $sanitize = false): array {}
 
 /**
  * @param string $path
  * @param 'https'|'http'|'relative'|'rest' $scheme
  * @return string
  */
-function home_url( string $path = '', $scheme = null ): string {}
+function home_url(string $path = '', $scheme = null): string {}
 
 /**
  * @template TArgs of array<array-key, mixed>
@@ -162,13 +164,13 @@ function home_url( string $path = '', $scheme = null ): string {}
  * @psalm-param TDefaults $defaults
  * @psalm-return TDefaults&TArgs
  */
-function wp_parse_args( $args, $defaults ) {}
+function wp_parse_args($args, $defaults) {}
 
 /**
  * @param WP_Error|mixed $error
  * @psalm-assert-if-true WP_Error $error
  */
-function is_wp_error( $error ): bool {}
+function is_wp_error($error): bool {}
 
 /**
  * @template T
@@ -177,4 +179,4 @@ function is_wp_error( $error ): bool {}
  * @param K $field
  * @return list<T>
  */
-function wp_list_pluck( array $input_list, string $field, string $index_key = null ): array {}
+function wp_list_pluck(array $input_list, string $field, string $index_key = null): array {}

@@ -28,6 +28,7 @@
 	},
 	"require-dev": {
 		"dg/bypass-finals": "^1.5",
+		"friendsofphp/php-cs-fixer": "^3.88",
 		"phpunit/phpunit": "^10.5 || ^11.5",
 		"psalm/plugin-phpunit": "^0.21"
 	},
@@ -60,15 +61,9 @@
 			"@analyze"
 		],
 		"analyze": "psalm",
-		"cs-check": [
-			"@composer --working-dir=tools/phpcs update --no-interaction --quiet",
-			"tools/phpcs/vendor/bin/phpcs -ps --colors"
-		],
-		"cs-fix": [
-			"@composer --working-dir=tools/phpcs update --no-interaction --quiet",
-			"tools/phpcs/vendor/bin/phpcbf"
-		],
-		"test": "codecept run",
+		"cs-check": "php-cs-fixer check --diff",
+		"cs-fix": "php-cs-fixer fix",
+		"test": "phpunit",
 		"test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
 		"generate-wordpress-stubs": "cd wordpress ; composer init -n ; composer require "
 	}

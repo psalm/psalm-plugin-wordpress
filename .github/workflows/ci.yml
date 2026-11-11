@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  schedule:
+    - cron: '0 4 * * 6' # Every Saturday at 4am
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push to a pull request cancels its running jobs; other runs get a unique group.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  php-cs-fixer:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2, cs2pr
+          coverage: none
+
+      - name: Get Composer cache directories
+        id: composer-cache
+        run: |
+          echo "files_cache=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+          echo "vcs_cache=$(composer config cache-vcs-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Retrieve cached packages
+        uses: actions/cache@v6
+        with:
+          path: |
+            ${{ steps.composer-cache.outputs.files_cache }}
+            ${{ steps.composer-cache.outputs.vcs_cache }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Run PHP-CS-Fixer
+        run: vendor/bin/php-cs-fixer check --format=checkstyle | cs2pr
+
+  tests:
+    name: Tests on PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Get Composer cache directories
+        id: composer-cache
+        run: |
+          echo "files_cache=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+          echo "vcs_cache=$(composer config cache-vcs-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Retrieve cached packages
+        uses: actions/cache@v6
+        with:
+          path: |
+            ${{ steps.composer-cache.outputs.files_cache }}
+            ${{ steps.composer-cache.outputs.vcs_cache }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # Psalm's test classes come from its source checkout (see "preferred-install" in composer.json).
+      - name: Install dependencies
+        run: composer install --ansi --no-interaction --no-progress
+
+      - name: Show Psalm version
+        run: vendor/bin/psalm --version
+
+      - name: Run tests
+        run: vendor/bin/phpunit

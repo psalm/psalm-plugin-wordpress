@@ -5,17 +5,19 @@ namespace PsalmWordPress\Tests;
 use Psalm\Tests\Traits\InvalidCodeAnalysisTestTrait;
 use Psalm\Tests\Traits\ValidCodeAnalysisTestTrait;
 
-class FiltersTest extends BaseTestCase {
-	use InvalidCodeAnalysisTestTrait;
-	use ValidCodeAnalysisTestTrait;
+class FiltersTest extends BaseTestCase
+{
+    use InvalidCodeAnalysisTestTrait;
+    use ValidCodeAnalysisTestTrait;
 
-	/**
-	 * @return iterable<string,array{string,assertions?:array<string,string>,error_levels?:string[]}>
-	 */
-	public static function providerValidCodeParse(): iterable {
-		return [
-			'add_filter with docblock' => [
-				<<<'EOD'
+    /**
+     * @return iterable<string,array{string,assertions?:array<string,string>,error_levels?:string[]}>
+     */
+    public static function providerValidCodeParse(): iterable
+    {
+        return [
+            'add_filter with docblock' => [
+                <<<'EOD'
 				<?php
 				$missing_sizes = array();
 				$image_meta = array();
@@ -31,9 +33,9 @@ class FiltersTest extends BaseTestCase {
 					return $sizes;
 				}, 10, 3 );
 				EOD,
-			],
-			'add_filter with no docblock' => [
-				<<<'EOD'
+            ],
+            'add_filter with no docblock' => [
+                <<<'EOD'
 				<?php
 				/** @psalm-suppress MixedAssignment */
 				$result = apply_filters( 'test_filter', true, 1, 1.1 );
@@ -42,9 +44,9 @@ class FiltersTest extends BaseTestCase {
 					return false;
 				}, 10, 3 );
 				EOD,
-			],
-			'add_filter with double apply_filters call' => [
-				<<<'EOD'
+            ],
+            'add_filter with double apply_filters call' => [
+                <<<'EOD'
 				<?php
 				/**
 				 * @param int $missing_sizes
@@ -60,9 +62,9 @@ class FiltersTest extends BaseTestCase {
 					return 1;
 				}, 10, 3 );
 				EOD,
-			],
-			'add_filter in a global namespace block after a named one' => [
-				<<<'EOD'
+            ],
+            'add_filter in a global namespace block after a named one' => [
+                <<<'EOD'
 				<?php
 				namespace Shop {
 					use Shop\Catalog\Product as Item;
@@ -83,17 +85,18 @@ class FiltersTest extends BaseTestCase {
 					} );
 				}
 				EOD,
-			],
-		];
-	}
+            ],
+        ];
+    }
 
-	/**
-	 * @return iterable<string,array{string,error_message:string,2?:string[],3?:bool,4?:string}>
-	 */
-	public static function providerInvalidCodeParse(): iterable {
-		return [
-			'add_filter fails wrong types' => [
-				<<<'EOD'
+    /**
+     * @return iterable<string,array{string,error_message:string,2?:string[],3?:bool,4?:string}>
+     */
+    public static function providerInvalidCodeParse(): iterable
+    {
+        return [
+            'add_filter fails wrong types' => [
+                <<<'EOD'
 				<?php
 				/**
 				 * @param array $missing_sizes Array with the missing image sub-sizes.
@@ -106,10 +109,10 @@ class FiltersTest extends BaseTestCase {
 					return $sizes;
 				}, 10, 3 );
 				EOD,
-				'error_message' => 'InvalidArgument',
-			],
-			'add_filter no type found' => [
-				<<<'EOD'
+                'error_message' => 'InvalidArgument',
+            ],
+            'add_filter no type found' => [
+                <<<'EOD'
 				<?php
 				$foo = 1;
 				$result = apply_filters( 'test_get_missing_image_subsizes', $foo );
@@ -118,10 +121,10 @@ class FiltersTest extends BaseTestCase {
 					return 1;
 				} );
 				EOD,
-				'error_message' => 'InvalidArgument',
-			],
-			'add_filter instead of add_action' => [
-				<<<'EOD'
+                'error_message' => 'InvalidArgument',
+            ],
+            'add_filter instead of add_action' => [
+                <<<'EOD'
 				<?php
 				do_action( 'test_action' );
 
@@ -129,8 +132,8 @@ class FiltersTest extends BaseTestCase {
 					echo 'some stuff';
 				} );
 				EOD,
-				'error_message' => 'HookNotFound',
-			],
-		];
-	}
+                'error_message' => 'HookNotFound',
+            ],
+        ];
+    }
 }
