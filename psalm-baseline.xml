@@ -61,9 +61,6 @@
     <MissingParamType>
       <code><![CDATA[$parser_param]]></code>
     </MissingParamType>
-    <NoInterfaceProperties>
-      <code><![CDATA[$statements_source->node_data]]></code>
-    </NoInterfaceProperties>
     <PossiblyFalseArgument>
       <code><![CDATA[file_get_contents($filepath)]]></code>
     </PossiblyFalseArgument>
@@ -72,9 +69,6 @@
       <code><![CDATA[$base_dir]]></code>
       <code><![CDATA[$cwd]]></code>
     </PossiblyFalseOperand>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[str_replace('{$abc}', '', $normalized_dynamic_hook_name)]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidOperand>
       <code><![CDATA[$arg->name]]></code>
     </PossiblyInvalidOperand>
@@ -87,9 +81,6 @@
     </PossiblyNullArgument>
     <PossiblyUndefinedVariable>
       <code><![CDATA[$doc_block]]></code>
-      <code><![CDATA[$hook_type]]></code>
-      <code><![CDATA[$hook_type]]></code>
-      <code><![CDATA[$hook_type]]></code>
     </PossiblyUndefinedVariable>
     <RedundantCondition>
       <code><![CDATA[isset($call_arg->name) && $call_arg->name instanceof PhpParser\Node\Identifier]]></code>
