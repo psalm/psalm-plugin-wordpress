@@ -23,7 +23,7 @@
 		"php-stubs/wordpress-stubs": "^6.0",
 		"php-stubs/wordpress-globals": "^0.2.0",
 		"php-stubs/wp-cli-stubs": "^2.7",
-		"psalm/psalm-plugin-api": "^0.4",
+		"psalm/psalm-plugin-api": "^0.4 || ^0.5",
 		"vimeo/psalm": "^7.0.0-rc5|dev-master"
 	},
 	"require-dev": {
