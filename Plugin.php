@@ -616,8 +616,10 @@ final class Plugin implements
             $hook_type = 'filter';
         } elseif (in_array($function_id, $do_action_functions, true)) {
             $hook_type = 'action';
-        } elseif (preg_match('/_deprecated_hook$/', $function_id) !== 1) {
+        } elseif (preg_match('/_deprecated_hook$/', $function_id) === 1) {
             // there are custom implementations of "deprecated_hook", e.g. for "wcs", so we need to preg match it.
+            $hook_type = null;
+        } else {
             return;
         }
 
@@ -664,7 +666,7 @@ final class Plugin implements
             $hook_name = $call_args[0]->value->value;
         }
 
-        if (preg_match('/_deprecated_hook$/', $function_id) === 1) {
+        if ($hook_type === null) {
             // hook type is irrelevant and won't be used when overriding
             // in case the hook is not registered yet, it will eventually be registered and the hook type and types will be set.
             static::registerHook($hook_name, [], '', true);
